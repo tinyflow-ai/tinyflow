@@ -12,7 +12,7 @@
     import { store } from '../store/stores';
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
-    import { genShortId } from './utils/IDGen';
+    import { genShortId } from './utils/IdGen';
     import { get } from 'svelte/store';
 
     const { onInit } = $props();

@@ -56,17 +56,26 @@
   &-input {
     display: flex;
     border: 1px solid #ccc;
-    padding: 5px 10px;
+    padding: 3px 10px;
     border-radius: 5px;
     font-size: 14px;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     background: #fff;
+    height: 27px;
 
     &:focus {
       border-color: var(--tf-primary-color);
       box-shadow: 0 0 5px rgba(81, 203, 238, .2);
+    }
+
+    &-value{
+      height: 21px;
+      min-width: 10px;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
     }
 
     &-arrow {
@@ -85,7 +94,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px;
+    width: max-content;
+    min-width: 100%;
     z-index: 9999;
+    box-sizing: border-box;
 
     &-item {
       display: flex;
@@ -96,9 +108,23 @@
       border-radius: 5px;
       cursor: pointer;
 
+      span {
+        width: 16px;
+        display: block;
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+
       &:hover {
         background: #f0f0f0;
       }
+    }
+
+    &-children {
+      padding-left: 14px;
     }
   }
 }

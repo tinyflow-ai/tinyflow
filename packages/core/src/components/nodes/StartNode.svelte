@@ -5,7 +5,7 @@
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { genShortId, genUuid } from '../utils/IDGen';
+    import { genShortId } from '../utils/IdGen';
 
     const { data, ...rest }: {
         data: NodeProps['data'],

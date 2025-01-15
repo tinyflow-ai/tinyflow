@@ -3,7 +3,9 @@
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterDataTypes } from '../utils/Consts';
+    import { type Parameter, parameterDataTypes, parameterRefTypes } from '../utils/Consts';
+    import { useRefOptions } from '../utils/useRefOptions';
+
 
     const { parameter, index }: {
         parameter: Parameter,
@@ -21,11 +23,11 @@
     });
 
     const { updateNodeData } = useSvelteFlow();
-    const updateName = (event: Event) => {
+    const updateValue = (event: Event) => {
         const newValue = (event.target as any).value;
         updateNodeData(currentNodeId, (node) => {
             let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].name = newValue;
+            inputParameters[index].value = newValue;
             return {
                 inputParameters
             };
@@ -56,15 +58,21 @@
         });
         triggerObject?.hide();
     };
+
+    const selectItems =  useRefOptions();
 </script>
 
 
 <div class="input-item">
-    <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
-           oninput={updateName} />
+    <Input style="width: 100%;" value={param.value} placeholder="请输入参数名称"
+           oninput={updateValue} />
 </div>
 <div class="input-item">
-    <Checkbox checked={param.required} onchange={updateRequired} />
+    {#if param.refType === 'constant'}
+        <Input value={param.value} placeholder="请输入参数值" oninput={updateValue} />
+    {:else}
+        <Select items={$selectItems} style="width: 100%" key={$selectItems} />
+    {/if}
 </div>
 <div class="input-item">
     <FloatingTrigger placement="bottom" bind:this={triggerObject}>
@@ -77,8 +85,8 @@
         {#snippet floating()}
             <div class="input-more-setting">
                 <div class="input-more-item">
-                    参数类型：
-                    <Select items={parameterDataTypes} style="width: 100%" />
+                    数据来源：
+                    <Select items={parameterRefTypes} style="width: 100%" />
                 </div>
                 <div class="input-more-item">
                     默认值：
@@ -99,6 +107,7 @@
 
 
 <style lang="less">
+
   .input-item {
     display: flex;
     align-items: center;

@@ -1,5 +1,6 @@
 <script lang="ts">
     let { target } = $props();
+    if (typeof target === 'undefined') target = "undefined";
 </script>
 
 
