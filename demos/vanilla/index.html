@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tinyflow Vanilla</title>
+    <link rel="stylesheet" href="./tinyflow.css" />
+    <style>
+        .tinyflow {
+            height: 100vh;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="tinyflow"></div>
+
+<script type="module" src="./tinyflow.js"></script>
+<script type="module">
+    import { Tinyflow } from './tinyflow.js';
+    new Tinyflow({
+            element: '.tinyflow',
+            data: {
+                nodes: [
+                    {
+                        id: '1', // required and needs to be a string
+                        position: { x: 0, y: 0 }, // required
+                        data: { label: 'hey' } // required
+                    },
+                    {
+                        id: '2',
+                        position: { x: 100, y: 100 },
+                        data: { label: 'world 111' }
+                    }
+                ],
+                edges: [{ id: '1-2', source: '1', target: '2' }]
+            }
+        }
+    );
+</script>
+</body>
+</html>

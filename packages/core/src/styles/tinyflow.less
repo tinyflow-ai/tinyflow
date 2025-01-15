@@ -1,0 +1,146 @@
+
+.svelte-flow__nodes {
+
+  .svelte-flow__node {
+    border: 3px solid transparent;
+    border-radius: 5px;
+    box-sizing: border-box;
+
+    .svelte-flow__handle {
+      width: 8px;
+      height: 8px;
+    }
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      border-radius: 5px;
+      top: -2px;
+      left: -2px;
+      border: 1px solid #ccc;
+      height: calc(100% + 2px);
+      width: calc(100% + 2px);
+    }
+
+    &:hover {
+      border: 3px solid #bacaef7d;
+    }
+
+    &.selectable.selected {
+      border: 3px solid #bacaef7d;
+      box-shadow: var(--xy-node-boxshadow-selected);
+    }
+
+    &:hover:after {
+      display: none;
+    }
+
+    &.selectable.selected:after {
+      display: none;
+    }
+  }
+}
+
+
+.tf-node-wrapper {
+  border-radius: 5px;
+  min-width: 300px;
+  background: #fff;
+
+  &-title {
+    height: 30px;
+    background: #EFF1F5;
+    color: #bcbcbc;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &-body {
+    padding: 10px;
+  }
+}
+
+.svelte-flow__attribution a {
+  display: none;
+}
+
+.tf-toolbar {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  display: flex;
+  gap: 5px;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  transform: translateX(-220px); /* 完全移出视口 */
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  &-container {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 180px;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+
+
+    &-header {
+      display: flex;
+    }
+
+    &-body {
+      display: flex;
+      margin-top: 20px;
+
+
+      .tf-toolbar-container-base, .tf-toolbar-container-tools {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        flex-grow: 1;
+
+        .tf-btn {
+          border: none;
+          width: 100%;
+          justify-content: flex-start;
+          height: 40px;
+          gap: 10px;
+          cursor: grabbing;
+          border-radius: 5px;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: #2563EB;
+          }
+
+          &:hover {
+            background: #f1f1f1;
+          }
+        }
+      }
+    }
+  }
+}
+
+.tinyflow-logo:before {
+  content: "Tinyflow.ai";
+  font-size: 145px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-weight: 800;
+  color: #03153b54;
+  text-shadow: 1px 3px 6px #cedafb, 0 0 0 #000, 1px 3px 6px #fff;
+  opacity: 0.1;
+
+
+}

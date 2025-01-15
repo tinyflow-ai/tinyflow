@@ -1,0 +1,26 @@
+{
+    "name": "@tinyflow-ui/demo-svelte",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
+    },
+    "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^5.0.3",
+        "@tsconfig/svelte": "^5.0.4",
+        "@types/node": "^22.10.3",
+        "autoprefixer": "^10.4.20",
+        "svelte": "^5.17.3",
+        "svelte-check": "^4.1.1",
+        "tslib": "^2.7.0",
+        "typescript": "^5.6.2",
+        "vite": "^6.0.6"
+    },
+    "dependencies": {
+        "@tinyflow-ui/core": "workspace:*"
+    }
+}

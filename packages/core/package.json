@@ -1,0 +1,42 @@
+{
+    "name": "@tinyflow-ui/core",
+    "version": "0.0.0",
+    "type": "module",
+    "module": "index.ts",
+    "main": "index.ts",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+        "lint": "eslint ."
+    },
+    "devDependencies": {
+        "@sveltejs/vite-plugin-svelte": "^5.0.3",
+        "@tinyflow-ui/eslint-config": "workspace:*",
+        "@tsconfig/svelte": "^5.0.4",
+        "autoprefixer": "^10.4.20",
+        "less": "^4.2.1",
+        "svelte": "^5.17.3",
+        "svelte-check": "^4.1.1",
+        "typescript": "^5.6.2",
+        "vite": "^6.0.6",
+        "vite-plugin-dts": "^4.4.0"
+    },
+    "dependencies": {
+        "@floating-ui/dom": "^1.6.12",
+        "@xyflow/svelte": "^0.1.26"
+    },
+    "imports": {
+        "#*": [
+            "./src/*.ts",
+            "./src/*.svelte"
+        ]
+    },
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "svelte": "./src/index.ts"
+        }
+    }
+}
