@@ -5,46 +5,26 @@
     interface Item {
         value: number | string;
         label: string | Snippet;
-        expand?: boolean;
         children?: Item[];
     }
 
-    let { items, onChange, value, expandAll = true, multiple = false, ...rest }: {
+    let { items, onExpand, onSelect, value = [], expandAll = true, multiple = false, expandValue = [], ...rest }: {
         items: Item[],
-        onChange?: (item: Item) => void,
-        value?: number | string | (number | string)[],
+        onExpand?: (item: Item) => void,
+        onSelect?: (item: Item) => void,
+        value?: (number | string)[],
         expandAll?: boolean,
-        multiple?: boolean,
+        expandValue?: (number | string)[],
+        multiple?: boolean
         [key: string]: any
     } = $props();
 
-
-    const initExpand = (items: Item[]) => {
-        items.forEach((item) => {
-            if (typeof item.expand === 'undefined') {
-                item.expand = expandAll;
-            }
-            if (item.children && item.children.length > 0) {
-                initExpand(item.children);
-            }
-        });
-        return items;
-    };
-
-    let itemsState = $state(initExpand(items));
-
-    let activeValue = $state(!value ? [] : Array.isArray(value) ? value : [value]);
-
-    $effect(() => {
-        itemsState = [...initExpand(items)];
-        activeValue = [...!value ? [] : Array.isArray(value) ? value : [value]];
-    });
 
     let activeItemsState = $derived.by(() => {
         const resultItems: Item[] = [];
         const fillResult = (items: Item[]) => {
             for (let item of items) {
-                if (activeValue.includes(item.value)) {
+                if (value.includes(item.value)) {
                     resultItems.push(item);
                 }
                 if (item.children && item.children.length > 0) {
@@ -58,36 +38,23 @@
 
     let triggerObject: any;
 
-    function handlerOnChange(item: Item) {
+    function handlerOnSelect(item: Item) {
         if (item.children && item.children.length > 0) {
-            item.expand = !item.expand;
+            // item.expand = !item.expand;
+            onExpand?.(item);
             return;
+        } else {
+            triggerObject?.hide();
+            onSelect?.(item);
         }
-
-        // 多选模式
-        if (multiple) {
-            if (activeValue.includes(item.value)) {
-                activeValue.splice(activeValue.indexOf(item.value), 1);
-            } else {
-                activeValue.push(item.value);
-            }
-        }
-        // 单选模式
-        else {
-            activeValue.splice(0, activeValue.length);
-            activeValue.push(item.value);
-        }
-
-        triggerObject?.hide();
-        onChange?.(item);
     }
 </script>
 
 
 {#snippet selectItems(items: Item[])}
-    {#each items as item, index (item.value)}
+    {#each items as item, index (`${index}_${item.value}`)}
         <button class="tf-select-content-item"
-                onclick={() => handlerOnChange(item)}
+                onclick={() => handlerOnSelect(item)}
         >
             <span>
             {#if item.children}
@@ -97,7 +64,7 @@
             </span>
             <Render target={item.label} />
         </button>
-        {#if (item.children && item.children.length > 0 && item.expand)}
+        {#if (item.children && item.children.length > 0 && (expandAll || expandValue.includes(item.value)))}
             <div class="tf-select-content-children">
                 {@render selectItems(item.children)}
             </div>
@@ -111,10 +78,16 @@
     <FloatingTrigger bind:this={triggerObject}>
         <button class="tf-select-input nopan nodrag" {...rest}>
             <div class="tf-select-input-value">
-                {#each activeItemsState as item,index (item.value)}
-                    <Render target={item.label} />
-                    {#if index < activeItemsState.length - 1}
-                        ,
+                {#each activeItemsState as item,index (`${index}_${item.value}`)}
+                    {#if !multiple}
+                        {#if index === 0}
+                            <Render target={item.label} />
+                        {/if}
+                    {:else}
+                        <Render target={item.label} />
+                        {#if index < activeItemsState.length - 1}
+                            ,
+                        {/if}
                     {/if}
                 {/each}
             </div>
@@ -128,7 +101,7 @@
 
         {#snippet floating()}
             <div class="tf-select-content nopan nodrag">
-                {@render selectItems(itemsState)}
+                {@render selectItems(items)}
             </div>
         {/snippet}
     </FloatingTrigger>

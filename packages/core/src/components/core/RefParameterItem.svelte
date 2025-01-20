@@ -1,9 +1,9 @@
 <script lang="ts">
     import { Input, Textarea } from '../base';
-    import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
+    import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterDataTypes, parameterRefTypes } from '../utils/Consts';
+    import { type Parameter, parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions';
 
 
@@ -34,12 +34,12 @@
         });
     };
 
-    const updateRequired = (event: Event) => {
-        const checked = (event.target as any).checked;
+
+    const updateRef = (item: any) => {
+        const newValue = item.value;
         updateNodeData(currentNodeId, (node) => {
             let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].required = checked;
-
+            inputParameters[index].ref = newValue;
             return {
                 inputParameters
             };
@@ -58,8 +58,7 @@
         });
         triggerObject?.hide();
     };
-
-    const selectItems =  useRefOptions();
+    const selectItems = useRefOptions();
 </script>
 
 
@@ -71,7 +70,9 @@
     {#if param.refType === 'constant'}
         <Input value={param.value} placeholder="请输入参数值" oninput={updateValue} />
     {:else}
-        <Select items={$selectItems} style="width: 100%" key={$selectItems} />
+        <Select items={$selectItems} style="width: 100%" value={[param.ref||'']}
+                expandAll
+                onSelect={updateRef} />
     {/if}
 </div>
 <div class="input-item">
