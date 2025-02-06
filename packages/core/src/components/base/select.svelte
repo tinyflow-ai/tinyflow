@@ -8,11 +8,22 @@
         children?: Item[];
     }
 
-    let { items, onExpand, onSelect, value = [], expandAll = true, multiple = false, expandValue = [], ...rest }: {
+    let {
+        items,
+        onExpand,
+        onSelect,
+        value = [],
+        defaultValue = [],
+        expandAll = true,
+        multiple = false,
+        expandValue = [],
+        ...rest
+    }: {
         items: Item[],
         onExpand?: (item: Item) => void,
         onSelect?: (item: Item) => void,
-        value?: (number | string)[],
+        value?: (number | string | undefined)[],
+        defaultValue?: (number | string | undefined)[],
         expandAll?: boolean,
         expandValue?: (number | string)[],
         multiple?: boolean
@@ -24,9 +35,16 @@
         const resultItems: Item[] = [];
         const fillResult = (items: Item[]) => {
             for (let item of items) {
-                if (value.includes(item.value)) {
-                    resultItems.push(item);
+                if (value.length > 0) {
+                    if (value.includes(item.value)) {
+                        resultItems.push(item);
+                    }
+                } else {
+                    if (defaultValue.includes(item.value)) {
+                        resultItems.push(item);
+                    }
                 }
+
                 if (item.children && item.children.length > 0) {
                     fillResult(item.children);
                 }
@@ -78,7 +96,7 @@
     <FloatingTrigger bind:this={triggerObject}>
         <button class="tf-select-input nopan nodrag" {...rest}>
             <div class="tf-select-input-value">
-                {#each activeItemsState as item,index (`${index}_${item.value}`)}
+                {#each activeItemsState as item, index (`${index}_${item.value}`)}
                     {#if !multiple}
                         {#if index === 0}
                             <Render target={item.label} />

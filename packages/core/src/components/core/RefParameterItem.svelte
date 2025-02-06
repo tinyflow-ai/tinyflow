@@ -6,7 +6,6 @@
     import { type Parameter, parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions';
 
-
     const { parameter, index }: {
         parameter: Parameter,
         index: number
@@ -23,11 +22,14 @@
     });
 
     const { updateNodeData } = useSvelteFlow();
-    const updateValue = (event: Event) => {
-        const newValue = (event.target as any).value;
+
+    const updateAttribute = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
             let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].value = newValue;
+            inputParameters[index] = {
+                ...inputParameters[index],
+                [key]: value
+            };
             return {
                 inputParameters
             };
@@ -35,15 +37,27 @@
     };
 
 
+    const updateName = (event: Event) => {
+        const newValue = (event.target as any).value;
+        updateAttribute('name', newValue);
+    };
+
+
+    const updateValue = (event: Event) => {
+        const newValue = (event.target as any).value;
+        updateAttribute('value', newValue);
+    };
+
+
     const updateRef = (item: any) => {
         const newValue = item.value;
-        updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].ref = newValue;
-            return {
-                inputParameters
-            };
-        });
+        updateAttribute('ref', newValue);
+    };
+
+
+    const updateRefType = (item: any) => {
+        const newValue = item.value;
+        updateAttribute('refType', newValue);
     };
 
 
@@ -63,14 +77,14 @@
 
 
 <div class="input-item">
-    <Input style="width: 100%;" value={param.value} placeholder="请输入参数名称"
-           oninput={updateValue} />
+    <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
+           oninput={updateName} />
 </div>
 <div class="input-item">
-    {#if param.refType === 'constant'}
+    {#if param.refType === 'input'}
         <Input value={param.value} placeholder="请输入参数值" oninput={updateValue} />
     {:else}
-        <Select items={$selectItems} style="width: 100%" value={[param.ref||'']}
+        <Select items={$selectItems} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
                 expandAll
                 onSelect={updateRef} />
     {/if}
@@ -87,15 +101,24 @@
             <div class="input-more-setting">
                 <div class="input-more-item">
                     数据来源：
-                    <Select items={parameterRefTypes} style="width: 100%" />
+                    <Select items={parameterRefTypes} style="width: 100%" defaultValue={["ref"]}
+                            value={param.refType ? [param.refType] : []}
+                            onSelect={updateRefType}
+                    />
                 </div>
                 <div class="input-more-item">
                     默认值：
-                    <Textarea rows={1} style="width: 100%;" />
+                    <Textarea rows={1} style="width: 100%;" onchange={(event:Event)=>{
+                        const value =  (event.target as any).value;
+                        updateAttribute('defaultValue', value)
+                    }} />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" />
+                    <Textarea rows={3} style="width: 100%;" onchange={(event:MouseEvent)=>{
+                        const value =  (event.target as any).value;
+                        updateAttribute('description', value)
+                    }} />
                 </div>
 
                 <div class="input-more-item">
