@@ -6,9 +6,10 @@
     import { type Parameter, parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions';
 
-    const { parameter, index }: {
+    const { parameter, index, dataKeyName }: {
         parameter: Parameter,
-        index: number
+        index: number,
+        dataKeyName: string,
     } = $props();
 
 
@@ -17,7 +18,7 @@
     let param = $derived.by(() => {
         return {
             ...parameter,
-            ...($node?.data?.inputParameters as Array<Parameter>)[index]
+            ...($node?.data[dataKeyName] as Array<Parameter>)[index]
         };
     });
 
@@ -25,13 +26,13 @@
 
     const updateAttribute = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index] = {
-                ...inputParameters[index],
+            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            parameters[index] = {
+                ...parameters[index],
                 [key]: value
             };
             return {
-                inputParameters
+                [dataKeyName]: parameters
             };
         });
     };
@@ -64,10 +65,10 @@
     let triggerObject: any;
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters.splice(index, 1);
+            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            parameters.splice(index, 1);
             return {
-                inputParameters: [...inputParameters]
+                [dataKeyName]: [...parameters]
             };
         });
         triggerObject?.hide();

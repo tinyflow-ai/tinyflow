@@ -18,16 +18,16 @@
 
     const onclick = () => {
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<any>;
-            if (inputParameters) {
-                inputParameters.push({
+            let outputParameters = node.data.outputParameters as Array<any>;
+            if (outputParameters) {
+                outputParameters.push({
                     id: genShortId()
                 });
             } else {
-                inputParameters = [{ id: genShortId() }];
+                outputParameters = [{ id: genShortId() }];
             }
             return {
-                inputParameters: [...inputParameters]
+                outputParameters: [...outputParameters]
             };
         });
     };
@@ -50,7 +50,7 @@
             </svg>
         </Button>
     </div>
-    <RefParameterList />
+    <RefParameterList noneParameterText="无输出参数" dataKeyName="outputParameters" />
 </NodeWrapper>
 
 

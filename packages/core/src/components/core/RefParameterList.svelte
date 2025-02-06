@@ -3,24 +3,32 @@
     import { getCurrentNodeId } from '../../store/nodeContext';
     import RefParameterItem from './RefParameterItem.svelte';
 
+    const {
+        noneParameterText = '无输入参数',
+        dataKeyName = 'inputParameters'
+    }: {
+        noneParameterText?: string;
+        dataKeyName?: string;
+    } = $props();
+
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
-    let inputParameters = $derived.by(() => {
-        return [...$node?.data?.inputParameters as Array<any> || []];
+    let parameters = $derived.by(() => {
+        return [...$node?.data[dataKeyName] as Array<any> || []];
     });
 </script>
 
 
 <div class="input-container">
-    {#if (inputParameters.length !== 0)}
+    {#if (parameters.length !== 0)}
         <div class="input-header">参数名称</div>
         <div class="input-header">参数值</div>
         <div class="input-header"></div>
     {/if}
-    {#each inputParameters as param, index (param.id)}
-        <RefParameterItem parameter={param} index={index} />
+    {#each parameters as param, index (param.id)}
+        <RefParameterItem parameter={param} index={index} {dataKeyName} />
     {:else }
-        <div class="none-params">无输入参数</div>
+        <div class="none-params">{noneParameterText}</div>
     {/each}
 </div>
 
