@@ -50,15 +50,7 @@
     }
   }
 
-  :global(.input-btn-more) {
-    border: 1px solid transparent;
-    padding: 3px;
 
-    &:hover {
-      background: #eee;
-      border: 1px solid transparent;
-    }
-  }
 </style>
 
 

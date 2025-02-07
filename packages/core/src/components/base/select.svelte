@@ -17,6 +17,7 @@
         expandAll = true,
         multiple = false,
         expandValue = [],
+        placeholder,
         ...rest
     }: {
         items: Item[],
@@ -27,6 +28,7 @@
         expandAll?: boolean,
         expandValue?: (number | string)[],
         multiple?: boolean
+        placeholder?: string
         [key: string]: any
     } = $props();
 
@@ -107,6 +109,10 @@
                             ,
                         {/if}
                     {/if}
+                {:else}
+                    <div class="tf-select-input-placeholder">
+                        {placeholder}
+                    </div>
                 {/each}
             </div>
             <div class="tf-select-input-arrow">

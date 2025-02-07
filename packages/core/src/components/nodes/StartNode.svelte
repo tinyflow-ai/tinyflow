@@ -2,10 +2,10 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { Heading } from '../base';
     import { Button } from '../base/index.js';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { type NodeProps } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { genShortId } from '../utils/IdGen';
+    import { useAddParameter } from '../utils/useAddParameter';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -13,25 +13,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-
-
-    const { updateNodeData } = useSvelteFlow();
-
-    const onclick = () => {
-        updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<any>;
-            if (inputParameters) {
-                inputParameters.push({
-                    id: genShortId()
-                });
-            } else {
-                inputParameters = [{ id: genShortId() }];
-            }
-            return {
-                inputParameters: [...inputParameters]
-            };
-        });
-    };
+    const { addParameter } = useAddParameter();
 
 </script>
 
@@ -46,7 +28,9 @@
 
     <div class="heading">
         <Heading level={3}>输入参数</Heading>
-        <Button class="input-btn-more" style="margin-left: auto" {onclick}>
+        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+            addParameter(currentNodeId)
+        }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
             </svg>
