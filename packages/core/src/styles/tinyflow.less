@@ -7,8 +7,29 @@
     box-sizing: border-box;
 
     .svelte-flow__handle {
-      width: 8px;
-      height: 8px;
+      width: 16px;
+      height: 16px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: none;
+
+      &::after {
+        content: ' ';
+        background: #2563EB;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        transition: width 0.1s, height 0.1s;
+      }
+
+      &:hover {
+        &::after {
+          width: 16px;
+          height: 16px;
+        }
+      }
     }
 
     &:after {

@@ -32,7 +32,7 @@
     </div>
 </div>
 
-<Handle type="target" position={Position.Left} style=" left: -10px;top: 20px" />
-<Handle type="source" position={Position.Right} style="right: -10px;top: 20px" />
+<Handle type="target" position={Position.Left} style=" left: -12px;top: 20px" />
+<Handle type="source" position={Position.Right} style="right: -12px;top: 20px" />
 
 
