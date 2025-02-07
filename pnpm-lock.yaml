@@ -58,8 +58,8 @@ importers:
         specifier: ^1.6.12
         version: 1.6.12
       '@xyflow/svelte':
-        specifier: ^0.1.26
-        version: 0.1.26(svelte@5.17.3)
+        specifier: ^0.1.29
+        version: 0.1.29(svelte@5.17.3)
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
@@ -652,13 +652,13 @@ packages:
   '@vue/shared@3.5.13':
     resolution: {integrity: sha512-/hnE/qP5ZoGpol0a5mDi45bOd7t3tjYJBjsgCsivow7D48cJeV5l05RD82lPqi7gRiphZM37rnhW1l6ZoCNNnQ==}
 
-  '@xyflow/svelte@0.1.26':
-    resolution: {integrity: sha512-eNcS7uqJIYfkPuVLk9Ok3n6QkXxi2pwoDSoRv8JwceG/6wfCSfEcNhkPi4KjinFfdFZv28XxX8rlEBlG5N2kfw==}
+  '@xyflow/svelte@0.1.29':
+    resolution: {integrity: sha512-j0MGQveXE63ItHPZsJ1zf170pJxubk6HxDqoTePu7S0TrRir0PWrBXcwWbgCyg94R05aqc4FY14v5l712wI03g==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0
 
-  '@xyflow/system@0.0.47':
-    resolution: {integrity: sha512-aUXJPIvsCFxGX70ccRG8LPsR+A8ExYXfh/noYNpqn8udKerrLdSHxMG2VsvUrQ1PGex10fOpbJwFU4A+I/Xv8w==}
+  '@xyflow/system@0.0.50':
+    resolution: {integrity: sha512-HVUZd4LlY88XAaldFh2nwVxDOcdIBxGpQ5txzwfJPf+CAjj2BfYug1fHs2p4yS7YO8H6A3EFJQovBE8YuHkAdg==}
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
@@ -2219,14 +2219,14 @@ snapshots:
 
   '@vue/shared@3.5.13': {}
 
-  '@xyflow/svelte@0.1.26(svelte@5.17.3)':
+  '@xyflow/svelte@0.1.29(svelte@5.17.3)':
     dependencies:
       '@svelte-put/shortcut': 3.1.1(svelte@5.17.3)
-      '@xyflow/system': 0.0.47
+      '@xyflow/system': 0.0.50
       classcat: 5.0.5
       svelte: 5.17.3
 
-  '@xyflow/system@0.0.47':
+  '@xyflow/system@0.0.50':
     dependencies:
       '@types/d3-drag': 3.0.7
       '@types/d3-selection': 3.0.11

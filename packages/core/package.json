@@ -25,7 +25,7 @@
     },
     "dependencies": {
         "@floating-ui/dom": "^1.6.12",
-        "@xyflow/svelte": "^0.1.26"
+        "@xyflow/svelte": "^0.1.29"
     },
     "imports": {
         "#*": [
