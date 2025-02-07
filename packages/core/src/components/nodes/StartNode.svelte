@@ -2,7 +2,7 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { Heading } from '../base';
     import { Button } from '../base/index.js';
-    import { type NodeProps } from '@xyflow/svelte';
+    import { type NodeProps, NodeToolbar, Position } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
@@ -18,7 +18,7 @@
 </script>
 
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {...rest} {data}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path

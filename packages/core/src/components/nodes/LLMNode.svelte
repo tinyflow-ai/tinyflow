@@ -1,6 +1,6 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { type NodeProps, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Select } from '../base';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
@@ -34,7 +34,10 @@
 </script>
 
 
+
+
 <NodeWrapper {data} {...rest}>
+
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
