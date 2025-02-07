@@ -17,17 +17,35 @@
                     {
                         id: '3',
                         type: 'startNode',
-                        data: { title: '开始节点', description: '开始定义输入参数',expand:true },
+                        data: { title: '开始节点', description: '开始定义输入参数', expand: true },
                         position: { x: 150, y: 25 }
                     },
                     {
                         id: '4',
                         type: 'endNode',
-                        data: { title: '结束节点', description: '结束定义输出参数',expand:true },
+                        data: { title: '结束节点', description: '结束定义输出参数', expand: true },
                         position: { x: 650, y: 300 }
                     }
                 ],
                 edges: []
+            },
+            provider: {
+                llms: () => {
+                    return [
+                        {
+                            value: 'gpt-4o',
+                            label: 'gpt-4o'
+                        },
+                        {
+                            value: 'gpt-4',
+                            label: 'gpt-4'
+                        },
+                        {
+                            value: 'gpt-3.5-turbo',
+                            label: 'gpt-3.5-turbo'
+                        }
+                    ];
+                }
             }
         });
     });

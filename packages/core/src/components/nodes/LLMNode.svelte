@@ -1,12 +1,14 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import type { NodeProps } from '@xyflow/svelte';
+    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Select } from '../base';
-    import { parameterDataTypes } from '../utils/Consts';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
+    import { getOptions } from '../utils/NodeUtils';
+    import { onMount } from 'svelte';
+    import type { Item } from '../../Tinyflow';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -15,6 +17,20 @@
 
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
+
+    // console.log("options: --> " , getOptions())
+
+    const options = getOptions();
+
+    let llms = $state<Item[]>([]);
+    onMount(async () => {
+        const newLLMs = await options.provider?.llms();
+        llms.push(...(newLLMs || []));
+    });
+
+    const { updateNodeData } = useSvelteFlow();
+
+
 </script>
 
 
@@ -41,7 +57,14 @@
     <Heading level={3} mt="10px">模型设置</Heading>
     <div class="setting-title">模型</div>
     <div class="setting-item">
-        <Select items={parameterDataTypes} style="width: 100%" placeholder="请选择模型" />
+        <Select items={llms} style="width: 100%" placeholder="请选择模型" onSelect={(item)=>{
+              const newValue = item.value;
+              updateNodeData(currentNodeId, ()=>{
+                  return {
+                      llmId: newValue
+                  }
+              })
+        }} value={data.llmId ? [data.llmId] : []} />
         <MenuButton />
     </div>
 

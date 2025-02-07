@@ -4,13 +4,22 @@
 }} />
 
 <script lang="ts">
-    import { SvelteFlowProvider } from '@xyflow/svelte';
+    import { SvelteFlowProvider, type useSvelteFlow } from '@xyflow/svelte';
     import TinyflowCore from './TinyflowCore.svelte';
     import { store } from '../store/stores.js';
-    const { data, onInit } = $props();
-    store.init(data.nodes, data.edges);
-</script>
+    import type { TinyflowOptions } from '../Tinyflow';
+    import { setContext } from 'svelte';
 
+    const { options, onInit }: {
+        options: TinyflowOptions,
+        onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void,
+    } = $props();
+    const { data } = options;
+    store.init(data.nodes!, data.edges!);
+
+    setContext('tinyflow_options', options);
+
+</script>
 
 
 <SvelteFlowProvider fitView>

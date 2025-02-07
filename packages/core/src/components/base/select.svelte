@@ -2,7 +2,7 @@
     import type { Snippet } from 'svelte';
     import { FloatingTrigger, Render } from './index';
 
-    interface Item {
+     type Item  ={
         value: number | string;
         label: string | Snippet;
         children?: Item[];
@@ -23,7 +23,7 @@
         items: Item[],
         onExpand?: (item: Item) => void,
         onSelect?: (item: Item) => void,
-        value?: (number | string | undefined)[],
+        value?: (any)[],
         defaultValue?: (number | string | undefined)[],
         expandAll?: boolean,
         expandValue?: (number | string)[],
