@@ -1,9 +1,8 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, MenuButton } from '../base';
+    import { type NodeProps } from '@xyflow/svelte';
+    import { Button, Heading } from '../base';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { genShortId } from '../utils/IdGen';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { useAddParameter } from '../utils/useAddParameter';
 

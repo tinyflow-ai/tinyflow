@@ -12,13 +12,12 @@
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^5.0.3",
         "@tsconfig/svelte": "^5.0.4",
-        "@types/node": "^22.10.3",
         "autoprefixer": "^10.4.20",
-        "svelte": "^5.17.3",
-        "svelte-check": "^4.1.1",
+        "svelte": "^5.19.9",
+        "svelte-check": "^4.1.4",
         "tslib": "^2.7.0",
         "typescript": "^5.6.2",
-        "vite": "^6.0.6"
+        "vite": "^6.1.0"
     },
     "dependencies": {
         "@tinyflow-ui/core": "workspace:*"
