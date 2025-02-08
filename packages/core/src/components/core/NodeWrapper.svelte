@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Handle, type NodeProps, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Collapse } from '../base';
-    import type { Snippet } from 'svelte';
+    import { type Snippet } from 'svelte';
 
     const { data, id = '', icon, children }: {
         data: NodeProps['data'],
@@ -20,10 +20,11 @@
         description: data.description as string,
         content: children
     }];
+
 </script>
 
 
-<NodeToolbar position={Position.Top} offset={860} align="end">
+<NodeToolbar position={Position.Top} align="end">
     <div class="tf-node-toolbar">
         <Button class="tf-node-toolbar-item">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -68,8 +69,9 @@
         border-radius: 5px;
         background: #fff;
         border: 1px solid #eee;
-        box-shadow:  0 0 5px rgba(0,0,0,0.1);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
+
     :global(.tf-node-toolbar-item) {
         border: 1px solid transparent;
     }

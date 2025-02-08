@@ -22,6 +22,8 @@
     onInit(svelteFlow);
 
     console.log('svelteFlow: ', svelteFlow);
+    window.svelteFlow = svelteFlow
+    // console.log('svelteFlow.viewport: ', get(svelteFlow.viewport));
     console.log('xyStore: ', xyStore);
     console.log('xyStore nodeLookup: ', get(xyStore.nodeLookup));
 
@@ -72,7 +74,7 @@
 </script>
 
 
-<div style="position: relative;height: 100%;width: 100%">
+<div style="position: relative; height: 100%; width: 100%">
     <Toolbar />
     <SvelteFlow {nodeTypes} {...store}
                 class="tinyflow-logo"

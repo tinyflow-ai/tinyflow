@@ -18,7 +18,6 @@
     store.init(data.nodes!, data.edges!);
 
     setContext('tinyflow_options', options);
-
 </script>
 
 

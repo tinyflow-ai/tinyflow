@@ -49,15 +49,16 @@ export class Tinyflow {
             options: TinyflowOptions;
             onInit: (svelteFlowInstance: FlowInstance) => void;
         };
+        tinyflowEl.style.display = 'block';
+        tinyflowEl.style.width = '100%';
+        tinyflowEl.style.height = '100%';
+        tinyflowEl.classList.add('tf-theme-light');
+
         tinyflowEl.options = this.options;
         tinyflowEl.onInit = (svelteFlowInstance: FlowInstance) => {
             this.svelteFlowInstance = svelteFlowInstance;
         };
 
-        tinyflowEl.style.display = 'block';
-        tinyflowEl.style.width = '100%';
-        tinyflowEl.style.height = '100%';
-        tinyflowEl.classList.add('tf-theme-light');
         this.rootEl.appendChild(tinyflowEl);
     }
 
