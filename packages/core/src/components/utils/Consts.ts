@@ -36,13 +36,14 @@ export const parameterRefTypes = [
     }
 ];
 
-
 export type Parameter = {
-    name?: string,
-    dataType?: string,
-    ref?: string,
-    refType?: string,
-    value?: string,
-    description?: string,
-    required?: boolean,
-}
+    id?: string;
+    name?: string;
+    dataType?: string;
+    ref?: string;
+    refType?: string;
+    value?: string;
+    description?: string;
+    required?: boolean;
+    children?: Parameter[];
+};

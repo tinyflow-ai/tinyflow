@@ -1,11 +1,11 @@
 <script lang="ts">
     import { useNodesData } from '@xyflow/svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import RefParameterItem from './RefParameterItem.svelte';
+    import OutputParameterItem from './OutputParameterItem.svelte';
 
     const {
-        noneParameterText = '无输入参数',
-        dataKeyName = 'inputParameters'
+        noneParameterText = '无输出参数',
+        dataKeyName = 'outputParameters'
     }: {
         noneParameterText?: string;
         dataKeyName?: string;
@@ -19,18 +19,27 @@
     });
 </script>
 
+{#snippet parameterList(params, position: number[])}
+    {#each params as param, index (`${param.id}_${param.children ? param.children.length : 0}`)}
+        <OutputParameterItem parameter={param} position={[...position, index]} {dataKeyName} />
+        {#if param.children}
+            {@render parameterList(param.children, [...position, index])}
+        {/if}
+    {:else }
+        {#if position.length === 0}
+            <div class="none-params">{noneParameterText}</div>
+        {/if}
+    {/each}
+{/snippet}
+
 
 <div class="input-container">
     {#if (parameters.length !== 0)}
         <div class="input-header">参数名称</div>
-        <div class="input-header">参数值</div>
+        <div class="input-header">参数类型</div>
         <div class="input-header"></div>
     {/if}
-    {#each parameters as param, index (param.id)}
-        <RefParameterItem parameter={param} index={index} {dataKeyName} />
-    {:else }
-        <div class="none-params">{noneParameterText}</div>
-    {/each}
+    {@render parameterList(parameters || [], [])}
 </div>
 
 

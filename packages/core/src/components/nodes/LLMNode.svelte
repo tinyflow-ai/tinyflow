@@ -9,6 +9,7 @@
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import type { Item } from '../../Tinyflow';
+    import OutputParameterList from '../core/OutputParameterList.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -91,7 +92,7 @@
             </svg>
         </Button>
     </div>
-    <RefParameterList noneParameterText="无输出参数" dataKeyName="outputParameters" />
+    <OutputParameterList  />
 
 </NodeWrapper>
 
