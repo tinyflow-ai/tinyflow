@@ -1,4 +1,4 @@
-![](./docs/asserts/images/screenshot.png)
+![](docs/assets/images/screenshot.png)
 # Tinyflow
 Tinyflow is a lightweight AI agent solution. It is not a "product" but a development component.
 By integrating Tinyflow, you can make any traditional application have the capabilities of an AI agent.
@@ -38,3 +38,8 @@ new Tinyflow({
 ```bash
 npm install @tinyflow-ai/nodejs
 ```
+
+
+## Wechat Group
+
+![](./docs/assets/images/wechat_group.jpg)

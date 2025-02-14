@@ -1,4 +1,4 @@
-![](./docs/asserts/images/screenshot.png)
+![](docs/assets/images/screenshot.png)
 # Tinyflow
 Tinyflow 是一个轻量的 AI 智能体解决方案，她不是一个 ”产品“，而是一个开发组件。
 通过集成 Tinyflow，您可以使得任何的传统应用，具备 AI 智能体的能力。
@@ -39,3 +39,8 @@ new Tinyflow({
 ```bash
 npm install @tinyflow-ai/nodejs
 ```
+
+
+## Star 用户专属交流群
+
+![](./docs/assets/images/wechat_group.jpg)
