@@ -16,7 +16,7 @@
     let param = $derived.by(() => {
         return {
             ...parameter,
-            ...($node?.data?.inputParameters as Array<Parameter>)[index]
+            ...($node?.data?.parameters as Array<Parameter>)[index]
         };
     });
 
@@ -24,10 +24,10 @@
     const updateName = (event: Event) => {
         const newValue = (event.target as any).value;
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].name = newValue;
+            let parameters = node.data.parameters as Array<Parameter>;
+            parameters[index].name = newValue;
             return {
-                inputParameters
+                parameters
             };
         });
     };
@@ -35,11 +35,11 @@
     const updateRequired = (event: Event) => {
         const checked = (event.target as any).checked;
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters[index].required = checked;
+            let parameters = node.data.parameters as Array<Parameter>;
+            parameters[index].required = checked;
 
             return {
-                inputParameters
+                parameters
             };
         });
     };
@@ -48,10 +48,10 @@
     let triggerObject: any;
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
-            let inputParameters = node.data.inputParameters as Array<Parameter>;
-            inputParameters.splice(index, 1);
+            let parameters = node.data.parameters as Array<Parameter>;
+            parameters.splice(index, 1);
             return {
-                inputParameters: [...inputParameters]
+                parameters: [...parameters]
             };
         });
         triggerObject?.hide();

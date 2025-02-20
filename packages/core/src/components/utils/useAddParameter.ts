@@ -4,7 +4,7 @@ import { useSvelteFlow } from '@xyflow/svelte';
 export const useAddParameter = () => {
     const { updateNodeData } = useSvelteFlow();
     return {
-        addParameter: (nodeId: string, dataKey: string = 'inputParameters') => {
+        addParameter: (nodeId: string, dataKey: string = 'parameters') => {
             updateNodeData(nodeId, (node) => {
                 let parameters = node.data[dataKey] as Array<any>;
                 if (parameters) {

@@ -14,10 +14,10 @@ const fillSourceNodeIds = (nodeIds: string[], currentNodeId: string, edges: Edge
 
 const nodeToOptions = (node: Node, isChildren: boolean) => {
     if (node.type === 'startNode') {
-        const inputParameters = node.data.inputParameters as Array<Parameter>;
+        const parameters = node.data.parameters as Array<Parameter>;
         const children = [];
-        if (inputParameters)
-            for (let inputParam of inputParameters) {
+        if (parameters)
+            for (let inputParam of parameters) {
                 children.push({
                     label:
                         inputParam.name +
@@ -48,8 +48,8 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
             ]
         };
     } else {
-        const outputParameters = node.data.outputParameters;
-        if (outputParameters) {
+        const outputDefs = node.data.outputDefs;
+        if (outputDefs) {
             const getChildren = (params: any, parentId: string) => {
                 if (!params || params.length === 0) return [];
                 return params.map((param: any) => ({
@@ -66,7 +66,7 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
             return {
                 label: node.data.title,
                 value: node.id,
-                children: getChildren(outputParameters, node.id)
+                children: getChildren(outputDefs, node.id)
             };
         }
     }

@@ -6,7 +6,7 @@
 
     const {
         noneParameterText = '无输出参数',
-        dataKeyName = 'outputParameters'
+        dataKeyName = 'outputDefs'
     }: {
         noneParameterText?: string;
         dataKeyName?: string;

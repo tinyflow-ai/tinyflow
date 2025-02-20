@@ -5,7 +5,7 @@
 
     const {
         noneParameterText = '无输入参数',
-        dataKeyName = 'inputParameters'
+        dataKeyName = 'parameters'
     }: {
         noneParameterText?: string;
         dataKeyName?: string;

@@ -5,19 +5,19 @@
 
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
-    let inputParameters = $derived.by(() => {
-        return [...$node?.data?.inputParameters as Array<any> || []];
+    let parameters = $derived.by(() => {
+        return [...$node?.data?.parameters as Array<any> || []];
     });
 </script>
 
 
 <div class="input-container">
-    {#if (inputParameters.length !== 0)}
+    {#if (parameters.length !== 0)}
         <div class="input-header">参数名称</div>
         <div class="input-header">必填</div>
         <div class="input-header"></div>
     {/if}
-    {#each inputParameters as param, index (param.id)}
+    {#each parameters as param, index (param.id)}
         <DefinedParameterItem parameter={param} index={index} />
     {:else }
         <div class="none-params">无输入参数</div>
