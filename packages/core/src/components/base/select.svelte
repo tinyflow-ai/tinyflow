@@ -77,7 +77,7 @@
                 onclick={() => handlerOnSelect(item)}
         >
             <span>
-            {#if item.children}
+            {#if item.children && item.children.length > 0}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path
                     d="M12 14L8 10H16L12 14Z"></path></svg>
             {/if}
