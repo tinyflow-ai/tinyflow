@@ -1,5 +1,5 @@
 {
-    "extends": "@tsconfig/svelte/tsconfig.json",
+//    "extends": "@tsconfig/svelte/tsconfig.json",
     "compilerOptions": {
         "esModuleInterop": true,
         "target": "ESNext",
@@ -16,8 +16,8 @@
         "isolatedModules": true,
         "moduleDetection": "force",
         "paths": {
-            "@tinyflow-ui/core": ["../../packages/core/src"],
-            "@tinyflow-ui/core/*": ["../../packages/core/src/*"]
+            "@tinyflow-ai/ui": ["../../packages/ui/src"],
+            "@tinyflow-ai/ui/*": ["../../packages/ui/src/*"]
         }
     },
     "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]

@@ -20,5 +20,6 @@ export default defineConfig({
     plugins: [svelte({ emitCss: false }), dts({
         rollupTypes: true ,
         // tsconfigPath: './tsconfig.app.json'
-    })]
+    })],
+
 });

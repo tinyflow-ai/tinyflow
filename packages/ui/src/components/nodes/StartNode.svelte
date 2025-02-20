@@ -2,7 +2,7 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { Heading } from '../base';
     import { Button } from '../base/index.js';
-    import { type NodeProps, NodeToolbar, Position } from '@xyflow/svelte';
+    import { type NodeProps } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';

@@ -1,5 +1,5 @@
 {
-    "name": "tinyflow-ui",
+    "name": "tinyflow-ai",
     "packageManager": "pnpm@8.15.6",
     "private": true,
     "scripts": {
