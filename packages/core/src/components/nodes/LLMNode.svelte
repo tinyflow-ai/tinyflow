@@ -1,6 +1,6 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
+    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Select } from '../base';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
@@ -9,7 +9,7 @@
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import type { Item } from '../../Tinyflow';
-    import OutputParameterList from '../core/OutputParameterList.svelte';
+    import OutputDefList from '../core/OutputDefList.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -33,8 +33,6 @@
 
 
 </script>
-
-
 
 
 <NodeWrapper {data} {...rest}>
@@ -92,7 +90,7 @@
             </svg>
         </Button>
     </div>
-    <OutputParameterList  />
+    <OutputDefList />
 
 </NodeWrapper>
 

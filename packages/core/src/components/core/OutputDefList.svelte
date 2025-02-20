@@ -1,8 +1,8 @@
 <script lang="ts">
     import { useNodesData } from '@xyflow/svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import OutputParameterItem from './OutputParameterItem.svelte';
     import { type Parameter } from '../utils/Consts';
+    import OutputDefItem from './OutputDefItem.svelte';
 
     const {
         noneParameterText = '无输出参数',
@@ -22,7 +22,7 @@
 
 {#snippet parameterList(params: Parameter[], position: number[])}
     {#each params as param, index (`${param.id}_${param.children ? param.children.length : 0}`)}
-        <OutputParameterItem parameter={param} position={[...position, index]} {dataKeyName} />
+        <OutputDefItem parameter={param} position={[...position, index]} {dataKeyName} />
         {#if param.children}
             {@render parameterList(param.children, [...position, index])}
         {/if}
