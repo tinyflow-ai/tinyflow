@@ -17,14 +17,14 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
         const parameters = node.data.parameters as Array<Parameter>;
         const children = [];
         if (parameters)
-            for (let inputParam of parameters) {
+            for (const parameter of parameters) {
                 children.push({
                     label:
-                        inputParam.name +
+                        parameter.name +
                         (isChildren
-                            ? ` (Array<${inputParam.dataType || 'String'}>)`
-                            : ` (${inputParam.dataType || 'String'})`),
-                    value: node.id + '.' + inputParam.name
+                            ? ` (Array<${parameter.dataType || 'String'}>)`
+                            : ` (${parameter.dataType || 'String'})`),
+                    value: node.id + '.' + parameter.name
                 });
             }
         return {
