@@ -20,12 +20,29 @@ npm install @tinyflow-ai/ui
 
 ```ts
 import { Tinyflow } from 'tinyflow';
-new Tinyflow({
+
+const tinyflow = new Tinyflow({
     element: '#tinyflow',
+    data: JSON.parse('{}'),
+    provider: {
+        llms: () => []
+    }
 });
 ```
 
-### 后端-java
+参数含义：
+- element：容器元素，可以是一个字符串，也可以是一个 DOM 元素。
+- data：工作流的数据，是一个 JSON 对象。
+- provider：数据提供者，目前支持 LLMs 的数据：
+
+tinyflow 提供了以下方法：
+
+- `tinyflow.getData()` 导出工作流的数据
+- `tinyflow.getOptions()` 获取初始化配置的参数
+
+### Java 后端
+
+后端 java 主要用于执行 Tinyflow 设计出来的工作流，其开源地址为：https://gitee.com/tinyflow-ai/tinyflow-java
 
 ```xml
 <dependency>
@@ -35,9 +52,17 @@ new Tinyflow({
 </dependency>
 ```
 
-### 后端-nodejs
+### 其他后端
+Nodejs 后端（正在开发中，暂未开放）：
+
 ```bash
 npm install @tinyflow-ai/nodejs
+```
+
+Python 后端（正在开发中，暂未开放）：
+
+```bash
+pip install tinyflow-ai-python
 ```
 
 
