@@ -13,13 +13,15 @@ export default defineConfig({
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
             // formats: ['es'],
-            name: 'Tinyflow',
-            fileName: 'tinyflow'
+            name: 'tinyflow',
+            fileName: 'index'
         }
     },
-    plugins: [svelte({ emitCss: false }), dts({
-        rollupTypes: true ,
-        // tsconfigPath: './tsconfig.app.json'
-    })],
-
+    plugins: [
+        svelte({ emitCss: false }),
+        dts({
+            rollupTypes: true
+            // tsconfigPath: './tsconfig.app.json'
+        })
+    ],
 });

@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { type HTMLButtonAttributes } from 'svelte/elements';
     import Button from './button.svelte';
+    import type { MyHTMLButtonAttributes } from './types';
 
-    const { ...rest }: HTMLButtonAttributes = $props();
+    const { ...rest }: MyHTMLButtonAttributes = $props();
 </script>
 
 <Button {...rest} class="input-btn-more {rest.class}">

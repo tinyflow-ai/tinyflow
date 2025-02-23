@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { type HTMLInputAttributes } from 'svelte/elements';
+    import type { MyHTMLInputAttributes } from './types';
 
-    const { ...rest }: HTMLInputAttributes = $props();
+    const { ...rest }: MyHTMLInputAttributes = $props();
 </script>
 <input type="text" {...rest} class="tf-input  nopan nodrag {rest.class}" />

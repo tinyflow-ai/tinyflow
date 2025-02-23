@@ -2,7 +2,7 @@
     import type { Snippet } from 'svelte';
     import { FloatingTrigger, Render } from './index';
 
-     type Item  ={
+    type Item = {
         value: number | string;
         label: string | Snippet;
         children?: Item[];
