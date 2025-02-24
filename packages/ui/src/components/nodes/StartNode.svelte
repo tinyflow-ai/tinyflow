@@ -18,7 +18,7 @@
 </script>
 
 
-<NodeWrapper {...rest} {data}>
+<NodeWrapper {...rest} {data} allowExecute={false}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
