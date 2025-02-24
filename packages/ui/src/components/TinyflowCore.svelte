@@ -5,7 +5,7 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, useStore, MarkerType
+        type Node, MarkerType
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
@@ -13,23 +13,12 @@
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
     import { genShortId } from './utils/IdGen';
-    import { get } from 'svelte/store';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
-    const xyStore = useStore();
 
     onInit(svelteFlow);
 
-    console.log('svelteFlow: ', svelteFlow);
-    window.svelteFlow = svelteFlow
-    // console.log('svelteFlow.viewport: ', get(svelteFlow.viewport));
-    console.log('xyStore: ', xyStore);
-    console.log('xyStore nodeLookup: ', get(xyStore.nodeLookup));
-
-    function onNodeDragStart(event: CustomEvent) {
-        console.log('onNodeDragStart: ', event);
-    }
 
     const onDragOver = (event: DragEvent) => {
         event.preventDefault();
@@ -59,17 +48,22 @@
         store.selectNodeOnly(newNode.id);
     };
 
-    const onconnect = (event: any) => {
-        console.log('onconnect: ', event);
-    };
 
-    const onconnectend = (event: any, node: any) => {
-        console.log('onconnectend: ', event, node);
-    };
-
-    const onconnectstart = (event: any, node: any) => {
-        console.log('onconnectstart: ', event, node);
-    };
+    // function onNodeDragStart(event: CustomEvent) {
+    //     console.log('onNodeDragStart: ', event);
+    // }
+    //
+    // const onconnect = (event: any) => {
+    //     // console.log('onconnect: ', event);
+    // };
+    //
+    // const onconnectend = (event: any, node: any) => {
+    //     // console.log('onconnectend: ', event, node);
+    // };
+    //
+    // const onconnectstart = (event: any, node: any) => {
+    //     console.log('onconnectstart: ', event, node);
+    // };
 
 </script>
 
@@ -78,12 +72,8 @@
     <Toolbar />
     <SvelteFlow {nodeTypes} {...store}
                 class="tinyflow-logo"
-                on:nodedragstart={onNodeDragStart}
                 on:drop={onDrop}
                 on:dragover={onDragOver}
-                {onconnect}
-                {onconnectend}
-                {onconnectstart}
                 defaultEdgeOptions={{
                     // animated: true,
                     // label: 'edge label',
