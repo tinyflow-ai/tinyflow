@@ -12,16 +12,19 @@ export default defineConfig({
         sourcemap: false,
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
-            // formats: ['es'],
-            name: 'tinyflow',
-            fileName: 'index'
+            cssFileName: 'index',
+            fileName: (format) => {
+                return format === 'umd' ? 'index.umd.js' : 'index.js';
+            },
+            formats: ['es', 'umd'],
+            name: 'tinyflow'
         }
     },
     plugins: [
         svelte({ emitCss: false }),
         dts({
-            rollupTypes: true
-            // tsconfigPath: './tsconfig.app.json'
+            rollupTypes: true,
+            tsconfigPath: './tsconfig.app.json'
         })
-    ],
+    ]
 });
