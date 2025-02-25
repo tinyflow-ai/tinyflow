@@ -9,7 +9,7 @@ export default defineConfig({
         outDir: 'dist',
         emptyOutDir: true,
         minify: true,
-        sourcemap: false,
+        sourcemap: true,
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
             cssFileName: 'index',

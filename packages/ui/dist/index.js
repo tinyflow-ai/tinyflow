@@ -15569,3 +15569,4 @@ customElements.define("tinyflow-component", ie(yy, { options: {}, onInit: {} }, 
 export {
   ky as Tinyflow
 };
+//# sourceMappingURL=index.js.map
