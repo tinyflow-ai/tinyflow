@@ -3,8 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterDataTypes, parameterRefTypes } from '../utils/Consts';
-    import { useRefOptions } from '../utils/useRefOptions';
+    import { type Parameter, parameterDataTypes } from '../utils/Consts';
     import { genShortId } from '../utils/IdGen';
 
     const { parameter, position, dataKeyName }: {
@@ -34,7 +33,6 @@
         return {
             ...parameter,
             ...param
-            // ...($node?.data[dataKeyName] as Array<Parameter>)[index]
         };
     });
 
@@ -70,21 +68,9 @@
     };
 
 
-    const updateValue = (event: Event) => {
-        const newValue = (event.target as any).value;
-        updateAttribute('value', newValue);
-    };
-
-
     const updateDataType = (item: any) => {
         const newValue = item.value;
         updateAttribute('dataType', newValue);
-    };
-
-
-    const updateRefType = (item: any) => {
-        const newValue = item.value;
-        updateAttribute('refType', newValue);
     };
 
 
@@ -151,13 +137,16 @@
 
 
 <div class="input-item">
-    {#if (position.length > 1)} {#each position as p} &nbsp;{/each}{/if}
+    {#if (position.length > 1)}
+        {#each position as p} &nbsp;{/each}
+    {/if}
     <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
-           oninput={updateName} />
+           oninput={updateName} disabled={param.nameDisabled === true} />
 </div>
 <div class="input-item">
     <Select items={parameterDataTypes} style="width: 100%" defaultValue={["String"]}
             value={param.dataType ? [param.dataType]:[]}
+            disabled={param.dataTypeDisabled === true}
             onSelect={updateDataType} />
     {#if param.dataType === "Object" || param.dataType === "Array"}
         <Button class="input-btn-more" style="margin-left: auto" onclick={addChild}>
@@ -189,9 +178,11 @@
                     }} />
                 </div>
 
-                <div class="input-more-item">
-                    <Button onclick={handleDelete}>删除</Button>
-                </div>
+                {#if param.deleteDisabled !== true}
+                    <div class="input-more-item">
+                        <Button onclick={handleDelete}>删除</Button>
+                    </div>
+                {/if}
             </div>
         {/snippet}
     </FloatingTrigger>
