@@ -19,14 +19,11 @@ npm install @tinyflow-ai/ui
 ```
 
 ```ts
-import { Tinyflow } from 'tinyflow';
+import { Tinyflow } from '@tinyflow-ai/ui';
+import "@tinyflow-ai/ui/dist/index.css";
 
-const tinyflow = new Tinyflow({
+new Tinyflow({
     element: '#tinyflow',
-    data: JSON.parse('{}'),
-    provider: {
-        llms: () => []
-    }
 });
 ```
 
