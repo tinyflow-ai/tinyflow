@@ -59,10 +59,10 @@
         <Textarea rows={10} placeholder="请输入执行代码" style="width: 100%" onchange={(e:any)=>{
             updateNodeData(currentNodeId, ()=>{
                 return {
-                    code: e.target.value
+                    template: e.target.value
                 }
             })
-        }} value={data.code as string||""}/>
+        }} value={data.template as string||""}/>
     </div>
 
 
