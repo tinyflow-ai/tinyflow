@@ -9,10 +9,10 @@
     "agent flow",
     "agents flow"
   ],
+  "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "browser": "./dist/index.umd.js",
-  "types": "./dist/index.d.ts",
   "license": "LGPL-3.0-or-later",
   "files": [
     "dist",
@@ -49,19 +49,17 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-
   "imports": {
     "#*": [
       "./src/*.ts",
-      "./src/*.svelte"
+      "./src/*.tsx"
     ]
   },
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.js",
       "types": "./dist/index.d.ts",
-      "svelte": "./src/index.ts"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     },
     "./dist/index.css": {
       "import": "./dist/index.css",

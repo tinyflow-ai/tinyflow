@@ -22,6 +22,7 @@ export declare class Tinyflow {
         edges: Edge[];
         viewport: Viewport;
     };
+    setData(data: TinyflowData): void;
     destroy(): void;
 }
 

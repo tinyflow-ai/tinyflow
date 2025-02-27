@@ -18135,7 +18135,7 @@ be(fv, { onInit: {} }, [], [], !0);
 function Tb(e, t) {
   Ce(t, !0);
   const n = w(t, "options", 7), r = w(t, "onInit", 7), { data: o } = n();
-  return Gi.init(o.nodes, o.edges), ho("tinyflow_options", n()), Cf(e, {
+  return Gi.init(o.nodes || [], o.edges || []), ho("tinyflow_options", n()), Cf(e, {
     fitView: !0,
     children: (a, i) => {
       fv(a, {

@@ -16761,7 +16761,7 @@ ie(Tf, { onInit: {} }, [], [], !0);
 function Vb(e, t) {
   ce(t, !0);
   const n = y(t, "options", 7), r = y(t, "onInit", 7), { data: o } = n();
-  return di.init(o.nodes, o.edges), Ir("tinyflow_options", n()), Fd(e, {
+  return di.init(o.nodes || [], o.edges || []), Ir("tinyflow_options", n()), Fd(e, {
     fitView: !0,
     children: (i, s) => {
       Tf(i, {
