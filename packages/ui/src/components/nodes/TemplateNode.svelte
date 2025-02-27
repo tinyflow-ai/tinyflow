@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Select } from '../base';
+    import { Button, Heading } from '../base';
     import { Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
@@ -20,14 +20,15 @@
     const { updateNodeData } = useSvelteFlow();
 
     $effect(() => {
-        addParameter(currentNodeId, 'outputDefs', {
-            name: 'output',
-            dataType: 'String',
-            dataTypeDisabled: true,
-            deleteDisabled: true
-        });
+        if (!data.outputDefs || data.outputDefs.length === 0) {
+            addParameter(currentNodeId, 'outputDefs', {
+                name: 'output',
+                dataType: 'String',
+                dataTypeDisabled: true,
+                deleteDisabled: true
+            });
+        }
     });
-
 </script>
 
 
