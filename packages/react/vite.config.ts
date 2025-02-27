@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import react from '@vitejs/plugin-react'
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
@@ -20,7 +21,7 @@ export default defineConfig({
         }
     },
     plugins: [
-        // svelte({ emitCss: false }),
+        react(),
         dts({
             rollupTypes: true,
             tsconfigPath: './tsconfig.app.json'

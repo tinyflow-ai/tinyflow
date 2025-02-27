@@ -26,22 +26,27 @@
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
     "lint": "eslint ."
   },
+  "dependencies": {
+    "@tinyflow-ai/ui": "workspace:*"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.13"
+  },
   "devDependencies": {
     "@tinyflow-ai/eslint-config": "workspace:*",
     "@types/node": "^22.13.4",
+    "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.20",
     "less": "^4.2.2",
     "typescript": "^5.6.2",
     "vite": "^6.1.0",
-    "vite-plugin-dts": "^4.5.0"
-  },
-  "dependencies": {
-    "@tinyflow-ai/ui": "workspace:*"
+    "vite-plugin-dts": "^4.5.0",
+    "vue": "^3.5.13"
   },
   "imports": {
     "#*": [
       "./src/*.ts",
-      "./src/*.svelte"
+      "./src/*.vue"
     ]
   },
   "exports": {

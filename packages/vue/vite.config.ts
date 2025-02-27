@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
@@ -20,10 +21,15 @@ export default defineConfig({
         }
     },
     plugins: [
-        // svelte({ emitCss: false }),
+        vue(),
         dts({
             rollupTypes: true,
             tsconfigPath: './tsconfig.app.json'
         })
-    ]
+    ],
+    // resolve: {
+    //     alias: {
+    //         '@tinyflow-ai/ui': resolve('../ui/src')
+    //     }
+    // }
 });
