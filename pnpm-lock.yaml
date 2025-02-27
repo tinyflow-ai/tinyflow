@@ -52,6 +52,34 @@ importers:
         specifier: ^6.1.0
         version: 6.1.1(@types/node@22.13.4)(less@4.2.2)
 
+  packages/react:
+    dependencies:
+      '@tinyflow-ai/ui':
+        specifier: workspace:*
+        version: link:../ui
+    devDependencies:
+      '@tinyflow-ai/eslint-config':
+        specifier: workspace:*
+        version: link:../../shared/eslint-config
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.5.3)
+      less:
+        specifier: ^4.2.2
+        version: 4.2.2
+      typescript:
+        specifier: ^5.6.2
+        version: 5.7.3
+      vite:
+        specifier: ^6.1.0
+        version: 6.1.1(@types/node@22.13.4)(less@4.2.2)
+      vite-plugin-dts:
+        specifier: ^4.5.0
+        version: 4.5.0(@types/node@22.13.4)(typescript@5.7.3)(vite@6.1.1)
+
   packages/ui:
     dependencies:
       '@floating-ui/dom':
@@ -85,6 +113,34 @@ importers:
       svelte-check:
         specifier: ^4.1.4
         version: 4.1.4(svelte@5.20.2)(typescript@5.7.3)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.7.3
+      vite:
+        specifier: ^6.1.0
+        version: 6.1.1(@types/node@22.13.4)(less@4.2.2)
+      vite-plugin-dts:
+        specifier: ^4.5.0
+        version: 4.5.0(@types/node@22.13.4)(typescript@5.7.3)(vite@6.1.1)
+
+  packages/vue:
+    dependencies:
+      '@tinyflow-ai/ui':
+        specifier: workspace:*
+        version: link:../ui
+    devDependencies:
+      '@tinyflow-ai/eslint-config':
+        specifier: workspace:*
+        version: link:../../shared/eslint-config
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.5.3)
+      less:
+        specifier: ^4.2.2
+        version: 4.2.2
       typescript:
         specifier: ^5.6.2
         version: 5.7.3
