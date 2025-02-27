@@ -75,4 +75,11 @@ export class Tinyflow {
     getData() {
         return this.svelteFlowInstance.toObject();
     }
+
+
+    destroy() {
+        while (this.rootEl.firstChild) {
+            this.rootEl.removeChild(this.rootEl.firstChild);
+        }
+    }
 }

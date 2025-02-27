@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Tinyflow as  TinyflowNative} from '@tinyflow-ai/ui';
+import { Tinyflow as TinyflowNative } from '@tinyflow-ai/ui';
 import '@tinyflow-ai/ui/dist/index.css';
 
 function Tinyflow() {
@@ -9,13 +9,13 @@ function Tinyflow() {
     //初始化 AiEditor
     useEffect(() => {
         if (divRef.current) {
-            new TinyflowNative({
+            const tinyflow = new TinyflowNative({
                 element: divRef.current,
-                data:{},
+                data: {}
             });
-            // return ()=>{
-            //     aiEditor.destroy();
-            // }
+            return () => {
+                tinyflow.destroy();
+            };
         }
     }, []);
 

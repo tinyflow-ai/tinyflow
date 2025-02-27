@@ -12420,6 +12420,10 @@ class Uy {
   getData() {
     return this.svelteFlowInstance.toObject();
   }
+  destroy() {
+    for (; this.rootEl.firstChild; )
+      this.rootEl.removeChild(this.rootEl.firstChild);
+  }
 }
 const g2 = () => {
   const e = ye([]), t = ye([]), n = ye({ x: 250, y: 100, zoom: 1 });

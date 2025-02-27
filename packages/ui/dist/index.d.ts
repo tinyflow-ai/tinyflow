@@ -22,6 +22,7 @@ export declare class Tinyflow {
         edges: Edge[];
         viewport: Viewport;
     };
+    destroy(): void;
 }
 
 export declare type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelteFlow>['toObject']>>;
