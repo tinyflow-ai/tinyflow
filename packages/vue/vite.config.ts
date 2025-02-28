@@ -27,9 +27,4 @@ export default defineConfig({
             tsconfigPath: './tsconfig.app.json'
         })
     ],
-    // resolve: {
-    //     alias: {
-    //         '@tinyflow-ai/ui': resolve('../ui/src')
-    //     }
-    // }
 });
