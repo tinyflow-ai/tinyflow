@@ -23,9 +23,9 @@ importers:
 
   demos/svelte:
     dependencies:
-      '@tinyflow-ai/ui':
+      '@tinyflow-ai/svelte':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/svelte
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
@@ -91,6 +91,46 @@ importers:
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      typescript:
+        specifier: ^5.6.2
+        version: 5.7.3
+      vite:
+        specifier: ^6.1.0
+        version: 6.1.1(@types/node@22.13.4)(less@4.2.2)
+      vite-plugin-dts:
+        specifier: ^4.5.0
+        version: 4.5.0(@types/node@22.13.4)(typescript@5.7.3)(vite@6.1.1)
+
+  packages/svelte:
+    dependencies:
+      '@tinyflow-ai/ui':
+        specifier: workspace:*
+        version: link:../ui
+    devDependencies:
+      '@sveltejs/vite-plugin-svelte':
+        specifier: ^5.0.3
+        version: 5.0.3(svelte@5.20.2)(vite@6.1.1)
+      '@tinyflow-ai/eslint-config':
+        specifier: workspace:*
+        version: link:../../shared/eslint-config
+      '@tsconfig/svelte':
+        specifier: ^5.0.4
+        version: 5.0.4
+      '@types/node':
+        specifier: ^22.13.4
+        version: 22.13.4
+      autoprefixer:
+        specifier: ^10.4.20
+        version: 10.4.20(postcss@8.5.3)
+      less:
+        specifier: ^4.2.2
+        version: 4.2.2
+      svelte:
+        specifier: ^5.20.2
+        version: 5.20.2
+      svelte-check:
+        specifier: ^4.1.4
+        version: 4.1.4(svelte@5.20.2)(typescript@5.7.3)
       typescript:
         specifier: ^5.6.2
         version: 5.7.3

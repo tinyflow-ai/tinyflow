@@ -20,6 +20,6 @@
         "vite": "^6.1.0"
     },
     "dependencies": {
-        "@tinyflow-ai/ui": "workspace:*"
+        "@tinyflow-ai/svelte": "workspace:*"
     }
 }

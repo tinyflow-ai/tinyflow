@@ -8,7 +8,7 @@ export default defineConfig({
     plugins: [svelte()],
     resolve: {
         alias: {
-            '@tinyflow-ai/ui': resolve('../../packages/ui/src')
+            '@tinyflow-ai/svelte': resolve('../../packages/svelte/src')
         }
     }
 });
