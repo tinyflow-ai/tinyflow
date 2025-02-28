@@ -68,6 +68,7 @@ const tinyflow = new Tinyflow({
 
     <script type="module">
         import { Tinyflow } from '@tinyflow-ai/ui';
+        import '@tinyflow-ai/ui/dist/index.css';
 
         const tinyflow = new Tinyflow({
             element: '#app',
@@ -85,8 +86,6 @@ const tinyflow = new Tinyflow({
 </body>
 </html>
 ```
-
----
 
 ## 注意事项
 
