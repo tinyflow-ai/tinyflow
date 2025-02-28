@@ -47,7 +47,7 @@ export default defineConfig({
 
                 nav: [
                     { text: '首页', link: '/' },
-                    { text: '帮助文档', link: '/zh/intro/what-is-tinyflow' },
+                    { text: '帮助文档', link: '/zh/what-is-tinyflow' },
                     {
                         text: 'ChangeLog',
                         link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
@@ -58,12 +58,12 @@ export default defineConfig({
                     {
                         text: '快速开始',
                         items: [
-                            { text: 'Tinyflow 是什么', link: '/zh/intro/what-is-tinyflow' },
-                            { text: '快速开始', link: '/zh/intro/getting-started' },
-                            { text: '与 Vue 集成', link: '/zh/intro/getting-started' },
-                            { text: '与 React 集成', link: '/zh/intro/getting-started' },
-                            { text: '与 Svelte 集成', link: '/zh/intro/getting-started' },
-                            { text: '与原生 JS 集成', link: '/zh/intro/getting-started' },
+                            { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
+                            { text: '快速开始', link: '/zh/quick-start' },
+                            { text: '与 Vue 集成', link: '/zh/integration/vue' },
+                            { text: '与 React 集成', link: '/zh/integration/react' },
+                            { text: '与 Svelte 集成', link: '/zh/integration/svelte' },
+                            { text: '与原生 JS 集成', link: '/zh/integration/native' },
                             { text: '微信交流群', link: '/zh/intro/communication' }
                         ]
                     },
