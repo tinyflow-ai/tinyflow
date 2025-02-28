@@ -1,1 +1,3 @@
-import Tinyflow from './Tinyflow.vue'; Tinyflow
+import Tinyflow from './Tinyflow.vue';
+
+export { Tinyflow };
