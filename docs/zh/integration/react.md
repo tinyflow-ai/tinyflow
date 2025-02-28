@@ -1,7 +1,5 @@
 # Tinyflow React 组件使用文档
 
-## 简介
-Tinyflow Vue 是一个基于 `@tinyflow-ai/ui` 的 Vue 组件，用于在 Vue 项目中集成 Tinyflow 流程设计器。该组件提供了简单的 API 和高度可定制的样式选项，方便开发者快速集成和使用。
 
 ## 简介
 `@tinyflow-ai/react` 是一个基于 React 的封装组件，用于在 React 项目中快速集成 Tinyflow 流程设计器。它提供了简洁的 API 和灵活的配置选项，方便开发者在 React 应用中嵌入流程设计功能。
