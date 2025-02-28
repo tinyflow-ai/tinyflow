@@ -22,6 +22,7 @@ const gitee_icon_svg =
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
     lastUpdated: true,
+    title: 'Tinyflow',
     locales: {
         en: {
             label: 'English',
@@ -60,11 +61,24 @@ export default defineConfig({
                         items: [
                             { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
                             { text: '快速开始', link: '/zh/quick-start' },
+                            { text: '微信交流群', link: '/zh/intro/communication' }
+                        ]
+                    },
+                    {
+                        text: '前端集成',
+                        items: [
                             { text: '与 Vue 集成', link: '/zh/integration/vue' },
                             { text: '与 React 集成', link: '/zh/integration/react' },
                             { text: '与 Svelte 集成', link: '/zh/integration/svelte' },
                             { text: '与原生 JS 集成', link: '/zh/integration/native' },
-                            { text: '微信交流群', link: '/zh/intro/communication' }
+                        ]
+                    },
+                    {
+                        text: '后端集成',
+                        items: [
+                            { text: '与 Java 项目集成', link: '/zh/intro/communication' },
+                            { text: '与 Node.js 项目集成', link: '/zh/intro/communication' },
+                            { text: '与 Python 项目集成', link: '/zh/intro/communication' },
                         ]
                     },
                     {
@@ -78,15 +92,6 @@ export default defineConfig({
                             { text: '执行条件（Condition）', link: '/zh/core/chain' }
                         ]
                     },
-                    {
-                        text: '执行后端',
-                        items: [
-                            { text: 'Java', link: '/zh/samples/chat' },
-                            { text: 'Python', link: '/zh/samples/chat-with-memory' },
-                            { text: 'Nodejs', link: '/zh/samples/rag' },
-                            { text: '其他', link: '/zh/samples/rag' }
-                        ]
-                    }
                 ]
             }
         }
