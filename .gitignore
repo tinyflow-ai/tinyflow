@@ -31,3 +31,8 @@ yarn-error.log*
 
 .idea
 .vscode
+
+.ossutil_checkpoint
+ossutil_output
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/
