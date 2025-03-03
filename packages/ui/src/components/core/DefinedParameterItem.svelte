@@ -4,6 +4,7 @@
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { type Parameter, parameterDataTypes } from '../utils/Consts';
+    import type { Item } from '../../Tinyflow';
 
     const { parameter, index }: {
         parameter: Parameter,
@@ -44,6 +45,20 @@
         });
     };
 
+    const updateDataType = (item: Item) => {
+        const dataType = item.value as string;
+        if (dataType) {
+            updateNodeData(currentNodeId, (node) => {
+                let parameters = node.data.parameters as Array<Parameter>;
+                parameters[index].dataType = dataType;
+                return {
+                    parameters
+                };
+            });
+        }
+
+    };
+
 
     let triggerObject: any;
     const handleDelete = () => {
@@ -78,7 +93,8 @@
             <div class="input-more-setting">
                 <div class="input-more-item">
                     参数类型：
-                    <Select items={parameterDataTypes} style="width: 100%" />
+                    <Select items={parameterDataTypes} style="width: 100%" onSelect={updateDataType}
+                            value={param.dataType ?[param.dataType]:[]} />
                 </div>
                 <div class="input-more-item">
                     默认值：
