@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Select } from '../base';
+    import { Button, Heading, Input, Select } from '../base';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
@@ -19,18 +19,44 @@
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
 
-    // console.log("options: --> " , getOptions())
-
     const options = getOptions();
 
-    let llmArray = $state<Item[]>([]);
+    let knowledgeArray = $state<Item[]>([]);
     onMount(async () => {
-        const newLLMs = await options.provider?.llm();
-        llmArray.push(...(newLLMs || []));
+        const newLLMs = await options.provider?.knowledge();
+        knowledgeArray.push(...(newLLMs || []));
     });
 
     const { updateNodeData } = useSvelteFlow();
 
+    $effect(() => {
+        if (!data.outputDefs || data.outputDefs.length === 0) {
+            addParameter(currentNodeId, 'outputDefs',
+                {
+                    name: "documents",
+                    dataType: "Array",
+                    // children: [
+                    //     {
+                    //         name: "title",
+                    //         dataType: "String"
+                    //     },
+                    //     {
+                    //         name: "content",
+                    //         dataType: "String"
+                    //     },
+                    //     {
+                    //         name: "documentId",
+                    //         dataType: "Number"
+                    //     },
+                    //     {
+                    //         name: "knowledgeId",
+                    //         dataType: "Number"
+                    //     }
+                    // ]
+                }
+            );
+        }
+    });
 
 </script>
 
@@ -56,29 +82,25 @@
     </div>
     <RefParameterList />
 
-    <Heading level={3} mt="10px">模型设置</Heading>
-    <div class="setting-title">模型</div>
+    <Heading level={3} mt="10px">知识库设置</Heading>
+    <div class="setting-title">知识库</div>
     <div class="setting-item">
-        <Select items={llmArray} style="width: 100%" placeholder="请选择模型" onSelect={(item)=>{
+        <Select items={knowledgeArray} style="width: 100%" placeholder="请选择知识库" onSelect={(item)=>{
               const newValue = item.value;
               updateNodeData(currentNodeId, ()=>{
                   return {
-                      llmId: newValue
+                      knowledgeId: newValue
                   }
               })
-        }} value={data.llmId ? [data.llmId] : []} />
+        }} value={data.knowledgeId ? [data.knowledgeId] : []} />
         <MenuButton />
     </div>
 
-    <div class="setting-title">系统提示词</div>
+    <div class="setting-title">获取数据量</div>
     <div class="setting-item">
-        <Textarea rows={5} placeholder="请输入系统提示词" style="width: 100%" />
+        <Input placeholder="搜索的数据条数" style="width: 100%" />
     </div>
 
-    <div class="setting-title">用户提示词</div>
-    <div class="setting-item">
-        <Textarea rows={5} placeholder="请输入用户提示词" style="width: 100%" />
-    </div>
 
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
