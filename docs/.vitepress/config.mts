@@ -76,9 +76,9 @@ export default defineConfig({
                     {
                         text: '后端集成',
                         items: [
-                            { text: '与 Java 项目集成', link: '/zh/intro/communication' },
-                            { text: '与 Node.js 项目集成', link: '/zh/intro/communication' },
-                            { text: '与 Python 项目集成', link: '/zh/intro/communication' },
+                            { text: '与 Java 项目集成', link: '/zh/integration/java' },
+                            { text: '与 Node.js 项目集成', link: '/zh/integration/nodejs' },
+                            { text: '与 Python 项目集成', link: '/zh/integration/python' },
                         ]
                     },
                     {
