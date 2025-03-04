@@ -11,7 +11,8 @@
     <div class="header">
         <div class="title">Tinyflow</div>
         <div class="description">
-            基于 Web Component 的流程图编辑器
+            基于 Web Component 的 AI 工作流编排框架
+            <a href="https://gitee.com/tinyflow-ai/tinyflow" target="_blank">Gitee</a>
             <a href="https://github.com/tinyflow-ai/tinyflow" target="_blank">Github</a>
         </div>
     </div>
