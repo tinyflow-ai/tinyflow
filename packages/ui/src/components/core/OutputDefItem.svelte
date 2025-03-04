@@ -148,7 +148,7 @@
             value={param.dataType ? [param.dataType]:[]}
             disabled={param.dataTypeDisabled === true}
             onSelect={updateDataType} />
-    {#if param.dataType === "Object" || param.dataType === "Array"}
+    {#if (param.dataType === "Object" || param.dataType === "Array") && param.addChildDisabled !== true}
         <Button class="input-btn-more" style="margin-left: auto" onclick={addChild}>
             <svg style="transform: scaleY(-1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  fill="currentColor">

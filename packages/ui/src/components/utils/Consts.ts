@@ -48,5 +48,6 @@ export type Parameter = {
     description?: string;
     required?: boolean;
     deleteDisabled?: boolean;
+    addChildDisabled?: boolean;
     children?: Parameter[];
 };

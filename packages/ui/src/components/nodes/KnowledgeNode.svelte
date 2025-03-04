@@ -37,6 +37,7 @@
                     dataType: 'Array',
                     nameDisabled: true,
                     dataTypeDisabled: true,
+                    addChildDisabled: true,
                     children: [
                         {
                             name: 'title',
