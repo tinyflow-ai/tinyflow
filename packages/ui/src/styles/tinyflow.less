@@ -6,6 +6,7 @@
     border-radius: 5px;
     box-sizing: border-box;
 
+
     .svelte-flow__handle {
       width: 16px;
       height: 16px;
@@ -28,6 +29,27 @@
         &::after {
           width: 16px;
           height: 16px;
+        }
+      }
+    }
+
+    div.loop_handle_wrapper {
+      &::after {
+        content: '循环体';
+        background: #000;
+        width: 100px;
+        height: 20px;
+        border-radius: 0;
+        display: flex;
+        color: #fff;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &:hover {
+        &::after {
+          width: 100px;
+          height: 20px;
         }
       }
     }
@@ -77,7 +99,7 @@
     align-items: center;
     padding-left: 5px;
     border-bottom: 1px solid #ccc;
-    font-weight:300;
+    font-weight: 300;
     letter-spacing: 1px;
   }
 

@@ -5,10 +5,11 @@
     import { useDeleteNode } from '../utils/useDeleteNode';
     import { useCopyNode } from '../utils/useCopyNode';
 
-    const { data, id = '', icon, children, allowExecute = true, allowCopy = true, allowDelete = true }: {
+    const { data, id = '', icon, handle, children, allowExecute = true, allowCopy = true, allowDelete = true }: {
         data: NodeProps['data'],
         id?: NodeProps['id'],
         icon: Snippet,
+        handle?: Snippet,
         children: Snippet,
         allowExecute?: boolean,
         allowCopy?: boolean,
@@ -76,6 +77,7 @@
 
 <Handle type="target" position={Position.Left} style=" left: -12px;top: 20px" />
 <Handle type="source" position={Position.Right} style="right: -12px;top: 20px" />
+{@render handle?.()}
 
 <style>
     .tf-node-toolbar {
