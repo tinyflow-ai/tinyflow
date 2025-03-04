@@ -6,6 +6,7 @@ import CodeNode from './CodeNode.svelte';
 import TemplateNode from './TemplateNode.svelte';
 import HttpNode from './HttpNode.svelte';
 import KnowledgeNode from './KnowledgeNode.svelte';
+import SearchEngineNode from './SearchEngineNode.svelte';
 
 /**
  * @description 节点类型（en: node type）
@@ -17,5 +18,6 @@ export const nodeTypes = {
     templateNode: TemplateNode,
     httpNode: HttpNode,
     knowledgeNode: KnowledgeNode,
+    searchEngineNode: SearchEngineNode,
     endNode: EndNode
 } as any as NodeTypes;
