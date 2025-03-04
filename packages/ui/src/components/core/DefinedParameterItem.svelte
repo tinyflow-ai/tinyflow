@@ -94,7 +94,7 @@
                 <div class="input-more-item">
                     参数类型：
                     <Select items={parameterDataTypes} style="width: 100%" onSelect={updateDataType}
-                            value={param.dataType ?[param.dataType]:[]} />
+                            value={param.dataType ?[param.dataType]:['String']} />
                 </div>
                 <div class="input-more-item">
                     默认值：
