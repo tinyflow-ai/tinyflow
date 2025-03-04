@@ -2,7 +2,6 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Input, Select } from '../base';
-    import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
