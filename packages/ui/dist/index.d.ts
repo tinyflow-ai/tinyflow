@@ -32,7 +32,8 @@ export declare type TinyflowOptions = {
     element: string | Element;
     data: TinyflowData;
     provider?: {
-        llms: () => Item[] | Promise<Item[]>;
+        llm: () => Item[] | Promise<Item[]>;
+        knowledge: () => Item[] | Promise<Item[]>;
     };
 };
 
