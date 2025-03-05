@@ -5,7 +5,18 @@
     import { useDeleteNode } from '../utils/useDeleteNode';
     import { useCopyNode } from '../utils/useCopyNode';
 
-    const { data, id = '', icon, handle, children, allowExecute = true, allowCopy = true, allowDelete = true }: {
+    const {
+        data,
+        id = '',
+        icon,
+        handle,
+        children,
+        allowExecute = true,
+        allowCopy = true,
+        allowDelete = true,
+        showSourceHandle = true,
+        showTargetHandle = true
+    }: {
         data: NodeProps['data'],
         id?: NodeProps['id'],
         icon: Snippet,
@@ -14,6 +25,8 @@
         allowExecute?: boolean,
         allowCopy?: boolean,
         allowDelete?: boolean,
+        showSourceHandle?: boolean,
+        showTargetHandle?: boolean,
     } = $props();
 
     let activeKeys = data.expand ? ['key'] : [];
@@ -75,8 +88,12 @@
     </div>
 </div>
 
-<Handle type="target" position={Position.Left} style=" left: -12px;top: 20px" />
-<Handle type="source" position={Position.Right} style="right: -12px;top: 20px" />
+{#if showTargetHandle}
+    <Handle type="target" position={Position.Left} style=" left: -12px;top: 20px" />
+{/if}
+{#if showSourceHandle}
+    <Handle type="source" position={Position.Right} style="right: -12px;top: 20px" />
+{/if}
 {@render handle?.()}
 
 <style>
