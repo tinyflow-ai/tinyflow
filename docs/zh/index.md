@@ -6,6 +6,9 @@ hero:
   name: "Tinyflow"
   text: "AI 工作流编排框架"
   tagline: 支持与 VUE、React 以及原生 JS 项目集成
+  image:
+    src: /assets/images/logo.png
+    alt: Tinyflow
   actions:
     - theme: brand
       text: 快速开始

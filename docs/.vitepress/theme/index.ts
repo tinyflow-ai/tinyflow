@@ -14,6 +14,9 @@ export default {
     enhanceApp({ app, router, siteData }) {
         // ...
 
+        if (typeof window === 'undefined'){
+            return;
+        }
         // 定义支持的语言列表
         const supportedLanguages = ['en', 'zh'];
         const nav = navigator as any;

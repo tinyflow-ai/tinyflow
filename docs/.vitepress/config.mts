@@ -30,6 +30,11 @@ export default defineConfig({
             title: 'Tinyflow',
             titleTemplate: ':title - Tinyflow Official website',
             description: 'An AI workflow orchestration framework',
+            themeConfig: {
+                editLink: {
+                    pattern: 'https://github.com/tinyflow-ai/tinyflow/edit/main/docs/:path',
+                },
+            }
         },
         zh: {
             titleTemplate: ':title - Tinyflow 官方网站',
@@ -42,7 +47,7 @@ export default defineConfig({
                     label: '章节'
                 },
                 editLink: {
-                    pattern: 'https://github.com/tinyflow-ai/tinyflow/edit/main/docs/:path',
+                    pattern: 'https://gitee.com/tinyflow-ai/tinyflow/edit/main/docs/:path',
                     text: '编辑当前页面'
                 },
 
@@ -61,7 +66,7 @@ export default defineConfig({
                         items: [
                             { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
                             { text: '快速开始', link: '/zh/quick-start' },
-                            { text: '微信交流群', link: '/zh/intro/communication' }
+                            { text: '微信交流群', link: '/zh/communication' }
                         ]
                     },
                     {
@@ -98,6 +103,7 @@ export default defineConfig({
     },
 
     themeConfig: {
+        // logo:'/assets/images/logo.png',
         search: {
             provider: 'local'
         },
@@ -153,7 +159,7 @@ export default defineConfig({
             copyright:
                 'Copyright © 2022-present Tinyflow AI. ' +
                 '<span style="display: flex;align-items: center;justify-content: center;">' +
-                '<span style="font-size: 12px;margin-right:10px;"><a style="color:#777" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">黔ICP备19009310号-13 </a></span>' +
+                '<span style="font-size: 12px;margin-right:10px;"><a style="color:#777" target="_blank" rel="noopener" href="http://beian.miit.gov.cn/">黔ICP备19009310号-16 </a></span>' +
                 '</span>'
         }
     },
@@ -168,7 +174,7 @@ export default defineConfig({
       var _hmt = _hmt || [];
       (function() {
         var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?88ab4cfa533c8000717a434501beba56";
+        hm.src = "https://hm.baidu.com/hm.js?7eaa4416bdf71eb6486a55f8d71f3397";
         var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
       })();

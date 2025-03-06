@@ -25,7 +25,7 @@ yarn add @tinyflow-ai/svelte
 以下是一个简单的使用示例，展示如何在 Svelte 项目中引入并使用该组件：
 
 
-```sveltehtml
+```html
 <script>
     import {Tinyflow} from '@tinyflow-ai/svelte';
 
