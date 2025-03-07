@@ -72,12 +72,33 @@
 
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
-        <Textarea rows={5} placeholder="请输入系统提示词" style="width: 100%" />
+        <Textarea 
+            rows={5} 
+            placeholder="请输入系统提示词" 
+            style="width: 100%" 
+            value={data.systemPrompt || ''} 
+            oninput={(e)=>{
+                updateNodeData(currentNodeId, {
+                    systemPrompt: e.target.value
+                });
+            }}
+
+        />
     </div>
 
     <div class="setting-title">用户提示词</div>
     <div class="setting-item">
-        <Textarea rows={5} placeholder="请输入用户提示词" style="width: 100%" />
+        <Textarea 
+            rows={5} 
+            placeholder="请输入用户提示词" 
+            style="width: 100%" 
+            value={data.userPrompt || ''}
+            oninput={(e)=>{
+                updateNodeData(currentNodeId, {
+                    userPrompt: e.target.value
+                });
+            }}
+        />
     </div>
 
     <div class="heading">
