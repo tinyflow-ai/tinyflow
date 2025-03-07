@@ -19,7 +19,9 @@
             data: {
                 title,
                 description,
-                extra
+                systemPrompt: '',
+                userPrompt: '',
+                ...extra
             }
         };
         event.dataTransfer.setData('application/tinyflow', JSON.stringify(node));
