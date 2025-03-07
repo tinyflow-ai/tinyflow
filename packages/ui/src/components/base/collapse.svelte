@@ -40,9 +40,11 @@
                     }
              }}
             >
+                {#if item.icon}
                 <span class="tf-collapse-item-title-icon">
                     <Render target={item.icon} />
                 </span>
+                {/if}
 
                 <Render target={item.title} />
 
