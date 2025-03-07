@@ -54,10 +54,8 @@
     const { getNode } = useGetNode();
 
     const isValidConnection = (conn: any) => {
-
         const sourceNode = getNode(conn.source)!;
         const targetNode = getNode(conn.target)!;
-
 
         // 阻止循环节点连接到父级节点 或者 父级节点连接到子级节点
         if (conn.sourceHandle === 'loop_handle' || sourceNode.parentId) {
@@ -73,14 +71,13 @@
             return false;
         }
 
-        // 运行执行
+        // 允许链接
         return true;
     };
 
 
     const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
     const onconnectend = (_: any, state: any) => {
-
         if (!state.isValid) {
             return;
         }
@@ -100,18 +97,24 @@
         }
 
         if (newNode.parentId) {
+            const parentNode = getNode(newNode.parentId) as Node;
             newNode.position = {
-                x: toNode.position.x - fromNode.position.x,
-                y: toNode.position.y - fromNode.position.y
+                x: toNode.position.x - parentNode.position.x,
+                y: toNode.position.y - parentNode.position.y
             };
-
             ensureParentInNodesBefore(fromNode.id, toNode.id);
             svelteFlow.updateNode(toNode.id, newNode);
         }
     };
 
+
     const onconnectstart = (event: any, node: any) => {
         console.log('onconnectstart: ', event, node);
+    };
+
+
+    const onconnect = (event: any) => {
+        console.log('onconnect: ', event);
     };
 
 </script>
@@ -126,6 +129,8 @@
                 isValidConnection={isValidConnection}
                 onconnectend={onconnectend}
                 onconnectstart={onconnectstart}
+                onconnect={onconnect}
+                connectionRadius={50}
                 defaultEdgeOptions={{
                     // animated: true,
                     // label: 'edge label',
