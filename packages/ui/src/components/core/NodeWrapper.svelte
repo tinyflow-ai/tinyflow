@@ -19,7 +19,7 @@
     }: {
         data: NodeProps['data'],
         id?: NodeProps['id'],
-        icon: Snippet,
+        icon?: Snippet,
         handle?: Snippet,
         children: Snippet,
         allowExecute?: boolean,
