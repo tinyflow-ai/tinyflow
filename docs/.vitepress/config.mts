@@ -52,7 +52,7 @@ export default defineConfig({
                 },
 
                 nav: [
-                    { text: '首页', link: '/' },
+                    { text: '首页', link: '/zh' },
                     { text: '帮助文档', link: '/zh/what-is-tinyflow' },
                     {
                         text: 'ChangeLog',
