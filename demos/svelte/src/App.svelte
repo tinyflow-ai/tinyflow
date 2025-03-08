@@ -16,6 +16,10 @@
         URL.revokeObjectURL(url);
     };
 
+     const printInConsole = () => {
+        console.log(window.tinyflowRef.getData());
+    };
+
 </script>
 
 <main>
@@ -27,6 +31,7 @@
             <a href="https://github.com/tinyflow-ai/tinyflow" target="_blank">Github</a>
 
             <button on:click="{downloadJsonData}">导出 JSON</button>
+            <button on:click="{printInConsole}">Console 打印当前数据</button>
         </div>
     </div>
     <Tinyflow data={JSON.parse(data)} style={{height:"calc(100vh - 58px)"}} bind:this={window.tinyflowRef} />

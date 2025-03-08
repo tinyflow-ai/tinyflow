@@ -5,26 +5,36 @@ export const useEnsureParentInNodesBefore = () => {
 
     const ensureParentInNodesBefore = (parentNodeId: string, childNodeId: string) => {
         nodes.update((nodeArray) => {
-            let parentIndex = -1,
-                childIndex = -1;
+            let parentIndex = -1;
             for (let i = 0; i < nodeArray.length; i++) {
-                if (nodeArray[i].id === parentNodeId) parentIndex = i;
-                if (nodeArray[i].id === childNodeId) childIndex = i;
-
-                if (parentIndex !== -1 && childIndex !== -1) {
+                if (nodeArray[i].id === parentNodeId) {
+                    parentIndex = i;
                     break;
                 }
             }
 
-            if (parentIndex == -1 || childIndex == -1 || parentIndex < childIndex) {
+            if (parentIndex <= 0) {
+                return nodeArray;
+            }
+
+            let firstChildIndex = -1;
+            for (let i = 0; i < parentIndex; i++) {
+                if (nodeArray[i].parentId === parentNodeId || nodeArray[i].id === childNodeId) {
+                    firstChildIndex = i;
+                    break;
+                }
+            }
+
+            if (firstChildIndex == -1) {
                 return nodeArray;
             }
 
             const parentNode = nodeArray[parentIndex];
-            for (let i = parentIndex; i > childIndex; i--) {
+            for (let i = parentIndex; i > firstChildIndex; i--) {
                 nodeArray[i] = nodeArray[i - 1];
             }
-            nodeArray[childIndex] = parentNode;
+            nodeArray[firstChildIndex] = parentNode;
+
             return nodeArray;
         });
     };

@@ -5,7 +5,7 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, MarkerType, type Handle, Panel
+        type Node, MarkerType, type Handle, Panel, type Edge
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
@@ -16,6 +16,7 @@
     import { useGetNode } from './utils/useGetNode';
     import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
     import { Textarea } from './base';
+    import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -56,6 +57,7 @@
 
     const { getNode } = useGetNode();
 
+
     const isValidConnection = (conn: any) => {
         const sourceNode = getNode(conn.source)!;
         const targetNode = getNode(conn.target)!;
@@ -65,7 +67,13 @@
             const edges = svelteFlow.getEdges();
             for (let edge of edges) {
                 if (edge.target === conn.target) {
-                    return false;
+                    const edgeSourceNode = getNode(edge.source) as Node;
+                    if (conn.sourceHandle === 'loop_handle' && edgeSourceNode.parentId !== sourceNode.id) {
+                        return false;
+                    }
+                    if (sourceNode.parentId && edgeSourceNode.parentId !== sourceNode.parentId) {
+                        return false;
+                    }
                 }
             }
         }
@@ -85,9 +93,13 @@
             return;
         }
 
+        const toNode = state.toNode as Node;
+        if (toNode.parentId) {
+            return;
+        }
+
         const fromNode = state.fromNode as Node;
         const fromHande = state.fromHandle as Handle;
-        const toNode = state.toNode as Node;
 
         const newNode = {
             position: { ...toNode.position }
@@ -105,9 +117,50 @@
                 x: toNode.position.x - parentNode.position.x,
                 y: toNode.position.y - parentNode.position.y
             };
-            ensureParentInNodesBefore(fromNode.id, toNode.id);
+            ensureParentInNodesBefore(newNode.parentId, toNode.id);
             svelteFlow.updateNode(toNode.id, newNode);
         }
+    };
+
+    const { getEdgesByTarget } = useGetEdgesByTarget();
+    const onDelete = (params: any) => {
+        const deleteEdges = params.edges as Edge[];
+
+        deleteEdges.forEach((edge) => {
+            const targetNode = getNode(edge.target) as Node;
+            if (targetNode.parentId) {
+                const nodeEdges = getEdgesByTarget(edge.target);
+                const loopNode = getNode(targetNode.parentId) as Node;
+                if (nodeEdges.length === 0) {
+                    svelteFlow.updateNode(targetNode.id, {
+                        parentId: undefined,
+                        position: {
+                            x: targetNode.position.x + loopNode.position.x,
+                            y: targetNode.position.y + loopNode.position.y
+                        }
+                    });
+                } else {
+                    let hasSameParent = false;
+                    for (let i = 0; i < nodeEdges.length; i++) {
+                        const edge = nodeEdges[i];
+                        const sourceNode = getNode(edge.source) as Node;
+                        if (sourceNode.parentId || sourceNode.type === 'loopNode') {
+                            hasSameParent = true;
+                            break;
+                        }
+                    }
+                    if (!hasSameParent) {
+                        svelteFlow.updateNode(targetNode.id, {
+                            parentId: undefined,
+                            position: {
+                                x: targetNode.position.x + loopNode.position.x,
+                                y: targetNode.position.y + loopNode.position.y
+                            }
+                        });
+                    }
+                }
+            }
+        });
     };
 
 
@@ -137,6 +190,7 @@
                 on:edgeclick={() => {
                     showEdgePanel = true;
                 }}
+                ondelete={onDelete}
                 onclick={(e) => {
                     const el = e.target as HTMLElement;
                     if (el.classList.contains("svelte-flow__edge-interaction")
