@@ -76,6 +76,7 @@ export default defineConfig({
                             { text: '与 React 集成', link: '/zh/integration/react' },
                             { text: '与 Svelte 集成', link: '/zh/integration/svelte' },
                             { text: '与原生 JS 集成', link: '/zh/integration/native' },
+                            { text: 'CDN 引入', link: '/zh/integration/cdn' },
                         ]
                     },
                     {

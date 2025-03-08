@@ -26,3 +26,4 @@ features:
     details: Tinyflow 的架构是模块化的，这意味着它可以随着你的业务需求不断扩展。比如，今天你只需要一个简单的文本生成流程，明天可能需要加入语音识别或图像处理。Tinyflow 的插件机制可以让你随时添加新功能，而不需要推倒重来。
 ---
 
+![screenshot_full.png](../assets/images/screenshot_full.png)
