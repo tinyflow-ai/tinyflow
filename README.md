@@ -31,8 +31,8 @@ new Tinyflow({
 ```xml
 <dependency>
     <groupId>dev.tinyflow</groupId>
-    <artifactId>tinyflow-java</artifactId>
-    <version>0.0.1</version>
+    <artifactId>tinyflow-java-core</artifactId>
+    <version>0.0.2</version>
 </dependency>
 ```
 

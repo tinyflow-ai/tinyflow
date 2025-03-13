@@ -9,7 +9,7 @@
 ```xml
 <dependency>
     <groupId>dev.tinyflow</groupId>
-    <artifactId>tinyflow-java</artifactId>
+    <artifactId>tinyflow-java-core</artifactId>
     <version>0.0.2</version>
 </dependency>
 ```
