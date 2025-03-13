@@ -8,6 +8,8 @@
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@tinyflow-ai/demo-svelte"
+    "@tinyflow-ai/demo-svelte",
+    "@tinyflow-ai/demo-vanilla",
+    "@tinyflow-ai/demo-vue"
   ]
 }

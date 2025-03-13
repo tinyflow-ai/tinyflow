@@ -10,6 +10,7 @@ export default defineConfig({
         emptyOutDir: true,
         minify: true,
         sourcemap: true,
+        cssCodeSplit: true,
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
             cssFileName: 'index',
@@ -17,7 +18,15 @@ export default defineConfig({
                 return format === 'umd' ? 'index.umd.js' : 'index.js';
             },
             formats: ['es', 'umd'],
-            name: 'tinyflow'
+            name: 'Tinyflow'
+        },
+        rollupOptions: {
+            external: ['vue'], // 排除 Vue 作为外部依赖
+            output: {
+                globals: {
+                    vue: 'Vue'
+                }
+            }
         }
     },
     plugins: [
@@ -26,5 +35,5 @@ export default defineConfig({
             rollupTypes: true,
             tsconfigPath: './tsconfig.app.json'
         })
-    ],
+    ]
 });
