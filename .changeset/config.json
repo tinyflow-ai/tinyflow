@@ -10,7 +10,6 @@
   "ignore": [
     "@tinyflow-ai/demo-react",
     "@tinyflow-ai/demo-svelte",
-    "@tinyflow-ai/demo-vanilla",
     "@tinyflow-ai/demo-vue"
   ]
 }
