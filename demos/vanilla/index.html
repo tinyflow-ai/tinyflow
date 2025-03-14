@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8" />
     <title>Tinyflow Vanilla</title>
-    <link rel="stylesheet" href="./tinyflow.css" />
+    <link href="https://unpkg.com/@tinyflow-ai/ui/dist/index.css" rel="stylesheet">
+    <script src="https://unpkg.com/@tinyflow-ai/ui/dist/index.umd.js"></script>
     <style>
         .tinyflow {
-            height: 100vh;
+            height: calc(100vh - 58px);
             padding: 0;
         }
     </style>
 </head>
 <body>
+<div style="height: 40px;border-bottom: solid 1px #efefef;display: flex;align-items: center;justify-content: space-between">
+    <span>
+        Tinyflow 是一个轻量级、灵活且无侵入性的 AI 工作流编排 解决方案
+        <a href="https://gitee.com/tinyflow-ai/tinyflow" target="_blank">Gitee</a>
+        <a href="https://github.com/tinyflow-ai/tinyflow" target="_blank">Github</a>
+    </span>
+    <div>
+        <button onclick="exportData()">获取数据</button>
+    </div>
+</div>
 <div class="tinyflow"></div>
 
-<script type="module" src="./tinyflow.js"></script>
-<script type="module">
-    import { Tinyflow } from './tinyflow.js';
-    new Tinyflow({
+<script>
+    var dataString = `{"nodes":[{"id":"node_hyWDqHpCdoupEQEO","position":{"x":53,"y":49},"data":{"title":"开始节点","description":"开始定义输入参数","expand":true,"parameters":[{"id":"7BB9XGvsCeMQStZq","name":"test"}]},"type":"startNode","selected":false,"measured":{"width":306,"height":209},"dragging":false},{"id":"node_EmmgWkcdQu6dEzTH","position":{"x":624,"y":89},"data":{"title":"结束节点","description":"结束定义输出参数","expand":true,"outputDefs":[{"id":"pxOHtOEQIZebK0Te","name":"test","ref":"node_hyWDqHpCdoupEQEO.test"}]},"type":"endNode","selected":false,"measured":{"width":323,"height":209},"dragging":false}],"edges":[{"markerEnd":{"type":"arrowclosed","width":20,"height":20},"source":"node_hyWDqHpCdoupEQEO","target":"node_EmmgWkcdQu6dEzTH","id":"xy-edge__node_hyWDqHpCdoupEQEO-node_EmmgWkcdQu6dEzTH","selected":false}],"viewport":{"x":250,"y":100,"zoom":1}}`
+    var tinyflow = new Tinyflow.Tinyflow({
             element: '.tinyflow',
-            data: {
-                nodes: [
-                    {
-                        id: '1', // required and needs to be a string
-                        position: { x: 0, y: 0 }, // required
-                        data: { label: 'hey' } // required
-                    },
-                    {
-                        id: '2',
-                        position: { x: 100, y: 100 },
-                        data: { label: 'world 111' }
-                    }
-                ],
-                edges: [{ id: '1-2', source: '1', target: '2' }]
-            }
+            data: JSON.parse(dataString),
         }
     );
+
+    function exportData() {
+       const data = tinyflow.getData();
+       alert(JSON.stringify(data));
+    }
 </script>
 </body>
 </html>
