@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react';
 import dts from 'vite-plugin-dts';
 
 // https://vitejs.dev/config/
@@ -18,6 +18,9 @@ export default defineConfig({
             },
             formats: ['es', 'umd'],
             name: 'tinyflow'
+        },
+        rollupOptions: {
+            external: ['react', 'react-dom']
         }
     },
     plugins: [

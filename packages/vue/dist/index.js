@@ -15210,9 +15210,9 @@ function Cd(e, t) {
   ]), o = mt(), { addParameter: a } = An(), i = ji();
   let s = ir(Tt([]));
   bn(async () => {
-    var u;
-    const c = await ((u = i.provider) == null ? void 0 : u.llm());
-    v(s).push(...c || []);
+    var u, c;
+    const d = await ((c = (u = i.provider) == null ? void 0 : u.llm) == null ? void 0 : c.call(u));
+    v(s).push(...d || []);
   });
   const { updateNodeData: l } = Bt();
   return kn(e, ut(
@@ -15923,9 +15923,9 @@ function Md(e, t) {
   ]), o = mt(), { addParameter: a } = An(), i = ji();
   let s = ir(Tt([]));
   bn(async () => {
-    var u;
-    const c = await ((u = i.provider) == null ? void 0 : u.knowledge());
-    v(s).push(...c || []);
+    var u, c;
+    const d = await ((c = (u = i.provider) == null ? void 0 : u.knowledge) == null ? void 0 : c.call(u));
+    v(s).push(...d || []);
   });
   const { updateNodeData: l } = Bt();
   return Er(() => {
@@ -16721,7 +16721,7 @@ re(Hd, { onInit: {} }, [], [], !0);
 function gw(e, t) {
   le(t, !0);
   const n = y(t, "options", 7), r = y(t, "onInit", 7), { data: o } = n();
-  return Fo.init(o.nodes || [], o.edges || []), Mr("tinyflow_options", n()), Bc(e, {
+  return Fo.init((o == null ? void 0 : o.nodes) || [], (o == null ? void 0 : o.edges) || []), Mr("tinyflow_options", n()), Bc(e, {
     fitView: !0,
     children: (a, i) => {
       Hd(a, {
@@ -16752,25 +16752,37 @@ const xw = /* @__PURE__ */ Fd({
   props: {
     className: {},
     style: {},
-    data: {}
+    data: {},
+    provider: {}
   },
   setup(e, { expose: t }) {
     const n = e, r = Gd(null);
     let o = null;
+    const a = {
+      llm: () => [],
+      knowledge: () => []
+    };
     return Ud(() => {
-      r.value && (o = new wm({
-        element: r.value,
-        data: n.data || {}
-      })), console.log("className:", n.className), console.log("style:", n.style);
+      if (r.value) {
+        const s = {
+          ...a,
+          ...n.provider
+        };
+        o = new wm({
+          element: r.value,
+          data: n.data || {},
+          provider: s
+        });
+      }
     }), Jd(() => {
       o && (o.destroy(), o = null);
     }), t({
       getData: () => o ? o.getData() : (console.warn("Tinyflow instance is not initialized"), null)
-    }), (i, s) => (ef(), Qd("div", {
+    }), (s, l) => (ef(), Qd("div", {
       ref_key: "divRef",
       ref: r,
-      class: nf(["tinyflow", i.className]),
-      style: tf(i.style)
+      class: nf(["tinyflow", s.className]),
+      style: tf(s.style)
     }, null, 6));
   }
 });

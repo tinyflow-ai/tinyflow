@@ -6,7 +6,7 @@ import {
 import '@tinyflow-ai/ui/dist/index.css';
 
 export type TinyflowOptions = {
-    data: NativeTinyflowOptions['data'];
+    data?: NativeTinyflowOptions['data'];
     style?: React.CSSProperties;
     className?: string;
 };
@@ -46,6 +46,6 @@ const Tinyflow = forwardRef<TinyflowHandle, TinyflowOptions>(({ data, style, cla
     }, [data]);
 
     return <div ref={divRef} style={{ height: '600px', ...style }} className={className} />;
-});
+}) as React.ForwardRefExoticComponent<TinyflowOptions & React.RefAttributes<TinyflowHandle>>;
 
 export default Tinyflow;
