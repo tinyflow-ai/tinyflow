@@ -3,12 +3,12 @@
 layout: home
 
 hero:
-  name: "Tinyflow"
-  text: "AI 工作流编排框架"
-  tagline: 支持与 VUE、React 以及原生 JS 项目集成
-  image:
-    src: /assets/images/logo.png
-    alt: Tinyflow
+  name: Tinyflow
+  text: AI 工作流编排框架
+  tagline:  前端支持与 Vue、React 以及原生 JS 项目集成 <br />后端 SDK 支持 Java、Nodejs、Python 等
+#  image:
+#    src: /assets/images/logo.png
+#    alt: Tinyflow
   actions:
     - theme: brand
       text: 快速开始
