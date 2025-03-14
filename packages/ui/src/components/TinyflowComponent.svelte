@@ -15,7 +15,7 @@
         onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void,
     } = $props();
     const { data } = options;
-    store.init(data.nodes || [], data.edges || []);
+    store.init(data?.nodes || [], data?.edges || []);
 
     setContext('tinyflow_options', options);
 </script>

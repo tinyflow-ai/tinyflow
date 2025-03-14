@@ -25,7 +25,7 @@
 
     let llmArray = $state<Item[]>([]);
     onMount(async () => {
-        const newLLMs = await options.provider?.llm();
+        const newLLMs = await options.provider?.llm?.();
         llmArray.push(...(newLLMs || []));
     });
 
@@ -72,11 +72,11 @@
 
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
-        <Textarea 
-            rows={5} 
-            placeholder="请输入系统提示词" 
-            style="width: 100%" 
-            value={data.systemPrompt || ''} 
+        <Textarea
+            rows={5}
+            placeholder="请输入系统提示词"
+            style="width: 100%"
+            value={data.systemPrompt || ''}
             oninput={(e)=>{
                 updateNodeData(currentNodeId, {
                     systemPrompt: e.target.value
@@ -88,10 +88,10 @@
 
     <div class="setting-title">用户提示词</div>
     <div class="setting-item">
-        <Textarea 
-            rows={5} 
-            placeholder="请输入用户提示词" 
-            style="width: 100%" 
+        <Textarea
+            rows={5}
+            placeholder="请输入用户提示词"
+            style="width: 100%"
             value={data.userPrompt || ''}
             oninput={(e)=>{
                 updateNodeData(currentNodeId, {

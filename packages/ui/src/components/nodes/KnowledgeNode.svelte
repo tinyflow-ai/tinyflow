@@ -22,7 +22,7 @@
 
     let knowledgeArray = $state<Item[]>([]);
     onMount(async () => {
-        const newLLMs = await options.provider?.knowledge();
+        const newLLMs = await options.provider?.knowledge?.();
         knowledgeArray.push(...(newLLMs || []));
     });
 
