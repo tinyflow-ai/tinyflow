@@ -37,4 +37,31 @@ tinyflow.execute(variables);
 > 
 > 在这个过程中，Tinyflow 不参与 Http 请求和发送数据的过程，需要开发者自己实现，也正因为如此，Tinyflow 的前端和后端，才能不受限与任何技术框架。
 
+## 注意事项
 
+1：使用若依框架时引入tinyflow-java-core导致冲突无法启动系统
+> 答：若依使用的logback与tinyflowd的slf4j-simple冲突导致系统无法启动。需要排除SLF4J-Simple、log4j-slf4j-impl、slf4j-reload4j。
+```
+    <dependency>
+          <groupId>dev.tinyflow</groupId>
+        <artifactId>tinyflow-java-core</artifactId>
+        <version>0.0.2</version>
+        <exclusions>
+            <!-- 排除 SLF4J-Simple -->
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+            </exclusion>
+            <!-- 排除 Log4j2 -->
+            <exclusion>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+            </exclusion>
+            <!-- 排除 Reload4j -->
+            <exclusion>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-reload4j</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+```
