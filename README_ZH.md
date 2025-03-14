@@ -31,7 +31,7 @@ new Tinyflow({
 参数含义：
 - element：容器元素，可以是一个字符串，也可以是一个 DOM 元素。
 - data：工作流的数据，是一个 JSON 对象。
-- provider：数据提供者，目前支持 LLMs 的数据：
+- provider：provider：数据提供者，目前支持大模型配置（llm）以及知识库（knowledge） 的数据。
 
 tinyflow 提供了以下方法：
 
