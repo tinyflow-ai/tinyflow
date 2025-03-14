@@ -30,10 +30,10 @@ export declare type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelt
 
 export declare type TinyflowOptions = {
     element: string | Element;
-    data: TinyflowData;
+    data?: TinyflowData;
     provider?: {
-        llm: () => Item[] | Promise<Item[]>;
-        knowledge: () => Item[] | Promise<Item[]>;
+        llm?: () => Item[] | Promise<Item[]>;
+        knowledge?: () => Item[] | Promise<Item[]>;
     };
 };
 

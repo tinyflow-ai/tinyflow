@@ -15256,8 +15256,8 @@ function Sd(e, t) {
   ]), o = mt(), { addParameter: i } = zn(), s = Gi();
   let a = sr(Vt([]));
   xn(async () => {
-    var c;
-    const u = await ((c = s.provider) == null ? void 0 : c.llm());
+    var c, f;
+    const u = await ((f = (c = s.provider) == null ? void 0 : c.llm) == null ? void 0 : f.call(c));
     h(a).push(...u || []);
   });
   const { updateNodeData: l } = Bt();
@@ -15969,8 +15969,8 @@ function Md(e, t) {
   ]), o = mt(), { addParameter: i } = zn(), s = Gi();
   let a = sr(Vt([]));
   xn(async () => {
-    var c;
-    const u = await ((c = s.provider) == null ? void 0 : c.knowledge());
+    var c, f;
+    const u = await ((f = (c = s.provider) == null ? void 0 : c.knowledge) == null ? void 0 : f.call(c));
     h(a).push(...u || []);
   });
   const { updateNodeData: l } = Bt();
@@ -16767,7 +16767,7 @@ re(Od, { onInit: {} }, [], [], !0);
 function ow(e, t) {
   ue(t, !0);
   const n = w(t, "options", 7), r = w(t, "onInit", 7), { data: o } = n();
-  return Jo.init(o.nodes || [], o.edges || []), Mr("tinyflow_options", n()), Xc(e, {
+  return Jo.init((o == null ? void 0 : o.nodes) || [], (o == null ? void 0 : o.edges) || []), Mr("tinyflow_options", n()), Xc(e, {
     fitView: !0,
     children: (i, s) => {
       Od(i, {
