@@ -26,6 +26,7 @@ npm install @tinyflow-ai/vue
 
 <script setup lang="ts">
     import { Tinyflow } from '@tinyflow-ai/vue';
+    import '@tinyflow-ai/vue/dist/index.css';
     import { ref } from 'vue';
 
     const initialData = ref({
@@ -62,6 +63,7 @@ Tinyflow 组件提供了一些方法，用于获取和设置流程图的数据�
 
 <script setup lang="ts">
 import { Tinyflow } from '@tinyflow-ai/vue';
+import '@tinyflow-ai/vue/dist/index.css';
 import { ref } from 'vue';
 
 const tinyflowRef = ref<InstanceType<typeof Tinyflow> | null>(null);
@@ -99,6 +101,7 @@ const fetchData = () => {
 
 <script setup lang="ts">
 import { Tinyflow } from '@tinyflow-ai/vue';
+import '@tinyflow-ai/vue/dist/index.css';
 import { ref } from 'vue';
 
 const tinyflowRef = ref<InstanceType<typeof Tinyflow> | null>(null);

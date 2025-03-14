@@ -11,6 +11,7 @@
 
 <script setup lang="ts">
 import { Tinyflow } from '@tinyflow-ai/vue';
+import '@tinyflow-ai/vue/dist/index.css';
 import { ref } from 'vue';
 
 const provider = {
