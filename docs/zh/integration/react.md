@@ -28,10 +28,11 @@ yarn add @tinyflow-ai/react
 
 ```tsx
 import React, { useRef } from 'react';
-import Tinyflow from '@tinyflow-ai/react';
+import { Tinyflow, TinyflowHandle } from '@tinyflow-ai/react';
+import '@tinyflow-ai/react/dist/index.css'
 
 const App = () => {
-const tinyflowRef = useRef<any>(null);
+const tinyflowRef = useRef<TinyflowHandle>(null);
 
     const handleGetData = () => {
         if (tinyflowRef.current) {
@@ -82,10 +83,11 @@ Tinyflow 组件提供了一些方法，用于获取和设置流程图的数据�
 
 ```tsx
 import React, { useRef } from 'react';
-import Tinyflow from '@tinyflow-ai/react';
+import { Tinyflow, TinyflowHandle } from '@tinyflow-ai/react';
+import '@tinyflow-ai/react/dist/index.css'
 
 const App = () => {
-const tinyflowRef = useRef<any>(null);
+const tinyflowRef = useRef<TinyflowHandle>(null);
 
     const handleGetData = () => {
         if (tinyflowRef.current) {
