@@ -91,8 +91,8 @@ export default defineConfig({
                         text: '核心元素',
                         items: [
                             { text: '执行链（Chain）', link: '/zh/core/chain' },
-                            { text: '边（Edge）', link: '/zh/core/edge' },
                             { text: '节点（Node）', link: '/zh/core/node' },
+                            { text: '边（Edge）', link: '/zh/core/edge' },
                             { text: '上下文（Context）', link: '/zh/core/context' },
                             { text: '事件（Event）', link: '/zh/core/event' },
                             { text: '执行条件（Condition）', link: '/zh/core/condition' }
