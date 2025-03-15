@@ -54,10 +54,10 @@ export default defineConfig({
                 nav: [
                     { text: '首页', link: '/zh' },
                     { text: '帮助文档', link: '/zh/what-is-tinyflow' },
-                    {
-                        text: 'ChangeLog',
-                        link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
-                    }
+                    // {
+                    //     text: 'ChangeLog',
+                    //     link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
+                    // }
                 ],
 
                 sidebar: [
@@ -90,12 +90,12 @@ export default defineConfig({
                     {
                         text: '核心元素',
                         items: [
-                            { text: '链条（Chain）', link: '/zh/core/llms' },
-                            { text: '边（Edge）', link: '/zh/core/llms' },
-                            { text: '节点（Node）', link: '/zh/core/memory' },
-                            { text: '上下文（Context）', link: '/zh/core/embedding' },
-                            { text: '监听器（Listener）', link: '/zh/core/embedding' },
-                            { text: '执行条件（Condition）', link: '/zh/core/chain' }
+                            { text: '执行链（Chain）', link: '/zh/core/chain' },
+                            { text: '边（Edge）', link: '/zh/core/edge' },
+                            { text: '节点（Node）', link: '/zh/core/node' },
+                            { text: '上下文（Context）', link: '/zh/core/context' },
+                            { text: '事件（Event）', link: '/zh/core/event' },
+                            { text: '执行条件（Condition）', link: '/zh/core/condition' }
                         ]
                     },
                 ]
@@ -119,10 +119,10 @@ export default defineConfig({
         nav: [
             { text: 'Home', link: '/' },
             { text: 'Document', link: '/intro/what-is-agentsflex' },
-            {
-                text: 'ChangeLog',
-                link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
-            }
+            // {
+            //     text: 'ChangeLog',
+            //     link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
+            // }
         ],
 
         sidebar: [
