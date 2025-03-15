@@ -27,41 +27,45 @@ Map<String, Object> variables = new HashMap<>();
 variables.put("name", "张三");
 variables.put("age", 18);
 
-tinyflow.execute(variables);
+tinyflow.toChain().execute(variables);
 ```
 
-## 问题
 
-问题1：如何获得前端的数据？
+## 常见问题
+
+**问题1：如何获得前端的数据？**
 > 答：在前端中，可以通过 `tinyflow.getData()` 方法获得获得设计的工作流数据，然后通过 Http 请求发送给后端，后端接收后，再初始化 Tinyflow。
 > 
 > 在这个过程中，Tinyflow 不参与 Http 请求和发送数据的过程，需要开发者自己实现，也正因为如此，Tinyflow 的前端和后端，才能不受限与任何技术框架。
 
-## 注意事项
 
-1：使用若依框架时引入tinyflow-java-core导致冲突无法启动系统
-> 答：若依使用的logback与tinyflowd的slf4j-simple冲突导致系统无法启动。需要排除SLF4J-Simple、log4j-slf4j-impl、slf4j-reload4j。
-```
-    <dependency>
-          <groupId>dev.tinyflow</groupId>
-        <artifactId>tinyflow-java-core</artifactId>
-        <version>0.0.2</version>
-        <exclusions>
-            <!-- 排除 SLF4J-Simple -->
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-simple</artifactId>
-            </exclusion>
-            <!-- 排除 Log4j2 -->
-            <exclusion>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-slf4j-impl</artifactId>
-            </exclusion>
-            <!-- 排除 Reload4j -->
-            <exclusion>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-reload4j</artifactId>
-            </exclusion>
-        </exclusions>
-    </dependency>
+
+**问题2：使用若依框架时引入 `tinyflow-java-core` 导致冲突无法启动系统**
+> 答：若依使用的 `logback` 与 Tinyflow 的 `slf4j-simple` 冲突导致系统无法启动。
+> 需要排除 `SLF4J-Simple`、`log4j-slf4j-impl`、`slf4j-reload4j`。
+
+
+```xml
+<dependency>
+    <groupId>dev.tinyflow</groupId>
+    <artifactId>tinyflow-java-core</artifactId>
+    <version>0.0.2</version>
+    <exclusions>
+        <!-- 排除 SLF4J-Simple -->
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+        </exclusion>
+        <!-- 排除 Log4j2 -->
+        <exclusion>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+        </exclusion>
+        <!-- 排除 Reload4j -->
+        <exclusion>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-reload4j</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
 ```
