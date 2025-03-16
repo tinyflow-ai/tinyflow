@@ -70,6 +70,54 @@
         <MenuButton />
     </div>
 
+    <!-- 在原有采样参数部分添加事件阻止 -->
+    <div class="setting-title">采样参数</div>
+
+    <div class="setting-item">
+        <div class="slider-container">
+            <label>Temperature: {data.temperature ?? 0.5}</label>
+            <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value={data.temperature ?? 0.5}
+                on:mousedown|stopPropagation
+            on:input={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
+            />
+        </div>
+    </div>
+
+    <div class="setting-item">
+        <div class="slider-container">
+            <label>Top P: {data.topP ?? 0.9}</label>
+            <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.1"
+                value={data.topP ?? 0.9}
+                on:mousedown|stopPropagation
+            on:input={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
+            />
+        </div>
+    </div>
+
+    <div class="setting-item">
+        <div class="slider-container">
+            <label>Top K: {data.topK ?? 50}</label>
+            <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={data.topK ?? 50}
+                on:mousedown|stopPropagation
+            on:input={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
+            />
+        </div>
+    </div>
+
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
         <Textarea
@@ -135,7 +183,39 @@
         margin-bottom: 10px;
         gap: 10px;
     }
+    /* 新增样式 */
+    .slider-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
 
+    .slider-container label {
+        font-size: 12px;
+        color: #666;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+        outline: none;
+        -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
+    }
 </style>
 
 
