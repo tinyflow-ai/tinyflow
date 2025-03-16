@@ -40,7 +40,13 @@
             ]} style="width: 100%" placeholder="请选择模型" value={['get']} />
         </div>
         <div style="width: 100%">
-            <Input placeholder="请输入url" style="width: 100%" />
+            <Input placeholder="请输入url" style="width: 100%" onchange={(e:any)=>{
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    url: e.target.value
+                }
+            })
+        }} value={data.url as string||""} />
         </div>
     </div>
 
