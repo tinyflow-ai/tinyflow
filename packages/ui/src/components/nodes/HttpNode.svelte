@@ -13,6 +13,15 @@
         [key: string]: any
     } = $props();
 
+    const method = [
+        {value: 'get', label: 'GET'},
+        {value: 'post', label: 'POST'},
+        {value: 'put', label: 'PUT'},
+        {value: 'delete', label: 'DELETE'},
+        {value: 'head', label: 'HEAD'},
+        {value: 'patch', label: 'PATCH'},
+    ];
+
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
     const { updateNodeData } = useSvelteFlow();
@@ -30,14 +39,14 @@
 
     <div style="display: flex;gap: 2px;width: 100%;padding: 10px 0">
         <div>
-            <Select items={[
-                 {value: 'get', label: 'GET'},
-                                {value: 'post', label: 'POST'},
-                                {value: 'put', label: 'PUT'},
-                                {value: 'delete', label: 'DELETE'},
-                                {value: 'head', label: 'HEAD'},
-                                {value: 'patch', label: 'PATCH'},
-            ]} style="width: 100%" placeholder="请选择模型" value={['get']} />
+            <Select items={method} style="width: 100%" placeholder="请选择请求方式" onSelect={(item)=>{
+              const newValue = item.value;
+              updateNodeData(currentNodeId, ()=>{
+                  return {
+                      method: newValue
+                  }
+              })
+        }} value={data.method ? [data.method] : ['get']} />
         </div>
         <div style="width: 100%">
             <Input placeholder="请输入url" style="width: 100%" onchange={(e:any)=>{
