@@ -9,7 +9,7 @@ Tinyflow 是一个轻量的 AI 智能体解决方案，她不是一个 ”产品
 原生的 HTML、CSS、JavaScript。
 - 后端支持 Java（不限制框架）、Python、Node.js 等语言。
 
-![](docs/assets/images/jiagoutu.jpg)
+![](docs/assets/images/architecture.png)
 
 ## 快速开始
 
