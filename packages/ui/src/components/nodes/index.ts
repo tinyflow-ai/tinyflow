@@ -8,6 +8,7 @@ import HttpNode from './HttpNode.svelte';
 import KnowledgeNode from './KnowledgeNode.svelte';
 import SearchEngineNode from './SearchEngineNode.svelte';
 import LoopNode from './LoopNode.svelte';
+import InternalNode from './InternalNode.svelte';
 
 /**
  * @description 节点类型（en: node type）
@@ -21,5 +22,6 @@ export const nodeTypes = {
     knowledgeNode: KnowledgeNode,
     searchEngineNode: SearchEngineNode,
     loopNode: LoopNode,
+    internalNode: InternalNode,
     endNode: EndNode
 } as any as NodeTypes;
