@@ -10,7 +10,7 @@
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-java-core</artifactId>
-    <version>0.0.2</version>
+    <version>1.0.0-rc.3</version>
 </dependency>
 ```
 注意：以上的 `tinyflow-java-core` 可能不是最新的，请到 [GitHub](https://github.com/tinyflow-ai/tinyflow-java) 查看最新版本。
@@ -49,7 +49,7 @@ tinyflow.toChain().execute(variables);
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-java-core</artifactId>
-    <version>0.0.2</version>
+    <version>1.0.0-rc.3</version>
     <exclusions>
         <!-- 排除 SLF4J-Simple -->
         <exclusion>
