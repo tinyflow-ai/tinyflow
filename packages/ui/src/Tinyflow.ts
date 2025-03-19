@@ -16,7 +16,6 @@ export type TinyflowOptions = {
     provider?: {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
-        internal?: () => Item[] | Promise<Item[]>;
     };
 };
 
