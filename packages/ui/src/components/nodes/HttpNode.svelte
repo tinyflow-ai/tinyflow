@@ -13,6 +13,18 @@
         [key: string]: any
     } = $props();
 
+    // 添加生命周期函数
+    import { onMount } from 'svelte';
+    // 在组件挂载时检查并设置默认值
+    onMount(() => {
+        if (!data.method) {
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    method: 'get'
+                }
+            })
+        }
+    });
     const method = [
         {value: 'get', label: 'GET'},
         {value: 'post', label: 'POST'},
