@@ -1,5 +1,5 @@
 <template>
-    <div ref="divRef" :class="['tinyflow', className]" :style="style" style="height: 100vh" />
+    <div ref="divRef" :class="['tinyflow', className]" :style="style" />
 </template>
 
 <script setup lang="ts">
