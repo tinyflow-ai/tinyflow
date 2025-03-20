@@ -10,6 +10,12 @@ export type Item = {
     children?: Item[];
 };
 
+export type CustomNode = {
+    title: string;
+    icon?: string;
+    render?: (parent:HTMLElement) => void;
+};
+
 export type TinyflowOptions = {
     element: string | Element;
     data?: TinyflowData;
@@ -17,6 +23,8 @@ export type TinyflowOptions = {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
     };
+    //type : node
+    customNodes?: Record<string, CustomNode>
 };
 
 export class Tinyflow {

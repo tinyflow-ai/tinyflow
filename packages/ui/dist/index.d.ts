@@ -3,6 +3,13 @@ import { Node as Node_2 } from '@xyflow/svelte';
 import { useSvelteFlow } from '@xyflow/svelte';
 import { Viewport } from '@xyflow/svelte';
 
+export declare type CustomNode = {
+    type: string;
+    name: string;
+    icon?: string;
+    render?: (parent: HTMLElement) => void;
+};
+
 export declare type Item = {
     value: number | string;
     label: string;
@@ -35,6 +42,7 @@ export declare type TinyflowOptions = {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
     };
+    customNodes?: Record<string, CustomNode>;
 };
 
 export { }

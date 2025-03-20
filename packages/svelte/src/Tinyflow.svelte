@@ -6,8 +6,8 @@
     const { style, className, data, ...rest }: {
         style?: Record<string, string> | string;
         className?: string;
-        data: TinyflowOptions['data']
-    } = $props();
+        // data: TinyflowOptions['data']
+    } & TinyflowOptions = $props();
 
 
     // Internal state
@@ -27,8 +27,8 @@
     onMount(() => {
         if (divRef) {
             tinyflowInstance = new TinyflowNative({
-                element: divRef,
-                data
+                ...rest,
+                element: divRef
             });
 
             return () => {

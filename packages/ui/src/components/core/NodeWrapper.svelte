@@ -15,7 +15,8 @@
         allowCopy = true,
         allowDelete = true,
         showSourceHandle = true,
-        showTargetHandle = true
+        showTargetHandle = true,
+        onCollapse
     }: {
         data: NodeProps['data'],
         id?: NodeProps['id'],
@@ -27,6 +28,7 @@
         allowDelete?: boolean,
         showSourceHandle?: boolean,
         showTargetHandle?: boolean,
+        onCollapse?: (key: string) => void,
     } = $props();
 
     let activeKeys = data.expand ? ['key'] : [];
@@ -84,6 +86,7 @@
     <div class="tf-node-wrapper-body">
         <Collapse {items} activeKeys={activeKeys} onChange={(_,actionKeys) => {
             updateNodeData(id, {expand: actionKeys?.includes('key')})
+            onCollapse?.(actionKeys?.includes('key') ? 'key' : '')
         }} />
     </div>
 </div>

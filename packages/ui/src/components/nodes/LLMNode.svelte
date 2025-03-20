@@ -19,8 +19,6 @@
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
 
-    // console.log("options: --> " , getOptions())
-
     const options = getOptions();
 
     let llmArray = $state<Item[]>([]);
@@ -30,8 +28,6 @@
     });
 
     const { updateNodeData } = useSvelteFlow();
-
-
 </script>
 
 

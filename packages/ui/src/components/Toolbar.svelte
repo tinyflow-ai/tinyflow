@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Tabs, Button } from './base/index';
     import DraggableButton from './core/DraggableButton.svelte';
+    import { getOptions } from './utils/NodeUtils';
 
     let showType = $state('base');
     let containerShowClass = $state('show');
@@ -75,6 +76,18 @@
         }
     ];
 
+    const customNodes = [] as any[];
+    const userCustomNodes = getOptions().customNodes;
+    if (userCustomNodes) {
+        for (let key of Object.keys(userCustomNodes)) {
+            customNodes.push({
+                icon: userCustomNodes[key].icon,
+                title: userCustomNodes[key].title,
+                type: key
+            });
+        }
+    }
+
 
 </script>
 
@@ -94,7 +107,9 @@
                 {/each}
             </div>
             <div class="tf-toolbar-container-tools" style="display: {showType !== 'base' ? 'flex' : 'none'}">
-                <Button>测试业务按钮</Button>
+                {#each customNodes as node}
+                    <DraggableButton {...node} />
+                {/each}
             </div>
         </div>
     </div>

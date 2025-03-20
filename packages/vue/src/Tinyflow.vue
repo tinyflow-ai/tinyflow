@@ -3,7 +3,12 @@
 </template>
 
 <script setup lang="ts">
-import { Item, Tinyflow as TinyflowNative } from '@tinyflow-ai/ui';
+import {
+    type CustomNode,
+    Item,
+    Tinyflow as TinyflowNative,
+    TinyflowOptions
+} from '@tinyflow-ai/ui';
 import '@tinyflow-ai/ui/dist/index.css';
 import { onMounted, onUnmounted, ref } from 'vue';
 
@@ -15,6 +20,7 @@ const props = defineProps<{
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
     };
+    customNodes?: Record<string, CustomNode>;
 }>();
 
 const divRef = ref<HTMLDivElement | null>(null);
@@ -22,7 +28,7 @@ let tinyflow: TinyflowNative | null = null;
 // 定义默认的 provider 方法
 const defaultProvider = {
     llm: () => [] as Item[],
-    knowledge: () => [] as Item[],
+    knowledge: () => [] as Item[]
 };
 
 onMounted(() => {
@@ -30,12 +36,13 @@ onMounted(() => {
         // 合并默认 provider 和传入的 props.provider
         const mergedProvider = {
             ...defaultProvider,
-            ...props.provider,
+            ...props.provider
         };
         tinyflow = new TinyflowNative({
             element: divRef.value as Element,
             data: props.data || {},
             provider: mergedProvider,
+            customNodes: props.customNodes
         });
     }
 });

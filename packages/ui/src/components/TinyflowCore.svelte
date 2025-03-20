@@ -5,7 +5,7 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, MarkerType, type Handle, Panel, type Edge
+        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
@@ -17,6 +17,8 @@
     import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
     import { Textarea } from './base';
     import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget';
+    import { getOptions } from './utils/NodeUtils';
+    import CustomNode from './nodes/CustomNode.svelte';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -173,12 +175,23 @@
         console.log('onconnect: ', event);
     };
 
+    const allNodeTypes = {
+        ...nodeTypes
+    } as NodeTypes;
+
+    const customNodes = getOptions().customNodes;
+    if (customNodes) {
+        for (let key of Object.keys(customNodes)) {
+            allNodeTypes[key] = CustomNode as any;
+        }
+    }
+
 </script>
 
 
 <div style="position: relative; height: 100%; width: 100%">
     <Toolbar />
-    <SvelteFlow {nodeTypes} {...store}
+    <SvelteFlow nodeTypes={allNodeTypes} {...store}
                 class="tinyflow-logo"
                 on:drop={onDrop}
                 on:dragover={onDragOver}

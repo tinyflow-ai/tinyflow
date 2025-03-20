@@ -1,5 +1,6 @@
 import { ComponentOptionsMixin } from 'vue';
 import { ComponentProvideOptions } from 'vue';
+import { CustomNode } from '@tinyflow-ai/ui';
 import { DefineComponent } from 'vue';
 import { Edge } from '@xyflow/svelte';
 import { Item } from '@tinyflow-ai/ui';
@@ -15,6 +16,7 @@ declare type __VLS_Props = {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
     };
+    customNodes?: Record<string, CustomNode>;
 };
 
 export declare const Tinyflow: DefineComponent<__VLS_Props, {
