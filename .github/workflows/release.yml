@@ -23,7 +23,7 @@ jobs:
           node-version: 20 # 指定 Node.js 20 或更高版本
           registry-url: https://registry.npmjs.org/ # 设置 NPM 注册表
 
-      # 3. 安装 pnpm（如果使用 pnpm）
+      # 3. 安装 pnpm
       - name: Install pnpm
         run: npm install -g pnpm
 
@@ -37,7 +37,7 @@ jobs:
 
       # 6. 运行 Changesets 版本更新
       - name: Run Changesets Version
-        run: pnpx changeset version
+        run: pnpm changeset version
 
       # 7. 提交版本更新和变更日志
       - name: Commit Version Updates
