@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - main # 或者你的主分支名称
-      - develop # 如果有开发分支
+    paths:
+      - ".changeset/*.md" # 仅在 .changeset 文件夹中的 .md 文件发生变更时触发
   workflow_dispatch: # 允许手动触发工作流
 
 jobs:
@@ -32,28 +33,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      # 5. 检查是否有待发布的变更集
-      - name: Check for changesets
-        id: check_changesets
-        run: |
-          if [ ! -d ".changeset" ]; then
-            echo "No .changeset folder found, skipping publish."
-            echo "has_changesets=false" >> $GITHUB_ENV
-            exit 0
-          fi
-
-          CHANGES=$(ls .changeset/*.md 2>/dev/null | wc -l)
-          if [ "$CHANGES" -eq 0 ]; then
-            echo "No .md files found in .changeset folder, skipping publish."
-            echo "has_changesets=false" >> $GITHUB_ENV
-          else
-            echo "Found $CHANGES .md files in .changeset folder, proceeding with publish."
-            echo "has_changesets=true" >> $GITHUB_ENV
-          fi
-
-      # 6. 使用 Changesets Action 自动化发布
+      # 5. 使用 Changesets Action 自动化发布
       - name: Create Release PR or publish stable version to npm
-        if: env.has_changesets == 'true'
         id: changesets
         uses: changesets/action@v1
         with:
@@ -68,9 +49,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
 
-      # 7. 打印日志以确认版本号
+      # 6. 打印日志以确认版本号
       - name: Print Version and Published Package
-        if: env.has_changesets == 'true'
         run: |
           echo "Current package.json version: $(node -p "require('./package.json').version")"
           echo "Latest version on NPM: $(npm show @tinyflow-ai/react version)"
