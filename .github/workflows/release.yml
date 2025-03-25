@@ -32,31 +32,32 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      # 5. 设置 Git 用户信息
-      - name: Set Git User Info
-        run: |
-          git config --global user.name "Michael"
-          git config --global user.email "fuhai999@gmail.com"
-
-      # 6. 检查是否有待发布的变更集
+      # 5. 检查是否有待发布的变更集
       - name: Check for changesets
         id: check_changesets
         run: |
-          if [ -z "$(ls -A .changeset)" ]; then
-            echo "No changesets found, skipping publish."
+          if [ ! -d ".changeset" ]; then
+            echo "No .changeset folder found, skipping publish."
+            echo "has_changesets=false" >> $GITHUB_ENV
+            exit 0
+          fi
+
+          CHANGES=$(ls .changeset/*.md 2>/dev/null | wc -l)
+          if [ "$CHANGES" -eq 0 ]; then
+            echo "No .md files found in .changeset folder, skipping publish."
             echo "has_changesets=false" >> $GITHUB_ENV
           else
-            echo "Changesets found, proceeding with publish."
+            echo "Found $CHANGES .md files in .changeset folder, proceeding with publish."
             echo "has_changesets=true" >> $GITHUB_ENV
           fi
 
-      # 7. 使用 Changesets Action 自动化发布
+      # 6. 使用 Changesets Action 自动化发布
       - name: Create Release PR or publish stable version to npm
         if: env.has_changesets == 'true'
         id: changesets
         uses: changesets/action@v1
         with:
-          createGithubReleases: false
+          createGithubReleases: true # 启用自动创建 GitHub Release
           publish: pnpm changeset publish
           version: pnpm changeset version
           title: ${{ github.ref_name == 'main' && 'Publish a new stable version' || 'Publish a new pre-release version' }}
@@ -66,3 +67,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: true
+
+      # 7. 打印日志以确认版本号
+      - name: Print Version and Published Package
+        if: env.has_changesets == 'true'
+        run: |
+          echo "Current package.json version: $(node -p "require('./package.json').version")"
+          echo "Latest version on NPM: $(npm show @tinyflow-ai/react version)"
