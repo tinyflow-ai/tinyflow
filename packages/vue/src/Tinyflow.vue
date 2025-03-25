@@ -11,7 +11,7 @@ const props = defineProps<
     {
         className?: string;
         style?: Record<string, string>;
-    } & TinyflowOptions
+    } & Omit<TinyflowOptions, 'element'>
 >();
 
 const divRef = ref<HTMLDivElement | null>(null);

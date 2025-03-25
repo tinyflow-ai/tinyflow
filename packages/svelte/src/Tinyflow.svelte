@@ -1,13 +1,16 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import { Tinyflow as TinyflowNative, type TinyflowOptions } from '@tinyflow-ai/ui';
+    import {
+        Tinyflow as TinyflowNative,
+        type TinyflowOptions
+    } from '@tinyflow-ai/ui';
     import '@tinyflow-ai/ui/dist/index.css';
 
     const { style, className, ...rest }: {
         style?: Record<string, string> | string;
         className?: string;
         // data: TinyflowOptions['data']
-    } & TinyflowOptions = $props();
+    } & Omit<TinyflowOptions, 'element'> = $props();
 
 
     // Internal state

@@ -1,17 +1,20 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-import { Tinyflow as TinyflowNative, TinyflowOptions } from '@tinyflow-ai/ui';
+import {
+    Tinyflow as TinyflowNative,
+    type TinyflowOptions as TinyflowNativeOptions
+} from '@tinyflow-ai/ui';
 import '@tinyflow-ai/ui/dist/index.css';
 
-export type Options = {
+export type TinyflowOptions = {
     style?: React.CSSProperties;
     className?: string;
-} & TinyflowOptions;
+} & Omit<TinyflowNativeOptions, 'element'>;
 
 export interface TinyflowHandle {
     getData: () => any;
 }
 
-const Tinyflow = forwardRef<TinyflowHandle, Options>((options, ref) => {
+const Tinyflow = forwardRef<TinyflowHandle, TinyflowOptions>((options, ref) => {
     const divRef = useRef<HTMLDivElement | null>(null);
     const tinyflowInstance = useRef<TinyflowNative | null>(null);
 
