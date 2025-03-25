@@ -20,22 +20,26 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20 # Node.js 版本
+          node-version: 20 # 指定 Node.js 20 或更高版本
           registry-url: https://registry.npmjs.org/ # 设置 NPM 注册表
 
-      # 3. 安装依赖
-      - name: Install Dependencies
-        run: npm ci
+      # 3. 安装 pnpm（如果使用 pnpm）
+      - name: Install pnpm
+        run: npm install -g pnpm
 
-      # 4. 设置 NPM 认证令牌
+      # 4. 安装依赖
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      # 5. 设置 NPM 认证令牌
       - name: Configure NPM Token
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
 
-      # 5. 运行 Changesets 版本更新
+      # 6. 运行 Changesets 版本更新
       - name: Run Changesets Version
-        run: npx changeset version
+        run: pnpx changeset version
 
-      # 6. 提交版本更新和变更日志
+      # 7. 提交版本更新和变更日志
       - name: Commit Version Updates
         run: |
           git config --global user.name "GitHub Actions"
@@ -43,13 +47,13 @@ jobs:
           git add .
           git diff --staged --quiet || git commit -m "chore: update versions and changelog [skip ci]"
 
-      # 7. 发布到 NPM
+      # 8. 发布到 NPM
       - name: Publish to NPM
-        run: npm publish
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # 8. 推送版本更新到 GitHub 仓库
+      # 9. 推送版本更新到 GitHub 仓库
       - name: Push Changes to GitHub
         run: |
           git push origin main
