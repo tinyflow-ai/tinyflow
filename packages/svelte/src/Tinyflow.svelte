@@ -3,7 +3,7 @@
     import { Tinyflow as TinyflowNative, type TinyflowOptions } from '@tinyflow-ai/ui';
     import '@tinyflow-ai/ui/dist/index.css';
 
-    const { style, className, data, ...rest }: {
+    const { style, className, ...rest }: {
         style?: Record<string, string> | string;
         className?: string;
         // data: TinyflowOptions['data']
