@@ -49,7 +49,7 @@ jobs:
 
       # 8. 发布到 NPM
       - name: Publish to NPM
-        run: pnpm publish --access public
+        run: pnpm changeset publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
