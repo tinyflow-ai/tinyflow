@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main # 或者你的主分支名称
+      - develop # 如果有开发分支
   workflow_dispatch: # 允许手动触发工作流
 
 jobs:
@@ -31,31 +32,18 @@ jobs:
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
 
-      # 5. 设置 NPM 认证令牌
-      - name: Configure NPM Token
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-
-      # 6. 运行 Changesets 版本更新
-      - name: Run Changesets Version
-        run: pnpm changeset version
-
-      # 7. 提交版本更新和变更日志
-      - name: Commit Version Updates
-        run: |
-          git config --global user.name "Michael"
-          git config --global user.email "fuhai999@gmail.com"
-          git add .
-          git diff --staged --quiet || git commit -m "chore: update versions and changelog [skip ci]"
-
-      # 8. 发布到 NPM
-      - name: Publish to NPM
-        run: pnpm changeset publish
+      # 5. 使用 Changesets Action 自动化发布
+      - name: Create Release PR or publish stable version to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          createGithubReleases: false
+          publish: npm run publish
+          version: npm run version
+          title: ${{ github.ref_name == 'main' && 'Publish a new stable version' || 'Publish a new pre-release version' }}
+          commit: >-
+            ${{ github.ref_name == 'main' && 'chore(release): publish a new release version' || 'chore(release): publish a new pre-release version' }}
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      # 9. 推送版本更新到 GitHub 仓库
-      - name: Push Changes to GitHub
-        run: |
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT }}@github.com/tinyflow-ai/tinyflow.git
-          git push origin main
-          git push origin --tags
+          NPM_CONFIG_PROVENANCE: true
