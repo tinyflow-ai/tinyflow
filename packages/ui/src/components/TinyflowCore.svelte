@@ -175,14 +175,14 @@
         console.log('onconnect: ', event);
     };
 
-    const allNodeTypes = {
-        ...nodeTypes
+    const customNodeTypes = {
+        // ...nodeTypes
     } as NodeTypes;
 
     const customNodes = getOptions().customNodes;
     if (customNodes) {
         for (let key of Object.keys(customNodes)) {
-            allNodeTypes[key] = CustomNode as any;
+            customNodeTypes[key] = CustomNode as any;
         }
     }
 
@@ -191,7 +191,7 @@
 
 <div style="position: relative; height: 100%; width: 100%">
     <Toolbar />
-    <SvelteFlow nodeTypes={allNodeTypes} {...store}
+    <SvelteFlow nodeTypes={{ ...nodeTypes,...customNodeTypes}} {...store}
                 class="tinyflow-logo"
                 on:drop={onDrop}
                 on:dragover={onDragOver}

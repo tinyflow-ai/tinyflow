@@ -1,4 +1,4 @@
-import { type useSvelteFlow } from '@xyflow/svelte';
+import { type Node, type NodeProps, type useSvelteFlow } from '@xyflow/svelte';
 import { componentName } from './consts';
 
 export type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelteFlow>['toObject']>>;
@@ -12,8 +12,15 @@ export type Item = {
 
 export type CustomNode = {
     title: string;
+    description?: string;
     icon?: string;
-    render?: (parent:HTMLElement) => void;
+    sortNo?: number;
+    render?: (
+        parent: HTMLElement,
+        node: Node,
+        flowInstance: ReturnType<typeof useSvelteFlow>
+    ) => void;
+    onUpdate?: (parent: HTMLElement, node: Node) => void;
 };
 
 export type TinyflowOptions = {
@@ -24,7 +31,7 @@ export type TinyflowOptions = {
         knowledge?: () => Item[] | Promise<Item[]>;
     };
     //type : node
-    customNodes?: Record<string, CustomNode>
+    customNodes?: Record<string, CustomNode>;
 };
 
 export class Tinyflow {

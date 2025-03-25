@@ -79,7 +79,11 @@
     const customNodes = [] as any[];
     const userCustomNodes = getOptions().customNodes;
     if (userCustomNodes) {
-        for (let key of Object.keys(userCustomNodes)) {
+        const keys = Object.keys(userCustomNodes).sort((a, b) => {
+            return (userCustomNodes[a].sortNo || 0) - (userCustomNodes[b].sortNo || 0);
+        });
+
+        for (let key of keys) {
             customNodes.push({
                 icon: userCustomNodes[key].icon,
                 title: userCustomNodes[key].title,

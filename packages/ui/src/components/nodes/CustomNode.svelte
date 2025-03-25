@@ -1,6 +1,6 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { type Node, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
@@ -15,19 +15,20 @@
 
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
-    const { updateNodeData } = useSvelteFlow();
+    const flowInstance = useSvelteFlow();
 
-
-    // let isRendered = $state(false);
-    let container: HTMLElement;
-
-    console.log('rest', { ...rest });
+    const node = {
+        ...rest,
+        id: currentNodeId,
+        data
+    } as Node;
 
     const externalElement = document.createElement('div') as HTMLElement;
     const options = getOptions();
     const customNode = options.customNodes![rest.type as string];
-    customNode.render?.(externalElement);
+    customNode.render?.(externalElement, node, flowInstance);
 
+    let container: HTMLElement;
     $effect(() => {
         // 注意：由于 $effect 的 state 自动追踪问题，需要 data.expand 方在 if 里的最前面
         if (data.expand && container) {
@@ -35,11 +36,16 @@
         }
     });
 
+    $effect(() => {
+        if (data) {
+            customNode.onUpdate?.(externalElement, { ...node, data });
+        }
+    });
 
 </script>
 
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper data={{...data, description: customNode.description}} {...rest}>
 
     {#snippet icon()}
         {@html customNode.icon}
