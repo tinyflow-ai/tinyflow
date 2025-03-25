@@ -7,9 +7,8 @@ export declare interface TinyflowHandle {
 }
 
 export declare type TinyflowOptions = {
-    data?: TinyflowOptions_2['data'];
     style?: React.CSSProperties;
     className?: string;
-};
+} & Omit<TinyflowOptions_2, 'element'>;
 
 export { }

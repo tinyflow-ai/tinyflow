@@ -4,10 +4,12 @@ import { useSvelteFlow } from '@xyflow/svelte';
 import { Viewport } from '@xyflow/svelte';
 
 export declare type CustomNode = {
-    type: string;
-    name: string;
+    title: string;
+    description?: string;
     icon?: string;
-    render?: (parent: HTMLElement) => void;
+    sortNo?: number;
+    render?: (parent: HTMLElement, node: Node_2, flowInstance: ReturnType<typeof useSvelteFlow>) => void;
+    onUpdate?: (parent: HTMLElement, node: Node_2) => void;
 };
 
 export declare type Item = {
