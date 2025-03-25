@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16 # 根据你的项目需求选择 Node.js 版本
+          node-version: 20 # Node.js 版本
           registry-url: https://registry.npmjs.org/ # 设置 NPM 注册表
 
       # 3. 安装依赖
