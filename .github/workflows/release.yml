@@ -1,0 +1,56 @@
+name: Release and Publish to NPM
+
+on:
+  push:
+    branches:
+      - main # 或者你的主分支名称
+  workflow_dispatch: # 允许手动触发工作流
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 检出代码
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # 获取完整的 Git 历史记录，Changesets 需要它来生成变更日志
+
+      # 2. 设置 Node.js 环境
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16 # 根据你的项目需求选择 Node.js 版本
+          registry-url: https://registry.npmjs.org/ # 设置 NPM 注册表
+
+      # 3. 安装依赖
+      - name: Install Dependencies
+        run: npm ci
+
+      # 4. 设置 NPM 认证令牌
+      - name: Configure NPM Token
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
+      # 5. 运行 Changesets 版本更新
+      - name: Run Changesets Version
+        run: npx changeset version
+
+      # 6. 提交版本更新和变更日志
+      - name: Commit Version Updates
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git diff --staged --quiet || git commit -m "chore: update versions and changelog [skip ci]"
+
+      # 7. 发布到 NPM
+      - name: Publish to NPM
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # 8. 推送版本更新到 GitHub 仓库
+      - name: Push Changes to GitHub
+        run: |
+          git push origin main
+          git push origin --tags
