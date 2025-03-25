@@ -9,12 +9,14 @@ on:
 #      - "package.json" # 如果 package.json 发生变更也触发
   workflow_dispatch: # 允许手动触发工作流
 
+permissions:
+  id-token: write
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write # 允许写入内容（例如创建 Git 标签）
-      id-token: write # 允许访问 GitHub OIDC 令牌以支持 Provenance 功能
     steps:
       # 1. 检出代码
       - name: Checkout Repository
