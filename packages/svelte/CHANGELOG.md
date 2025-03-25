@@ -1,5 +1,14 @@
 # @tinyflow-ai/svelte
 
+## 0.0.9
+
+### Patch Changes
+
+- 6557dd1: - feat: add custom node support
+    - feat: add auto publish workflow
+- Updated dependencies [6557dd1]
+    - @tinyflow-ai/ui@0.0.9
+
 ## 0.0.8
 
 ### Patch Changes
