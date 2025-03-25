@@ -6,11 +6,15 @@ on:
       - main # 或者你的主分支名称
     paths:
       - ".changeset/*.md" # 仅在 .changeset 文件夹中的 .md 文件发生变更时触发
+      - "package.json" # 如果 package.json 发生变更也触发
   workflow_dispatch: # 允许手动触发工作流
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # 允许写入内容（例如创建 Git 标签）
+      id-token: write # 允许访问 GitHub OIDC 令牌以支持 Provenance 功能
     steps:
       # 1. 检出代码
       - name: Checkout Repository
@@ -47,10 +51,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          NPM_CONFIG_PROVENANCE: true # 启用 NPM Provenance 功能
 
       # 6. 打印日志以确认版本号
       - name: Print Version and Published Package
+        if: success() # 仅在上一步成功时执行
         run: |
           echo "Current package.json version: $(node -p "require('./package.json').version")"
           echo "Latest version on NPM: $(npm show @tinyflow-ai/react version)"
