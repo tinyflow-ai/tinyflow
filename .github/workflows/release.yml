@@ -42,8 +42,8 @@ jobs:
       # 7. 提交版本更新和变更日志
       - name: Commit Version Updates
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
+          git config --global user.name "Michael"
+          git config --global user.email "fuhai999@gmail.com"
           git add .
           git diff --staged --quiet || git commit -m "chore: update versions and changelog [skip ci]"
 
