@@ -1,5 +1,13 @@
 # @tinyflow-ai/ui
 
+## 0.0.8
+
+### Patch Changes
+
+- 001ed00: - feat: add custom node support
+- Updated dependencies [001ed00]
+    - @tinyflow-ai/ui@0.0.8
+
 ## 0.0.7
 
 ### Patch Changes

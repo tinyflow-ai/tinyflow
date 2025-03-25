@@ -1,5 +1,11 @@
 # @tinyflow-ai/eslint-config
 
+## 0.0.8
+
+### Patch Changes
+
+- 001ed00: - feat: add custom node support
+
 ## 0.0.7
 
 ### Patch Changes
