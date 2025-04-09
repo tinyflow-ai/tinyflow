@@ -123,3 +123,58 @@ const fetchData = () => {
 };
 </script>
 ```
+
+
+使用Antd Vue时，出现checkBox 无法显示的问题可以在使用页面增加一下样式
+/* 添加样式覆盖 */
+/deep/ .custom-tinyflow {
+	select {
+		appearance: auto !important;
+		-webkit-appearance: menulist !important;
+	}
+
+	/* 如果使用checkbox需要添加 */
+	input[type="checkbox"] {
+		width: 16px;
+		height: 16px;
+		margin: 0 4px;
+		border: 1px solid #ccc;
+	}
+}
+/* 添加checkbox交互样式 */
+/deep/ .custom-tinyflow {
+	input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+		border: 2px solid #d9d9d9;
+		border-radius: 4px;
+		transition: all 0.3s;
+		position: relative;
+		cursor: pointer;
+		margin: 0 8px 0 0;
+
+		&:checked {
+			background-color: #1890ff;
+			border-color: #1890ff;
+
+			&::after {
+				content: '';
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 8px;
+				height: 12px;
+				border: 2px solid #fff;
+				border-top: 0;
+				border-left: 0;
+				transform: translate(-50%, -60%) rotate(45deg);
+			}
+		}
+
+		&:hover {
+			border-color: #40a9ff;
+		}
+	}
+}
+
+![输入图片说明](../../../antdnodestartcheckbox.png)
