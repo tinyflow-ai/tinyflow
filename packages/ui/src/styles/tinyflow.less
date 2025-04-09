@@ -120,7 +120,7 @@
   display: flex;
   gap: 5px;
   transition: transform 0.5s ease, opacity 0.5s ease;
-  transform: translateX(-220px); /* 完全移出视口 */
+  transform: translateX(-200px); /* 完全移出视口 */
 
   &.show {
     transform: translateX(0);
@@ -132,7 +132,7 @@
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    width: 180px;
+    width: fit-content;
 
     &-header {
       display: flex;
