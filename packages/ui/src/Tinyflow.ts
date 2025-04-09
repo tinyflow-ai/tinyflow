@@ -25,7 +25,7 @@ export type CustomNode = {
 
 export type TinyflowOptions = {
     element: string | Element;
-    data?: TinyflowData;
+    data?: TinyflowData | string;
     provider?: {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
