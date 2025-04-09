@@ -111,9 +111,12 @@
             <button on:click="{printInConsole}">Console 打印当前数据</button>
         </div>
     </div>
-    <Tinyflow data={JSON.parse(data)} style={{height:"calc(100vh - 58px)"}} bind:this={window.tinyflowRef}
-              {customNodes}
-    />
+    <div style="margin: 20px;border: 1px solid #ccc;">
+        <Tinyflow data={JSON.parse(data)} style={{height:"calc(100vh - 58px)"}} bind:this={window.tinyflowRef}
+                  {customNodes}
+        />
+    </div>
+
 </main>
 <style lang="less">
   .header {

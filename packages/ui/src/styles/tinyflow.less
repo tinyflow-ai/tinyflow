@@ -120,7 +120,7 @@
   display: flex;
   gap: 5px;
   transition: transform 0.5s ease, opacity 0.5s ease;
-  transform: translateX(-200px); /* 完全移出视口 */
+  transform: translateX(calc(-100% + 20px)); /* 完全移出视口 */
 
   &.show {
     transform: translateX(0);
