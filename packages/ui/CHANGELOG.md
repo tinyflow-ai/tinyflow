@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 0.0.10
+
+### Patch Changes
+
+- 7f8a6e2: optimize styles
+
 ## 0.0.9
 
 ### Patch Changes
