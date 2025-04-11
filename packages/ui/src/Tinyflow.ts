@@ -15,6 +15,10 @@ export type CustomNode = {
     description?: string;
     icon?: string;
     sortNo?: number;
+    rootClass?: string;
+    rootStyle?: string;
+    parametersEnable?: boolean;
+    outputDefsEnable?: boolean;
     render?: (
         parent: HTMLElement,
         node: Node,

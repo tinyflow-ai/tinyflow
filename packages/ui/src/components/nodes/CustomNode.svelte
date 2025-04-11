@@ -51,34 +51,38 @@
         {@html customNode.icon}
     {/snippet}
 
-    <div class="heading">
-        <Heading level={3}>输入参数</Heading>
-        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+    {#if customNode.parametersEnable !== false}
+        <div class="heading">
+            <Heading level={3}>输入参数</Heading>
+            <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
             addParameter(currentNodeId)
         }}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-            </svg>
-        </Button>
-    </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+            </Button>
+        </div>
 
-    <RefParameterList />
-
-
-    <div bind:this={container}></div>
+        <RefParameterList />
+    {/if}
 
 
-    <div class="heading">
-        <Heading level={3} mt="10px">输出参数</Heading>
-        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+    <div bind:this={container} style={customNode.rootStyle||""} class={customNode.rootClass}></div>
+
+
+    {#if customNode.outputDefsEnable !== false}
+        <div class="heading">
+            <Heading level={3} mt="10px">输出参数</Heading>
+            <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
             addParameter(currentNodeId,'outputDefs')
         }}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-            </svg>
-        </Button>
-    </div>
-    <OutputDefList />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+            </Button>
+        </div>
+        <OutputDefList />
+    {/if}
 
 </NodeWrapper>
 
