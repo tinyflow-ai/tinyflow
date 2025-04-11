@@ -31,9 +31,13 @@ export const parameterRefTypes = [
         label: '引用'
     },
     {
-        value: 'input',
+        value: 'fixed',
         label: '固定值'
-    }
+    },
+    // {
+    //     value: 'input',
+    //     label: '输入'
+    // }
 ];
 
 export type Parameter = {
@@ -47,6 +51,7 @@ export type Parameter = {
     value?: string;
     description?: string;
     required?: boolean;
+    defaultValue?: string;
     deleteDisabled?: boolean;
     addChildDisabled?: boolean;
     children?: Parameter[];

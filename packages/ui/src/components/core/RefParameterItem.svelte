@@ -90,9 +90,9 @@
            oninput={updateName} />
 </div>
 <div class="input-item">
-    {#if param.refType === 'input'}
+    {#if param.refType === 'fixed'}
         <Input value={param.value} placeholder="请输入参数值" oninput={updateValue} />
-    {:else}
+    {:else if (param.refType !== 'input')}
         <Select items={$selectItems} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
                 expandAll
                 onSelect={updateRef} />
