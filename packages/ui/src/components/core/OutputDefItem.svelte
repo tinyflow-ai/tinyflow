@@ -165,14 +165,18 @@
             <div class="input-more-setting">
                 <div class="input-more-item">
                     默认值：
-                    <Textarea rows={1} style="width: 100%;" onchange={(event:Event)=>{
+                    <Textarea rows={1} style="width: 100%;"
+                              value={param.defaultValue||''}
+                              onchange={(event:Event)=>{
                         const value =  (event.target as any).value;
                         updateAttribute('defaultValue', value)
                     }} />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" onchange={(event:MouseEvent)=>{
+                    <Textarea rows={3} style="width: 100%;"
+                              value={param.description||''}
+                              onchange={(event:Event)=>{
                         const value =  (event.target as any).value;
                         updateAttribute('description', value)
                     }} />
