@@ -1,5 +1,19 @@
 # @tinyflow-ai/eslint-config
 
+## 0.1.0
+
+### Minor Changes
+
+- cbbe5cc: - feat: CustomNode add more configs: "rootClass" "rootStyle" "parametersEnable" "outputDefsEnable"
+    - style: optimize styles
+    - chore: upgrade svelte
+- 97c9c75: - feat: CustomNode add more configs: "rootClass" "rootStyle" "parameters
+    - style: optimize styles
+    - feat: add onNodeExecute config support
+    - refactor: optimize RefParameterItem.svelte
+    - fix: fixed textarea can not show the value property
+    - chore: upgrade svelte
+
 ## 0.0.10
 
 ### Patch Changes
