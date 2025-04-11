@@ -32,6 +32,7 @@ export type TinyflowOptions = {
     };
     //type : node
     customNodes?: Record<string, CustomNode>;
+    onNodeExecute?: (node: Node) => void;
 };
 
 export class Tinyflow {

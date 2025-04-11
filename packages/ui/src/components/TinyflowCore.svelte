@@ -167,12 +167,12 @@
 
 
     const onconnectstart = (event: any, node: any) => {
-        console.log('onconnectstart: ', event, node);
+        // console.log('onconnectstart: ', event, node);
     };
 
 
     const onconnect = (event: any) => {
-        console.log('onconnect: ', event);
+        // console.log('onconnect: ', event);
     };
 
     const customNodeTypes = {
