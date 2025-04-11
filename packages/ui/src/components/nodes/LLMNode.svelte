@@ -79,7 +79,7 @@
                 step="0.1"
                 value={data.temperature ?? 0.5}
                 on:mousedown|stopPropagation
-            on:input={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
+                on:input={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
             />
         </div>
     </div>
@@ -94,7 +94,7 @@
                 step="0.1"
                 value={data.topP ?? 0.9}
                 on:mousedown|stopPropagation
-            on:input={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
+                on:input={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
             />
         </div>
     </div>
@@ -109,7 +109,7 @@
                 step="1"
                 value={data.topK ?? 50}
                 on:mousedown|stopPropagation
-            on:input={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
+                on:input={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
             />
         </div>
     </div>
@@ -147,7 +147,21 @@
 
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
-        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+        <Select items={[{
+            label: '文本',
+            value: 'text'
+        }, {
+            label: 'JSON',
+            value: 'json'
+        }]} style="width: 100px;margin-left: auto" defaultValue="text" onSelect={(item)=>{
+              const newValue = item.value;
+              updateNodeData(currentNodeId, ()=>{
+                  return {
+                      outType: newValue
+                  }
+              })
+        }} value={data.outType ? [data.outType] : []} />
+        <Button class="input-btn-more" style="margin-left: 10px" onclick={()=>{
             addParameter(currentNodeId,'outputDefs')
         }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -162,6 +176,7 @@
 <style>
     .heading {
         display: flex;
+        align-items: center;
         margin-bottom: 10px;
     }
 
@@ -179,6 +194,7 @@
         margin-bottom: 10px;
         gap: 10px;
     }
+
     /* 新增样式 */
     .slider-container {
         width: 100%;
