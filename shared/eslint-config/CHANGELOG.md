@@ -1,5 +1,12 @@
 # @tinyflow-ai/eslint-config
 
+## 0.0.12
+
+### Patch Changes
+
+- 73967cf: - feat: LLMNode add outType config
+    - fix: OutputDefItem can not show 'defaultValue'
+
 ## 0.1.0
 
 ### Minor Changes
