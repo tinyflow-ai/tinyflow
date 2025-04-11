@@ -22,41 +22,34 @@
     });
 
     const { updateNodeData } = useSvelteFlow();
-    const updateName = (event: Event) => {
-        const newValue = (event.target as any).value;
+
+    const updateParameter = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
             let parameters = node.data.parameters as Array<Parameter>;
-            parameters[index].name = newValue;
+            (parameters[index] as any)[key] = value;
             return {
                 parameters
             };
         });
     };
+
+    const updateName = (event: Event) => {
+        const newValue = (event.target as any).value;
+        updateParameter('name', newValue);
+    };
+
 
     const updateRequired = (event: Event) => {
         const checked = (event.target as any).checked;
-        updateNodeData(currentNodeId, (node) => {
-            let parameters = node.data.parameters as Array<Parameter>;
-            parameters[index].required = checked;
-
-            return {
-                parameters
-            };
-        });
+        updateParameter('required', checked);
     };
+
 
     const updateDataType = (item: Item) => {
         const dataType = item.value as string;
         if (dataType) {
-            updateNodeData(currentNodeId, (node) => {
-                let parameters = node.data.parameters as Array<Parameter>;
-                parameters[index].dataType = dataType;
-                return {
-                    parameters
-                };
-            });
+            updateParameter('dataType', dataType);
         }
-
     };
 
 
@@ -71,6 +64,7 @@
         });
         triggerObject?.hide();
     };
+
 </script>
 
 
@@ -98,11 +92,23 @@
                 </div>
                 <div class="input-more-item">
                     默认值：
-                    <Textarea rows={1} style="width: 100%;" />
+                    <Textarea rows={1} style="width: 100%;"
+                              value={param.defaultValue}
+                              onchange={event => {
+                        const newValue = (event.target as any).value;
+                        updateParameter('defaultValue', newValue)
+                    }}
+                    />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" />
+                    <Textarea rows={3} style="width: 100%;"
+                              value={param.description}
+                              onchange={event => {
+                        const newValue = (event.target as any).value;
+                        updateParameter('description', newValue)
+                    }}
+                    />
                 </div>
 
                 <div class="input-more-item">
