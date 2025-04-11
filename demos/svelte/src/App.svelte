@@ -113,6 +113,9 @@
     </div>
     <div style="margin: 20px;border: 1px solid #ccc;">
         <Tinyflow data={JSON.parse(data)} style={{height:"calc(100vh - 58px)"}} bind:this={window.tinyflowRef}
+                  onNodeExecute={(node)=>{
+                      console.log('node execute: ', node)
+                  }}
                   {customNodes}
         />
     </div>
