@@ -8,6 +8,10 @@ export declare type CustomNode = {
     description?: string;
     icon?: string;
     sortNo?: number;
+    rootClass?: string;
+    rootStyle?: string;
+    parametersEnable?: boolean;
+    outputDefsEnable?: boolean;
     render?: (parent: HTMLElement, node: Node_2, flowInstance: ReturnType<typeof useSvelteFlow>) => void;
     onUpdate?: (parent: HTMLElement, node: Node_2) => void;
 };
@@ -45,6 +49,7 @@ export declare type TinyflowOptions = {
         knowledge?: () => Item[] | Promise<Item[]>;
     };
     customNodes?: Record<string, CustomNode>;
+    onNodeExecute?: (node: Node_2) => void;
 };
 
 export { }
