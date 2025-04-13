@@ -5,7 +5,7 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes
+        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes, useStore
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
@@ -24,6 +24,8 @@
     const svelteFlow = useSvelteFlow();
 
     onInit(svelteFlow);
+
+    // svelteFlow.
 
     let showEdgePanel = $state(false);
 
@@ -185,6 +187,35 @@
             customNodeTypes[key] = CustomNode as any;
         }
     }
+
+    const { nodes, edges, viewport } = useStore();
+    const onDataChange = getOptions().onDataChange;
+    if (onDataChange) {
+        nodes.subscribe(() => {
+            onDataChange({
+                nodes: $nodes,
+                edges: $edges,
+                viewport: $viewport
+            }, { eventType: 'nodesChange' });
+        });
+
+        edges.subscribe(() => {
+            onDataChange({
+                nodes: $nodes,
+                edges: $edges,
+                viewport: $viewport
+            }, { eventType: 'edgesChange' });
+        });
+
+        viewport.subscribe(() => {
+            onDataChange({
+                nodes: $nodes,
+                edges: $edges,
+                viewport: $viewport
+            }, { eventType: 'viewportChange' });
+        });
+    }
+
 
 </script>
 

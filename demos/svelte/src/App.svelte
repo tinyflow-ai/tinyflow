@@ -116,6 +116,9 @@
                   onNodeExecute={(node)=>{
                       console.log('node execute: ', node)
                   }}
+                  onDataChange={(data,event)=>{
+                      console.log('data change: ', data, event)
+                  }}
                   {customNodes}
         />
     </div>
