@@ -1,5 +1,11 @@
 # @tinyflow-ai/eslint-config
 
+## 0.0.14
+
+### Patch Changes
+
+- [`f63106c`](https://github.com/tinyflow-ai/tinyflow/commit/f63106c921740b6f843b7cda9767c96a71f94f0b) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v0.0.14
+
 ## 0.0.13
 
 ### Patch Changes
