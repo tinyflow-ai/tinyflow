@@ -37,30 +37,35 @@
                     nameDisabled: true,
                     dataTypeDisabled: true,
                     addChildDisabled: true,
+                    deleteDisabled: true,
                     children: [
                         {
                             name: 'title',
                             dataType: 'String',
                             nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true
                         },
                         {
                             name: 'content',
                             dataType: 'String',
                             nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true
                         },
                         {
                             name: 'documentId',
                             dataType: 'Number',
                             nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true
                         },
                         {
                             name: 'knowledgeId',
                             dataType: 'Number',
                             nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true
                         }
                     ]
                 }
@@ -105,9 +110,32 @@
         }} value={data.knowledgeId ? [data.knowledgeId] : []} />
     </div>
 
+    <div class="setting-title">关键字</div>
+    <div class="setting-item">
+        <Input placeholder="请输入关键字" style="width: 100%"
+               value={data.keyword}
+               onchange={(e)=>{
+            const newValue = e.target.value;
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    keyword: newValue
+                }
+            })
+        }}
+        />
+    </div>
+
+
     <div class="setting-title">获取数据量</div>
     <div class="setting-item">
-        <Input placeholder="搜索的数据条数" style="width: 100%" />
+        <Input placeholder="搜索的数据条数" style="width: 100%" onchange={(e)=>{
+            const newValue = e.target.value;
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    limit: newValue
+                }
+            })
+        }} value={data.limit || ''} />
     </div>
 
 
