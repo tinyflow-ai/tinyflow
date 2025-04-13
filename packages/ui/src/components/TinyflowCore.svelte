@@ -190,7 +190,6 @@
 
 
 <div style="position: relative; height: 100%; width: 100%;overflow: hidden">
-    <Toolbar />
     <SvelteFlow nodeTypes={{ ...nodeTypes,...customNodeTypes}} {...store}
                 class="tinyflow-logo"
                 on:drop={onDrop}
@@ -246,6 +245,7 @@
             </Panel>
         {/if}
     </SvelteFlow>
+    <Toolbar />
 </div>
 
 <style>
