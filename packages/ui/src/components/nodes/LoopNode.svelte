@@ -1,13 +1,10 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { Handle, type NodeProps, Position, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Input, Select, Textarea } from '../base';
+    import { Handle, type NodeProps, Position } from '@xyflow/svelte';
+    import { Button, Heading } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
-    import { getOptions } from '../utils/NodeUtils';
-    import { onMount } from 'svelte';
-    import type { Item } from '../../Tinyflow';
     import OutputDefList from '../core/OutputDefList.svelte';
 
     const { data, ...rest }: {
@@ -17,15 +14,6 @@
 
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
-
-    const options = getOptions();
-
-    let knowledgeArray = $state<Item[]>([]);
-    onMount(async () => {
-        const newLLMs = await options.provider?.knowledge();
-        knowledgeArray.push(...(newLLMs || []));
-    });
-
 
 </script>
 

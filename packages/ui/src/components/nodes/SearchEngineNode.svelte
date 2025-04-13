@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Input, Select, Textarea } from '../base';
+    import { Button, Heading, Input, Select } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
@@ -44,14 +44,14 @@
                             dataType: 'String',
                             nameDisabled: true,
                             dataTypeDisabled: true,
-                            deleteDisabled: true,
+                            deleteDisabled: true
                         },
                         {
                             name: 'content',
                             dataType: 'String',
                             nameDisabled: true,
                             dataTypeDisabled: true,
-                            deleteDisabled: true,
+                            deleteDisabled: true
                         }
                     ]
                 }
