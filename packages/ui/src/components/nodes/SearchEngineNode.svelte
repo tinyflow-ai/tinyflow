@@ -20,10 +20,10 @@
 
     const options = getOptions();
 
-    let knowledgeArray = $state<Item[]>([]);
+    let searchEngines = $state<Item[]>([]);
     onMount(async () => {
-        const newLLMs = await options.provider?.knowledge();
-        knowledgeArray.push(...(newLLMs || []));
+        const newLLMs = await options.provider?.searchEngine?.();
+        searchEngines.push(...(newLLMs || []));
     });
 
     const { updateNodeData } = useSvelteFlow();
@@ -37,30 +37,21 @@
                     nameDisabled: true,
                     dataTypeDisabled: true,
                     addChildDisabled: true,
+                    deleteDisabled: true,
                     children: [
                         {
                             name: 'title',
                             dataType: 'String',
                             nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true,
                         },
                         {
                             name: 'content',
                             dataType: 'String',
                             nameDisabled: true,
-                            dataTypeDisabled: true
-                        },
-                        {
-                            name: 'documentId',
-                            dataType: 'Number',
-                            nameDisabled: true,
-                            dataTypeDisabled: true
-                        },
-                        {
-                            name: 'knowledgeId',
-                            dataType: 'Number',
-                            nameDisabled: true,
-                            dataTypeDisabled: true
+                            dataTypeDisabled: true,
+                            deleteDisabled: true,
                         }
                     ]
                 }
@@ -93,37 +84,47 @@
     <RefParameterList />
 
     <Heading level={3} mt="10px">搜索引擎设置</Heading>
-    <div class="setting-title">API 服务商</div>
+    <div class="setting-title">搜索引擎</div>
     <div class="setting-item">
-        <Select items={knowledgeArray} style="width: 100%" placeholder="请选择 API 服务商" onSelect={(item)=>{
+        <Select items={searchEngines} style="width: 100%" placeholder="请选择搜索引擎" onSelect={(item)=>{
               const newValue = item.value;
               updateNodeData(currentNodeId, ()=>{
                   return {
-                      knowledgeId: newValue
+                      engine: newValue
                   }
               })
-        }} value={data.knowledgeId ? [data.knowledgeId] : []} />
+        }} value={data.engine ? [data.engine] : []} />
     </div>
 
-    <div class="setting-title">API Key</div>
-    <div class="setting-item">
-        <Input placeholder="请输入 API Key" style="width: 100%" />
-    </div>
 
     <div class="setting-title">关键字</div>
     <div class="setting-item">
-        <Input placeholder="请输入关键字" style="width: 100%" />
+        <Input placeholder="请输入关键字" style="width: 100%"
+               value={data.keyword}
+               onchange={(e)=>{
+            const newValue = e.target.value;
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    keyword: newValue
+                }
+            })
+        }}
+        />
     </div>
 
-    <div class="setting-title">数据量</div>
+    <div class="setting-title">搜索数据量</div>
     <div class="setting-item">
-        <Input placeholder="搜索的数据条数" style="width: 100%" />
+        <Input placeholder="搜索的数据条数" style="width: 100%" value={data.limit}
+               onchange={(e)=>{
+            const newValue = e.target.value;
+            updateNodeData(currentNodeId, ()=>{
+                return {
+                    limit: newValue
+                }
+            })
+        }} />
     </div>
 
-    <div class="setting-title">其他参数</div>
-    <div class="setting-item">
-        <Textarea rows={3} placeholder="请输入其他参数（Property 格式）" style="width: 100%" />
-    </div>
 
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
