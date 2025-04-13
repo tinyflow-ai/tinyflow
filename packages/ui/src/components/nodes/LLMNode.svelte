@@ -71,45 +71,45 @@
 
     <div class="setting-item">
         <div class="slider-container">
-            <label>Temperature: {data.temperature ?? 0.5}</label>
+            <span>Temperature: {data.temperature ?? 0.5}</span>
             <input
+                class="nodrag"
                 type="range"
                 min="0"
                 max="1"
                 step="0.1"
                 value={data.temperature ?? 0.5}
-                on:mousedown|stopPropagation
-                on:input={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
+                oninput={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
             />
         </div>
     </div>
 
     <div class="setting-item">
         <div class="slider-container">
-            <label>Top P: {data.topP ?? 0.9}</label>
+            <span>Top P: {data.topP ?? 0.9}</span>
             <input
+                class="nodrag"
                 type="range"
                 min="0"
                 max="1"
                 step="0.1"
                 value={data.topP ?? 0.9}
-                on:mousedown|stopPropagation
-                on:input={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
+                oninput={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
             />
         </div>
     </div>
 
     <div class="setting-item">
         <div class="slider-container">
-            <label>Top K: {data.topK ?? 50}</label>
+            <span>Top K: {data.topK ?? 50}</span>
             <input
+                class="nodrag"
                 type="range"
                 min="0"
                 max="100"
                 step="1"
                 value={data.topK ?? 50}
-                on:mousedown|stopPropagation
-                on:input={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
+                oninput={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
             />
         </div>
     </div>
@@ -203,7 +203,7 @@
         gap: 4px;
     }
 
-    .slider-container label {
+    .slider-container span {
         font-size: 12px;
         color: #666;
         display: flex;
