@@ -33,6 +33,7 @@ export type TinyflowOptions = {
     provider?: {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
+        searchEngine?: () => Item[] | Promise<Item[]>;
     };
     //type : node
     customNodes?: Record<string, CustomNode>;
