@@ -51,6 +51,9 @@ export declare type TinyflowOptions = {
     };
     customNodes?: Record<string, CustomNode>;
     onNodeExecute?: (node: Node_2) => void;
+    onDataChange?: (data: TinyflowData, event: {
+        eventType: string;
+    }) => void;
 };
 
 export { }
