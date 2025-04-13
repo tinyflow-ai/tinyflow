@@ -1,13 +1,20 @@
 name: Release and Publish to NPM
 
+#on:
+#  push:
+#    branches:
+#      - main # 或者你的主分支名称
+#    paths:
+#      - ".changeset/*.md" # 仅在 .changeset 文件夹中的 .md 文件发生变更时触发
+#      - "package.json" # 如果 package.json 发生变更也触发
+#  workflow_dispatch: # 允许手动触发工作流
+
 on:
   push:
-    branches:
-      - main # 或者你的主分支名称
-    paths:
-      - ".changeset/*.md" # 仅在 .changeset 文件夹中的 .md 文件发生变更时触发
-      - "package.json" # 如果 package.json 发生变更也触发
-  workflow_dispatch: # 允许手动触发工作流
+    tags:
+      - "v*" # 匹配以 v 开头的标签（如 v1.0.0）
+  workflow_dispatch:
+
 
 permissions:
   id-token: write
