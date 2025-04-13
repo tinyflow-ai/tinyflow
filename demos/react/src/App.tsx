@@ -34,6 +34,9 @@ function App() {
                 ref={tinyflowRef}
                 style={{ border: '1px solid #ccc',height: 'calc(100vh - 60px)' }}
                 className="custom-class"
+                onDataChange={(data, event) => {
+                    console.log('onDataChange', data, event);
+                }}
             />
         </>
     );
