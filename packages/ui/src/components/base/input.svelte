@@ -3,4 +3,4 @@
 
     const { ...rest }: MyHTMLInputAttributes = $props();
 </script>
-<input type="text" {...rest} class="tf-input  nopan nodrag {rest.class}" />
+<input type="text" spellcheck="false" {...rest} class="tf-input  nopan nodrag {rest.class}" />
