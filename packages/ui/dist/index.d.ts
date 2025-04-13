@@ -47,6 +47,7 @@ export declare type TinyflowOptions = {
     provider?: {
         llm?: () => Item[] | Promise<Item[]>;
         knowledge?: () => Item[] | Promise<Item[]>;
+        searchEngine?: () => Item[] | Promise<Item[]>;
     };
     customNodes?: Record<string, CustomNode>;
     onNodeExecute?: (node: Node_2) => void;
