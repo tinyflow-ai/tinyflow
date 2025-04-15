@@ -19,16 +19,17 @@
     import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget';
     import { getOptions } from './utils/NodeUtils';
     import CustomNode from './nodes/CustomNode.svelte';
+    import { useUpdateEdgeData } from './utils/useUpdateEdgeData';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
 
     onInit(svelteFlow);
 
-    // svelteFlow.
-
     let showEdgePanel = $state(false);
+    let currentEdge = $state();
 
+    const { updateEdgeData } = useUpdateEdgeData();
 
     const onDragOver = (event: DragEvent) => {
         event.preventDefault();
@@ -129,7 +130,6 @@
     const { getEdgesByTarget } = useGetEdgesByTarget();
     const onDelete = (params: any) => {
         const deleteEdges = params.edges as Edge[];
-
         deleteEdges.forEach((edge) => {
             const targetNode = getNode(edge.target) as Node;
             if (targetNode.parentId) {
@@ -230,8 +230,10 @@
                 onconnectstart={onconnectstart}
                 onconnect={onconnect}
                 connectionRadius={50}
-                on:edgeclick={() => {
+                on:edgeclick={(e) => {
                     showEdgePanel = true;
+                    currentEdge = e.detail.edge;
+                    // console.log(e)
                 }}
                 ondelete={onDelete}
                 onclick={(e) => {
@@ -242,6 +244,7 @@
                      return
                     }
                      showEdgePanel = false;
+                     currentEdge = null;
                 }}
                 defaultEdgeOptions={{
                     // animated: true,
@@ -268,7 +271,13 @@
                             rows={3}
                             placeholder="请输入边条件"
                             style="width: 100%"
-                            oninput={(e)=>{
+                            value={currentEdge?.data?.condition}
+                            onchange={(e)=>{
+                                if (currentEdge){
+                                    updateEdgeData(currentEdge.id, {
+                                        condition: e.target.value
+                                    })
+                                }
                             }}
                         />
                     </div>
