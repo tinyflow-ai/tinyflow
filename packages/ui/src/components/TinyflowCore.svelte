@@ -132,7 +132,7 @@
         const deleteEdges = params.edges as Edge[];
         deleteEdges.forEach((edge) => {
             const targetNode = getNode(edge.target) as Node;
-            if (targetNode.parentId) {
+            if (targetNode && targetNode.parentId) {
                 const nodeEdges = getEdgesByTarget(edge.target);
                 const loopNode = getNode(targetNode.parentId) as Node;
                 if (nodeEdges.length === 0) {
