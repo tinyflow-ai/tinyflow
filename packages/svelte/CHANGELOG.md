@@ -1,5 +1,14 @@
 # @tinyflow-ai/svelte
 
+## 0.0.15
+
+### Patch Changes
+
+- [`2b6b889`](https://github.com/tinyflow-ai/tinyflow/commit/2b6b889a2b946a55dc8b5b85d601e8a76e917cca) Thanks [@yangfuhai](https://github.com/yangfuhai)! - add condition setting in edge
+
+- Updated dependencies [[`2b6b889`](https://github.com/tinyflow-ai/tinyflow/commit/2b6b889a2b946a55dc8b5b85d601e8a76e917cca)]:
+    - @tinyflow-ai/ui@0.0.15
+
 ## 0.0.14
 
 ### Patch Changes
