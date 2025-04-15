@@ -46,7 +46,7 @@ tinyflow 提供了以下方法：
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-java-core</artifactId>
-    <version>1.0.0-rc.3</version>
+    <version>1.0.0-rc.8</version>
 </dependency>
 ```
 
