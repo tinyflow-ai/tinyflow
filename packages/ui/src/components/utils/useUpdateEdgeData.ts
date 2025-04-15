@@ -16,7 +16,7 @@ export const useUpdateEdgeData = () => {
                 if (e.id === id) {
                     return edge;
                 }
-                return edge;
+                return e;
             })
         );
     };
