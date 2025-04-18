@@ -104,7 +104,7 @@
                         <div class="settings">
 
                             <div class="input-item">
-                                参数描述：
+                                节点名称：
                                 <Input style="width: 100%;" onchange={(event)=>{
                                     const value =  (event.target as any).value;
                                     updateNodeData(currentNodeId,{
