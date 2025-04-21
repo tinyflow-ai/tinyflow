@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 0.0.16
+
+### Patch Changes
+
+- [`f590e99`](https://github.com/tinyflow-ai/tinyflow/commit/f590e991d354a497a181d9b7140b436e2640929c) Thanks [@yangfuhai](https://github.com/yangfuhai)! - add node condition
+
 ## 0.0.15
 
 ### Patch Changes
