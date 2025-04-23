@@ -1,45 +1,8 @@
-import { type Node, type NodeProps, type useSvelteFlow } from '@xyflow/svelte';
+import { type useSvelteFlow } from '@xyflow/svelte';
 import { componentName } from './consts';
+import type { TinyflowData, TinyflowOptions } from './types';
 
-export type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelteFlow>['toObject']>>;
 type FlowInstance = ReturnType<typeof useSvelteFlow>;
-
-export type Item = {
-    value: number | string;
-    label: string;
-    children?: Item[];
-};
-
-export type CustomNode = {
-    title: string;
-    description?: string;
-    icon?: string;
-    sortNo?: number;
-    rootClass?: string;
-    rootStyle?: string;
-    parametersEnable?: boolean;
-    outputDefsEnable?: boolean;
-    render?: (
-        parent: HTMLElement,
-        node: Node,
-        flowInstance: ReturnType<typeof useSvelteFlow>
-    ) => void;
-    onUpdate?: (parent: HTMLElement, node: Node) => void;
-};
-
-export type TinyflowOptions = {
-    element: string | Element;
-    data?: TinyflowData | string;
-    provider?: {
-        llm?: () => Item[] | Promise<Item[]>;
-        knowledge?: () => Item[] | Promise<Item[]>;
-        searchEngine?: () => Item[] | Promise<Item[]>;
-    };
-    //type : node
-    customNodes?: Record<string, CustomNode>;
-    onNodeExecute?: (node: Node) => void;
-    onDataChange?: (data: TinyflowData, event: { eventType: string }) => void;
-};
 
 export class Tinyflow {
     private options!: TinyflowOptions;

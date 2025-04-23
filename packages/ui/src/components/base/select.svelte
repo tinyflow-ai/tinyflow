@@ -1,12 +1,6 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
     import { FloatingTrigger, Render } from './index';
-
-    type Item = {
-        value: number | string;
-        label: string | Snippet;
-        children?: Item[];
-    }
+    import type { SelectItem } from '../../types';
 
     let {
         items,
@@ -20,9 +14,9 @@
         placeholder,
         ...rest
     }: {
-        items: Item[],
-        onExpand?: (item: Item) => void,
-        onSelect?: (item: Item) => void,
+        items: SelectItem[],
+        onExpand?: (item: SelectItem) => void,
+        onSelect?: (item: SelectItem) => void,
         value?: (any)[],
         defaultValue?: (number | string | undefined)[],
         expandAll?: boolean,
@@ -34,8 +28,8 @@
 
 
     let activeItemsState = $derived.by(() => {
-        const resultItems: Item[] = [];
-        const fillResult = (items: Item[]) => {
+        const resultItems: SelectItem[] = [];
+        const fillResult = (items: SelectItem[]) => {
             for (let item of items) {
                 if (value.length > 0) {
                     if (value.includes(item.value)) {
@@ -58,7 +52,7 @@
 
     let triggerObject: any;
 
-    function handlerOnSelect(item: Item) {
+    function handlerOnSelect(item: SelectItem) {
         if (item.children && item.children.length > 0) {
             // item.expand = !item.expand;
             onExpand?.(item);
@@ -71,7 +65,7 @@
 </script>
 
 
-{#snippet selectItems(items: Item[])}
+{#snippet selectItems(items: SelectItem[])}
     {#each items as item, index (`${index}_${item.value}`)}
         <button class="tf-select-content-item"
                 onclick={() => handlerOnSelect(item)}

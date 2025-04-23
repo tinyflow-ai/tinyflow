@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type Node, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading } from '../base';
+    import { Button, Heading, Input, Select, Textarea } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
@@ -16,6 +16,7 @@
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
     const flowInstance = useSvelteFlow();
+    const { updateNodeData } = flowInstance;
 
     const node = {
         ...rest,
@@ -27,6 +28,7 @@
     const options = getOptions();
     const customNode = options.customNodes![rest.type as string];
     customNode.render?.(externalElement, node, flowInstance);
+    const forms = customNode.forms;
 
     let container: HTMLElement;
     $effect(() => {
@@ -67,6 +69,72 @@
     {/if}
 
 
+    {#if forms}
+        {#each forms as form}
+            {#if form.type === 'input'}
+                <div class="setting-title">{form.label}</div>
+                <div class="setting-item">
+                    <Input
+                        placeholder={form.placeholder}
+                        style="width: 100%"
+                        value={data[form.name] || form.defaultValue}
+                        {...form.attrs}
+                        onchange={(e)=>{
+                                updateNodeData(currentNodeId, {
+                                    [form.name]: e.target.value
+                                });
+                            }}
+                    />
+                </div>
+            {:else if form.type === 'textarea'}
+                <div class="setting-title">{form.label}</div>
+                <div class="setting-item">
+                        <Textarea
+                            rows={3}
+                            placeholder={form.placeholder}
+                            style="width: 100%"
+                            value={data[form.name] || form.defaultValue}
+                            {...form.attrs}
+                            onchange={(e)=>{
+                                updateNodeData(currentNodeId, {
+                                    [form.name]: e.target.value
+                                });
+                            }}
+                        />
+                </div>
+            {:else if form.type === 'slider'}
+                <div class="setting-title">{form.label}</div>
+                <div class="setting-item">
+                    <div class="slider-container">
+                        <span>{form.description}: {data[form.name] ?? form.defaultValue}</span>
+                        <input
+                            class="nodrag"
+                            type="range"
+                            {...form.attrs}
+                            value={data[form.name] ?? form.defaultValue}
+                            oninput={(e) => updateNodeData(currentNodeId, { [form.name]: parseFloat(e.target.value) })}
+                        />
+                    </div>
+                </div>
+            {:else if form.type === 'select'}
+                <div class="setting-title">{form.label}</div>
+                <div class="setting-item">
+                    <Select items={form.options||[]} style="width: 100%" placeholder={form.placeholder} onSelect={(item)=>{
+                      const newValue = item.value;
+                      updateNodeData(currentNodeId, ()=>{
+                          return {
+                              [form.name]: newValue
+                          }
+                      })
+                }} value={data[form.name] ? [data[form.name]] : [form.defaultValue]} />
+                </div>
+            {:else if form.type === 'heading'}
+                <Heading level={3} mt="10px" {...form.attrs}>{form.label}</Heading>
+            {/if}
+        {/each}
+    {/if}
+
+
     <div bind:this={container} style={customNode.rootStyle||""} class={customNode.rootClass}></div>
 
 
@@ -89,7 +157,57 @@
 <style>
     .heading {
         display: flex;
+        align-items: center;
         margin-bottom: 10px;
+    }
+
+    .setting-title {
+        font-size: 12px;
+        color: #999;
+        margin-bottom: 4px;
+        margin-top: 10px;
+    }
+
+    .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+
+    /* 新增样式 */
+    .slider-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .slider-container span {
+        font-size: 12px;
+        color: #666;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        height: 4px;
+        background: #ddd;
+        border-radius: 2px;
+        outline: none;
+        -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 14px;
+        height: 14px;
+        background: #007bff;
+        border-radius: 50%;
+        cursor: pointer;
     }
 </style>
 
