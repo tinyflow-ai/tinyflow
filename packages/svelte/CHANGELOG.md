@@ -1,5 +1,16 @@
 # @tinyflow-ai/svelte
 
+## 0.1.0
+
+### Minor Changes
+
+- [`fa467a1`](https://github.com/tinyflow-ai/tinyflow/commit/fa467a1bd6d6d435d4647d6763c6059f73d685cd) Thanks [@yangfuhai](https://github.com/yangfuhai)! - add custom nodes to the base tab
+
+### Patch Changes
+
+- Updated dependencies [[`fa467a1`](https://github.com/tinyflow-ai/tinyflow/commit/fa467a1bd6d6d435d4647d6763c6059f73d685cd)]:
+    - @tinyflow-ai/ui@0.1.0
+
 ## 0.0.16
 
 ### Patch Changes
