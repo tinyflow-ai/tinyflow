@@ -19,8 +19,6 @@
             data: {
                 title,
                 description,
-                systemPrompt: '',
-                userPrompt: '',
                 ...extra
             }
         };
