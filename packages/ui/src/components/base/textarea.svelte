@@ -6,4 +6,4 @@
     } = $props();
 
 </script>
-<textarea spellcheck="false" {...rest} class="tf-textarea nodrag {rest.class}">{value || ""}</textarea>
+<textarea spellcheck="false" {...rest} class="tf-textarea nodrag nowheel {rest.class}">{value || ""}</textarea>
