@@ -1,5 +1,14 @@
 # @tinyflow-ai/ui
 
+## 0.1.1
+
+### Patch Changes
+
+- [`0d165f9`](https://github.com/tinyflow-ai/tinyflow/commit/0d165f9ab75959a7ad19590d008caa480b8e18db) Thanks [@yangfuhai](https://github.com/yangfuhai)! - - fix: fixed the parameter description can not show
+    - feat: add "nowheel" class name to the textarea
+- Updated dependencies [[`0d165f9`](https://github.com/tinyflow-ai/tinyflow/commit/0d165f9ab75959a7ad19590d008caa480b8e18db)]:
+    - @tinyflow-ai/ui@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
