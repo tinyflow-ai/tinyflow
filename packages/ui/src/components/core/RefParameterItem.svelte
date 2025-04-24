@@ -32,7 +32,7 @@
 
     const { updateNodeData } = useSvelteFlow();
 
-    const updateAttribute = (key: string, value: any) => {
+    const updateParam = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
             let parameters = node.data[dataKeyName] as Array<Parameter>;
             parameters[index] = {
@@ -46,27 +46,21 @@
     };
 
 
-    const updateName = (event: Event) => {
+    const updateParamByEvent = (name: string, event: Event) => {
         const newValue = (event.target as any).value;
-        updateAttribute('name', newValue);
-    };
-
-
-    const updateValue = (event: Event) => {
-        const newValue = (event.target as any).value;
-        updateAttribute('value', newValue);
+        updateParam(name, newValue);
     };
 
 
     const updateRef = (item: any) => {
         const newValue = item.value;
-        updateAttribute('ref', newValue);
+        updateParam('ref', newValue);
     };
 
 
     const updateRefType = (item: any) => {
         const newValue = item.value;
-        updateAttribute('refType', newValue);
+        updateParam('refType', newValue);
     };
 
 
@@ -87,11 +81,11 @@
 
 <div class="input-item">
     <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
-           oninput={updateName} />
+           oninput={(event)=>updateParamByEvent('name', event)} />
 </div>
 <div class="input-item">
     {#if param.refType === 'fixed'}
-        <Input value={param.value} placeholder="请输入参数值" oninput={updateValue} />
+        <Input value={param.value} placeholder="请输入参数值" oninput={(event)=>updateParamByEvent('value', event)} />
     {:else if (param.refType !== 'input')}
         <Select items={$selectItems} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
                 expandAll
@@ -100,7 +94,7 @@
 </div>
 <div class="input-item">
     <FloatingTrigger placement="bottom" bind:this={triggerObject}>
-        <MenuButton/>
+        <MenuButton />
         {#snippet floating()}
             <div class="input-more-setting">
                 <div class="input-more-item">
@@ -113,16 +107,14 @@
                 <div class="input-more-item">
                     默认值：
                     <Textarea rows={1} style="width: 100%;" onchange={(event:Event)=>{
-                        const value =  (event.target as any).value;
-                        updateAttribute('defaultValue', value)
-                    }} />
+                        updateParamByEvent('defaultValue', event)
+                    }} value={param.defaultValue} />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" onchange={(event:MouseEvent)=>{
-                        const value =  (event.target as any).value;
-                        updateAttribute('description', value)
-                    }} />
+                    <Textarea rows={3} style="width: 100%;" onchange={(event:Event)=>{
+                        updateParamByEvent('description', event)
+                    }} value={param.description} />
                 </div>
 
                 <div class="input-more-item">
