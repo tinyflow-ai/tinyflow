@@ -3,8 +3,8 @@
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterDataTypes } from '../utils/Consts';
-    import type { Item } from '../../Tinyflow';
+    import { parameterDataTypes } from '../utils/Consts';
+    import type { SelectItem, Parameter } from '../../types';
 
     const { parameter, index }: {
         parameter: Parameter,
@@ -45,7 +45,7 @@
     };
 
 
-    const updateDataType = (item: Item) => {
+    const updateDataType = (item: SelectItem) => {
         const dataType = item.value as string;
         if (dataType) {
             updateParameter('dataType', dataType);

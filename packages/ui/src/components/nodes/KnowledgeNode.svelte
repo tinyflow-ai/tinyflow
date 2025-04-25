@@ -7,8 +7,8 @@
     import { useAddParameter } from '../utils/useAddParameter';
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
-    import type { Item } from '../../Tinyflow';
     import OutputDefList from '../core/OutputDefList.svelte';
+    import type { SelectItem } from '../../types';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -20,7 +20,7 @@
 
     const options = getOptions();
 
-    let knowledgeArray = $state<Item[]>([]);
+    let knowledgeArray = $state<SelectItem[]>([]);
     onMount(async () => {
         const newLLMs = await options.provider?.knowledge?.();
         knowledgeArray.push(...(newLLMs || []));

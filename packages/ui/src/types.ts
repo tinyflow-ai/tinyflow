@@ -69,3 +69,22 @@ export type TinyflowOptions = {
     onNodeExecute?: (node: Node) => void;
     onDataChange?: (data: TinyflowData, event: { eventType: string }) => void;
 };
+
+
+
+export type Parameter = {
+    id?: string;
+    name?: string;
+    nameDisabled?: boolean;
+    dataType?: string;
+    dataTypeDisabled?: boolean;
+    ref?: string;
+    refType?: string;
+    value?: string;
+    description?: string;
+    required?: boolean;
+    defaultValue?: string;
+    deleteDisabled?: boolean;
+    addChildDisabled?: boolean;
+    children?: Parameter[];
+};

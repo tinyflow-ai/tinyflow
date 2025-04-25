@@ -39,20 +39,3 @@ export const parameterRefTypes = [
     //     label: '输入'
     // }
 ];
-
-export type Parameter = {
-    id?: string;
-    name?: string;
-    nameDisabled?: boolean;
-    dataType?: string;
-    dataTypeDisabled?: boolean;
-    ref?: string;
-    refType?: string;
-    value?: string;
-    description?: string;
-    required?: boolean;
-    defaultValue?: string;
-    deleteDisabled?: boolean;
-    addChildDisabled?: boolean;
-    children?: Parameter[];
-};

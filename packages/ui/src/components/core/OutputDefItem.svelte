@@ -3,8 +3,9 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterDataTypes } from '../utils/Consts';
+    import { parameterDataTypes } from '../utils/Consts';
     import { genShortId } from '../utils/IdGen';
+    import type { Parameter } from '../../types';
 
     const { parameter, position, dataKeyName }: {
         parameter: Parameter,

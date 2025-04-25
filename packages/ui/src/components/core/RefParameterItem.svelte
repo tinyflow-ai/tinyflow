@@ -3,10 +3,11 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { type Parameter, parameterRefTypes } from '../utils/Consts';
+    import {  parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions';
     // 添加生命周期函数
     import { onMount } from 'svelte';
+    import type { Parameter } from '../../types';
     // 在组件挂载时检查并设置默认值
     onMount(() => {
         if (!param.refType) {
