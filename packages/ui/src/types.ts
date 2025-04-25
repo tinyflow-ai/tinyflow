@@ -45,8 +45,12 @@ export type CustomNode = {
     group?: 'base' | 'tools';
     rootClass?: string;
     rootStyle?: string;
+    parameters?: Parameter[];
     parametersEnable?: boolean;
+    parametersAddEnable?: boolean;
+    outputDefs?: Parameter[];
     outputDefsEnable?: boolean;
+    outputDefsAddEnable?: boolean;
     render?: (
         parent: HTMLElement,
         node: Node,
@@ -69,8 +73,6 @@ export type TinyflowOptions = {
     onNodeExecute?: (node: Node) => void;
     onDataChange?: (data: TinyflowData, event: { eventType: string }) => void;
 };
-
-
 
 export type Parameter = {
     id?: string;

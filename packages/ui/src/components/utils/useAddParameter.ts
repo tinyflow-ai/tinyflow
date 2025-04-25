@@ -1,10 +1,10 @@
 import { genShortId } from './IdGen';
 import { useSvelteFlow } from '@xyflow/svelte';
-import type { Parameter } from './Consts';
+import type { Parameter } from '../../types';
 
-const fillParameterId = (parameters?: Parameter[]) => {
+export const fillParameterId = (parameters?: Parameter[]) => {
     if (!parameters || parameters.length == 0) {
-        return;
+        return parameters;
     }
     parameters.forEach((parameter) => {
         if (!parameter.id) {
@@ -12,6 +12,8 @@ const fillParameterId = (parameters?: Parameter[]) => {
         }
         fillParameterId(parameter.children);
     });
+
+    return parameters;
 };
 
 export const useAddParameter = () => {
