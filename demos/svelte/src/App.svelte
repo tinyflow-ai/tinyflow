@@ -72,6 +72,14 @@
                     dataType:'String'
                 }
             ],
+            outputDefs:[
+                {
+                    name: 'text',
+                    nameDisabled: true,
+                    dataType:'String'
+                }
+            ],
+            outputDefsAddEnable:false,
             forms: [
                 {
                     type: 'heading',
