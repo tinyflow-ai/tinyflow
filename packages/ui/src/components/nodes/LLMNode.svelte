@@ -8,8 +8,8 @@
     import { useAddParameter } from '../utils/useAddParameter';
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
-    import type { Item } from '../../Tinyflow';
     import OutputDefList from '../core/OutputDefList.svelte';
+    import type { SelectItem } from '../../types';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -21,13 +21,43 @@
 
     const options = getOptions();
 
-    let llmArray = $state<Item[]>([]);
+    let llmArray = $state<SelectItem[]>([]);
     onMount(async () => {
         const newLLMs = await options.provider?.llm?.();
         llmArray.push(...(newLLMs || []));
     });
 
     const { updateNodeData } = useSvelteFlow();
+    const setOutType = (value: string) => {
+        updateNodeData(currentNodeId, () => {
+            return {
+                outType: value
+            };
+        });
+
+        if (value === 'text') {
+            updateNodeData(currentNodeId, {
+                outputDefs: [{
+                    name: 'output',
+                    dataType: 'String',
+                    dataTypeDisabled: true,
+                    deleteDisabled: true
+                }]
+            });
+        } else {
+            updateNodeData(currentNodeId, {
+                outputDefs: []
+            });
+        }
+    };
+
+    $effect(() => {
+        if (!data.outType) {
+            setOutType('text');
+        }
+    });
+
+
 </script>
 
 
@@ -154,20 +184,18 @@
             label: 'JSON',
             value: 'json'
         }]} style="width: 100px;margin-left: auto" defaultValue="text" onSelect={(item)=>{
-              const newValue = item.value;
-              updateNodeData(currentNodeId, ()=>{
-                  return {
-                      outType: newValue
-                  }
-              })
+              setOutType(item.value);
         }} value={data.outType ? [data.outType] : []} />
-        <Button class="input-btn-more" style="margin-left: 10px" onclick={()=>{
+
+        {#if data.outType === 'json'}
+            <Button class="input-btn-more" style="margin-left: 10px" onclick={()=>{
             addParameter(currentNodeId,'outputDefs')
         }}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-            </svg>
-        </Button>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+                </svg>
+            </Button>
+        {/if}
     </div>
     <OutputDefList />
 
