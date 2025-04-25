@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 0.1.2
+
+### Patch Changes
+
+- [`ff4ab77`](https://github.com/tinyflow-ai/tinyflow/commit/ff4ab773cee3d985e7251f2beecfcd47d53314f7) Thanks [@yangfuhai](https://github.com/yangfuhai)! - add custom parameters and outputDefs configuration for CustomNode
+
 ## 0.1.1
 
 ### Patch Changes
