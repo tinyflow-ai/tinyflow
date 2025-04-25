@@ -82,6 +82,7 @@
 
 <div class="input-item">
     <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
+           disabled={param.nameDisabled === true}
            oninput={(event)=>updateParamByEvent('name', event)} />
 </div>
 <div class="input-item">
