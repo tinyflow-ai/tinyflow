@@ -135,6 +135,16 @@
                                 </div>
                             {/if}
 
+                            <label class="input-item-inline">
+                                <span>异步执行：</span>
+                                <input type="checkbox" checked={!!data.async} onchange={(event)=>{
+                                    const value =  (event.target as any).checked;
+                                     updateNodeData(currentNodeId,{
+                                        async: value
+                                    })
+                                }} />
+                            </label>
+
                         </div>
                     {/snippet}
                 </FloatingTrigger>
@@ -193,6 +203,12 @@
       display: flex;
       flex-direction: column;
       gap: 3px;
+      font-size: 12px;
+      color: #666;
+    }
+    .input-item-inline {
+      display: flex;
+      align-items: center;
       font-size: 12px;
       color: #666;
     }
