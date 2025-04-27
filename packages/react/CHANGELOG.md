@@ -1,5 +1,14 @@
 # @tinyflow-ai/ui
 
+## 0.1.4
+
+### Patch Changes
+
+- [`147783d`](https://github.com/tinyflow-ai/tinyflow/commit/147783d1a8e5ff30f2ca080e5bcbb5a580d6a941) Thanks [@yangfuhai](https://github.com/yangfuhai)! - feat: add async configuration
+
+- Updated dependencies [[`147783d`](https://github.com/tinyflow-ai/tinyflow/commit/147783d1a8e5ff30f2ca080e5bcbb5a580d6a941)]:
+    - @tinyflow-ai/ui@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
