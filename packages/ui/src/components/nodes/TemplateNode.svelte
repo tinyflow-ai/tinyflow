@@ -53,29 +53,21 @@
     </div>
     <RefParameterList />
 
-    <Heading level={3} mt="10px">代码</Heading>
+    <Heading level={3} mt="10px" mb="10px">模板内容</Heading>
 
-    <div class="setting-title">执行代码</div>
     <div class="setting-item">
-        <Textarea rows={10} placeholder="请输入执行代码" style="width: 100%" onchange={(e:any)=>{
+        <Textarea rows={10} placeholder="请输入模板内容" style="width: 100%" onchange={(e:any)=>{
             updateNodeData(currentNodeId, ()=>{
                 return {
                     template: e.target.value
                 }
             })
-        }} value={data.template as string||""} />
+        }} value={data.template ||""} />
     </div>
 
 
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
-        <!--        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{-->
-        <!--            addParameter(currentNodeId, 'outputDefs')-->
-        <!--        }}>-->
-        <!--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">-->
-        <!--                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>-->
-        <!--            </svg>-->
-        <!--        </Button>-->
     </div>
     <OutputDefList />
 
