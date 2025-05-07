@@ -1,7 +1,7 @@
 <script lang="ts">
     import { useNodesData } from '@xyflow/svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { type Parameter } from '../utils/Consts';
+    import type { Parameter } from '../../types';
     import OutputDefItem from './OutputDefItem.svelte';
 
     const {
