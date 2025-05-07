@@ -13,10 +13,13 @@
         dataKeyName: string,
     } = $props();
 
+    // function deepClone<T>(obj: T): T {
+    //     return JSON.parse(JSON.stringify(obj));
+    // }
 
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
-    let param = $derived.by(() => {
+    let currentParameter = $derived.by(() => {
         let parameters = $node?.data[dataKeyName] as Parameter[];
         let param;
         if (parameters && position.length > 0) {
@@ -43,7 +46,7 @@
         updateNodeData(currentNodeId, (node) => {
             const parameters = node.data[dataKeyName] as Array<Parameter>;
             if (parameters && position.length > 0) {
-                let params = parameters as Array<Parameter>;
+                let params = parameters as Parameter[];
                 for (let i = 0; i < position.length; i++) {
                     const pos = position[i];
                     if (i == position.length - 1) {
@@ -57,7 +60,7 @@
                 }
             }
             return {
-                [dataKeyName]: parameters
+                [dataKeyName]: [...parameters]
             };
         });
     };
@@ -79,8 +82,6 @@
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
             let parameters = node.data[dataKeyName] as Array<Parameter>;
-            // parameters.splice(index, 1);
-
             if (parameters && position.length > 0) {
                 let params = parameters as Array<Parameter>;
                 for (let i = 0; i < position.length; i++) {
@@ -141,15 +142,15 @@
     {#if (position.length > 1)}
         {#each position as p} &nbsp;{/each}
     {/if}
-    <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
-           oninput={updateName} disabled={param.nameDisabled === true} />
+    <Input style="width: 100%;" value={currentParameter.name} placeholder="请输入参数名称"
+           oninput={updateName} disabled={currentParameter.nameDisabled === true} />
 </div>
 <div class="input-item">
     <Select items={parameterDataTypes} style="width: 100%" defaultValue={["String"]}
-            value={param.dataType ? [param.dataType]:[]}
-            disabled={param.dataTypeDisabled === true}
+            value={currentParameter.dataType ? [currentParameter.dataType]:[]}
+            disabled={currentParameter.dataTypeDisabled === true}
             onSelect={updateDataType} />
-    {#if (param.dataType === "Object" || param.dataType === "Array") && param.addChildDisabled !== true}
+    {#if (currentParameter.dataType === "Object" || currentParameter.dataType === "Array") && currentParameter.addChildDisabled !== true}
         <Button class="input-btn-more" style="margin-left: auto" onclick={addChild}>
             <svg style="transform: scaleY(-1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  fill="currentColor">
