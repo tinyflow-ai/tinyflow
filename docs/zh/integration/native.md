@@ -160,7 +160,7 @@ tinyflow.destroy();
                 ]
             },
             provider: {
-                llms: async () => [
+                llm: async () => [
                     { value: 'gpt', label: 'gpt' },
                     { value: 'gpt-4o', label: 'gpt-4o' }
                 ]
