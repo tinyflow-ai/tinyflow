@@ -6,6 +6,7 @@
     import { parameterDataTypes } from '../utils/Consts';
     import { genShortId } from '../utils/IdGen';
     import type { Parameter } from '../../types';
+    import { deepClone } from '../utils/deepClone';
 
     const { parameter, position, dataKeyName }: {
         parameter: Parameter,
@@ -13,9 +14,6 @@
         dataKeyName: string,
     } = $props();
 
-    // function deepClone<T>(obj: T): T {
-    //     return JSON.parse(JSON.stringify(obj));
-    // }
 
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
@@ -55,20 +53,20 @@
                             [key]: value
                         };
                     } else {
-                        params = parameters[pos].children!;
+                        params = params[pos].children!;
                     }
                 }
             }
             return {
-                [dataKeyName]: [...parameters]
+                [dataKeyName]: [...deepClone(parameters)]
             };
         });
     };
 
 
-    const updateName = (event: Event) => {
+    const updateByEvent = (name: string, event: Event) => {
         const newValue = (event.target as any).value;
-        updateAttribute('name', newValue);
+        updateAttribute(name, newValue);
     };
 
 
@@ -94,14 +92,14 @@
                 }
             }
             return {
-                [dataKeyName]: [...parameters]
+                [dataKeyName]: [...deepClone(parameters)]
             };
         });
         triggerObject?.hide();
     };
 
 
-    const addChild = () => {
+    const handleAddChildParameter = () => {
         updateNodeData(currentNodeId, (node) => {
             let parameters = node.data[dataKeyName] as Array<Parameter>;
             if (parameters && position.length > 0) {
@@ -131,7 +129,7 @@
             }
 
             return {
-                [dataKeyName]: [...parameters]
+                [dataKeyName]: [...deepClone(parameters)]
             };
         });
     };
@@ -143,7 +141,7 @@
         {#each position as p} &nbsp;{/each}
     {/if}
     <Input style="width: 100%;" value={currentParameter.name} placeholder="请输入参数名称"
-           oninput={updateName} disabled={currentParameter.nameDisabled === true} />
+           oninput={(e)=>{updateByEvent('name',e)}} disabled={currentParameter.nameDisabled === true} />
 </div>
 <div class="input-item">
     <Select items={parameterDataTypes} style="width: 100%" defaultValue={["String"]}
@@ -151,7 +149,7 @@
             disabled={currentParameter.dataTypeDisabled === true}
             onSelect={updateDataType} />
     {#if (currentParameter.dataType === "Object" || currentParameter.dataType === "Array") && currentParameter.addChildDisabled !== true}
-        <Button class="input-btn-more" style="margin-left: auto" onclick={addChild}>
+        <Button class="input-btn-more" style="margin-left: auto" onclick={handleAddChildParameter}>
             <svg style="transform: scaleY(-1)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                  fill="currentColor">
                 <path
@@ -168,23 +166,21 @@
                 <div class="input-more-item">
                     默认值：
                     <Textarea rows={1} style="width: 100%;"
-                              value={param.defaultValue||''}
-                              onchange={(event:Event)=>{
-                        const value =  (event.target as any).value;
-                        updateAttribute('defaultValue', value)
+                              value={currentParameter.defaultValue||''}
+                              onchange={(event)=>{
+                        updateByEvent( 'defaultValue', event)
                     }} />
                 </div>
                 <div class="input-more-item">
                     参数描述：
                     <Textarea rows={3} style="width: 100%;"
-                              value={param.description||''}
-                              onchange={(event:Event)=>{
-                        const value =  (event.target as any).value;
-                        updateAttribute('description', value)
+                              value={currentParameter.description||''}
+                              onchange={(event)=>{
+                         updateByEvent( 'description', event)
                     }} />
                 </div>
 
-                {#if param.deleteDisabled !== true}
+                {#if currentParameter.deleteDisabled !== true}
                     <div class="input-more-item">
                         <Button onclick={handleDelete}>删除</Button>
                     </div>
