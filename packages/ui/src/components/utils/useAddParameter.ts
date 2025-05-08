@@ -24,6 +24,7 @@ export const useAddParameter = () => {
             const newParameter = {
                 name: '',
                 dataType: 'String',
+                refType: 'ref',
                 ...parameter,
                 id: genShortId()
             };
