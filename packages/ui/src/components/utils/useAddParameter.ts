@@ -22,6 +22,8 @@ export const useAddParameter = () => {
         addParameter: (nodeId: string, dataKey: string = 'parameters', parameter?: Parameter) => {
             fillParameterId(parameter?.children);
             const newParameter = {
+                name: '',
+                dataType: 'String',
                 ...parameter,
                 id: genShortId()
             };
