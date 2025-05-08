@@ -18,20 +18,20 @@
     // 在组件挂载时检查并设置默认值
     onMount(() => {
         if (!data.method) {
-            updateNodeData(currentNodeId, ()=>{
+            updateNodeData(currentNodeId, () => {
                 return {
                     method: 'get'
-                }
-            })
+                };
+            });
         }
     });
     const method = [
-        {value: 'get', label: 'GET'},
-        {value: 'post', label: 'POST'},
-        {value: 'put', label: 'PUT'},
-        {value: 'delete', label: 'DELETE'},
-        {value: 'head', label: 'HEAD'},
-        {value: 'patch', label: 'PATCH'},
+        { value: 'get', label: 'GET' },
+        { value: 'post', label: 'POST' },
+        { value: 'put', label: 'PUT' },
+        { value: 'delete', label: 'DELETE' },
+        { value: 'head', label: 'HEAD' },
+        { value: 'patch', label: 'PATCH' }
     ];
 
     const currentNodeId = getCurrentNodeId();
@@ -49,6 +49,20 @@
         </svg>
     {/snippet}
 
+
+    <div class="heading">
+        <Heading level={3}>输入参数</Heading>
+        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+            addParameter(currentNodeId)
+        }}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+            </svg>
+        </Button>
+    </div>
+    <RefParameterList />
+
+    <Heading level={3} mt="10px">URL 地址</Heading>
     <div style="display: flex;gap: 2px;width: 100%;padding: 10px 0">
         <div>
             <Select items={method} style="width: 100%" placeholder="请选择请求方式" onSelect={(item)=>{
@@ -83,17 +97,6 @@
     </div>
     <RefParameterList dataKeyName="headers" />
 
-    <div class="heading" style="padding-top: 10px">
-        <Heading level={3}>参数</Heading>
-        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-            addParameter(currentNodeId,'urlParameters')
-        }}>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-            </svg>
-        </Button>
-    </div>
-    <RefParameterList dataKeyName="urlParameters" />
 
     <Heading level={3} mt="10px">Body</Heading>
 
@@ -141,34 +144,34 @@
         <div class="heading" style="padding-top: 10px">
             <Heading level={3}>参数</Heading>
             <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-            addParameter(currentNodeId,'fromData')
+            addParameter(currentNodeId,'formData')
         }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                 </svg>
             </Button>
         </div>
-        <RefParameterList dataKeyName="fromData" />
+        <RefParameterList dataKeyName="formData" />
     {/if}
 
 
     {#if data.bodyType === 'x-www-form-urlencoded'}
         <div class="heading" style="padding-top: 10px">
-            <Heading level={3}>参数</Heading>
+            <Heading level={3}>Body 参数</Heading>
             <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-            addParameter(currentNodeId,'fromUrlencoded')
+            addParameter(currentNodeId,'formUrlencoded')
         }}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                 </svg>
             </Button>
         </div>
-        <RefParameterList dataKeyName="fromUrlencoded" />
+        <RefParameterList dataKeyName="formUrlencoded" />
     {/if}
 
     {#if data.bodyType === 'json'}
         <div style="width: 100%">
-            <Textarea rows="5" style="width: 100%" placeholder="请输入 json 信息" value={data.bodyJson}
+            <Textarea rows={5} style="width: 100%" placeholder="请输入 json 信息" value={data.bodyJson}
                       oninput={(e:any)=>{
                           updateNodeData(currentNodeId,{
                               bodyJson: e.target.value,
@@ -180,7 +183,7 @@
 
     {#if data.bodyType === 'raw'}
         <div style="width: 100%">
-            <Textarea rows="5" style="width: 100%" placeholder="请输入请求信息" value={data.bodyRaw}
+            <Textarea rows={5} style="width: 100%" placeholder="请输入请求信息" value={data.bodyRaw}
                       oninput={(e:any)=>{
                           updateNodeData(currentNodeId,{
                               bodyRaw: e.target.value,
