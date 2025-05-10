@@ -135,6 +135,11 @@
                   onNodeExecute={(node)=>{
                       console.log('node execute: ', node)
                   }}
+
+                  hiddenNodes = {()=>{
+                       // return ['startNode','loopNode'];
+                  }}
+
                   onDataChange={(data,event)=>{
                       // console.log('data change: ', data, event)
                   }}

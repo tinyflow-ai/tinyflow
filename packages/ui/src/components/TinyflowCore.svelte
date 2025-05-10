@@ -221,7 +221,8 @@
 
 
 <div style="position: relative; height: 100%; width: 100%;overflow: hidden">
-    <SvelteFlow nodeTypes={{ ...nodeTypes,...customNodeTypes}} {...store}
+    <SvelteFlow nodeTypes={{ ...nodeTypes, ...customNodeTypes}}
+                {...store}
                 class="tinyflow-logo"
                 on:drop={onDrop}
                 on:dragover={onDragOver}

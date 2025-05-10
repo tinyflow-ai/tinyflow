@@ -85,7 +85,8 @@
     ];
 
     const customNodes = [] as any[];
-    const userCustomNodes = getOptions().customNodes;
+    const options = getOptions();
+    const userCustomNodes = options.customNodes;
     if (userCustomNodes) {
         const keys = Object.keys(userCustomNodes).sort((a, b) => {
             return (userCustomNodes[a].sortNo || 0) - (userCustomNodes[b].sortNo || 0);
@@ -96,7 +97,7 @@
                 baseNodes.push({
                     type: key,
                     ...userCustomNodes[key]
-                });
+                } as any);
             } else {
                 customNodes.push({
                     icon: userCustomNodes[key].icon,
@@ -109,6 +110,20 @@
         baseNodes.sort((a, b) => {
             return (a.sortNo || 0) - (b.sortNo || 0);
         });
+    }
+
+    if (options.hiddenNodes) {
+        const hiddenNodes = typeof options.hiddenNodes === 'function' ? options.hiddenNodes() : options.hiddenNodes;
+        if (Array.isArray(hiddenNodes)) {
+            for (let hiddenNode of hiddenNodes) {
+                for (let i = 0; i < baseNodes.length; i++) {
+                    if (baseNodes[i].type === hiddenNode) {
+                        baseNodes.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
 </script>

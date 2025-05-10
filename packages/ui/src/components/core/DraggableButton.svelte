@@ -25,8 +25,6 @@
         event.dataTransfer.setData('application/tinyflow', JSON.stringify(node));
         event.dataTransfer.effectAllowed = 'move';
     };
-
-
 </script>
 
-<Button draggable ondragstart={onDragStart}>{@html icon} {title}</Button>
+<Button draggable ondragstart={onDragStart} data-node-type={type}>{@html icon} {title}</Button>
