@@ -83,9 +83,10 @@ export declare type TinyflowOptions = {
         llm?: () => SelectItem[] | Promise<SelectItem[]>;
         knowledge?: () => SelectItem[] | Promise<SelectItem[]>;
         searchEngine?: () => SelectItem[] | Promise<SelectItem[]>;
-    };
+    } & Record<string, () => SelectItem[] | Promise<SelectItem[]>>;
     customNodes?: Record<string, CustomNode>;
     onNodeExecute?: (node: Node_2) => void;
+    hiddenNodes?: string[] | (() => string[]);
     onDataChange?: (data: TinyflowData, event: {
         eventType: string;
     }) => void;
