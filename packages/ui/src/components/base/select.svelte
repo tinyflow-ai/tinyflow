@@ -4,7 +4,6 @@
 
     let {
         items,
-        onExpand,
         onSelect,
         value = [],
         defaultValue = [],
@@ -15,7 +14,6 @@
         ...rest
     }: {
         items: SelectItem[],
-        onExpand?: (item: SelectItem) => void,
         onSelect?: (item: SelectItem) => void,
         value?: (any)[],
         defaultValue?: (number | string | undefined)[],
@@ -51,16 +49,9 @@
     });
 
     let triggerObject: any;
-
     function handlerOnSelect(item: SelectItem) {
-        if (item.children && item.children.length > 0) {
-            // item.expand = !item.expand;
-            onExpand?.(item);
-            return;
-        } else {
-            triggerObject?.hide();
-            onSelect?.(item);
-        }
+        triggerObject?.hide();
+        onSelect?.(item);
     }
 </script>
 
