@@ -1,5 +1,14 @@
 # @tinyflow-ai/svelte
 
+## 0.1.10
+
+### Patch Changes
+
+- [`ba531dd`](https://github.com/tinyflow-ai/tinyflow/commit/ba531ddccb4a14daad98d33aaf25fd67ebc0bfec) Thanks [@yangfuhai](https://github.com/yangfuhai)! - 优化 LoopNode 循环节点
+
+- Updated dependencies [[`ba531dd`](https://github.com/tinyflow-ai/tinyflow/commit/ba531ddccb4a14daad98d33aaf25fd67ebc0bfec)]:
+    - @tinyflow-ai/ui@0.1.10
+
 ## 0.1.9
 
 ### Patch Changes
