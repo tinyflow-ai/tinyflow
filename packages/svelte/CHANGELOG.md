@@ -1,5 +1,14 @@
 # @tinyflow-ai/svelte
 
+## 0.1.9
+
+### Patch Changes
+
+- [`0a45ed5`](https://github.com/tinyflow-ai/tinyflow/commit/0a45ed5fee40958fd4f17e96281246dff669fac9) Thanks [@yangfuhai](https://github.com/yangfuhai)! - 自定义节点新增 chosen 组件配置
+
+- Updated dependencies [[`0a45ed5`](https://github.com/tinyflow-ai/tinyflow/commit/0a45ed5fee40958fd4f17e96281246dff669fac9)]:
+    - @tinyflow-ai/ui@0.1.9
+
 ## 0.1.8
 
 ### Patch Changes
