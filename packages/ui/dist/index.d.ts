@@ -35,6 +35,7 @@ export declare type CustomNodeForm = {
     chosen?: {
         labelDataKey: string;
         valueDataKey: string;
+        buttonText?: string;
         onChosen?: (updateNodeData: (data: Record<string, any>) => void, value?: string, label?: string, event?: Event) => void;
     };
 };
