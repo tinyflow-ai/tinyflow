@@ -3,7 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import {  parameterRefTypes } from '../utils/Consts';
+    import { parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions';
     // 添加生命周期函数
     import { onMount } from 'svelte';
@@ -15,10 +15,11 @@
         }
     });
 
-    const { parameter, index, dataKeyName }: {
+    const { parameter, index, dataKeyName, useChildrenOnly }: {
         parameter: Parameter,
         index: number,
         dataKeyName: string,
+        useChildrenOnly?: boolean,
     } = $props();
 
 
@@ -76,7 +77,7 @@
         });
         triggerObject?.hide();
     };
-    const selectItems = useRefOptions();
+    const selectItems = useRefOptions(useChildrenOnly);
 </script>
 
 

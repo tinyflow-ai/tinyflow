@@ -3,16 +3,29 @@ import type { Parameter } from '../../types';
 import { getCurrentNodeId } from '../../store/nodeContext';
 import { derived } from 'svelte/store';
 
-const fillSourceNodeIds = (nodeIds: string[], currentNodeId: string, edges: Edge[]) => {
+const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: Edge[]) => {
     for (const edge of edges) {
         if (edge.target === currentNodeId && edge.source) {
-            nodeIds.push(edge.source);
-            fillSourceNodeIds(nodeIds, edge.source, edges);
+            refNodeIds.push(edge.source);
+            fillRefNodeIds(refNodeIds, edge.source, edges);
         }
     }
 };
 
-const nodeToOptions = (node: Node, isChildren: boolean) => {
+const getChildren = (params: any, parentId: string, nodeIsChildren: boolean) => {
+    if (!params || params.length === 0) return [];
+    return params.map((param: any) => ({
+        label:
+            param.name +
+            (nodeIsChildren
+                ? ` (Array<${param.dataType || 'String'}>)`
+                : ` (${param.dataType || 'String'})`),
+        value: parentId + '.' + param.name,
+        children: getChildren(param.children, parentId + '.' + param.name, nodeIsChildren)
+    }));
+};
+
+const nodeToOptions = (node: Node, nodeIsChildren: boolean, currentNode: Node) => {
     if (node.type === 'startNode') {
         const parameters = node.data.parameters as Array<Parameter>;
         const children = [];
@@ -21,7 +34,7 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
                 children.push({
                     label:
                         parameter.name +
-                        (isChildren
+                        (nodeIsChildren
                             ? ` (Array<${parameter.dataType || 'String'}>)`
                             : ` (${parameter.dataType || 'String'})`),
                     value: node.id + '.' + parameter.name
@@ -32,7 +45,7 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
             value: node.id,
             children
         };
-    } else if (node.type === 'loopNode' && isChildren) {
+    } else if (node.type === 'loopNode' && currentNode.parentId) {
         return {
             label: node.data.title,
             value: node.id,
@@ -50,23 +63,10 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
     } else {
         const outputDefs = node.data.outputDefs;
         if (outputDefs) {
-            const getChildren = (params: any, parentId: string) => {
-                if (!params || params.length === 0) return [];
-                return params.map((param: any) => ({
-                    label:
-                        param.name +
-                        (isChildren
-                            ? ` (Array<${param.dataType || 'String'}>)`
-                            : ` (${param.dataType || 'String'})`),
-                    // label: param.name ,
-                    value: parentId + '.' + param.name,
-                    children: getChildren(param.children, parentId + '.' + param.name)
-                }));
-            };
             return {
                 label: node.data.title,
                 value: node.id,
-                children: getChildren(outputDefs, node.id)
+                children: getChildren(outputDefs, node.id, nodeIsChildren)
             };
         }
     }
@@ -75,27 +75,37 @@ const nodeToOptions = (node: Node, isChildren: boolean) => {
 export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
     const currentNodeId = getCurrentNodeId();
     const currentNode = useNodesData(currentNodeId);
-    const { nodes, edges } = useStore();
+    const { nodes, edges, nodeLookup } = useStore();
+    return derived(
+        [currentNode, nodes, edges, nodeLookup],
+        ([currentNode, nodes, edges, nodeLookup]) => {
+            if (!currentNode) {
+                return [];
+            }
+            //通过 nodeLookup.get 才会得到有 parentId 的 node
+            const cNode = nodeLookup.get(currentNodeId)!;
+            const resultOptions = [];
+            if (useChildrenOnly) {
+                for (const node of nodes) {
+                    const nodeIsChildren = node.parentId === currentNode!.id;
+                    if (nodeIsChildren) {
+                        const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
+                        nodeOptions && resultOptions.push(nodeOptions);
+                    }
+                }
+            } else {
+                const refNodeIds: string[] = [];
+                fillRefNodeIds(refNodeIds, currentNodeId, edges);
 
-    return derived([currentNode, nodes, edges], ([currentNode, nodes, edges]) => {
-        const resultOptions = [];
-        if (useChildrenOnly) {
-            for (const node of nodes) {
-                if (node.parentId === currentNode!.id) {
-                    const nodeOptions = nodeToOptions(node, node.parentId === currentNode!.id);
-                    nodeOptions && resultOptions.push(nodeOptions);
+                for (const node of nodes) {
+                    if (refNodeIds.includes(node.id)) {
+                        const nodeIsChildren = node.parentId === currentNode!.id;
+                        const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
+                        nodeOptions && resultOptions.push(nodeOptions);
+                    }
                 }
             }
-        } else {
-            const refNodeIds: string[] = [];
-            fillSourceNodeIds(refNodeIds, currentNodeId, edges);
-            for (const node of nodes) {
-                if (refNodeIds.includes(node.id)) {
-                    const nodeOptions = nodeToOptions(node, node.parentId === currentNode!.id);
-                    nodeOptions && resultOptions.push(nodeOptions);
-                }
-            }
+            return resultOptions;
         }
-        return resultOptions;
-    });
+    );
 };

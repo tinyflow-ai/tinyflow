@@ -5,7 +5,6 @@
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
-    import OutputDefList from '../core/OutputDefList.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -14,6 +13,18 @@
 
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
+
+
+    $effect(() => {
+        if (!data.parameters || data.parameters.length === 0) {
+            addParameter(currentNodeId, 'parameters', {
+                name: 'loopVar',
+                dataType: 'String',
+                nameDisabled: true,
+                deleteDisabled: true
+            });
+        }
+    });
 
 </script>
 
@@ -34,27 +45,35 @@
 
     <div class="heading">
         <Heading level={3}>循环变量</Heading>
+<!--        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{-->
+<!--            addParameter(currentNodeId)-->
+<!--        }}>-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">-->
+<!--                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>-->
+<!--            </svg>-->
+<!--        </Button>-->
+    </div>
+    <RefParameterList />
+
+    <div class="heading">
+        <Heading level={3}>输出参数</Heading>
         <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-            addParameter(currentNodeId)
+            addParameter(currentNodeId,'outputDefs')
         }}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
             </svg>
         </Button>
     </div>
-    <RefParameterList />
-
-    <div class="heading">
-        <Heading level={3} mt="10px">输出参数</Heading>
-    </div>
-    <OutputDefList />
+    <RefParameterList noneParameterText="无输出参数" dataKeyName="outputDefs" useChildrenOnly={true} />
 
 </NodeWrapper>
 
 <style lang="less">
   .heading {
     display: flex;
-    margin-bottom: 10px;
+    margin: 10px 0;
+    align-items: center;
   }
 
   :global(.loop_handle_wrapper ) {
@@ -70,16 +89,6 @@
       align-items: center;
     }
   }
-
-  //.loop_handle {
-  //  width: 100px;
-  //  height: 20px;
-  //  background: #000;
-  //  color: #fff;
-  //  display: flex;
-  //  justify-content: center;
-  //  align-items: center;
-  //}
 
 </style>
 
