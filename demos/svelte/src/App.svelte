@@ -96,8 +96,15 @@
                     placeholder: '请选择测试内容',
                     label: '请选择插件',
                     chosen: {
+                        labelDataKey: 'pluginName',
+                        valueDataKey: 'pluginId',
+                        // buttonText: '选择插件',
                         onChosen: (updateNodeData, value, label, event) => {
                             console.log('chosen: ', value, label, updateNodeData, event);
+                            updateNodeData({
+                                pluginId: '123',
+                                pluginName: '测试的插件'
+                            });
                         }
                     }
                 },

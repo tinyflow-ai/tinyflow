@@ -155,7 +155,8 @@
             {:else if form.type === 'chosen'}
                 <div class="setting-title">{form.label}</div>
                 <div class="setting-item">
-                    <Chosen style="width: 100%" placeholder={form.placeholder} onChosen={(value,label,event)=>{
+                    <Chosen style="width: 100%" placeholder={form.placeholder}
+                            buttonText={form.chosen?.buttonText} onChosen={(value,label,event)=>{
                         form.chosen?.onChosen?.(updateNodeData,value,label,event);
                     }} value={data[form.chosen?.valueDataKey||""]} label={data[form.chosen?.labelDataKey||""]} />
                 </div>
