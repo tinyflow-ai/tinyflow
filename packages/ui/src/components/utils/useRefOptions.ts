@@ -1,10 +1,10 @@
-import { type Edge, type Node, useEdges, useNodes, useNodesData, useStore } from '@xyflow/svelte';
-import type { Parameter } from './Consts';
+import { type Edge, type Node, useNodesData, useStore } from '@xyflow/svelte';
+import type { Parameter } from '../../types';
 import { getCurrentNodeId } from '../../store/nodeContext';
-import { derived, get } from 'svelte/store';
+import { derived } from 'svelte/store';
 
 const fillSourceNodeIds = (nodeIds: string[], currentNodeId: string, edges: Edge[]) => {
-    for (let edge of edges) {
+    for (const edge of edges) {
         if (edge.target === currentNodeId && edge.source) {
             nodeIds.push(edge.source);
             fillSourceNodeIds(nodeIds, edge.source, edges);
@@ -80,7 +80,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
     return derived([currentNode, nodes, edges], ([currentNode, nodes, edges]) => {
         const resultOptions = [];
         if (useChildrenOnly) {
-            for (let node of nodes) {
+            for (const node of nodes) {
                 if (node.parentId === currentNode!.id) {
                     const nodeOptions = nodeToOptions(node, node.parentId === currentNode!.id);
                     nodeOptions && resultOptions.push(nodeOptions);
@@ -89,7 +89,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
         } else {
             const refNodeIds: string[] = [];
             fillSourceNodeIds(refNodeIds, currentNodeId, edges);
-            for (let node of nodes) {
+            for (const node of nodes) {
                 if (refNodeIds.includes(node.id)) {
                     const nodeOptions = nodeToOptions(node, node.parentId === currentNode!.id);
                     nodeOptions && resultOptions.push(nodeOptions);
