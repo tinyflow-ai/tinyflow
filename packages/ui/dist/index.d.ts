@@ -24,7 +24,7 @@ export declare type CustomNode = {
 };
 
 export declare type CustomNodeForm = {
-    type: 'input' | 'textarea' | 'select' | 'slider' | 'heading';
+    type: 'input' | 'textarea' | 'select' | 'chosen' | 'slider' | 'heading';
     label: string;
     description?: string;
     name: string;
@@ -32,6 +32,11 @@ export declare type CustomNodeForm = {
     defaultValue?: string | number | boolean;
     attrs?: Record<string, any>;
     options?: SelectItem[];
+    chosen?: {
+        labelDataKey: string;
+        valueDataKey: string;
+        onChosen?: (updateNodeData: (data: Record<string, any>) => void, value?: string, label?: string, event?: Event) => void;
+    };
 };
 
 export declare type Parameter = {

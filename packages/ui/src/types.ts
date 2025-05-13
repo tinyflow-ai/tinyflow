@@ -14,6 +14,7 @@ export type CustomNodeForm = {
         | 'input'
         | 'textarea'
         | 'select'
+        | 'chosen'
         // | 'checkbox'
         // | 'radio'
         // | 'switch'
@@ -35,6 +36,17 @@ export type CustomNodeForm = {
     defaultValue?: string | number | boolean;
     attrs?: Record<string, any>;
     options?: SelectItem[];
+    chosen?: {
+        labelDataKey: string;
+        valueDataKey: string;
+        onChosen?: (
+            updateNodeData: (data: Record<string, any>) => void,
+            value?: string,
+            label?: string,
+            event?: Event,
+        ) => void;
+
+    };
 };
 
 export type CustomNode = {

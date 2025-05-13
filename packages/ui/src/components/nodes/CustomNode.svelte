@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type Node, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Input, Select, Textarea } from '../base';
+    import { Button, Chosen, Heading, Input, Select, Textarea } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useAddParameter } from '../utils/useAddParameter';
@@ -17,7 +17,17 @@
     const currentNodeId = getCurrentNodeId();
     const { addParameter } = useAddParameter();
     const flowInstance = useSvelteFlow();
-    const { updateNodeData } = flowInstance;
+    const { updateNodeData: updateNodeDataInner } = flowInstance;
+
+    const updateNodeData = (data: Record<string, any>) => {
+        updateNodeDataInner(currentNodeId, data);
+    };
+
+    const updateNodeDataByEvent = (name: string, event: Event) => {
+        updateNodeData({
+            [name]: (event.target as any)?.value
+        });
+    };
 
     const node = {
         ...rest,
@@ -47,7 +57,7 @@
 
     $effect(() => {
         if (!data.parameters && customNode.parameters) {
-            updateNodeData(currentNodeId, {
+            updateNodeData({
                 parameters: fillParameterId(JSON.parse(JSON.stringify(customNode.parameters)))
             });
         }
@@ -55,7 +65,7 @@
 
     $effect(() => {
         if (!data.outputDefs && customNode.outputDefs) {
-            updateNodeData(currentNodeId, {
+            updateNodeData({
                 outputDefs: fillParameterId(JSON.parse(JSON.stringify(customNode.outputDefs)))
             });
         }
@@ -100,9 +110,7 @@
                         value={data[form.name] || form.defaultValue}
                         {...form.attrs}
                         onchange={(e)=>{
-                                updateNodeData(currentNodeId, {
-                                    [form.name]: e.target.value
-                                });
+                                updateNodeDataByEvent(form.name,e)
                             }}
                     />
                 </div>
@@ -116,9 +124,7 @@
                             value={data[form.name] || form.defaultValue}
                             {...form.attrs}
                             onchange={(e)=>{
-                                updateNodeData(currentNodeId, {
-                                    [form.name]: e.target.value
-                                });
+                                updateNodeDataByEvent(form.name,e)
                             }}
                         />
                 </div>
@@ -132,7 +138,7 @@
                             type="range"
                             {...form.attrs}
                             value={data[form.name] ?? form.defaultValue}
-                            oninput={(e) => updateNodeData(currentNodeId, { [form.name]: parseFloat(e.target.value) })}
+                            oninput={(e) => updateNodeData({ [form.name]: parseFloat(e.target.value) })}
                         />
                     </div>
                 </div>
@@ -141,12 +147,17 @@
                 <div class="setting-item">
                     <Select items={form.options||[]} style="width: 100%" placeholder={form.placeholder} onSelect={(item)=>{
                       const newValue = item.value;
-                      updateNodeData(currentNodeId, ()=>{
-                          return {
+                      updateNodeData({
                               [form.name]: newValue
-                          }
                       })
                 }} value={data[form.name] ? [data[form.name]] : [form.defaultValue]} />
+                </div>
+            {:else if form.type === 'chosen'}
+                <div class="setting-title">{form.label}</div>
+                <div class="setting-item">
+                    <Chosen style="width: 100%" placeholder={form.placeholder} onChosen={(value,label,event)=>{
+                        form.chosen?.onChosen?.(updateNodeData,value,label,event);
+                    }} value={data[form.chosen?.valueDataKey||""]} label={data[form.chosen?.labelDataKey||""]} />
                 </div>
             {:else if form.type === 'heading'}
                 <Heading level={3} mt="10px" {...form.attrs}>{form.label}</Heading>

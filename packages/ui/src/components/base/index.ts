@@ -1,5 +1,6 @@
 import Button from './button.svelte';
 import Checkbox from './checkbox.svelte';
+import Chosen from './chosen.svelte';
 import Input from './input.svelte';
 import Textarea from './textarea.svelte';
 import Tabs from './tabs.svelte';
@@ -13,6 +14,7 @@ import MenuButton from './menu-button.svelte';
 export {
     Button,
     Checkbox,
+    Chosen,
     Input,
     Textarea,
     Tabs,
