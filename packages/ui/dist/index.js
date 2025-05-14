@@ -16914,9 +16914,8 @@ function jd(e, t) {
     "data"
   ]), o = mt(), { addParameter: i } = Pn();
   return Qt(() => {
-    (!n().parameters || n().parameters.length === 0) && i(o, "parameters", {
+    (!n().loopVars || n().loopVars.length === 0) && i(o, "loopVars", {
       name: "loopVar",
-      dataType: "String",
       nameDisabled: !0,
       deleteDisabled: !0
     });
@@ -16955,7 +16954,7 @@ function jd(e, t) {
           $$slots: { default: !0 }
         }), Y(f);
         var h = B(f, 2);
-        Lt(h, {});
+        Lt(h, { dataKeyName: "loopVars" });
         var p = B(h, 2), x = F(p);
         Qe(x, {
           level: 3,

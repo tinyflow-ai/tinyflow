@@ -16868,9 +16868,8 @@ function jd(e, t) {
     "data"
   ]), o = ht(), { addParameter: i } = En();
   return Gt(() => {
-    (!n().parameters || n().parameters.length === 0) && i(o, "parameters", {
+    (!n().loopVars || n().loopVars.length === 0) && i(o, "loopVars", {
       name: "loopVar",
-      dataType: "String",
       nameDisabled: !0,
       deleteDisabled: !0
     });
@@ -16909,7 +16908,7 @@ function jd(e, t) {
           $$slots: { default: !0 }
         }), q(u);
         var d = Z(u, 2);
-        Lt(d, {});
+        Lt(d, { dataKeyName: "loopVars" });
         var v = Z(d, 2), p = X(v);
         Ge(p, {
           level: 3,

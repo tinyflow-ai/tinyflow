@@ -17496,9 +17496,8 @@ function yf(e, t) {
     "data"
   ]), o = Et(), { addParameter: i } = Zn();
   return vn(() => {
-    (!n().parameters || n().parameters.length === 0) && i(o, "parameters", {
+    (!n().loopVars || n().loopVars.length === 0) && i(o, "loopVars", {
       name: "loopVar",
-      dataType: "String",
       nameDisabled: !0,
       deleteDisabled: !0
     });
@@ -17537,7 +17536,7 @@ function yf(e, t) {
           $$slots: { default: !0 }
         }), X(u);
         var d = Z(u, 2);
-        Ut(d, {});
+        Ut(d, { dataKeyName: "loopVars" });
         var v = Z(d, 2), p = j(v);
         nt(p, {
           level: 3,
