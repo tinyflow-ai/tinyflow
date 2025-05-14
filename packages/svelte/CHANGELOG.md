@@ -1,5 +1,16 @@
 # @tinyflow-ai/svelte
 
+## 0.2.0
+
+### Minor Changes
+
+- [`8e5a712`](https://github.com/tinyflow-ai/tinyflow/commit/8e5a7127690b2cb95aad4bd5c77017b67be7ab30) Thanks [@yangfuhai](https://github.com/yangfuhai)! - 修复 LoopNode 的循环参数配置不正确的问题
+
+### Patch Changes
+
+- Updated dependencies [[`8e5a712`](https://github.com/tinyflow-ai/tinyflow/commit/8e5a7127690b2cb95aad4bd5c77017b67be7ab30)]:
+    - @tinyflow-ai/ui@0.2.0
+
 ## 0.1.10
 
 ### Patch Changes
