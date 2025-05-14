@@ -16,10 +16,9 @@
 
 
     $effect(() => {
-        if (!data.parameters || data.parameters.length === 0) {
-            addParameter(currentNodeId, 'parameters', {
+        if (!data.loopVars || data.loopVars.length === 0) {
+            addParameter(currentNodeId, 'loopVars', {
                 name: 'loopVar',
-                dataType: 'String',
                 nameDisabled: true,
                 deleteDisabled: true
             });
@@ -53,7 +52,7 @@
 <!--            </svg>-->
 <!--        </Button>-->
     </div>
-    <RefParameterList />
+    <RefParameterList dataKeyName="loopVars" />
 
     <div class="heading">
         <Heading level={3}>输出参数</Heading>
