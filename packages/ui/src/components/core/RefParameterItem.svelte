@@ -109,13 +109,13 @@
                 </div>
                 <div class="input-more-item">
                     默认值：
-                    <Textarea rows={1} style="width: 100%;" onchange={(event:Event)=>{
+                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('defaultValue', event)
                     }} value={param.defaultValue} />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" onchange={(event:Event)=>{
+                    <Textarea rows={3} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('description', event)
                     }} value={param.description} />
                 </div>
