@@ -20,6 +20,8 @@
     import { getOptions } from './utils/NodeUtils';
     import CustomNode from './nodes/CustomNode.svelte';
     import { useUpdateEdgeData } from './utils/useUpdateEdgeData';
+    import { Button } from '#components/base/index';
+    import { useDeleteEdge } from '#components/utils/useDeleteEdge';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -167,6 +169,8 @@
         });
     };
 
+    const { deleteEdge } = useDeleteEdge();
+
 
     const onconnectstart = (event: any, node: any) => {
         // console.log('onconnectstart: ', event, node);
@@ -276,11 +280,30 @@
                             onchange={(e)=>{
                                 if (currentEdge){
                                     updateEdgeData(currentEdge.id, {
-                                        condition: e.target.value
+                                        condition: e.target?.value
                                     })
                                 }
                             }}
                         />
+                    </div>
+                    <div class="setting-item" style="padding: 8px 0">
+                        <Button
+                            onclick={() => {
+                                deleteEdge(currentEdge?.id)
+                                showEdgePanel = false;
+                            }}
+                        >
+                            删除
+                        </Button>
+
+                        <Button
+                            primary={true}
+                            onclick={() => {
+                                showEdgePanel = false;
+                            }}
+                        >
+                            保存
+                        </Button>
                     </div>
                 </div>
             </Panel>
@@ -303,5 +326,12 @@
         margin: 10px 0;
         font-size: 12px;
         color: #999;
+    }
+
+    .setting-item{
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        justify-content: end;
     }
 </style>
