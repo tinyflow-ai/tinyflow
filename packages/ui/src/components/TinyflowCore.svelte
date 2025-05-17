@@ -133,6 +133,10 @@
     const onDelete = (params: any) => {
         const deleteEdges = params.edges as Edge[];
         deleteEdges.forEach((edge) => {
+            if (edge.id === currentEdge?.id) {
+                currentEdge = null;
+                showEdgePanel = false;
+            }
             const targetNode = getNode(edge.target) as Node;
             if (targetNode && targetNode.parentId) {
                 const nodeEdges = getEdgesByTarget(edge.target);
@@ -240,6 +244,12 @@
                     currentEdge = e.detail.edge;
                     // console.log(e)
                 }}
+                onedgecreate={(edge) => {
+                    return {
+                        ...edge,
+                        id:genShortId(),
+                    }
+                }}
                 ondelete={onDelete}
                 onclick={(e) => {
                     const el = e.target as HTMLElement;
@@ -328,7 +338,7 @@
         color: #999;
     }
 
-    .setting-item{
+    .setting-item {
         display: flex;
         gap: 5px;
         align-items: center;

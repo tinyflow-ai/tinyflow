@@ -221,8 +221,8 @@ importers:
         specifier: ^1.7.0
         version: 1.7.0
       '@xyflow/svelte':
-        specifier: ^0.1.37
-        version: 0.1.37(svelte@5.28.2)
+        specifier: ^0.1.39
+        version: 0.1.39(svelte@5.28.2)
     devDependencies:
       '@rollup/plugin-replace':
         specifier: ^6.0.2
@@ -2615,19 +2615,19 @@ packages:
       vue: 3.5.13(typescript@5.7.3)
     dev: true
 
-  /@xyflow/svelte@0.1.37(svelte@5.28.2):
-    resolution: {integrity: sha512-955H1c67kidX/5679nypWOvOFvcDMdMH66h84I5M6oKnoAumJ7Q9gFkWqRflNJQfXeoXJ2OcFTJoGtCXY7AkzQ==}
+  /@xyflow/svelte@0.1.39(svelte@5.28.2):
+    resolution: {integrity: sha512-QZ5mzNysvJeJW7DxmqI4Urhhef9tclqtPr7WAS5zQF5Gk6k9INwzey4CYNtEZo8XMj9H8lzgoJRmgMPnJEc1kw==}
     peerDependencies:
       svelte: ^3.0.0 || ^4.0.0 || ^5.0.0
     dependencies:
       '@svelte-put/shortcut': 3.1.1(svelte@5.28.2)
-      '@xyflow/system': 0.0.57
+      '@xyflow/system': 0.0.59
       classcat: 5.0.5
       svelte: 5.28.2
     dev: false
 
-  /@xyflow/system@0.0.57:
-    resolution: {integrity: sha512-1YpBo0WgmZLR5wQw9Jvk3Tu0gISi/oYc4uSimrDuAsA/G2rGleulLrKkM59uuT/QU5m6DYC2VdBDAzjSNMGuBA==}
+  /@xyflow/system@0.0.59:
+    resolution: {integrity: sha512-+xgqYhoBv5F10TQx0SiKZR/DcWtuxFYR+e/LluHb7DMtX4SsMDutZWEJ4da4fDco25jZxw5G9fOlmk7MWvYd5Q==}
     dependencies:
       '@types/d3-drag': 3.0.7
       '@types/d3-selection': 3.0.11
