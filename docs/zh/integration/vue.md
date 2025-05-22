@@ -17,7 +17,7 @@ npm install @tinyflow-ai/vue
 <template>
     <div style="width: 100%; height: calc(100vh - 16px)">
         <Tinyflow
-            :className="'custom-class'"
+            class="custom-class"
             :style="{ width: '100%', height: '100%' }"
             :data="initialData"
         />
@@ -39,7 +39,7 @@ npm install @tinyflow-ai/vue
 ## 属性说明
 | 属性名 | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| className | string | '' | 自定义类名，用于为组件添加额外的样式类。 |
+| class | string | '' | 自定义类名，用于为组件添加额外的样式类。 |
 | style | Record<string, string> | {} | 自定义内联样式，用于动态设置组件的宽度、高度等样式属性。 |
 | data | Record<string, any> | {} | 初始化数据，包含流程图的节点 (nodes) 和边 (edges) 等信息。 |
 
@@ -91,7 +91,7 @@ const fetchData = () => {
     <h1>Tinyflow 示例</h1>
     <Tinyflow
       ref="tinyflowRef"
-      :className="'custom-tinyflow'"
+      class="custom-tinyflow"
       :style="{ width: '100%', height: '500px', border: '1px solid #ccc' }"
       :data="initialData"
     />
@@ -126,6 +126,7 @@ const fetchData = () => {
 
 
 使用Antd Vue时，出现checkBox 无法显示的问题可以在使用页面增加一下样式
+```css
 /* 添加样式覆盖 */
 /deep/ .custom-tinyflow {
 	select {
@@ -141,6 +142,8 @@ const fetchData = () => {
 		border: 1px solid #ccc;
 	}
 }
+```
+```css
 /* 添加checkbox交互样式 */
 /deep/ .custom-tinyflow {
 	input[type="checkbox"] {
@@ -176,4 +179,4 @@ const fetchData = () => {
 		}
 	}
 }
-
+```
