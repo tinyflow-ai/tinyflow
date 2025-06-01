@@ -52,7 +52,7 @@ const nodeToOptions = (node: Node, nodeIsChildren: boolean, currentNode: Node) =
             children: [
                 {
                     label: 'loopItem',
-                    value: node.id + '.loop'
+                    value: node.id + '.loopItem'
                 },
                 {
                     label: 'index (Number)',
