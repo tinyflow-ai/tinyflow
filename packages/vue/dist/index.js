@@ -15013,7 +15013,7 @@ const Dd = (e, t, n) => {
         children: [
           {
             label: "loopItem",
-            value: e.id + ".loop"
+            value: e.id + ".loopItem"
           },
           {
             label: "index (Number)",
