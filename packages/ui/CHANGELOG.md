@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- [`50bde81`](https://github.com/tinyflow-ai/tinyflow/commit/50bde81fe0ce5723e52632ba8a60f5452ff79804) Thanks [@yangfuhai](https://github.com/yangfuhai)! - fixed loopNode issues
+
 ## 0.2.1
 
 ### Patch Changes
