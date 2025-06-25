@@ -145,6 +145,48 @@
                                 }} />
                             </label>
 
+                            <label class="input-item-inline">
+                                <span>循环执行：</span>
+                                <input type="checkbox" checked={!!data.loopEnable} onchange={(event)=>{
+                                    const value =  (event.target as any).checked;
+                                     updateNodeData(currentNodeId,{
+                                        loopEnable: value
+                                    })
+                                }} />
+                            </label>
+
+                            {#if !!data.loopEnable}
+                                <div class="input-item">
+                                    循环间隔时间（单位：毫秒）：
+                                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                                    const value =  (event.target as any).value;
+                                     updateNodeData(currentNodeId,{
+                                        loopIntervalMs: value
+                                    })
+                                }} value={data.loopIntervalMs || '1000'} />
+                                </div>
+
+                                <div class="input-item">
+                                    最大循环次数（0 表示不限制）：
+                                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                                    const value =  (event.target as any).value;
+                                     updateNodeData(currentNodeId,{
+                                        maxLoopCount: value
+                                    })
+                                }} value={data.maxLoopCount || '0'} />
+                                </div>
+
+                                <div class="input-item">
+                                    退出条件：
+                                    <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
+                                    const value =  (event.target as any).value;
+                                     updateNodeData(currentNodeId,{
+                                        loopBreakCondition: value
+                                    })
+                                }} value={data.loopBreakCondition} />
+                                </div>
+                            {/if}
+
                         </div>
                     {/snippet}
                 </FloatingTrigger>
@@ -206,6 +248,7 @@
       font-size: 12px;
       color: #666;
     }
+
     .input-item-inline {
       display: flex;
       align-items: center;
