@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 0.2.3
+
+### Patch Changes
+
+- [`69b50e0`](https://github.com/tinyflow-ai/tinyflow/commit/69b50e0cdcacac87ce15175b712a0bd4f59a5144) Thanks [@yangfuhai](https://github.com/yangfuhai)! - add loop execute options
+
 ## 0.2.2
 
 ### Patch Changes
