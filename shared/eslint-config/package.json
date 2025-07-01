@@ -1,6 +1,6 @@
 {
     "name": "@tinyflow-ai/eslint-config",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "private": true,
     "dependencies": {
         "@typescript-eslint/eslint-plugin": "^7.1.0",
