@@ -49,7 +49,11 @@
         });
 
         const baseNodeJsonString = event.dataTransfer?.getData('application/tinyflow');
-        const baseNode = baseNodeJsonString ? JSON.parse(baseNodeJsonString) : {};
+        if (!baseNodeJsonString) {
+            return;
+        }
+
+        const baseNode = JSON.parse(baseNodeJsonString);
         const newNode = {
             id: `node_${genShortId()}`,
             position,
