@@ -17727,7 +17727,10 @@ function tf(e, t) {
     const L = l.screenToFlowPosition({
       x: T.clientX - 250,
       y: T.clientY - 100
-    }), Y = (U = T.dataTransfer) == null ? void 0 : U.getData("application/tinyflow"), W = Y ? JSON.parse(Y) : {}, G = {
+    }), Y = (U = T.dataTransfer) == null ? void 0 : U.getData("application/tinyflow");
+    if (!Y)
+      return;
+    const W = JSON.parse(Y), G = {
       id: `node_${pr()}`,
       position: L,
       data: {},

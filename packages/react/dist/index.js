@@ -18309,7 +18309,10 @@ function $f(e, t) {
     const j = l.screenToFlowPosition({
       x: M.clientX - 250,
       y: M.clientY - 100
-    }), K = (z = M.dataTransfer) == null ? void 0 : z.getData("application/tinyflow"), te = K ? JSON.parse(K) : {}, G = {
+    }), K = (z = M.dataTransfer) == null ? void 0 : z.getData("application/tinyflow");
+    if (!K)
+      return;
+    const te = JSON.parse(K), G = {
       id: `node_${Nr()}`,
       position: j,
       data: {},

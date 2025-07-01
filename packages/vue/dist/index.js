@@ -17681,7 +17681,10 @@ function Jd(e, t) {
     const Y = l.screenToFlowPosition({
       x: P.clientX - 250,
       y: P.clientY - 100
-    }), W = (A = P.dataTransfer) == null ? void 0 : A.getData("application/tinyflow"), ee = W ? JSON.parse(W) : {}, G = {
+    }), W = (A = P.dataTransfer) == null ? void 0 : A.getData("application/tinyflow");
+    if (!W)
+      return;
+    const ee = JSON.parse(W), G = {
       id: `node_${pr()}`,
       position: Y,
       data: {},
