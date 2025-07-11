@@ -14,7 +14,7 @@
     import Toolbar from './Toolbar.svelte';
     import { genShortId } from './utils/IdGen';
     import { useGetNode } from './utils/useGetNode.svelte';
-    // import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
+    import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore.svelte';
     import { Textarea } from './base';
     import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget.svelte';
     import { getOptions } from './utils/NodeUtils';
@@ -98,7 +98,7 @@
     };
 
 
-    // const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
+    const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
     const onconnectend = (_: any, state: any) => {
         if (!state.isValid) {
             return;
@@ -128,7 +128,7 @@
                 x: toNode.position.x - parentNode.position.x,
                 y: toNode.position.y - parentNode.position.y
             };
-            // ensureParentInNodesBefore(newNode.parentId, toNode.id);
+            ensureParentInNodesBefore(newNode.parentId, toNode.id);
             svelteFlow.updateNode(toNode.id, newNode);
         }
     };
