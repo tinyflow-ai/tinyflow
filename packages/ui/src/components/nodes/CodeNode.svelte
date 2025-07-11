@@ -4,7 +4,7 @@
     import { Button, Heading, Select } from '../base';
     import { Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
 

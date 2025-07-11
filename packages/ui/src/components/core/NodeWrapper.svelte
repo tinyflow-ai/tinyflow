@@ -5,7 +5,7 @@
     import { useDeleteNode } from '../utils/useDeleteNode.svelte';
     import { useCopyNode } from '../utils/useCopyNode.svelte';
     import { getOptions } from '../utils/NodeUtils';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     const {
         data,

@@ -1,7 +1,7 @@
 <script lang="ts">
     import DefinedParameterItem from './DefinedParameterItem.svelte';
     import { useNodesData } from '@xyflow/svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));

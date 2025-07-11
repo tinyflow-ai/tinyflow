@@ -3,7 +3,7 @@
     import { Handle, type NodeProps, Position } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
 
     const { data, ...rest }: {

@@ -7,7 +7,7 @@ import {
     useStore
 } from '@xyflow/svelte';
 import type { Parameter } from '#types';
-import { getCurrentNodeId } from '#store/nodeContext';
+import { getCurrentNodeId } from '#components/utils/NodeUtils';
 import { derived } from 'svelte/store';
 
 const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: NodeConnection[]) => {

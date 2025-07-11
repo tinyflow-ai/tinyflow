@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Input, MenuButton, Textarea } from '../base';
     import { Button, FloatingTrigger, Select } from '../base/index.js';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';

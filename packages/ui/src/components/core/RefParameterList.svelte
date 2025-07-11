@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useNodesData } from '@xyflow/svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import RefParameterItem from './RefParameterItem.svelte';
 
     const {

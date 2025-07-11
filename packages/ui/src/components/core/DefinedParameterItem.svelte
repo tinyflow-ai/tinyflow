@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Input, Textarea } from '../base';
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
-    import { getCurrentNodeId } from '#store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterDataTypes } from '../utils/Consts';
     import type { SelectItem, Parameter } from '../../types';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     const { parameter, index }: {
         parameter: Parameter,

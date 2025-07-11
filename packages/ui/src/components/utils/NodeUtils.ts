@@ -2,7 +2,7 @@ import { getContext } from 'svelte';
 import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
 import type { TinyflowOptions } from '#types';
 
-export const useCurrentNodeId = () => {
+export const getCurrentNodeId = () => {
     return getContext<string>('svelteflow__node_id');
 };
 
@@ -11,13 +11,13 @@ export const getOptions = () => {
 };
 
 export const useCurrentNodeData = () => {
-    const currentNodeId = useCurrentNodeId();
+    const currentNodeId = getCurrentNodeId();
     return useNodesData<any>(currentNodeId);
 };
 
 export const useUpdateNodeData = () => {
     const { updateNodeData } = useSvelteFlow();
-    const currentNodeId = useCurrentNodeId();
+    const currentNodeId = getCurrentNodeId();
     return {
         updateNodeData: (data: any) => {
             updateNodeData(currentNodeId, data);

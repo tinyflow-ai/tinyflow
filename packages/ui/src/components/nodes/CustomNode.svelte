@@ -3,7 +3,7 @@
     import { type Node, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Chosen, Heading, Input, Select, Textarea } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import OutputDefList from '../core/OutputDefList.svelte';

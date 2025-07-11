@@ -4,7 +4,7 @@
     import { Button } from '../base/index.js';
     import { type NodeProps } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
-    import { getCurrentNodeId } from '#store/nodeContext';
+    import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
 
     const { data, ...rest }: {
