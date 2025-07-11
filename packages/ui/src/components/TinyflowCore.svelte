@@ -29,7 +29,7 @@
     onInit(svelteFlow);
 
     let showEdgePanel = $state(false);
-    let currentEdge = $state<Edge|null>(null);
+    let currentEdge = $state<Edge | null>(null);
 
     const { updateEdgeData } = useUpdateEdgeData();
 
@@ -131,6 +131,16 @@
             ensureParentInNodesBefore(newNode.parentId, toNode.id);
             svelteFlow.updateNode(toNode.id, newNode);
         }
+
+        // 显示边面板
+        setTimeout(() => {
+            store.getEdges().forEach((edge) => {
+                if (edge.target === toNode.id && edge.source == fromNode.id) {
+                    showEdgePanel = true;
+                    currentEdge = edge;
+                }
+            });
+        });
     };
 
     const { getEdgesByTarget } = useGetEdgesByTarget();
