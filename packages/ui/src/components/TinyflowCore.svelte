@@ -224,8 +224,7 @@
                 connectionRadius={50}
                 onedgeclick={(e) => {
                     showEdgePanel = true;
-                    currentEdge = e.detail.edge;
-                    // console.log(e)
+                    currentEdge = e.edge;
                 }}
                 onbeforeconnect={(edge) => {
                     return {
