@@ -5,7 +5,7 @@
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterDataTypes } from '../utils/Consts';
     import { genShortId } from '../utils/IdGen';
-    import type { Parameter } from '../../types';
+    import type { Parameter } from '#types';
     import { deepClone } from '../utils/deepClone';
 
     const { parameter, position, dataKeyName }: {

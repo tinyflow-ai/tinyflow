@@ -1,6 +1,6 @@
 <script lang="ts">
     import { FloatingTrigger, Render } from './index';
-    import type { SelectItem } from '../../types';
+    import type { SelectItem } from '#types';
 
     let {
         items,

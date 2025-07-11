@@ -3,7 +3,7 @@
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterDataTypes } from '../utils/Consts';
-    import type { SelectItem, Parameter } from '../../types';
+    import type { SelectItem, Parameter } from '#types';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     const { parameter, index }: {
