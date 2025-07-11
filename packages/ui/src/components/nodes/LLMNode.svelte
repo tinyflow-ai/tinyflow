@@ -9,7 +9,7 @@
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
-    import type { SelectItem } from '../../types';
+    import type { SelectItem } from '#types';
 
     const { data, ...rest }: {
         data: NodeProps['data'],

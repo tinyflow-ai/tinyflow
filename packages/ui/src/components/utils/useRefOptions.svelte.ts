@@ -1,16 +1,8 @@
-import {
-    type NodeConnection,
-    type Edge,
-    type Node,
-    useNodeConnections,
-    useNodesData,
-    useStore
-} from '@xyflow/svelte';
+import { type Edge, type Node, useNodesData, useStore } from '@xyflow/svelte';
 import type { Parameter } from '#types';
 import { getCurrentNodeId } from '#components/utils/NodeUtils';
-import { derived } from 'svelte/store';
 
-const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: NodeConnection[]) => {
+const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: Edge[]) => {
     for (const edge of edges) {
         if (edge.target === currentNodeId && edge.source) {
             refNodeIds.push(edge.source);
@@ -80,19 +72,13 @@ const nodeToOptions = (node: Node, nodeIsChildren: boolean, currentNode: Node) =
 };
 
 export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
-
     const currentNodeId = getCurrentNodeId();
     const currentNode = useNodesData(currentNodeId);
-
-    const { nodes, nodeLookup } = $derived(useStore());
-
-    const connections = useNodeConnections({
-        handleType: 'target'
-    });
+    const { nodes, edges, nodeLookup } = $derived(useStore());
 
     let selectItems = $derived.by(() => {
         const resultOptions = [];
-        if (!currentNode) {
+        if (!currentNode.current) {
             return [];
         }
 
@@ -101,7 +87,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
 
         if (useChildrenOnly) {
             for (const node of nodes) {
-                const nodeIsChildren = node.parentId === currentNode!.id;
+                const nodeIsChildren = node.parentId === currentNode.current.id;
                 if (nodeIsChildren) {
                     const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
                     nodeOptions && resultOptions.push(nodeOptions);
@@ -109,11 +95,11 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
             }
         } else {
             const refNodeIds: string[] = [];
-            fillRefNodeIds(refNodeIds, currentNodeId, connections.current);
+            fillRefNodeIds(refNodeIds, currentNodeId, edges);
 
             for (const node of nodes) {
                 if (refNodeIds.includes(node.id)) {
-                    const nodeIsChildren = node.parentId === currentNode!.id;
+                    const nodeIsChildren = node.parentId === currentNode.current.id;
                     const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
                     nodeOptions && resultOptions.push(nodeOptions);
                 }
@@ -122,6 +108,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
 
         return resultOptions;
     });
+
     return {
         get current() {
             return selectItems;

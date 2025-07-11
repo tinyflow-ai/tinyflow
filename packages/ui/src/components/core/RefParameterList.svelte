@@ -17,7 +17,7 @@
     let node = $derived(useNodesData(currentNodeId));
 
     let parameters = $derived.by(() => {
-        return [...node?.data?.[dataKeyName] as Array<any> || []];
+        return [...node?.current?.data?.[dataKeyName] as Array<any> || []];
     });
 </script>
 

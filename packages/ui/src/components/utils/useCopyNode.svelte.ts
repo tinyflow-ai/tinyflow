@@ -16,8 +16,8 @@ export const useCopyNode = () => {
             };
 
             store.updateNodes((nodes) => {
-                nodes.map((n) => ({ ...n, selected: false }));
-                return [...nodes, newNode];
+                const newNodes = nodes.map((n) => ({ ...n, selected: false }));
+                return [...newNodes, newNode];
             });
         }
     };

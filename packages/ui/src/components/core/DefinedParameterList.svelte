@@ -6,7 +6,7 @@
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
     let parameters = $derived.by(() => {
-        return [...node?.data?.parameters as Array<any> || []];
+        return [...node?.current?.data?.parameters as Array<any> || []];
     });
 </script>
 

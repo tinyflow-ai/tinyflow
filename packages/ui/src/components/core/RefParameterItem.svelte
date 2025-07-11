@@ -28,7 +28,7 @@
     let param = $derived.by(() => {
         return {
             ...parameter,
-            ...(node?.data?.[dataKeyName] as Array<Parameter>)[index]
+            ...(node?.current?.data?.[dataKeyName] as Array<Parameter>)[index]
         };
     });
 
@@ -77,7 +77,7 @@
         });
         triggerObject?.hide();
     };
-    const selectItems = useRefOptions(useChildrenOnly);
+    let selectItems = useRefOptions(useChildrenOnly);
 </script>
 
 
@@ -90,7 +90,7 @@
     {#if param.refType === 'fixed'}
         <Input value={param.value} placeholder="请输入参数值" oninput={(event)=>updateParamByEvent('value', event)} />
     {:else if (param.refType !== 'input')}
-        <Select items={$selectItems} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
+        <Select items={selectItems.current} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
                 expandAll
                 onSelect={updateRef} />
     {/if}
