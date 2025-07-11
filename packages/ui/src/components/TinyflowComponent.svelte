@@ -1,10 +1,10 @@
 <svelte:options customElement={{
   tag: "tinyflow-component",
   shadow: "none",
-  props: {
-			options: { reflect: true, type: 'Object', attribute: 'options' },
-			onInit: { reflect: true, type: 'Object', attribute: 'onInit' }
-		},
+  // props: {
+	// 		options: { reflect: true, type: 'Object', attribute: 'options' },
+	// 		onInit: { reflect: true, type: 'Object', attribute: 'onInit' }
+	// 	},
 }} />
 
 <script lang="ts">

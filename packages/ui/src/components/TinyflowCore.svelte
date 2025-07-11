@@ -29,7 +29,7 @@
     onInit(svelteFlow);
 
     let showEdgePanel = $state(false);
-    let currentEdge = $state();
+    let currentEdge = $state<Edge|null>(null);
 
     const { updateEdgeData } = useUpdateEdgeData();
 
