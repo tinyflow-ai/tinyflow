@@ -2,9 +2,9 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
-    import { getCurrentNodeId } from '../../store/nodeContext';
+    import { getCurrentNodeId } from '#store/nodeContext';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
+    import { useAddParameter } from '../utils/useAddParameter.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -12,7 +12,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameterSvelte();
+    const { addParameter } = useAddParameter();
 
 </script>
 

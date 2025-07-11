@@ -4,8 +4,8 @@
     import { Button, Heading, Select } from '../base';
     import { Input, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '../../store/nodeContext';
-    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
+    import { getCurrentNodeId } from '#store/nodeContext';
+    import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
 
     const { data, ...rest }: {
@@ -35,7 +35,7 @@
     ];
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameterSvelte();
+    const { addParameter } = useAddParameter();
     const { updateNodeData } = useSvelteFlow();
 </script>
 

@@ -1,6 +1,6 @@
 import { useStore, useSvelteFlow } from '@xyflow/svelte';
 
-export const useDeleteEdgeSvelte = () => {
+export const useDeleteEdge = () => {
     let { edges } = $derived(useStore())
     const instance = useSvelteFlow();
     const deleteEdge = (id: string) => {

@@ -13,15 +13,15 @@
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
     import { genShortId } from './utils/IdGen';
-    import { useGetNodeSvelte } from './utils/useGetNode.svelte';
+    import { useGetNode } from './utils/useGetNode.svelte';
     // import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
     import { Textarea } from './base';
-    import { useGetEdgesByTargetSvelte } from './utils/useGetEdgesByTarget.svelte';
+    import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget.svelte';
     import { getOptions } from './utils/NodeUtils';
     import CustomNode from './nodes/CustomNode.svelte';
-    import { useUpdateEdgeDataSvelte } from './utils/useUpdateEdgeData.svelte';
+    import { useUpdateEdgeData } from './utils/useUpdateEdgeData.svelte';
     import { Button } from '#components/base/index';
-    import { useDeleteEdgeSvelte } from '#components/utils/useDeleteEdge.svelte';
+    import { useDeleteEdge } from '#components/utils/useDeleteEdge.svelte';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -31,7 +31,7 @@
     let showEdgePanel = $state(false);
     let currentEdge = $state();
 
-    const { updateEdgeData } = useUpdateEdgeDataSvelte();
+    const { updateEdgeData } = useUpdateEdgeData();
 
     const onDragOver = (event: DragEvent) => {
         event.preventDefault();
@@ -66,7 +66,7 @@
     };
 
 
-    const { getNode } = useGetNodeSvelte();
+    const { getNode } = useGetNode();
 
 
     const isValidConnection = (conn: any) => {
@@ -133,7 +133,7 @@
         }
     };
 
-    const { getEdgesByTarget } = useGetEdgesByTargetSvelte();
+    const { getEdgesByTarget } = useGetEdgesByTarget();
     const onDelete = (params: any) => {
         const deleteEdges = params.edges as Edge[];
         deleteEdges.forEach((edge) => {
@@ -177,7 +177,7 @@
         });
     };
 
-    const { deleteEdge } = useDeleteEdgeSvelte();
+    const { deleteEdge } = useDeleteEdge();
 
 
     const onconnectstart = (event: any, node: any) => {

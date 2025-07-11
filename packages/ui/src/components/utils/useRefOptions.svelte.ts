@@ -79,7 +79,7 @@ const nodeToOptions = (node: Node, nodeIsChildren: boolean, currentNode: Node) =
     }
 };
 
-export const useRefOptionsSvelte: any = (useChildrenOnly: boolean = false) => {
+export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
 
     const currentNodeId = getCurrentNodeId();
     const currentNode = useNodesData(currentNodeId);

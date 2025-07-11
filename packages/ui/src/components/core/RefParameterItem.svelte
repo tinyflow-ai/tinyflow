@@ -1,10 +1,10 @@
 <script lang="ts">
     import { Input, MenuButton, Textarea } from '../base';
     import { Button, FloatingTrigger, Select } from '../base/index.js';
-    import { getCurrentNodeId } from '../../store/nodeContext';
+    import { getCurrentNodeId } from '#store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterRefTypes } from '../utils/Consts';
-    import { useRefOptionsSvelte } from '../utils/useRefOptions.svelte';
+    import { useRefOptions } from '../utils/useRefOptions.svelte';
     // 添加生命周期函数
     import { onMount } from 'svelte';
     import type { Parameter } from '../../types';
@@ -77,7 +77,7 @@
         });
         triggerObject?.hide();
     };
-    const selectItems = useRefOptionsSvelte(useChildrenOnly);
+    const selectItems = useRefOptions(useChildrenOnly);
 </script>
 
 

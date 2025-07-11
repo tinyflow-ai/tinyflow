@@ -1,7 +1,7 @@
 import { genShortId } from './IdGen';
 import { store } from '#store/stores.svelte';
 
-export const useCopyNodeSvelte = () => {
+export const useCopyNode = () => {
     const copyNode = (id: string) => {
         const node = store.getNode(id);
         if (node) {

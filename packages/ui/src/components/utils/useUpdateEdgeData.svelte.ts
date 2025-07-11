@@ -1,6 +1,6 @@
 import { store } from '#store/stores.svelte';
 
-export const useUpdateEdgeDataSvelte = () => {
+export const useUpdateEdgeData = () => {
     const updateEdgeData = (id: string, dataUpdate: any, options?: { replace: boolean }) => {
         const edge = store.getEdge(id);
         if (!edge) {

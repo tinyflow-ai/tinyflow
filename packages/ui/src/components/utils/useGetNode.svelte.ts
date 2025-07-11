@@ -1,6 +1,6 @@
 import { store } from '#store/stores.svelte';
 
-export const useGetNodeSvelte = () => {
+export const useGetNode = () => {
     const getNode = (id: string) => {
         return store.getNode(id);
     };

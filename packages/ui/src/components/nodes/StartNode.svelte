@@ -4,8 +4,8 @@
     import { Button } from '../base/index.js';
     import { type NodeProps } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
-    import { getCurrentNodeId } from '../../store/nodeContext';
-    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
+    import { getCurrentNodeId } from '#store/nodeContext';
+    import { useAddParameter } from '../utils/useAddParameter.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -13,7 +13,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameterSvelte();
+    const { addParameter } = useAddParameter();
 
 </script>
 

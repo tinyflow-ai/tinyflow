@@ -16,7 +16,7 @@ export const fillParameterId = (parameters?: Parameter[]) => {
     return parameters;
 };
 
-export const useAddParameterSvelte = () => {
+export const useAddParameter = () => {
     const { updateNodeData } = useSvelteFlow();
     return {
         addParameter: (nodeId: string, dataKey: string = 'parameters', parameter?: Parameter) => {

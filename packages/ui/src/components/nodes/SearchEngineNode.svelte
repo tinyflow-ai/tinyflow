@@ -3,8 +3,8 @@
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Input, Select } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '../../store/nodeContext';
-    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
+    import { getCurrentNodeId } from '#store/nodeContext';
+    import { useAddParameter } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
@@ -16,7 +16,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameterSvelte();
+    const { addParameter } = useAddParameter();
 
     const options = getOptions();
 
