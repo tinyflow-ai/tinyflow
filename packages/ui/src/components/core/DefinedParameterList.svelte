@@ -1,12 +1,12 @@
 <script lang="ts">
     import DefinedParameterItem from './DefinedParameterItem.svelte';
     import { useNodesData } from '@xyflow/svelte';
-    import { getCurrentNodeId } from '../../store/nodeContext';
+    import { getCurrentNodeId } from '#store/nodeContext';
 
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
     let parameters = $derived.by(() => {
-        return [...$node?.data?.parameters as Array<any> || []];
+        return [...node?.data?.parameters as Array<any> || []];
     });
 </script>
 

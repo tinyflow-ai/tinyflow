@@ -4,10 +4,10 @@
     import { Button, Chosen, Heading, Input, Select, Textarea } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '#store/nodeContext';
-    import { useAddParameter } from '../utils/useAddParameter';
+    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import OutputDefList from '../core/OutputDefList.svelte';
-    import { fillParameterId } from '../utils/useAddParameter.js';
+    import { fillParameterId } from '../utils/useAddParameter.svelte.js';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -15,7 +15,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameter();
+    const { addParameter } = useAddParameterSvelte();
     const flowInstance = useSvelteFlow();
     const { updateNodeData: updateNodeDataInner } = flowInstance;
 

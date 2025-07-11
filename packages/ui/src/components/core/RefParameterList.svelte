@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useNodesData } from '@xyflow/svelte';
-    import { getCurrentNodeId } from '../../store/nodeContext';
+    import { getCurrentNodeId } from '#store/nodeContext';
     import RefParameterItem from './RefParameterItem.svelte';
 
     const {
@@ -17,7 +17,7 @@
     let node = $derived(useNodesData(currentNodeId));
 
     let parameters = $derived.by(() => {
-        return [...$node?.data[dataKeyName] as Array<any> || []];
+        return [...node?.data?.[dataKeyName] as Array<any> || []];
     });
 </script>
 

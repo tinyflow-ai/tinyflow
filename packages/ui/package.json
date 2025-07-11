@@ -28,21 +28,21 @@
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^6.0.2",
-    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@sveltejs/vite-plugin-svelte": "^6.0.0",
     "@tinyflow-ai/eslint-config": "workspace:*",
     "@tsconfig/svelte": "^5.0.4",
     "@types/node": "^22.13.4",
     "autoprefixer": "^10.4.21",
     "less": "^4.2.2",
-    "svelte": "^5.28.2",
-    "svelte-check": "^4.1.7",
+    "svelte": "^5.35.6",
+    "svelte-check": "^4.2.2",
     "typescript": "^5.6.2",
-    "vite": "^6.3.5",
+    "vite": "^7.0.4",
     "vite-plugin-dts": "^4.5.3"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.7.0",
-    "@xyflow/svelte": "^0.1.39"
+    "@floating-ui/dom": "^1.7.2",
+    "@xyflow/svelte": "^1.2.1"
   },
   "imports": {
     "#*": [

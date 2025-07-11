@@ -5,23 +5,23 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes, useStore
+        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
-    import { store } from '../store/stores';
+    import { store } from '#store/stores.svelte';
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
     import { genShortId } from './utils/IdGen';
-    import { useGetNode } from './utils/useGetNode';
-    import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
+    import { useGetNodeSvelte } from './utils/useGetNode.svelte';
+    // import { useEnsureParentInNodesBefore } from './utils/useEnsureParentInNodesBefore';
     import { Textarea } from './base';
-    import { useGetEdgesByTarget } from './utils/useGetEdgesByTarget';
+    import { useGetEdgesByTargetSvelte } from './utils/useGetEdgesByTarget.svelte';
     import { getOptions } from './utils/NodeUtils';
     import CustomNode from './nodes/CustomNode.svelte';
-    import { useUpdateEdgeData } from './utils/useUpdateEdgeData';
+    import { useUpdateEdgeDataSvelte } from './utils/useUpdateEdgeData.svelte';
     import { Button } from '#components/base/index';
-    import { useDeleteEdge } from '#components/utils/useDeleteEdge';
+    import { useDeleteEdgeSvelte } from '#components/utils/useDeleteEdge.svelte';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -31,7 +31,7 @@
     let showEdgePanel = $state(false);
     let currentEdge = $state();
 
-    const { updateEdgeData } = useUpdateEdgeData();
+    const { updateEdgeData } = useUpdateEdgeDataSvelte();
 
     const onDragOver = (event: DragEvent) => {
         event.preventDefault();
@@ -66,7 +66,7 @@
     };
 
 
-    const { getNode } = useGetNode();
+    const { getNode } = useGetNodeSvelte();
 
 
     const isValidConnection = (conn: any) => {
@@ -98,7 +98,7 @@
     };
 
 
-    const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
+    // const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
     const onconnectend = (_: any, state: any) => {
         if (!state.isValid) {
             return;
@@ -128,12 +128,12 @@
                 x: toNode.position.x - parentNode.position.x,
                 y: toNode.position.y - parentNode.position.y
             };
-            ensureParentInNodesBefore(newNode.parentId, toNode.id);
+            // ensureParentInNodesBefore(newNode.parentId, toNode.id);
             svelteFlow.updateNode(toNode.id, newNode);
         }
     };
 
-    const { getEdgesByTarget } = useGetEdgesByTarget();
+    const { getEdgesByTarget } = useGetEdgesByTargetSvelte();
     const onDelete = (params: any) => {
         const deleteEdges = params.edges as Edge[];
         deleteEdges.forEach((edge) => {
@@ -177,7 +177,7 @@
         });
     };
 
-    const { deleteEdge } = useDeleteEdge();
+    const { deleteEdge } = useDeleteEdgeSvelte();
 
 
     const onconnectstart = (event: any, node: any) => {
@@ -200,32 +200,9 @@
         }
     }
 
-    const { nodes, edges, viewport } = useStore();
+    // const { nodes, edges, viewport } = useStore();
     const onDataChange = getOptions().onDataChange;
     if (onDataChange) {
-        nodes.subscribe(() => {
-            onDataChange({
-                nodes: $nodes,
-                edges: $edges,
-                viewport: $viewport
-            }, { eventType: 'nodesChange' });
-        });
-
-        edges.subscribe(() => {
-            onDataChange({
-                nodes: $nodes,
-                edges: $edges,
-                viewport: $viewport
-            }, { eventType: 'edgesChange' });
-        });
-
-        viewport.subscribe(() => {
-            onDataChange({
-                nodes: $nodes,
-                edges: $edges,
-                viewport: $viewport
-            }, { eventType: 'viewportChange' });
-        });
     }
 
 
@@ -234,21 +211,23 @@
 
 <div style="position: relative; height: 100%; width: 100%;overflow: hidden">
     <SvelteFlow nodeTypes={{ ...nodeTypes, ...customNodeTypes}}
-                {...store}
+                bind:nodes={store.getNodes, store.setNodes}
+                bind:edges={store.getEdges, store.setEdges}
+                bind:viewport={store.getViewport, store.setViewport}
                 class="tinyflow-logo"
-                on:drop={onDrop}
-                on:dragover={onDragOver}
+                ondrop={onDrop}
+                ondragover={onDragOver}
                 isValidConnection={isValidConnection}
                 onconnectend={onconnectend}
                 onconnectstart={onconnectstart}
                 onconnect={onconnect}
                 connectionRadius={50}
-                on:edgeclick={(e) => {
+                onedgeclick={(e) => {
                     showEdgePanel = true;
                     currentEdge = e.detail.edge;
                     // console.log(e)
                 }}
-                onedgecreate={(edge) => {
+                onbeforeconnect={(edge) => {
                     return {
                         ...edge,
                         id:genShortId(),

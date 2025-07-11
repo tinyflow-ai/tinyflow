@@ -1,9 +1,16 @@
-import { type Edge, type Node, useNodesData, useStore } from '@xyflow/svelte';
-import type { Parameter } from '../../types';
-import { getCurrentNodeId } from '../../store/nodeContext';
+import {
+    type NodeConnection,
+    type Edge,
+    type Node,
+    useNodeConnections,
+    useNodesData,
+    useStore
+} from '@xyflow/svelte';
+import type { Parameter } from '#types';
+import { getCurrentNodeId } from '#store/nodeContext';
 import { derived } from 'svelte/store';
 
-const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: Edge[]) => {
+const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: NodeConnection[]) => {
     for (const edge of edges) {
         if (edge.target === currentNodeId && edge.source) {
             refNodeIds.push(edge.source);
@@ -72,40 +79,52 @@ const nodeToOptions = (node: Node, nodeIsChildren: boolean, currentNode: Node) =
     }
 };
 
-export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
+export const useRefOptionsSvelte: any = (useChildrenOnly: boolean = false) => {
+
     const currentNodeId = getCurrentNodeId();
     const currentNode = useNodesData(currentNodeId);
-    const { nodes, edges, nodeLookup } = useStore();
-    return derived(
-        [currentNode, nodes, edges, nodeLookup],
-        ([currentNode, nodes, edges, nodeLookup]) => {
-            if (!currentNode) {
-                return [];
-            }
-            //通过 nodeLookup.get 才会得到有 parentId 的 node
-            const cNode = nodeLookup.get(currentNodeId)!;
-            const resultOptions = [];
-            if (useChildrenOnly) {
-                for (const node of nodes) {
-                    const nodeIsChildren = node.parentId === currentNode!.id;
-                    if (nodeIsChildren) {
-                        const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
-                        nodeOptions && resultOptions.push(nodeOptions);
-                    }
-                }
-            } else {
-                const refNodeIds: string[] = [];
-                fillRefNodeIds(refNodeIds, currentNodeId, edges);
 
-                for (const node of nodes) {
-                    if (refNodeIds.includes(node.id)) {
-                        const nodeIsChildren = node.parentId === currentNode!.id;
-                        const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
-                        nodeOptions && resultOptions.push(nodeOptions);
-                    }
+    const { nodes, nodeLookup } = $derived(useStore());
+
+    const connections = useNodeConnections({
+        handleType: 'target'
+    });
+
+    let selectItems = $derived.by(() => {
+        const resultOptions = [];
+        if (!currentNode) {
+            return [];
+        }
+
+        //通过 nodeLookup.get 才会得到有 parentId 的 node
+        const cNode = nodeLookup.get(currentNodeId)!;
+
+        if (useChildrenOnly) {
+            for (const node of nodes) {
+                const nodeIsChildren = node.parentId === currentNode!.id;
+                if (nodeIsChildren) {
+                    const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
+                    nodeOptions && resultOptions.push(nodeOptions);
                 }
             }
-            return resultOptions;
+        } else {
+            const refNodeIds: string[] = [];
+            fillRefNodeIds(refNodeIds, currentNodeId, connections.current);
+
+            for (const node of nodes) {
+                if (refNodeIds.includes(node.id)) {
+                    const nodeIsChildren = node.parentId === currentNode!.id;
+                    const nodeOptions = nodeToOptions(node, nodeIsChildren, cNode);
+                    nodeOptions && resultOptions.push(nodeOptions);
+                }
+            }
         }
-    );
+
+        return resultOptions;
+    });
+    return {
+        get current() {
+            return selectItems;
+        }
+    };
 };

@@ -4,7 +4,7 @@
     import { getCurrentNodeId } from '../../store/nodeContext';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterRefTypes } from '../utils/Consts';
-    import { useRefOptions } from '../utils/useRefOptions';
+    import { useRefOptionsSvelte } from '../utils/useRefOptions.svelte';
     // 添加生命周期函数
     import { onMount } from 'svelte';
     import type { Parameter } from '../../types';
@@ -28,7 +28,7 @@
     let param = $derived.by(() => {
         return {
             ...parameter,
-            ...($node?.data[dataKeyName] as Array<Parameter>)[index]
+            ...(node?.data?.[dataKeyName] as Array<Parameter>)[index]
         };
     });
 
@@ -36,7 +36,7 @@
 
     const updateParam = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
-            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            let parameters = node.data?.[dataKeyName] as Array<Parameter>;
             parameters[index] = {
                 ...parameters[index],
                 [key]: value
@@ -69,7 +69,7 @@
     let triggerObject: any;
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
-            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            let parameters = node.data?.[dataKeyName] as Array<Parameter>;
             parameters.splice(index, 1);
             return {
                 [dataKeyName]: [...parameters]
@@ -77,7 +77,7 @@
         });
         triggerObject?.hide();
     };
-    const selectItems = useRefOptions(useChildrenOnly);
+    const selectItems = useRefOptionsSvelte(useChildrenOnly);
 </script>
 
 

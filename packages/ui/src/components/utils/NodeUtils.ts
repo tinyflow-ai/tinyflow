@@ -1,6 +1,6 @@
 import { getContext } from 'svelte';
 import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-import type { TinyflowOptions } from '../../types';
+import type { TinyflowOptions } from '#types';
 
 export const useCurrentNodeId = () => {
     return getContext<string>('svelteflow__node_id');

@@ -5,7 +5,7 @@
     import { Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { useAddParameter } from '../utils/useAddParameter';
+    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
 
     const { data, ...rest }: {
@@ -25,7 +25,7 @@
         }
     });
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameter();
+    const { addParameter } = useAddParameterSvelte();
 
 
     const { updateNodeData } = useSvelteFlow();

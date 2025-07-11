@@ -1,20 +1,26 @@
 <svelte:options customElement={{
   tag: "tinyflow-component",
-  shadow: "none"
+  shadow: "none",
+  props: {
+			options: { reflect: true, type: 'Object', attribute: 'options' },
+			onInit: { reflect: true, type: 'Object', attribute: 'onInit' }
+		},
 }} />
 
 <script lang="ts">
     import { SvelteFlowProvider, type useSvelteFlow } from '@xyflow/svelte';
     import TinyflowCore from './TinyflowCore.svelte';
-    import { store } from '../store/stores.js';
-    import type { TinyflowData, TinyflowOptions } from '../Tinyflow';
+    import { store } from '#store/stores.svelte';
+    import type { TinyflowData, TinyflowOptions } from '#types';
     import { setContext } from 'svelte';
 
     const { options, onInit }: {
         options: TinyflowOptions,
         onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void,
     } = $props();
+
     let { data } = options;
+
     if (typeof data === 'string') {
         try {
             data = JSON.parse(data.trim());
@@ -27,6 +33,6 @@
 </script>
 
 
-<SvelteFlowProvider fitView>
+<SvelteFlowProvider>
     <TinyflowCore {onInit} />
 </SvelteFlowProvider>

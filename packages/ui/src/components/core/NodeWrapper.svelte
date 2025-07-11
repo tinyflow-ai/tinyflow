@@ -2,10 +2,10 @@
     import { Handle, type NodeProps, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Collapse, FloatingTrigger, Input, Textarea } from '../base';
     import { type Snippet } from 'svelte';
-    import { useDeleteNode } from '../utils/useDeleteNode';
-    import { useCopyNode } from '../utils/useCopyNode';
+    import { useDeleteNodeSvelte } from '../utils/useDeleteNode.svelte';
+    import { useCopyNodeSvelte } from '../utils/useCopyNode.svelte';
     import { getOptions } from '../utils/NodeUtils';
-    import { getCurrentNodeId } from '../../store/nodeContext';
+    import { getCurrentNodeId } from '#store/nodeContext';
 
     const {
         data,
@@ -51,8 +51,8 @@
     });
 
 
-    const { deleteNode } = useDeleteNode();
-    const { copyNode } = useCopyNode();
+    const { deleteNode } = useDeleteNodeSvelte();
+    const { copyNode } = useCopyNodeSvelte();
 
     const options = getOptions();
 

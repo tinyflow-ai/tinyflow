@@ -1,6 +1,6 @@
 import { genShortId } from './IdGen';
 import { useSvelteFlow } from '@xyflow/svelte';
-import type { Parameter } from '../../types';
+import type { Parameter } from '#types';
 
 export const fillParameterId = (parameters?: Parameter[]) => {
     if (!parameters || parameters.length == 0) {
@@ -16,7 +16,7 @@ export const fillParameterId = (parameters?: Parameter[]) => {
     return parameters;
 };
 
-export const useAddParameter = () => {
+export const useAddParameterSvelte = () => {
     const { updateNodeData } = useSvelteFlow();
     return {
         addParameter: (nodeId: string, dataKey: string = 'parameters', parameter?: Parameter) => {

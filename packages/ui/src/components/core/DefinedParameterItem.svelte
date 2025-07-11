@@ -17,7 +17,7 @@
     let param = $derived.by(() => {
         return {
             ...parameter,
-            ...($node?.data?.parameters as Array<Parameter>)[index]
+            ...(node?.data?.parameters as Array<Parameter>)[index]
         };
     });
 

@@ -4,7 +4,7 @@
     import { Button, Heading } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '../../store/nodeContext';
-    import { useAddParameter } from '../utils/useAddParameter';
+    import { useAddParameterSvelte } from '../utils/useAddParameter.svelte';
 
     const { data, ...rest }: {
         data: NodeProps['data'],
@@ -12,7 +12,7 @@
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
-    const { addParameter } = useAddParameter();
+    const { addParameter } = useAddParameterSvelte();
 
 
     $effect(() => {

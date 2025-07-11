@@ -18,7 +18,7 @@
     let currentNodeId = getCurrentNodeId();
     let node = $derived(useNodesData(currentNodeId));
     let currentParameter = $derived.by(() => {
-        let parameters = $node?.data[dataKeyName] as Parameter[];
+        let parameters = node?.data?.[dataKeyName] as Parameter[];
         let param;
         if (parameters && position.length > 0) {
             let params = parameters as Array<Parameter>;
@@ -42,7 +42,7 @@
 
     const updateAttribute = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
-            const parameters = node.data[dataKeyName] as Array<Parameter>;
+            const parameters = node.data?.[dataKeyName] as Array<Parameter>;
             if (parameters && position.length > 0) {
                 let params = parameters as Parameter[];
                 for (let i = 0; i < position.length; i++) {
@@ -79,7 +79,7 @@
     let triggerObject: any;
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
-            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            let parameters = node.data?.[dataKeyName] as Array<Parameter>;
             if (parameters && position.length > 0) {
                 let params = parameters as Array<Parameter>;
                 for (let i = 0; i < position.length; i++) {
@@ -101,7 +101,7 @@
 
     const handleAddChildParameter = () => {
         updateNodeData(currentNodeId, (node) => {
-            let parameters = node.data[dataKeyName] as Array<Parameter>;
+            let parameters = node.data?.[dataKeyName] as Array<Parameter>;
             if (parameters && position.length > 0) {
                 let params = parameters as Array<Parameter>;
                 for (let i = 0; i < position.length; i++) {
