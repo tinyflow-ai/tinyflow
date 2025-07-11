@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.2",
-    "@xyflow/svelte": "^1.2.1"
+    "@xyflow/svelte": "^1.2.2"
   },
   "imports": {
     "#*": [
