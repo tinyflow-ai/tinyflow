@@ -5,10 +5,9 @@
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
-    // 添加生命周期函数
     import { onMount } from 'svelte';
     import type { Parameter } from '#types';
-    // 在组件挂载时检查并设置默认值
+
     onMount(() => {
         if (!param.refType) {
             updateRefType({ value: 'ref' }); // 设置数据来源默认值
