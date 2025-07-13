@@ -1,6 +1,6 @@
 {
   "name": "@tinyflow-ai/svelte",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "type": "module",
   "keywords": [
     "tinyflow",
