@@ -44,9 +44,8 @@ export type CustomNodeForm = {
             updateNodeData: (data: Record<string, any>) => void,
             value?: string,
             label?: string,
-            event?: Event,
+            event?: Event
         ) => void;
-
     };
 };
 
@@ -103,4 +102,9 @@ export type Parameter = {
     deleteDisabled?: boolean;
     addChildDisabled?: boolean;
     children?: Parameter[];
+};
+
+export type ConfirmParameter = Parameter & {
+    inputDataType?: string;
+    inputActionType?: 'single' | 'multiple' | 'confirm_cancel';
 };
