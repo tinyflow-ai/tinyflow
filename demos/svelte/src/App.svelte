@@ -157,8 +157,8 @@
                        // return ['startNode','loopNode'];
                   }}
 
-                  onDataChange={(data,event)=>{
-                      // console.log('data change: ', data, event)
+                  onDataChange={(data)=>{
+                      // console.log('data change: ', data)
                   }}
                   {customNodes}
         />

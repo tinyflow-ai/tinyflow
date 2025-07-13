@@ -6,7 +6,6 @@
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
-    import { onMount } from 'svelte';
     import ConfirmParameterList from '../core/ConfirmParameterList.svelte';
     import type { ConfirmParameter, Parameter } from '#types';
     import { deepEqual } from '#components/utils/deepEqual';
@@ -43,7 +42,7 @@
                     ...confirm,
                     nameDisabled: true,
                     dataTypeDisabled: true,
-                    dataType: confirm.inputActionType === 'multiple' ? 'Array' : 'String',
+                    dataType: confirm.selectionMode === 'multiple' ? 'Array' : 'String',
                     addChildDisabled: true
                 } as Parameter;
             });
@@ -92,10 +91,10 @@
                   style="width: 100%" onchange={(e:any)=>{
             updateNodeData(currentNodeId, ()=>{
                 return {
-                    code: e.target.value
+                    message: e.target.value
                 }
             })
-        }} value={data.code as string||""} />
+        }} value={data.message as string||""} />
     </div>
 
 

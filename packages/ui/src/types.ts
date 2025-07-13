@@ -84,7 +84,7 @@ export type TinyflowOptions = {
     customNodes?: Record<string, CustomNode>;
     onNodeExecute?: (node: Node) => void;
     hiddenNodes?: string[] | (() => string[]);
-    onDataChange?: (data: TinyflowData, event: { eventType: string }) => void;
+    onDataChange?: (data: TinyflowData) => void;
 };
 
 export type Parameter = {
@@ -105,6 +105,6 @@ export type Parameter = {
 };
 
 export type ConfirmParameter = Parameter & {
-    inputDataType?: string;
-    inputActionType?: 'single' | 'multiple' | 'confirm_cancel';
+    selectionDataType?: string;
+    selectionMode?: 'single' | 'multiple' | 'confirm';
 };

@@ -3,9 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { parameterRefTypes } from '../utils/Consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
-    import { onMount } from 'svelte';
     import type { ConfirmParameter, Parameter } from '#types';
 
 
@@ -17,12 +15,6 @@
     } = $props();
 
 
-    onMount(() => {
-        if (!param.refType) {
-            updateRefType({ value: 'ref' }); // 设置数据来源默认值
-        }
-    });
-
     let currentNodeId = getCurrentNodeId();
     let node = useNodesData(currentNodeId);
     let param = $derived.by(() => {
@@ -33,6 +25,7 @@
     });
 
     const { updateNodeData } = useSvelteFlow();
+
 
     const updateParam = (key: string, value: any) => {
         updateNodeData(currentNodeId, (node) => {
@@ -58,15 +51,15 @@
         updateParam('ref', newValue);
     };
 
-    const updateInputActionType = (item: any) => {
+    const updateSelectionMode = (item: any) => {
         const newValue = item.value;
-        updateParam('inputActionType', newValue);
+        updateParam('selectionMode', newValue);
     };
 
 
-    const updateInputDataType = (item: any) => {
+    const updateSelectionDataType = (item: any) => {
         const newValue = item.value;
-        updateParam('inputDataType', newValue);
+        updateParam('selectionDataType', newValue);
     };
 
     const updateRequired = (item: any) => {
@@ -88,7 +81,7 @@
     };
     let selectItems = useRefOptions(useChildrenOnly);
 
-    const inputDataTypes = [
+    const selectionDataTypes = [
         { label: '文字', value: 'text' },
         { label: '图片', value: 'image' },
         { label: '视频', value: 'video' },
@@ -97,7 +90,7 @@
         { label: '其他', value: 'other' }
     ];
 
-    const inputActionTypes = [
+    const selectionModes = [
         { label: '单选', value: 'single' },
         { label: '多选', value: 'multiple' }
     ];
@@ -127,16 +120,16 @@
             <div class="input-more-setting">
                 <div class="input-more-item">
                     数据类型：
-                    <Select items={inputDataTypes} style="width: 100%" defaultValue={["ref"]}
-                            value={param.inputDataType ? [param.inputDataType] : []}
-                            onSelect={updateInputDataType}
+                    <Select items={selectionDataTypes} style="width: 100%" defaultValue={["text"]}
+                            value={param.selectionDataType ? [param.selectionDataType] : []}
+                            onSelect={updateSelectionDataType}
                     />
                 </div>
                 <div class="input-more-item">
                     确认方式：
-                    <Select items={inputActionTypes} style="width: 100%" defaultValue={["ref"]}
-                            value={param.inputActionType ? [param.inputActionType] : []}
-                            onSelect={updateInputActionType}
+                    <Select items={selectionModes} style="width: 100%" defaultValue={["single"]}
+                            value={param.selectionMode ? [param.selectionMode] : []}
+                            onSelect={updateSelectionMode}
                     />
                 </div>
                 <label class="input-item-inline">

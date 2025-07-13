@@ -210,10 +210,14 @@
         }
     }
 
-    // const { nodes, edges, viewport } = useStore();
     const onDataChange = getOptions().onDataChange;
-    if (onDataChange) {
-    }
+    $effect(() => {
+        onDataChange?.({
+            nodes: store.getNodes(),
+            edges: store.getEdges(),
+            viewport: store.getViewport()
+        });
+    });
 
 
 </script>
