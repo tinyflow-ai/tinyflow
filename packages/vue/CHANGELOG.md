@@ -1,5 +1,14 @@
 # @tinyflow-ai/ui
 
+## 1.0.2
+
+### Patch Changes
+
+- [`806e81b`](https://github.com/tinyflow-ai/tinyflow/commit/806e81bf028f92861745a03a222cbc7b6506bfd2) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.0.2
+
+- Updated dependencies [[`806e81b`](https://github.com/tinyflow-ai/tinyflow/commit/806e81bf028f92861745a03a222cbc7b6506bfd2)]:
+    - @tinyflow-ai/ui@1.0.2
+
 ## 1.0.1
 
 ### Patch Changes
