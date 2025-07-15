@@ -24,7 +24,34 @@
                 };
             });
         }
+
+        if (!data.outputDefs) {
+            addParameter(currentNodeId, 'outputDefs', [
+                {
+                    name: 'headers',
+                    nameDisabled: true,
+                    dataType: 'Object',
+                    dataTypeDisabled: true,
+                    deleteDisabled: true
+                },
+                {
+                    name: 'body',
+                    nameDisabled: true,
+                    dataType: 'String',
+                    deleteDisabled: true
+                },
+                {
+                    name: 'statusCode',
+                    nameDisabled: true,
+                    dataType: 'Number',
+                    dataTypeDisabled: true,
+                    deleteDisabled: true
+                }
+            ]);
+        }
     });
+
+
     const method = [
         { value: 'get', label: 'GET' },
         { value: 'post', label: 'POST' },
@@ -98,46 +125,50 @@
     <RefParameterList dataKeyName="headers" />
 
 
-    <Heading level={3} mt="10px">Body</Heading>
+    {#if data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch'}
 
-    <div class="radio-group">
-        <label><Input type="radio" name="bodyType" value="" checked={!data.bodyType} onchange={(e:any)=>{
+        <Heading level={3} mt="10px">Body</Heading>
+        <div class="radio-group">
+            <label><Input type="radio" name="bodyType" value="" checked={!data.bodyType || data.bodyType === ''}
+                          onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
                     bodyType: '',
                 })
             }
         }} />none</label>
-        <label><Input type="radio" name="bodyType" value="form-data" checked={data.bodyType === 'form-data'} onchange={(e:any)=>{
+            <label><Input type="radio" name="bodyType" value="form-data" checked={data.bodyType === 'form-data'}
+                          onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
                     bodyType: 'form-data',
                 })
             }
         }} />form-data</label>
-        <label><Input type="radio" name="bodyType" value="x-www-form-urlencoded"
-                      checked={data.bodyType === 'x-www-form-urlencoded'} onchange={(e:any)=>{
+            <label><Input type="radio" name="bodyType" value="x-www-form-urlencoded"
+                          checked={data.bodyType === 'x-www-form-urlencoded'} onchange={(e:any)=>{
                           if (e.target?.checked){
                               updateNodeData(currentNodeId,{
                                   bodyType: 'x-www-form-urlencoded',
                               })
                           }
         }} />x-www-form-urlencoded</label>
-        <label><Input type="radio" name="bodyType" value="json" checked={data.bodyType === 'json'} onchange={(e:any)=>{
+            <label><Input type="radio" name="bodyType" value="json" checked={data.bodyType === 'json'} onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
                     bodyType: 'json',
                 })
             }
         }} />json</label>
-        <label><Input type="radio" name="bodyType" value="raw" checked={data.bodyType === 'raw'} onchange={(e:any)=>{
+            <label><Input type="radio" name="bodyType" value="raw" checked={data.bodyType === 'raw'} onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
                     bodyType: 'raw',
                 })
             }
         }} />raw</label>
-    </div>
+        </div>
+    {/if}
 
 
     {#if data.bodyType === 'form-data'}
@@ -216,10 +247,12 @@
   .radio-group {
     display: flex;
     margin: 10px 0;
+    flex-wrap: wrap;
 
     label {
       display: flex;
       font-size: 14px;
+      box-sizing: border-box;
     }
   }
 
