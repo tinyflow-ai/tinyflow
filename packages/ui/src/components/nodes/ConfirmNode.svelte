@@ -82,7 +82,7 @@
             </svg>
         </Button>
     </div>
-    <ConfirmParameterList dataKeyName="confirms" />
+    <ConfirmParameterList dataKeyName="confirms" noneParameterText="无确认数据" />
 
     <Heading level={3} mt="10px">确认消息</Heading>
     <div class="setting-title">消息内容</div>

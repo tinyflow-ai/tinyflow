@@ -132,22 +132,26 @@
                             onSelect={updateSelectionMode}
                     />
                 </div>
+
+                <div class="input-more-item">
+                    数据标题：
+                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                        updateParamByEvent('formLabel', event)
+                    }} value={param.formLabel} />
+                </div>
+
+                <div class="input-more-item">
+                    数据描述：
+                    <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
+                        updateParamByEvent('formDescription', event)
+                    }} value={param.formDescription} />
+                </div>
+
                 <label class="input-item-inline">
                     <span>是否必填：</span>
                     <input type="checkbox" checked={false} onchange={updateRequired} />
                 </label>
-                <div class="input-more-item">
-                    默认值：
-                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
-                        updateParamByEvent('defaultValue', event)
-                    }} value={param.defaultValue} />
-                </div>
-                <div class="input-more-item">
-                    参数描述：
-                    <Textarea rows={3} style="width: 100%;" onchange={(event)=>{
-                        updateParamByEvent('description', event)
-                    }} value={param.description} />
-                </div>
+
 
                 <div class="input-more-item">
                     <Button onclick={handleDelete}>删除</Button>

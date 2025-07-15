@@ -107,4 +107,6 @@ export type Parameter = {
 export type ConfirmParameter = Parameter & {
     selectionDataType?: string;
     selectionMode?: 'single' | 'multiple' | 'confirm';
+    formLabel?: string;
+    formDescription?: string;
 };

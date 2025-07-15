@@ -4,7 +4,7 @@
     import ConfirmParameterItem from './ConfirmParameterItem.svelte';
 
     const {
-        noneParameterText = '无输入参数',
+        noneParameterText = '无确认数据',
         dataKeyName = 'parameters',
         useChildrenOnly,
     }: {
