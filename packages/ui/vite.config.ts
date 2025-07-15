@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dts from 'vite-plugin-dts';
-// import replace from '@rollup/plugin-replace';
+import replace from '@rollup/plugin-replace';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -27,10 +27,10 @@ export default defineConfig({
                 exports: 'named',
             },
             plugins: [
-                // replace({
-                //     preventAssignment: true,
-                //     'process.env.NODE_ENV': JSON.stringify('production') // 替换为生产环境
-                // })
+                replace({
+                    preventAssignment: true,
+                    'process.env.NODE_ENV': JSON.stringify('production') // 替换为生产环境
+                })
             ]
         }
     },
