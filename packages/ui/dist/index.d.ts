@@ -7,6 +7,8 @@ import { Viewport } from '@xyflow/svelte';
 export declare type ConfirmParameter = Parameter & {
     selectionDataType?: string;
     selectionMode?: 'single' | 'multiple' | 'confirm';
+    formLabel?: string;
+    formDescription?: string;
 };
 
 export declare type CustomNode = {
