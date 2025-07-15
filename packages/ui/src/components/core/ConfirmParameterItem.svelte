@@ -63,7 +63,7 @@
     };
 
     const updateRequired = (item: any) => {
-        const newValue = item.checked;
+        const newValue = item.target.checked;
         updateParam('required', newValue);
     };
 
