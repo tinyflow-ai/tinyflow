@@ -1,5 +1,11 @@
 # @tinyflow-ai/ui
 
+## 1.0.1
+
+### Patch Changes
+
+- [`9dc676d`](https://github.com/tinyflow-ai/tinyflow/commit/9dc676d46ccf26d1801487716b0709f89ba3a0d1) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.0.1
+
 ## 1.0.0
 
 ### Major Changes
