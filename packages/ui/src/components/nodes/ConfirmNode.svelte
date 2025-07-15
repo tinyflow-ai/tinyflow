@@ -101,7 +101,7 @@
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
     </div>
-    <OutputDefList />
+    <OutputDefList placeholder="" />
 
 </NodeWrapper>
 

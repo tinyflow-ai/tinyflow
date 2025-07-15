@@ -8,10 +8,11 @@
     import type { Parameter } from '#types';
     import { deepClone } from '../utils/deepClone';
 
-    const { parameter, position, dataKeyName }: {
+    const { parameter, position, dataKeyName, placeholder = '请输入参数值' }: {
         parameter: Parameter,
         position: number[],
         dataKeyName: string,
+        placeholder?: string,
     } = $props();
 
 
@@ -140,7 +141,7 @@
     {#if (position.length > 1)}
         {#each position as p} &nbsp;{/each}
     {/if}
-    <Input style="width: 100%;" value={currentParameter.name} placeholder="请输入参数名称"
+    <Input style="width: 100%;" value={currentParameter.name} placeholder={placeholder}
            oninput={(e)=>{updateByEvent('name',e)}} disabled={currentParameter.nameDisabled === true} />
 </div>
 <div class="input-item">
