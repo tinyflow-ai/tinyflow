@@ -4,6 +4,11 @@ import { Snippet } from 'svelte';
 import { useSvelteFlow } from '@xyflow/svelte';
 import { Viewport } from '@xyflow/svelte';
 
+export declare type ConfirmParameter = Parameter & {
+    selectionDataType?: string;
+    selectionMode?: 'single' | 'multiple' | 'confirm';
+};
+
 export declare type CustomNode = {
     title: string;
     description?: string;
@@ -93,9 +98,7 @@ export declare type TinyflowOptions = {
     customNodes?: Record<string, CustomNode>;
     onNodeExecute?: (node: Node_2) => void;
     hiddenNodes?: string[] | (() => string[]);
-    onDataChange?: (data: TinyflowData, event: {
-        eventType: string;
-    }) => void;
+    onDataChange?: (data: TinyflowData) => void;
 };
 
 export { }
