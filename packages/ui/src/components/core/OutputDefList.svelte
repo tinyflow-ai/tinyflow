@@ -6,10 +6,12 @@
 
     const {
         noneParameterText = '无输出参数',
-        dataKeyName = 'outputDefs'
+        dataKeyName = 'outputDefs',
+        placeholder = '请输入参数名称',
     }: {
         noneParameterText?: string;
         dataKeyName?: string;
+        placeholder?: string
     } = $props();
 
     let currentNodeId = getCurrentNodeId();
@@ -22,7 +24,7 @@
 
 {#snippet parameterList(params: Parameter[], position: number[])}
     {#each params as param, index (`${param.id}_${param.children ? param.children.length : 0}`)}
-        <OutputDefItem parameter={param} position={[...position, index]} {dataKeyName} />
+        <OutputDefItem parameter={param} position={[...position, index]} {dataKeyName} {placeholder} />
         {#if param.children}
             {@render parameterList(param.children, [...position, index])}
         {/if}
