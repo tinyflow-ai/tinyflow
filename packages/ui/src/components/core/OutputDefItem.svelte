@@ -17,7 +17,7 @@
 
 
     let currentNodeId = getCurrentNodeId();
-    let node = $derived(useNodesData(currentNodeId));
+    let node = useNodesData(currentNodeId);
     let currentParameter = $derived.by(() => {
         let parameters = node?.current?.data?.[dataKeyName] as Parameter[];
         let param;

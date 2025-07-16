@@ -15,7 +15,7 @@
     } = $props();
 
     let currentNodeId = getCurrentNodeId();
-    let node = $derived(useNodesData(currentNodeId));
+    let node = useNodesData(currentNodeId);
 
     let parameters = $derived.by(() => {
         return [...node?.current?.data?.[dataKeyName] as Array<Parameter> || []];

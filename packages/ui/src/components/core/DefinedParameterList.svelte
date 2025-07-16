@@ -4,7 +4,7 @@
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     let currentNodeId = getCurrentNodeId();
-    let node = $derived(useNodesData(currentNodeId));
+    let node = useNodesData(currentNodeId);
     let parameters = $derived.by(() => {
         return [...node?.current?.data?.parameters as Array<any> || []];
     });
