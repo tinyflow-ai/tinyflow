@@ -50,7 +50,7 @@ export const useAddParameter = () => {
             updateNodeData(nodeId, (node) => {
                 let parameters = node.data[dataKey] as Array<any>;
                 if (parameters) {
-                    parameters.push(newParameters);
+                    parameters.push(...newParameters);
                 } else {
                     parameters = [...newParameters];
                 }
