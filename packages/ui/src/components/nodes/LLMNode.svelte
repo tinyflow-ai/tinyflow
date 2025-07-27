@@ -176,7 +176,7 @@
     </div>
 
     <div class="heading">
-        <Heading level={3} mt="10px">输出参数</Heading>
+        <Heading level={3}>输出参数</Heading>
         <Select items={[{
             label: '文本',
             value: 'text'
