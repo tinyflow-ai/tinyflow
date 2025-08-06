@@ -59,14 +59,13 @@
     const executeNode = () => {
         options.onNodeExecute?.(getNode(id)!);
     };
-
     let currentNodeId = getCurrentNodeId();
 
 </script>
 
 
 {#if allowExecute || allowCopy || allowDelete}
-    <NodeToolbar position={Position.Top} align="end">
+    <NodeToolbar position={Position.Top} align="start">
         <div class="tf-node-toolbar">
             {#if allowDelete}
                 <Button class="tf-node-toolbar-item" onclick={()=>{ deleteNode(id) }}>
