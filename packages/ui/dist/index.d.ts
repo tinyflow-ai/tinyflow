@@ -4,13 +4,6 @@ import { Snippet } from 'svelte';
 import { useSvelteFlow } from '@xyflow/svelte';
 import { Viewport } from '@xyflow/svelte';
 
-export declare type ConfirmParameter = Parameter & {
-    selectionDataType?: string;
-    selectionMode?: 'single' | 'multiple' | 'confirm';
-    formLabel?: string;
-    formDescription?: string;
-};
-
 export declare type CustomNode = {
     title: string;
     description?: string;
@@ -53,6 +46,7 @@ export declare type Parameter = {
     nameDisabled?: boolean;
     dataType?: string;
     dataTypeDisabled?: boolean;
+    contentType?: string;
     ref?: string;
     refType?: string;
     value?: string;
@@ -62,6 +56,10 @@ export declare type Parameter = {
     deleteDisabled?: boolean;
     addChildDisabled?: boolean;
     children?: Parameter[];
+    enums?: string[];
+    formType?: string;
+    formLabel?: string;
+    formDescription?: string;
 };
 
 export declare type SelectItem = {
