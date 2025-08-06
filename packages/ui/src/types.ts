@@ -93,6 +93,7 @@ export type Parameter = {
     nameDisabled?: boolean;
     dataType?: string;
     dataTypeDisabled?: boolean;
+    contentType?: string; //数据内容类型
     ref?: string;
     refType?: string;
     value?: string;
@@ -102,11 +103,8 @@ export type Parameter = {
     deleteDisabled?: boolean;
     addChildDisabled?: boolean;
     children?: Parameter[];
-};
-
-export type ConfirmParameter = Parameter & {
-    selectionDataType?: string;
-    selectionMode?: 'single' | 'multiple' | 'confirm';
+    enums?: string[];
+    formType?: string;
     formLabel?: string;
     formDescription?: string;
 };
