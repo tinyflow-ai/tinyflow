@@ -4,11 +4,12 @@
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
-    import type { ConfirmParameter, Parameter } from '#types';
+    import type { Parameter } from '#types';
+    import { contentTypes, confirmFormTypes } from '#consts';
 
 
     const { parameter, index, dataKeyName, useChildrenOnly }: {
-        parameter: ConfirmParameter,
+        parameter: Parameter,
         index: number,
         dataKeyName: string,
         useChildrenOnly?: boolean,
@@ -51,15 +52,14 @@
         updateParam('ref', newValue);
     };
 
-    const updateSelectionMode = (item: any) => {
+    const updateFormType = (item: any) => {
         const newValue = item.value;
-        updateParam('selectionMode', newValue);
+        updateParam('formType', newValue);
     };
 
-
-    const updateSelectionDataType = (item: any) => {
+    const updateContentType = (item: any) => {
         const newValue = item.value;
-        updateParam('selectionDataType', newValue);
+        updateParam('contentType', newValue);
     };
 
     const updateRequired = (item: any) => {
@@ -80,20 +80,6 @@
         triggerObject?.hide();
     };
     let selectItems = useRefOptions(useChildrenOnly);
-
-    const selectionDataTypes = [
-        { label: '文字', value: 'text' },
-        { label: '图片', value: 'image' },
-        { label: '视频', value: 'video' },
-        { label: '音频', value: 'audio' },
-        { label: '文件', value: 'file' },
-        { label: '其他', value: 'other' }
-    ];
-
-    const selectionModes = [
-        { label: '单选', value: 'single' },
-        { label: '多选', value: 'multiple' }
-    ];
 
 
 </script>
@@ -119,27 +105,25 @@
         {#snippet floating()}
             <div class="input-more-setting">
                 <div class="input-more-item">
-                    数据类型：
-                    <Select items={selectionDataTypes} style="width: 100%" defaultValue={["text"]}
-                            value={param.selectionDataType ? [param.selectionDataType] : []}
-                            onSelect={updateSelectionDataType}
+                    数据内容：
+                    <Select items={contentTypes} style="width: 100%" defaultValue={["text"]}
+                            value={param.contentType ? [param.contentType] : []}
+                            onSelect={updateContentType}
                     />
                 </div>
                 <div class="input-more-item">
                     确认方式：
-                    <Select items={selectionModes} style="width: 100%" defaultValue={["single"]}
-                            value={param.selectionMode ? [param.selectionMode] : []}
-                            onSelect={updateSelectionMode}
+                    <Select items={confirmFormTypes} style="width: 100%" defaultValue={["single"]}
+                            value={param.formType ? [param.formType] : []}
+                            onSelect={updateFormType}
                     />
                 </div>
-
                 <div class="input-more-item">
                     数据标题：
                     <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('formLabel', event)
                     }} value={param.formLabel} />
                 </div>
-
                 <div class="input-more-item">
                     数据描述：
                     <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
