@@ -2,8 +2,8 @@
     import { Input, Textarea } from '../base';
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { parameterDataTypes } from '../utils/Consts';
-    import type { SelectItem, Parameter } from '#types';
+    import { contentTypes, startFormTypes } from '#consts';
+    import type { Parameter } from '#types';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
     const { parameter, index }: {
@@ -33,23 +33,29 @@
         });
     };
 
+    const updateParamByEvent = (name: string, event: Event) => {
+        const newValue = (event.target as any).value;
+        updateParameter(name, newValue);
+    };
+
     const updateName = (event: Event) => {
         const newValue = (event.target as any).value;
         updateParameter('name', newValue);
     };
-
 
     const updateRequired = (event: Event) => {
         const checked = (event.target as any).checked;
         updateParameter('required', checked);
     };
 
+    const updateFormType = (item: any) => {
+        const newValue = item.value;
+        updateParameter('formType', newValue);
+    };
 
-    const updateDataType = (item: SelectItem) => {
-        const dataType = item.value as string;
-        if (dataType) {
-            updateParameter('dataType', dataType);
-        }
+    const updateContentType = (item: any) => {
+        const newValue = item.value;
+        updateParameter('contentType', newValue);
     };
 
 
@@ -86,30 +92,42 @@
         {#snippet floating()}
             <div class="input-more-setting">
                 <div class="input-more-item">
-                    参数类型：
-                    <Select items={parameterDataTypes} style="width: 100%" onSelect={updateDataType}
-                            value={param.dataType ?[param.dataType]:['String']} />
-                </div>
-                <div class="input-more-item">
-                    默认值：
-                    <Textarea rows={1} style="width: 100%;"
-                              value={param.defaultValue}
-                              onchange={event => {
-                        const newValue = (event.target as any).value;
-                        updateParameter('defaultValue', newValue)
-                    }}
+                    数据内容：
+                    <Select items={contentTypes} style="width: 100%" defaultValue={["text"]}
+                            value={param.contentType ? [param.contentType] : []}
+                            onSelect={updateContentType}
                     />
                 </div>
                 <div class="input-more-item">
-                    参数描述：
-                    <Textarea rows={3} style="width: 100%;"
-                              value={param.description}
-                              onchange={event => {
-                        const newValue = (event.target as any).value;
-                        updateParameter('description', newValue)
-                    }}
+                    输入方式：
+                    <Select items={startFormTypes} style="width: 100%" defaultValue={["input"]}
+                            value={param.formType ? [param.formType] : []}
+                            onSelect={updateFormType}
                     />
                 </div>
+
+                {#if param.formType === "radio" || param.formType === "checkbox" || param.formType === "select" }
+                    <div class="input-more-item">
+                        数据选项：
+                        <Textarea rows={3} style="width: 100%;" onchange={(event)=>{
+                        updateParameter('enums', event.target?.value.trim().split("\n"))
+                    }} value={param.enums?.join("\n")} placeholder="一行一个选项" />
+                    </div>
+                {/if}
+
+                <div class="input-more-item">
+                    数据标题：
+                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                        updateParamByEvent('formLabel', event)
+                    }} value={param.formLabel} />
+                </div>
+                <div class="input-more-item">
+                    数据描述：
+                    <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
+                        updateParamByEvent('formDescription', event)
+                    }} value={param.formDescription} />
+                </div>
+
 
                 <div class="input-more-item">
                     <Button onclick={handleDelete}>删除</Button>
@@ -124,6 +142,13 @@
   .input-item {
     display: flex;
     align-items: center;
+  }
+
+  .input-item-inline {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #666;
   }
 
   .input-more-setting {
