@@ -7,7 +7,7 @@
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
     import ConfirmParameterList from '../core/ConfirmParameterList.svelte';
-    import type { ConfirmParameter, Parameter } from '#types';
+    import type { Parameter } from '#types';
     import { deepEqual } from '#components/utils/deepEqual';
 
 
@@ -23,7 +23,7 @@
 
     $effect(() => {
         if (data.confirms) {
-            const outputDefs = data.confirms.map((confirm: ConfirmParameter) => {
+            const outputDefs = data.confirms.map((confirm: Parameter) => {
                 return {
                     // id?: string;
                     // name?: string;
@@ -42,7 +42,7 @@
                     ...confirm,
                     nameDisabled: true,
                     dataTypeDisabled: true,
-                    dataType: confirm.selectionMode === 'multiple' ? 'Array' : 'String',
+                    dataType: confirm.formType === 'checkbox' || confirm.formType === 'select' ? 'Array' : 'String',
                     addChildDisabled: true
                 } as Parameter;
             });
