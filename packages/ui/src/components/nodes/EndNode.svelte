@@ -34,7 +34,7 @@
             </svg>
         </Button>
     </div>
-    <RefParameterList noneParameterText="无输出参数" dataKeyName="outputDefs" />
+    <RefParameterList noneParameterText="无输出参数" dataKeyName="outputDefs" showContentType={true} />
 </NodeWrapper>
 
 

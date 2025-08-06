@@ -3,7 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { parameterRefTypes } from '#consts';
+    import { contentTypes, parameterRefTypes } from '#consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
     import { onMount } from 'svelte';
     import type { Parameter } from '#types';
@@ -14,11 +14,12 @@
         }
     });
 
-    const { parameter, index, dataKeyName, useChildrenOnly }: {
+    const { parameter, index, dataKeyName, useChildrenOnly, showContentType = false }: {
         parameter: Parameter,
         index: number,
         dataKeyName: string,
         useChildrenOnly?: boolean,
+        showContentType?: boolean,
     } = $props();
 
 
@@ -64,6 +65,11 @@
         updateParam('refType', newValue);
     };
 
+    const updateContentType = (item: any) => {
+        const newValue = item.value;
+        updateParam('contentType', newValue);
+    };
+
 
     let triggerObject: any;
     const handleDelete = () => {
@@ -106,6 +112,15 @@
                             onSelect={updateRefType}
                     />
                 </div>
+                {#if showContentType }
+                    <div class="input-more-item">
+                        数据内容：
+                        <Select items={contentTypes} style="width: 100%" defaultValue={["text"]}
+                                value={param.contentType ? [param.contentType] : []}
+                                onSelect={updateContentType}
+                        />
+                    </div>
+                {/if}
                 <div class="input-more-item">
                     默认值：
                     <Textarea rows={1} style="width: 100%;" onchange={(event)=>{

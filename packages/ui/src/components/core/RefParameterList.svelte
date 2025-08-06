@@ -7,10 +7,12 @@
         noneParameterText = '无输入参数',
         dataKeyName = 'parameters',
         useChildrenOnly,
+        showContentType = false
     }: {
         noneParameterText?: string;
         dataKeyName?: string;
         useChildrenOnly?: boolean,
+        showContentType?: boolean,
     } = $props();
 
     let currentNodeId = getCurrentNodeId();
@@ -29,7 +31,7 @@
         <div class="input-header"></div>
     {/if}
     {#each parameters as param, index (param.id)}
-        <RefParameterItem parameter={param} index={index} {dataKeyName} {useChildrenOnly}/>
+        <RefParameterItem parameter={param} index={index} {dataKeyName} {useChildrenOnly} {showContentType} />
     {:else }
         <div class="none-params">{noneParameterText}</div>
     {/each}

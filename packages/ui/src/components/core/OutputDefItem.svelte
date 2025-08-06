@@ -3,7 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { parameterDataTypes } from '../utils/Consts';
+    import { parameterDataTypes } from '#consts';
     import { genShortId } from '../utils/IdGen';
     import type { Parameter } from '#types';
     import { deepClone } from '../utils/deepClone';
