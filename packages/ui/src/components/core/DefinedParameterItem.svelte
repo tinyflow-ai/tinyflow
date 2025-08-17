@@ -121,11 +121,19 @@
                         updateParamByEvent('formLabel', event)
                     }} value={param.formLabel} />
                 </div>
+
                 <div class="input-more-item">
                     数据描述：
                     <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('formDescription', event)
                     }} value={param.formDescription} />
+                </div>
+
+                <div class="input-more-item">
+                    占位符：
+                    <Textarea rows={2} style="width: 100%;" onchange={(event)=>{
+                        updateParamByEvent('formPlaceholder', event)
+                    }} value={param.formPlaceholder} />
                 </div>
 
 
