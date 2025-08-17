@@ -54,6 +54,7 @@ export const contentTypes = [
 export const startFormTypes = [
     { label: '当行输入框', value: 'input' },
     { label: '多行输入框', value: 'textarea' },
+    { label: '下拉菜单', value: 'select' },
     { label: '单选', value: 'radio' },
     { label: '多选', value: 'checkbox' }
 ];
