@@ -107,4 +107,6 @@ export type Parameter = {
     formType?: string;
     formLabel?: string;
     formDescription?: string;
+    formPlaceholder?: string;
+    formAttrs?: string;
 };
