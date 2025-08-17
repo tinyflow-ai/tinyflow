@@ -60,6 +60,8 @@ export declare type Parameter = {
     formType?: string;
     formLabel?: string;
     formDescription?: string;
+    formPlaceholder?: string;
+    formAttrs?: string;
 };
 
 export declare type SelectItem = {
