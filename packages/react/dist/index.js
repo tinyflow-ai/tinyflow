@@ -13965,7 +13965,7 @@ const Xl = "tinyflow-component", _2 = [
   { label: "文件", value: "file" },
   { label: "其他", value: "other" }
 ], E2 = [
-  { label: "当行输入框", value: "input" },
+  { label: "单行输入框", value: "input" },
   { label: "多行输入框", value: "textarea" },
   { label: "下拉菜单", value: "select" },
   { label: "单选", value: "radio" },
