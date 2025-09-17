@@ -109,7 +109,7 @@
         </button>
 
         {#snippet floating()}
-            <div class="tf-select-content nopan nodrag">
+            <div class="tf-select-content nopan nodrag nowheel ">
                 {@render selectItems(items)}
             </div>
         {/snippet}
