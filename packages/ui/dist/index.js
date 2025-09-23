@@ -16932,7 +16932,7 @@ function Fd(e, t) {
           let X = /* @__PURE__ */ $(() => n().code || "");
           Be(N, {
             rows: 10,
-            placeholder: "请输入执行代码，注：输出内容需添加到_result中，如：_result.put(key, value)",
+            placeholder: "请输入执行代码，注：输出内容需添加到_result中，如：_result['key'] = value 或者 _result.key = value",
             style: "width: 100%",
             onchange: (G) => {
               s(o, () => ({ code: G.target.value }));
