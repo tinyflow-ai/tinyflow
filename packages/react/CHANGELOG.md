@@ -1,5 +1,16 @@
 # @tinyflow-ai/ui
 
+## 2.0.0
+
+### Major Changes
+
+- [#49](https://github.com/tinyflow-ai/tinyflow/pull/49) [`6b4efd6`](https://github.com/tinyflow-ai/tinyflow/commit/6b4efd6dda7efce0f56ba9aa98520c805e269882) Thanks [@Dalididilo](https://github.com/Dalididilo)! - docs(CodeNode):修正动态代码节点中placeholder的描述错误;
+
+### Patch Changes
+
+- Updated dependencies [[`6b4efd6`](https://github.com/tinyflow-ai/tinyflow/commit/6b4efd6dda7efce0f56ba9aa98520c805e269882)]:
+    - @tinyflow-ai/ui@2.0.0
+
 ## 1.1.3
 
 ### Patch Changes
