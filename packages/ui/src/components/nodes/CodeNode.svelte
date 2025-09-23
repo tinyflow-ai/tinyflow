@@ -76,7 +76,7 @@
 
     <div class="setting-title">执行代码</div>
     <div class="setting-item">
-        <Textarea rows={10} placeholder="请输入执行代码，注：输出内容需添加到_result中，如：_result.put(key, value)" style="width: 100%" onchange={(e:any)=>{
+        <Textarea rows={10} placeholder="请输入执行代码，注：输出内容需添加到_result中，如：_result['key'] = value 或者 _result.key = value" style="width: 100%" onchange={(e:any)=>{
             updateNodeData(currentNodeId, ()=>{
                 return {
                     code: e.target.value
