@@ -62,10 +62,10 @@
         updateParam('contentType', newValue);
     };
 
-    const updateRequired = (item: any) => {
-        const newValue = item.target.checked;
-        updateParam('required', newValue);
-    };
+    // const updateRequired = (item: any) => {
+    //     const newValue = item.target.checked;
+    //     updateParam('required', newValue);
+    // };
 
 
     let triggerObject: any;
@@ -131,10 +131,10 @@
                     }} value={param.formDescription} />
                 </div>
 
-                <label class="input-item-inline">
-                    <span>是否必填：</span>
-                    <input type="checkbox" checked={false} onchange={updateRequired} />
-                </label>
+<!--                <label class="input-item-inline">-->
+<!--                    <span>是否必填：</span>-->
+<!--                    <input type="checkbox" checked={false} onchange={updateRequired} />-->
+<!--                </label>-->
 
 
                 <div class="input-more-item">
