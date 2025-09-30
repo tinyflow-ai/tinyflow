@@ -92,6 +92,7 @@ export type Parameter = {
     name?: string;
     nameDisabled?: boolean;
     dataType?: string;
+    dataTypeItems?: SelectItem[];
     dataTypeDisabled?: boolean;
     contentType?: string; //数据内容类型
     ref?: string;

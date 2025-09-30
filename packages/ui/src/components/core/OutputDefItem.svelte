@@ -145,7 +145,7 @@
            oninput={(e)=>{updateByEvent('name',e)}} disabled={currentParameter.nameDisabled === true} />
 </div>
 <div class="input-item">
-    <Select items={parameterDataTypes} style="width: 100%" defaultValue={["String"]}
+    <Select items={currentParameter.dataTypeItems || parameterDataTypes} style="width: 100%" defaultValue={["String"]}
             value={currentParameter.dataType ? [currentParameter.dataType]:[]}
             disabled={currentParameter.dataTypeDisabled === true}
             onSelect={updateDataType} />

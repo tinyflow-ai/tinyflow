@@ -1,7 +1,7 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
-    import { Button, Heading, Select } from '../base';
+    import { Button, FloatingTrigger, Heading, Select } from '../base';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
@@ -46,7 +46,20 @@
             });
         } else {
             updateNodeData(currentNodeId, {
-                outputDefs: []
+                outputDefs: [{
+                    name: 'root',
+                    dataType: 'Object',
+                    dataTypeItems: [
+                        {
+                            value: 'Object',
+                            label: 'Object'
+                        },
+                        {
+                            value: 'Array',
+                            label: 'Array'
+                        }],
+                    deleteDisabled: true
+                }]
             });
         }
     };
@@ -82,6 +95,19 @@
     </div>
     <RefParameterList />
 
+    <div class="heading" style="padding-top: 10px">
+        <Heading level={3}>图片识别</Heading>
+        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
+            addParameter(currentNodeId, "images")
+        }}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
+            </svg>
+        </Button>
+    </div>
+
+    <RefParameterList dataKeyName="images" noneParameterText="无图片参数" />
+
     <Heading level={3} mt="10px">模型设置</Heading>
     <div class="setting-title">模型</div>
     <div class="setting-item">
@@ -93,56 +119,61 @@
                   }
               })
         }} value={data.llmId ? [data.llmId] : []} />
-        <MenuButton />
+        <FloatingTrigger placement="bottom">
+            <MenuButton />
+            {#snippet floating()}
+                <div class="llm-setting">
+                    <!-- 在原有采样参数部分添加事件阻止 -->
+                    <div class="setting-title">采样参数</div>
+                    <div class="setting-item">
+                        <div class="slider-container">
+                            <span>Temperature: {data.temperature ?? 0.7}</span>
+                            <input
+                                class="nodrag"
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.1"
+                                value={data.temperature ?? 0.7}
+                                oninput={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
+                            />
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="slider-container">
+                            <span>Top P: {data.topP ?? 0.9}</span>
+                            <input
+                                class="nodrag"
+                                type="range"
+                                min="0"
+                                max="1"
+                                step="0.1"
+                                value={data.topP ?? 0.9}
+                                oninput={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
+                            />
+                        </div>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="slider-container">
+                            <span>Top K: {data.topK ?? 50}</span>
+                            <input
+                                class="nodrag"
+                                type="range"
+                                min="0"
+                                max="100"
+                                step="1"
+                                value={data.topK ?? 50}
+                                oninput={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
+                            />
+                        </div>
+                    </div>
+                </div>
+            {/snippet}
+        </FloatingTrigger>
     </div>
 
-    <!-- 在原有采样参数部分添加事件阻止 -->
-    <div class="setting-title">采样参数</div>
-
-    <div class="setting-item">
-        <div class="slider-container">
-            <span>Temperature: {data.temperature ?? 0.5}</span>
-            <input
-                class="nodrag"
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={data.temperature ?? 0.5}
-                oninput={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
-            />
-        </div>
-    </div>
-
-    <div class="setting-item">
-        <div class="slider-container">
-            <span>Top P: {data.topP ?? 0.9}</span>
-            <input
-                class="nodrag"
-                type="range"
-                min="0"
-                max="1"
-                step="0.1"
-                value={data.topP ?? 0.9}
-                oninput={(e) => updateNodeData(currentNodeId, { topP: parseFloat(e.target.value) })}
-            />
-        </div>
-    </div>
-
-    <div class="setting-item">
-        <div class="slider-container">
-            <span>Top K: {data.topK ?? 50}</span>
-            <input
-                class="nodrag"
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                value={data.topK ?? 50}
-                oninput={(e) => updateNodeData(currentNodeId, { topK: parseInt(e.target.value) })}
-            />
-        </div>
-    </div>
 
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
@@ -183,19 +214,9 @@
         }, {
             label: 'JSON',
             value: 'json'
-        }]} style="width: 100px;margin-left: auto" defaultValue="text" onSelect={(item)=>{
+        }]} style="width: 100px;margin-left: auto" onSelect={(item)=>{
               setOutType(item.value);
         }} value={data.outType ? [data.outType] : []} />
-
-        {#if data.outType === 'json'}
-            <Button class="input-btn-more" style="margin-left: 10px" onclick={()=>{
-            addParameter(currentNodeId,'outputDefs')
-        }}>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
-                </svg>
-            </Button>
-        {/if}
     </div>
     <OutputDefList />
 
@@ -237,6 +258,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .llm-setting {
+        width: 200px;
+        background: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ddd;
+
     }
 
     input[type="range"] {
