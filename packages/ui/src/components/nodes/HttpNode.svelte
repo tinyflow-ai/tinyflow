@@ -124,7 +124,6 @@
     </div>
     <RefParameterList dataKeyName="headers" />
 
-
     {#if data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch'}
 
         <Heading level={3} mt="10px">Body</Heading>
@@ -153,19 +152,21 @@
                               })
                           }
         }} />x-www-form-urlencoded</label>
-            <label><Input type="radio" name="bodyType" value="json" checked={data.bodyType === 'json'} onchange={(e:any)=>{
-            if (e.target?.checked){
-                updateNodeData(currentNodeId,{
-                    bodyType: 'json',
-                })
-            }
+            <label><Input type="radio" name="bodyType" value="json" checked={data.bodyType === 'json'}
+                          onchange={(e:any)=>{
+                            if (e.target?.checked){
+                                updateNodeData(currentNodeId,{
+                                    bodyType: 'json',
+                                })
+                            }
         }} />json</label>
-            <label><Input type="radio" name="bodyType" value="raw" checked={data.bodyType === 'raw'} onchange={(e:any)=>{
-            if (e.target?.checked){
-                updateNodeData(currentNodeId,{
-                    bodyType: 'raw',
-                })
-            }
+            <label><Input type="radio" name="bodyType" value="raw" checked={data.bodyType === 'raw'}
+                          onchange={(e:any)=>{
+                            if (e.target?.checked){
+                                updateNodeData(currentNodeId,{
+                                    bodyType: 'raw',
+                                })
+                            }
         }} />raw</label>
         </div>
     {/if}
