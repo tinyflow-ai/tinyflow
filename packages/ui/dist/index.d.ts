@@ -45,6 +45,7 @@ export declare type Parameter = {
     name?: string;
     nameDisabled?: boolean;
     dataType?: string;
+    dataTypeItems?: SelectItem[];
     dataTypeDisabled?: boolean;
     contentType?: string;
     ref?: string;
