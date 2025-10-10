@@ -1,5 +1,14 @@
 # @tinyflow-ai/svelte
 
+## 1.1.5
+
+### Patch Changes
+
+- [`69177e2`](https://github.com/tinyflow-ai/tinyflow/commit/69177e2e1874f2630f25685033f292373dc94585) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.1.5
+
+- Updated dependencies [[`69177e2`](https://github.com/tinyflow-ai/tinyflow/commit/69177e2e1874f2630f25685033f292373dc94585)]:
+    - @tinyflow-ai/ui@1.1.5
+
 ## 1.1.4
 
 ### Patch Changes
