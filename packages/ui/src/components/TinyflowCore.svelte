@@ -22,6 +22,8 @@
     import { useUpdateEdgeData } from './utils/useUpdateEdgeData.svelte';
     import { Button } from '#components/base/index';
     import { useDeleteEdge } from '#components/utils/useDeleteEdge.svelte';
+    import { useGetNodesFromSource } from '#components/utils/useGetNodesFromSource.svelte';
+    import { useGetNodeRelativePosition } from '#components/utils/useGetNodeRelativePosition.svelte';
 
     const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
@@ -97,7 +99,8 @@
         return true;
     };
 
-
+    const { getNodesFromSource } = useGetNodesFromSource();
+    const { getNodeRelativePosition } = useGetNodeRelativePosition();
     const { ensureParentInNodesBefore } = useEnsureParentInNodesBefore();
     const onconnectend = (_: any, state: any) => {
         if (!state.isValid) {
@@ -123,13 +126,29 @@
         }
 
         if (newNode.parentId) {
-            const parentNode = getNode(newNode.parentId) as Node;
+
+            const { x, y } = getNodeRelativePosition(newNode.parentId);
+
             newNode.position = {
-                x: toNode.position.x - parentNode.position.x,
-                y: toNode.position.y - parentNode.position.y
+                x: toNode.position.x - x,
+                y: toNode.position.y - y
             };
-            ensureParentInNodesBefore(newNode.parentId, toNode.id);
+
             svelteFlow.updateNode(toNode.id, newNode);
+
+            // 更新目标节点的所有后续的链接节点
+            const nodesFromToNode = getNodesFromSource(toNode.id);
+            nodesFromToNode.forEach((node) => {
+                svelteFlow.updateNode(node.id, {
+                    parentId: newNode.parentId,
+                    position: {
+                        x: node.position.x - x,
+                        y: node.position.y - y
+                    }
+                });
+            });
+
+            ensureParentInNodesBefore(newNode.parentId, toNode.id);
         }
 
         // 显示边面板
@@ -154,14 +173,27 @@
             const targetNode = getNode(edge.target) as Node;
             if (targetNode && targetNode.parentId) {
                 const nodeEdges = getEdgesByTarget(edge.target);
-                const loopNode = getNode(targetNode.parentId) as Node;
+                // const loopNode = getNode(targetNode.parentId) as Node;
+                const { x, y } = getNodeRelativePosition(targetNode.parentId);
                 if (nodeEdges.length === 0) {
                     svelteFlow.updateNode(targetNode.id, {
                         parentId: undefined,
                         position: {
-                            x: targetNode.position.x + loopNode.position.x,
-                            y: targetNode.position.y + loopNode.position.y
+                            x: targetNode.position.x + x,
+                            y: targetNode.position.y + y
                         }
+                    });
+
+                    // 更新目标节点的所有后续的链接节点
+                    const nodesFromSource = getNodesFromSource(targetNode.id);
+                    nodesFromSource.forEach((node) => {
+                        svelteFlow.updateNode(node.id, {
+                            parentId: undefined,
+                            position: {
+                                x: node.position.x + x,
+                                y: node.position.y + y
+                            }
+                        });
                     });
                 } else {
                     let hasSameParent = false;
@@ -177,9 +209,21 @@
                         svelteFlow.updateNode(targetNode.id, {
                             parentId: undefined,
                             position: {
-                                x: targetNode.position.x + loopNode.position.x,
-                                y: targetNode.position.y + loopNode.position.y
+                                x: targetNode.position.x + x,
+                                y: targetNode.position.y + y
                             }
+                        });
+
+                        // 更新目标节点的所有后续的链接节点
+                        const nodesFromSource = getNodesFromSource(targetNode.id);
+                        nodesFromSource.forEach((node) => {
+                            svelteFlow.updateNode(node.id, {
+                                parentId: undefined,
+                                position: {
+                                    x: node.position.x + x,
+                                    y: node.position.y + y
+                                }
+                            });
                         });
                     }
                 }
