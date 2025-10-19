@@ -24,10 +24,13 @@
     import { useDeleteEdge } from '#components/utils/useDeleteEdge.svelte';
     import { useGetNodesFromSource } from '#components/utils/useGetNodesFromSource.svelte';
     import { useGetNodeRelativePosition } from '#components/utils/useGetNodeRelativePosition.svelte';
+    import { useCopyPasteHandler } from '#components/utils/useCopyPasteHandler.svelte';
+    import { onDestroy, onMount } from 'svelte';
 
-    const { onInit } = $props();
+    const { onInit, ...rest } = $props();
     const svelteFlow = useSvelteFlow();
 
+    console.log('props', rest);
     onInit(svelteFlow);
 
     let showEdgePanel = $state(false);
@@ -162,6 +165,7 @@
         });
     };
 
+
     const { getEdgesByTarget } = useGetEdgesByTarget();
     const onDelete = (params: any) => {
         const deleteEdges = params.edges as Edge[];
@@ -242,6 +246,52 @@
     const onconnect = (event: any) => {
         // console.log('onconnect: ', event);
     };
+
+    const { copyHandler, pasteHandler } = useCopyPasteHandler();
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
+            e.preventDefault();
+            copyHandler(e);
+        }
+
+        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+            e.preventDefault();
+            // 全选所有节点
+            store.updateNodes((nodes) => {
+                return nodes.map(node => ({ ...node, selected: true }));
+            });
+
+            store.updateEdges((edges) => {
+                return edges.map(edge => ({ ...edge, selected: true }));
+            });
+        }
+    };
+
+    const handleGlobalPaste = async (event: ClipboardEvent) => {
+        // 只在“非输入态”下处理流程图粘贴
+        const activeEl = document.activeElement;
+        const isInInput =
+            activeEl instanceof HTMLInputElement ||
+            activeEl instanceof HTMLTextAreaElement ||
+            activeEl?.hasAttribute('contenteditable');
+
+        if (isInInput) {
+            return;
+        }
+
+        pasteHandler(event);
+    };
+
+    onMount(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('paste', handleGlobalPaste);
+    });
+
+    onDestroy(() => {
+        window.removeEventListener('keydown', handleKeyDown);
+        window.removeEventListener('paste', handleGlobalPaste);
+    });
 
     const customNodeTypes = {
         // ...nodeTypes
