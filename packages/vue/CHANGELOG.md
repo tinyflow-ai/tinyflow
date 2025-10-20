@@ -1,5 +1,14 @@
 # @tinyflow-ai/ui
 
+## 1.1.7
+
+### Patch Changes
+
+- [`449fad2`](https://github.com/tinyflow-ai/tinyflow/commit/449fad252d65735a63e77bd28a9327ffb4fcd9b6) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.1.7
+
+- Updated dependencies [[`449fad2`](https://github.com/tinyflow-ai/tinyflow/commit/449fad252d65735a63e77bd28a9327ffb4fcd9b6)]:
+    - @tinyflow-ai/ui@1.1.7
+
 ## 1.1.6
 
 ### Patch Changes
