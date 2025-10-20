@@ -26,6 +26,7 @@
     import { useGetNodeRelativePosition } from '#components/utils/useGetNodeRelativePosition.svelte';
     import { useCopyPasteHandler } from '#components/utils/useCopyPasteHandler.svelte';
     import { onDestroy, onMount } from 'svelte';
+    import { isInEditableElement } from '#components/utils/isInEditableElement';
 
     const { onInit, ...rest } = $props();
     const svelteFlow = useSvelteFlow();
@@ -250,6 +251,11 @@
     const { copyHandler, pasteHandler } = useCopyPasteHandler();
 
     const handleKeyDown = (e: KeyboardEvent) => {
+
+        if (isInEditableElement()) {
+            return;
+        }
+
         if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
             e.preventDefault();
             copyHandler(e);
@@ -270,13 +276,7 @@
 
     const handleGlobalPaste = async (event: ClipboardEvent) => {
         // 只在“非输入态”下处理流程图粘贴
-        const activeEl = document.activeElement;
-        const isInInput =
-            activeEl instanceof HTMLInputElement ||
-            activeEl instanceof HTMLTextAreaElement ||
-            activeEl?.hasAttribute('contenteditable');
-
-        if (isInInput) {
+        if (isInEditableElement()) {
             return;
         }
 
