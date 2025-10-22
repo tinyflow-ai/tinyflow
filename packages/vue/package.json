@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@tinyflow-ai/eslint-config": "workspace:*",
-    "@types/node": "^22.13.4",
+    "@types/node": "^22.18.12",
     "@vitejs/plugin-vue": "^5.2.1",
     "autoprefixer": "^10.4.21",
     "less": "^4.2.2",
