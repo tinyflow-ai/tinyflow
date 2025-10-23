@@ -128,7 +128,7 @@
 
         <Heading level={3} mt="10px">Body</Heading>
         <div class="radio-group">
-            <label><Input type="radio" name="bodyType" value="" checked={!data.bodyType || data.bodyType === ''}
+            <label><Input type="radio" value="" checked={!data.bodyType || data.bodyType === ''}
                           onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
@@ -136,7 +136,7 @@
                 })
             }
         }} />none</label>
-            <label><Input type="radio" name="bodyType" value="form-data" checked={data.bodyType === 'form-data'}
+            <label><Input type="radio" value="form-data" checked={data.bodyType === 'form-data'}
                           onchange={(e:any)=>{
             if (e.target?.checked){
                 updateNodeData(currentNodeId,{
@@ -144,7 +144,7 @@
                 })
             }
         }} />form-data</label>
-            <label><Input type="radio" name="bodyType" value="x-www-form-urlencoded"
+            <label><Input type="radio" value="x-www-form-urlencoded"
                           checked={data.bodyType === 'x-www-form-urlencoded'} onchange={(e:any)=>{
                           if (e.target?.checked){
                               updateNodeData(currentNodeId,{
@@ -152,7 +152,7 @@
                               })
                           }
         }} />x-www-form-urlencoded</label>
-            <label><Input type="radio" name="bodyType" value="json" checked={data.bodyType === 'json'}
+            <label><Input type="radio" value="json" checked={data.bodyType === 'json'}
                           onchange={(e:any)=>{
                             if (e.target?.checked){
                                 updateNodeData(currentNodeId,{
@@ -160,7 +160,7 @@
                                 })
                             }
         }} />json</label>
-            <label><Input type="radio" name="bodyType" value="raw" checked={data.bodyType === 'raw'}
+            <label><Input type="radio" value="raw" checked={data.bodyType === 'raw'}
                           onchange={(e:any)=>{
                             if (e.target?.checked){
                                 updateNodeData(currentNodeId,{
