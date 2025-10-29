@@ -177,8 +177,7 @@
 
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
-        <Textarea
-            rows={5}
+        <Textarea rows={5}
             placeholder="请输入系统提示词"
             style="width: 100%"
             value={data.systemPrompt || ''}

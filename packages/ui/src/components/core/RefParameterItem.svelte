@@ -125,13 +125,13 @@
                     默认值：
                     <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('defaultValue', event)
-                    }} value={param.defaultValue} />
+                    }} value={param.defaultValue}  placeholder="请输入参数默认值" />
                 </div>
                 <div class="input-more-item">
                     参数描述：
                     <Textarea rows={3} style="width: 100%;" onchange={(event)=>{
                         updateParamByEvent('description', event)
-                    }} value={param.description} />
+                    }} value={param.description}  placeholder="请输入参数描述"/>
                 </div>
 
                 <div class="input-more-item">
