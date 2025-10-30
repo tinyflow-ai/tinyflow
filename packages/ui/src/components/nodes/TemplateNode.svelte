@@ -79,13 +79,6 @@
         margin-bottom: 10px;
     }
 
-    .setting-title {
-        font-size: 12px;
-        color: #999;
-        margin-bottom: 4px;
-        margin-top: 10px;
-    }
-
     .setting-item {
         display: flex;
         align-items: center;

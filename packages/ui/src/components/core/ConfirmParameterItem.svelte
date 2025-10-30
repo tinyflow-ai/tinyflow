@@ -153,13 +153,6 @@
     align-items: center;
   }
 
-  .input-item-inline {
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    color: #666;
-  }
-
   .input-more-setting {
     display: flex;
     flex-direction: column;
