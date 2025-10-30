@@ -15,14 +15,6 @@
 
     // 统一的高度调整函数
     function adjustHeight() {
-        if (!defaultHeight) {
-            const defaultRows = rest.rows || 1;
-            const computedStyle = getComputedStyle(textareaEl);
-            const lineHeight = parseFloat(computedStyle.fontSize) * 1.3;
-            defaultHeight = lineHeight * defaultRows + parseFloat(computedStyle.paddingTop)
-                + parseFloat(computedStyle.paddingBottom) + 2;
-        }
-
         if (textareaEl && autoHeight) {
             // 如果外部指定了固定高度，则使用指定高度
             if (height !== undefined) {
@@ -38,6 +30,16 @@
 
 
             let newHeight = textareaEl.scrollHeight;
+
+            // defaultHeight 只计算一次
+            if (!defaultHeight) {
+                const defaultRows = rest.rows || 1;
+                const computedStyle = getComputedStyle(textareaEl);
+                const lineHeight = parseFloat(computedStyle.fontSize) * 1.2;
+                defaultHeight = (lineHeight * defaultRows + parseFloat(computedStyle.paddingTop)
+                    + parseFloat(computedStyle.paddingBottom)) + parseFloat(computedStyle.borderTopWidth);
+            }
+
             if (newHeight < defaultHeight) {
                 newHeight = defaultHeight;
             }
