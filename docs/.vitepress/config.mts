@@ -66,7 +66,8 @@ export default defineConfig({
                         items: [
                             { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
                             { text: '快速开始', link: '/zh/quick-start' },
-                            { text: '微信交流群', link: '/zh/communication' }
+                            { text: '微信交流群', link: '/zh/communication' },
+                            { text: '企业版', link: '/zh/communication' }
                         ]
                     },
                     {
@@ -82,9 +83,11 @@ export default defineConfig({
                     {
                         text: '后端集成',
                         items: [
-                            { text: '与 Java 项目集成', link: '/zh/integration/java' },
-                            { text: '与 Node.js 项目集成', link: '/zh/integration/nodejs' },
-                            { text: '与 Python 项目集成', link: '/zh/integration/python' },
+                            { text: '与 Agents-Flex 集成', link: '/zh/integration/agents-flex' },
+                            { text: '与 SpringAI 集成', link: '/zh/integration/springai' },
+                            { text: '与 LangChain4j 集成', link: '/zh/integration/langchain4j' },
+                            { text: '与 其他框架 集成', link: '/zh/integration/langchain4j' },
+                            { text: '新增自定义节点', link: '/zh/integration/custom-node' },
                         ]
                     },
                     {
