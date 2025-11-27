@@ -186,6 +186,49 @@
                                 </div>
                             {/if}
 
+
+                            <label class="input-item-inline">
+                                <span>错误重试：</span>
+                                <input type="checkbox" checked={!!data.retryEnable} onchange={(event)=>{
+                                    const value =  (event.target as any).checked;
+                                     updateNodeData(currentNodeId,{
+                                        retryEnable: value
+                                    })
+                                }} />
+                            </label>
+
+                            {#if !!data.retryEnable}
+                                <div class="input-item">
+                                    错误重试间隔时间（单位：毫秒）：
+                                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                                    const value =  (event.target as any).value;
+                                     updateNodeData(currentNodeId,{
+                                        retryIntervalMs: value
+                                    })
+                                }} value={data.retryIntervalMs || '1000'} />
+                                </div>
+
+                                <div class="input-item">
+                                    最大重试次数：
+                                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
+                                    const value =  (event.target as any).value;
+                                     updateNodeData(currentNodeId,{
+                                        maxRetryCount: value
+                                    })
+                                }} value={data.maxRetryCount || '3'} />
+                                </div>
+
+                                <label class="input-item-inline">
+                                    <span>正常后重置重试次数记录：</span>
+                                    <input type="checkbox" checked={!!data.resetRetryCountAfterNormal} onchange={(event)=>{
+                                    const value =  (event.target as any).checked;
+                                     updateNodeData(currentNodeId,{
+                                        resetRetryCountAfterNormal: value
+                                    })
+                                }} />
+                                </label>
+                            {/if}
+
                         </div>
                     {/snippet}
                 </FloatingTrigger>
