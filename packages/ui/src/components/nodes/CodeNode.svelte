@@ -17,11 +17,11 @@
     // 在组件挂载时检查并设置默认值
     onMount(() => {
         if (!data.engine) {
-            updateNodeData(currentNodeId, ()=>{
+            updateNodeData(currentNodeId, () => {
                 return {
                     engine: 'qlexpress'
-                }
-            })
+                };
+            });
         }
     });
     const currentNodeId = getCurrentNodeId();
@@ -31,9 +31,9 @@
     const { updateNodeData } = useSvelteFlow();
 
     const engines = [
-        { label: 'QLExpress', value: 'qlexpress' },
+        { label: 'JavaScript', value: 'js' },
         { label: 'Groovy', value: 'groovy' },
-        { label: 'JavaScript', value: 'js' }
+        { label: 'QLExpress', value: 'qlexpress' }
     ];
 
 
@@ -76,7 +76,9 @@
 
     <div class="setting-title">执行代码</div>
     <div class="setting-item">
-        <Textarea rows={10} placeholder="请输入执行代码，注：输出内容需添加到_result中，如：_result['key'] = value 或者 _result.key = value" style="width: 100%" onchange={(e:any)=>{
+        <Textarea rows={10}
+                  placeholder="请输入执行代码，注：输出内容需添加到_result中，如：_result['key'] = value 或者 _result.key = value"
+                  style="width: 100%" onchange={(e:any)=>{
             updateNodeData(currentNodeId, ()=>{
                 return {
                     code: e.target.value
