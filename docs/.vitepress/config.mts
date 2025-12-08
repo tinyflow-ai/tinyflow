@@ -67,6 +67,7 @@ export default defineConfig({
                             { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
                             { text: '快速开始', link: '/zh/quick-start' },
                             { text: '微信交流群', link: '/zh/communication' },
+                            { text: '文字模板', link: '/zh/text-template' },
                             // { text: '企业版', link: '/zh/communication' },
                             // { text: '常见问题', link: '/zh/communication' }
                         ]

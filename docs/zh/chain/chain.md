@@ -17,7 +17,7 @@
 - **`ChainDefinition`**：只读的、静态的工作流蓝图，包含节点（Node）、边（Edge）、条件（Condition）等拓扑结构。
 - **`ChainState`**：动态的、可变的运行时状态，记录执行进度、内存变量、错误信息、挂起状态等。
 
-> ✅ 优势：同一 `ChainDefinition` 可被多个实例（`stateInstanceId`）并行执行，彼此状态隔离。
+> 特点：同一 `ChainDefinition` 可被多个实例（`stateInstanceId`）并行执行，彼此状态隔离。
 
 ### 2.2 事件驱动（Event-Driven）
 
