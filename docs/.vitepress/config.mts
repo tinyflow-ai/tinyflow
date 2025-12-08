@@ -32,8 +32,8 @@ export default defineConfig({
             description: 'An AI workflow orchestration framework',
             themeConfig: {
                 editLink: {
-                    pattern: 'https://github.com/tinyflow-ai/tinyflow/edit/main/docs/:path',
-                },
+                    pattern: 'https://github.com/tinyflow-ai/tinyflow/edit/main/docs/:path'
+                }
             }
         },
         zh: {
@@ -53,7 +53,7 @@ export default defineConfig({
 
                 nav: [
                     { text: '首页', link: '/zh' },
-                    { text: '帮助文档', link: '/zh/what-is-tinyflow' },
+                    { text: '帮助文档', link: '/zh/what-is-tinyflow' }
                     // {
                     //     text: 'ChangeLog',
                     //     link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
@@ -67,7 +67,8 @@ export default defineConfig({
                             { text: 'Tinyflow 是什么', link: '/zh/what-is-tinyflow' },
                             { text: '快速开始', link: '/zh/quick-start' },
                             { text: '微信交流群', link: '/zh/communication' },
-                            { text: '企业版', link: '/zh/communication' }
+                            // { text: '企业版', link: '/zh/communication' },
+                            // { text: '常见问题', link: '/zh/communication' }
                         ]
                     },
                     {
@@ -77,7 +78,7 @@ export default defineConfig({
                             { text: '与 React 集成', link: '/zh/integration/react' },
                             { text: '与 Svelte 集成', link: '/zh/integration/svelte' },
                             { text: '与原生 JS 集成', link: '/zh/integration/native' },
-                            { text: 'CDN 引入', link: '/zh/integration/cdn' },
+                            { text: '通过 CDN 引入', link: '/zh/integration/cdn' }
                         ]
                     },
                     {
@@ -86,21 +87,37 @@ export default defineConfig({
                             { text: '与 Agents-Flex 集成', link: '/zh/integration/agents-flex' },
                             { text: '与 SpringAI 集成', link: '/zh/integration/springai' },
                             { text: '与 LangChain4j 集成', link: '/zh/integration/langchain4j' },
-                            { text: '与 其他框架 集成', link: '/zh/integration/langchain4j' },
-                            { text: '新增自定义节点', link: '/zh/integration/custom-node' },
+                            { text: '与 其他框架 集成', link: '/zh/integration/other' }
                         ]
                     },
                     {
-                        text: '核心元素',
+                        text: 'Chain',
                         items: [
-                            { text: '执行链（Chain）', link: '/zh/core/chain' },
-                            { text: '节点（Node）', link: '/zh/core/node' },
-                            { text: '边（Edge）', link: '/zh/core/edge' },
-                            { text: '上下文（Context）', link: '/zh/core/context' },
-                            { text: '事件（Event）', link: '/zh/core/event' },
-                            { text: '执行条件（Condition）', link: '/zh/core/condition' }
+                            { text: 'Chain', link: '/zh/chain/chain' },
+                            { text: 'ChainExecutor', link: '/zh/chain/chain-executor' },
+                            { text: 'ChainState', link: '/zh/chain/chain-state' },
+                            { text: 'ChainStateRepository', link: '/zh/chain/chain-state-repository' },
+                            { text: 'ChainDefinition', link: '/zh/chain/chain-definition' },
+                            { text: 'ChainDefinitionRepository', link: '/zh/chain/chain-definition-repository' },
+                            { text: 'ChainParser', link: '/zh/chain/chain-parser' },
+                            { text: '监听器 (Listener)', link: '/zh/chain/listener' },
                         ]
                     },
+                    {
+                        text: 'Trigger',
+                        items: [
+                            { text: 'Trigger', link: '/zh/trigger/trigger' },
+                            { text: 'TriggerStore', link: '/zh/trigger/trigger-store' },
+                        ]
+                    },
+                    {
+                        text: 'Node & Edge',
+                        items: [
+                            { text: 'Node', link: '/zh/node/node' },
+                            { text: 'Edge', link: '/zh/node/edge' },
+                            { text: 'Condition', link: '/zh/node/condition' }
+                        ]
+                    }
                 ]
             }
         }
@@ -121,7 +138,7 @@ export default defineConfig({
 
         nav: [
             { text: 'Home', link: '/' },
-            { text: 'Document', link: '/intro/what-is-agentsflex' },
+            { text: 'Document', link: '/intro/what-is-agentsflex' }
             // {
             //     text: 'ChangeLog',
             //     link: 'https://github.com/tinyflow-ai/tinyflow/blob/main/changes.md'
