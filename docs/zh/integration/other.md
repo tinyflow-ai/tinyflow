@@ -204,7 +204,7 @@ try {
     <parent>
         <groupId>dev.tinyflow</groupId>
         <artifactId>tinyflow-java</artifactId>
-        <version>2.0.0-beta.3</version>
+        <version>2.0.0-beta.4</version>
     </parent>
 
     <artifactId>tinyflow-support-yourframework</artifactId>

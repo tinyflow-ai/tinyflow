@@ -31,7 +31,7 @@ Tinyflow 通过 `Llm` 接口抽象 LLM 调用行为，而 `SpringAiLlm` 是该�
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-support-springai</artifactId>
-    <version>2.0.0-beta.3</version>
+    <version>2.0.0-beta.4</version>
 </dependency>
 ```
 

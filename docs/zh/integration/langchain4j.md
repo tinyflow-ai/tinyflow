@@ -32,7 +32,7 @@ Tinyflow 定义了标准 `Llm` 接口，而 `Langchain4jLlm` 是其实现类，�
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-support-langchain4j</artifactId>
-    <version>2.0.0-beta.3</version>
+    <version>2.0.0-beta.4</version>
 </dependency>
 ```
 

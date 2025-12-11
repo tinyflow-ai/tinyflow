@@ -28,7 +28,7 @@ Agents-Flex 是一个强大的开源智能体开发框架，提供统一的 `Cha
 <dependency>
     <groupId>dev.tinyflow</groupId>
     <artifactId>tinyflow-support-agentsflex</artifactId>
-    <version>2.0.0-beta.3</version>
+    <version>2.0.0-beta.4</version>
 </dependency>
 ```
 
