@@ -79,7 +79,8 @@ export default defineConfig({
                             { text: '与 React 集成', link: '/zh/integration/react' },
                             { text: '与 Svelte 集成', link: '/zh/integration/svelte' },
                             { text: '与原生 JS 集成', link: '/zh/integration/native' },
-                            { text: '通过 CDN 引入', link: '/zh/integration/cdn' }
+                            { text: '通过 CDN 引入', link: '/zh/integration/cdn' },
+                            { text: '自定义节点 (前端)', link: '/zh/integration/custom-node' }
                         ]
                     },
                     {
@@ -88,7 +89,8 @@ export default defineConfig({
                             { text: '与 Agents-Flex 集成', link: '/zh/integration/agents-flex' },
                             { text: '与 SpringAI 集成', link: '/zh/integration/springai' },
                             { text: '与 LangChain4j 集成', link: '/zh/integration/langchain4j' },
-                            { text: '与 其他框架 集成', link: '/zh/integration/other' }
+                            { text: '与 其他框架 集成', link: '/zh/integration/other' },
+                            { text: '自定义节点 (后端)', link: '/zh/integration/custom-node-java' }
                         ]
                     },
                     {
