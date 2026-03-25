@@ -205,20 +205,6 @@
         />
     </div>
 
-    <div class="heading">
-        <Heading level={3}>输出参数</Heading>
-        <Select items={[{
-            label: '文本',
-            value: 'text'
-        }, {
-            label: 'JSON',
-            value: 'json'
-        }]} style="width: 100px;margin-left: auto" onSelect={(item)=>{
-              setOutType(item.value);
-        }} value={data.outType ? [data.outType] : []} />
-    </div>
-
-
     {#if "json" === data.outType}
         <div class="setting-title">JSON Schema</div>
         <div class="setting-item">
@@ -235,6 +221,22 @@
         />
         </div>
     {/if}
+
+    <div class="heading">
+        <Heading level={3}>输出参数</Heading>
+        <Select items={[{
+            label: '文本',
+            value: 'text'
+        }, {
+            label: 'JSON',
+            value: 'json'
+        }]} style="width: 100px;margin-left: auto" onSelect={(item)=>{
+              setOutType(item.value);
+        }} value={data.outType ? [data.outType] : []} />
+    </div>
+
+
+
 
 
     <OutputDefList />
