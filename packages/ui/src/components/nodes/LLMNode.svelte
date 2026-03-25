@@ -127,14 +127,14 @@
                     <div class="setting-title">采样参数</div>
                     <div class="setting-item">
                         <div class="slider-container">
-                            <span>Temperature: {data.temperature ?? 0.7}</span>
+                            <span>Temperature: {data.temperature ?? 0.5}</span>
                             <input
                                 class="nodrag"
                                 type="range"
                                 min="0"
                                 max="1"
                                 step="0.1"
-                                value={data.temperature ?? 0.7}
+                                value={data.temperature ?? 0.5}
                                 oninput={(e) => updateNodeData(currentNodeId, { temperature: parseFloat(e.target.value) })}
                             />
                         </div>
