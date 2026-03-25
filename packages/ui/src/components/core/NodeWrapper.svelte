@@ -135,16 +135,6 @@
                             {/if}
 
                             <label class="input-item-inline">
-                                <span>异步执行：</span>
-                                <input type="checkbox" checked={!!data.async} onchange={(event)=>{
-                                    const value =  (event.target as any).checked;
-                                     updateNodeData(currentNodeId,{
-                                        async: value
-                                    })
-                                }} />
-                            </label>
-
-                            <label class="input-item-inline">
                                 <span>循环执行：</span>
                                 <input type="checkbox" checked={!!data.loopEnable} onchange={(event)=>{
                                     const value =  (event.target as any).checked;
