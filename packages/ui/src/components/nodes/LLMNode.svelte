@@ -178,10 +178,10 @@
     <div class="setting-title">系统提示词</div>
     <div class="setting-item">
         <Textarea rows={5}
-            placeholder="请输入系统提示词"
-            style="width: 100%"
-            value={data.systemPrompt || ''}
-            oninput={(e)=>{
+                  placeholder="请输入系统提示词"
+                  style="width: 100%"
+                  value={data.systemPrompt || ''}
+                  oninput={(e)=>{
                 updateNodeData(currentNodeId, {
                     systemPrompt: e.target.value
                 });
@@ -217,6 +217,26 @@
               setOutType(item.value);
         }} value={data.outType ? [data.outType] : []} />
     </div>
+
+
+    {#if "json" === data.outType}
+        <div class="setting-title">JSON Schema</div>
+        <div class="setting-item">
+        <Textarea rows={5}
+                  placeholder="请输入 SON Schema"
+                  style="width: 100%"
+                  value={data.jsonSchema || ''}
+                  oninput={(e)=>{
+                    updateNodeData(currentNodeId, {
+                        jsonSchema: e.target.value
+                    });
+            }}
+
+        />
+        </div>
+    {/if}
+
+
     <OutputDefList />
 
 </NodeWrapper>
