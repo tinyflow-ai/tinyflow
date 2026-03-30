@@ -1,187 +1,191 @@
-
 .svelte-flow__nodes {
+    .svelte-flow__node {
+        border: 3px solid transparent;
+        border-radius: 5px;
+        box-sizing: border-box;
 
-  .svelte-flow__node {
-    border: 3px solid transparent;
-    border-radius: 5px;
-    box-sizing: border-box;
+        .svelte-flow__handle {
+            width: 16px;
+            height: 16px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
 
+            &::after {
+                content: ' ';
+                background: var(--primary);
+                width: 8px;
+                height: 8px;
+                border-radius: 100%;
+                transition:
+                    width 0.1s,
+                    height 0.1s;
+            }
 
-    .svelte-flow__handle {
-      width: 16px;
-      height: 16px;
-      background: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-
-      &::after {
-        content: ' ';
-        background: #2563EB;
-        width: 8px;
-        height: 8px;
-        border-radius: 100%;
-        transition: width 0.1s, height 0.1s;
-      }
-
-      &:hover {
-        &::after {
-          width: 16px;
-          height: 16px;
+            &:hover {
+                &::after {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
         }
-      }
-    }
 
-    div.loop_handle_wrapper {
-      &::after {
-        content: '循环体';
-        background: #2563EB;
-        width: 100px;
-        height: 20px;
-        border-radius: 0;
-        display: flex;
-        color: #fff;
-        justify-content: center;
-        align-items: center;
-      }
+        div.loop_handle_wrapper {
+            &::after {
+                content: '循环体';
+                background: var(--primary);
+                width: 100px;
+                height: 20px;
+                border-radius: 0;
+                display: flex;
+                color: var(--primary-foreground);
+                justify-content: center;
+                align-items: center;
+            }
 
-      &:hover {
-        &::after {
-          width: 100px;
-          height: 20px;
+            &:hover {
+                &::after {
+                    width: 100px;
+                    height: 20px;
+                }
+            }
         }
-      }
-    }
 
-    &:after {
-      content: ' ';
-      position: absolute;
-      border-radius: 5px;
-      top: -2px;
-      left: -2px;
-      border: 1px solid #ccc;
-      height: calc(100% + 2px);
-      width: calc(100% + 2px);
-    }
+        &:after {
+            content: ' ';
+            position: absolute;
+            border-radius: 5px;
+            top: -2px;
+            left: -2px;
+            border: 1px solid var(--border);
+            height: calc(100% + 2px);
+            width: calc(100% + 2px);
+        }
 
-    &:hover {
-      border: 3px solid #bacaef7d;
-    }
+        &:hover {
+            border: 3px solid color-mix(in oklab, var(--border) 50%, transparent);
+        }
 
-    &.selectable.selected {
-      border: 3px solid #bacaef7d;
-      box-shadow: var(--xy-node-boxshadow-selected);
-    }
+        &.selectable.selected {
+            border: 3px solid color-mix(in oklab, var(--border) 50%, transparent);
+            box-shadow: 0 0 0 1px var(--primary);
+        }
 
-    &:hover:after {
-      display: none;
-    }
+        &:hover:after {
+            display: none;
+        }
 
-    &.selectable.selected:after {
-      display: none;
+        &.selectable.selected:after {
+            display: none;
+        }
     }
-  }
 }
-
 
 .tf-node-wrapper {
-  border-radius: 5px;
-  min-width: 300px;
-  background: #fff;
-
-  &-title {
-    height: 30px;
-    background: #EFF1F5;
-    color: #bcbcbc;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    padding-left: 5px;
-    border-bottom: 1px solid #ccc;
-    font-weight: 300;
-    letter-spacing: 1px;
-  }
-
-  &-body {
-    padding: 10px;
-  }
-}
-
-.svelte-flow__attribution a {
-  display: none;
-}
-
-.tf-toolbar {
-  z-index: 200;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 5px;
-  transition: transform 0.5s ease, opacity 0.5s ease;
-  transform: translateX(calc(-100% + 20px)); /* 完全移出视口 */
-
-  &.show {
-    transform: translateX(0);
-  }
-
-  &-container {
-    background: #fff;
-    border: 1px solid #eee;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    width: fit-content;
+    min-width: 300px;
+    background: var(--background);
 
-    &-header {
-      display: flex;
+    &-title {
+        height: 30px;
+        background: color-mix(in oklab, var(--primary) 5%, transparent);
+        color: var(--muted-foreground);
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 300;
+        letter-spacing: 1px;
     }
 
     &-body {
-      display: flex;
-      margin-top: 20px;
-
-      .tf-toolbar-container-base, .tf-toolbar-container-tools {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        flex-grow: 1;
-
-        .tf-btn {
-          border: none;
-          width: 100%;
-          justify-content: flex-start;
-          height: 40px;
-          gap: 10px;
-          cursor: grabbing;
-          border-radius: 5px;
-
-          svg {
-            width: 20px;
-            height: 20px;
-            fill: #2563EB;
-          }
-
-          &:hover {
-            background: #f1f1f1;
-          }
-        }
-      }
+        padding: 10px;
     }
-  }
+}
+
+.svelte-flow__attribution a {
+    display: none;
+}
+
+.tf-toolbar {
+    z-index: 200;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    transition:
+        transform 0.5s ease,
+        opacity 0.5s ease;
+    transform: translateX(calc(-100% + 20px)); /* 完全移出视口 */
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    &-container {
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        width: fit-content;
+
+        &-header {
+            display: flex;
+        }
+
+        &-body {
+            display: flex;
+            margin-top: 20px;
+
+            .tf-toolbar-container-base,
+            .tf-toolbar-container-tools {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                flex-grow: 1;
+
+                .tf-btn {
+                    border: none;
+                    width: 100%;
+                    justify-content: flex-start;
+                    height: 40px;
+                    gap: 10px;
+                    cursor: grabbing;
+                    border-radius: 5px;
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                        fill: var(--primary);
+                    }
+
+                    &:hover {
+                        background: var(--muted);
+                    }
+                }
+            }
+        }
+    }
 }
 
 .tinyflow-logo:after {
-  content: "Tinyflow.ai";
-  font-size: 145px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  font-weight: 800;
-  color: #03153b54;
-  text-shadow: 1px 3px 6px #cedafb, 0 0 0 #000, 1px 3px 6px #fff;
-  opacity: 0.1;
+    content: 'Tinyflow.ai';
+    font-size: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 800;
+    color: color-mix(in oklab, var(--foreground) 33%, transparent);
+    text-shadow:
+        1px 3px 6px #cedafb,
+        0 0 0 #000,
+        1px 3px 6px #fff;
+    opacity: 0.1;
 }

@@ -6,61 +6,56 @@
     const {
         noneParameterText = '无确认数据',
         dataKeyName = 'parameters',
-        useChildrenOnly,
+        useChildrenOnly
     }: {
         noneParameterText?: string;
         dataKeyName?: string;
-        useChildrenOnly?: boolean,
+        useChildrenOnly?: boolean;
     } = $props();
 
     let currentNodeId = getCurrentNodeId();
     let node = useNodesData(currentNodeId);
 
     let parameters = $derived.by(() => {
-        return [...node?.current?.data?.[dataKeyName] as Array<any> || []];
+        return [...((node?.current?.data?.[dataKeyName] as Array<any>) || [])];
     });
 </script>
 
-
 <div class="input-container">
-    {#if (parameters.length !== 0)}
+    {#if parameters.length !== 0}
         <div class="input-header">参数名称</div>
         <div class="input-header">参数值</div>
         <div class="input-header"></div>
     {/if}
     {#each parameters as param, index (param.id)}
-        <ConfirmParameterItem parameter={param} index={index} {dataKeyName} {useChildrenOnly}/>
-    {:else }
+        <ConfirmParameterItem parameter={param} {index} {dataKeyName} {useChildrenOnly} />
+    {:else}
         <div class="none-params">{noneParameterText}</div>
     {/each}
 </div>
 
-
 <style lang="less">
-  .input-container {
-    display: grid;
-    grid-template-columns: 40% 50% 10%;
-    row-gap: 5px;
-    column-gap: 3px;
+    .input-container {
+        display: grid;
+        grid-template-columns: 40% 50% 10%;
+        row-gap: 5px;
+        column-gap: 3px;
 
-    .none-params {
-      font-size: 12px;
-      background: #f8f8f8;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px;
-      width: calc(100% - 5px);
-      grid-column: 1 / -1; /* 从第一列开始到最后一列结束 */
+        .none-params {
+            font-size: 12px;
+            background: var(--secondary);
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 5px;
+            width: calc(100% - 5px);
+            grid-column: 1 / -1; /* 从第一列开始到最后一列结束 */
+        }
+
+        .input-header {
+            font-size: 12px;
+            color: var(--muted-foreground);
+        }
     }
-
-    .input-header {
-      font-size: 12px;
-      color: #666;
-    }
-  }
-
 </style>
-
-

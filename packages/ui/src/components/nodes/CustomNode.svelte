@@ -9,9 +9,12 @@
     import OutputDefList from '../core/OutputDefList.svelte';
     import { fillParameterId } from '../utils/useAddParameter.svelte.js';
 
-    const { data, ...rest }: {
-        data: NodeProps['data'],
-        [key: string]: any
+    const {
+        data,
+        ...rest
+    }: {
+        data: NodeProps['data'];
+        [key: string]: any;
     } = $props();
 
     const currentNodeId = getCurrentNodeId();
@@ -70,12 +73,9 @@
             });
         }
     });
-
 </script>
 
-
-<NodeWrapper data={{...data, description: customNode.description}} {...rest}>
-
+<NodeWrapper data={{ ...data, description: customNode.description }} {...rest}>
     {#snippet icon()}
         {@html customNode.icon}
     {/snippet}
@@ -85,9 +85,13 @@
             <Heading level={3}>输入参数</Heading>
 
             {#if customNode.parametersAddEnable !== false}
-                <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-                    addParameter(currentNodeId)
-                }}>
+                <Button
+                    class="input-btn-more"
+                    style="margin-left: auto"
+                    onclick={() => {
+                        addParameter(currentNodeId);
+                    }}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                     </svg>
@@ -97,7 +101,6 @@
 
         <RefParameterList />
     {/if}
-
 
     {#if forms}
         {#each forms as form}
@@ -109,24 +112,24 @@
                         style="width: 100%"
                         value={data[form.name] || form.defaultValue}
                         {...form.attrs}
-                        onchange={(e)=>{
-                                updateNodeDataByEvent(form.name,e)
-                            }}
+                        onchange={(e) => {
+                            updateNodeDataByEvent(form.name, e);
+                        }}
                     />
                 </div>
             {:else if form.type === 'textarea'}
                 <div class="setting-title">{form.label}</div>
                 <div class="setting-item">
-                        <Textarea
-                            rows={3}
-                            placeholder={form.placeholder}
-                            style="width: 100%"
-                            value={data[form.name] || form.defaultValue}
-                            {...form.attrs}
-                            onchange={(e)=>{
-                                updateNodeDataByEvent(form.name,e)
-                            }}
-                        />
+                    <Textarea
+                        rows={3}
+                        placeholder={form.placeholder}
+                        style="width: 100%"
+                        value={data[form.name] || form.defaultValue}
+                        {...form.attrs}
+                        onchange={(e) => {
+                            updateNodeDataByEvent(form.name, e);
+                        }}
+                    />
                 </div>
             {:else if form.type === 'slider'}
                 <div class="setting-title">{form.label}</div>
@@ -138,27 +141,40 @@
                             type="range"
                             {...form.attrs}
                             value={data[form.name] ?? form.defaultValue}
-                            oninput={(e) => updateNodeData({ [form.name]: parseFloat(e.target.value) })}
+                            oninput={(e) =>
+                                updateNodeData({ [form.name]: parseFloat(e.target.value) })}
                         />
                     </div>
                 </div>
             {:else if form.type === 'select'}
                 <div class="setting-title">{form.label}</div>
                 <div class="setting-item">
-                    <Select items={form.options||[]} style="width: 100%" placeholder={form.placeholder} onSelect={(item)=>{
-                      const newValue = item.value;
-                      updateNodeData({
-                              [form.name]: newValue
-                      })
-                }} value={data[form.name] ? [data[form.name]] : [form.defaultValue]} />
+                    <Select
+                        items={form.options || []}
+                        style="width: 100%"
+                        placeholder={form.placeholder}
+                        onSelect={(item) => {
+                            const newValue = item.value;
+                            updateNodeData({
+                                [form.name]: newValue
+                            });
+                        }}
+                        value={data[form.name] ? [data[form.name]] : [form.defaultValue]}
+                    />
                 </div>
             {:else if form.type === 'chosen'}
                 <div class="setting-title">{form.label}</div>
                 <div class="setting-item">
-                    <Chosen style="width: 100%" placeholder={form.placeholder}
-                            buttonText={form.chosen?.buttonText} onChosen={(value,label,event)=>{
-                        form.chosen?.onChosen?.(updateNodeData,value,label,event);
-                    }} value={data[form.chosen?.valueDataKey||""]} label={data[form.chosen?.labelDataKey||""]} />
+                    <Chosen
+                        style="width: 100%"
+                        placeholder={form.placeholder}
+                        buttonText={form.chosen?.buttonText}
+                        onChosen={(value, label, event) => {
+                            form.chosen?.onChosen?.(updateNodeData, value, label, event);
+                        }}
+                        value={data[form.chosen?.valueDataKey || '']}
+                        label={data[form.chosen?.labelDataKey || '']}
+                    />
                 </div>
             {:else if form.type === 'heading'}
                 <Heading level={3} mt="10px" {...form.attrs}>{form.label}</Heading>
@@ -166,18 +182,24 @@
         {/each}
     {/if}
 
-
-    <div bind:this={container} style={customNode.rootStyle||""} class={customNode.rootClass}></div>
-
+    <div
+        bind:this={container}
+        style={customNode.rootStyle || ''}
+        class={customNode.rootClass}
+    ></div>
 
     {#if customNode.outputDefsEnable !== false}
         <div class="heading">
             <Heading level={3} mt="10px">输出参数</Heading>
 
             {#if customNode.outputDefsAddEnable !== false}
-                <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{
-                    addParameter(currentNodeId,'outputDefs')
-                }}>
+                <Button
+                    class="input-btn-more"
+                    style="margin-left: auto"
+                    onclick={() => {
+                        addParameter(currentNodeId, 'outputDefs');
+                    }}
+                >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>
                     </svg>
@@ -186,7 +208,6 @@
         </div>
         <OutputDefList />
     {/if}
-
 </NodeWrapper>
 
 <style>
@@ -198,7 +219,7 @@
 
     .setting-title {
         font-size: 12px;
-        color: #999;
+        color: var(--secondary-foreground);
         margin-bottom: 4px;
         margin-top: 10px;
     }
@@ -221,30 +242,27 @@
 
     .slider-container span {
         font-size: 12px;
-        color: #666;
+        color: var(--muted-foreground);
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
 
-    input[type="range"] {
+    input[type='range'] {
         width: 100%;
         height: 4px;
-        background: #ddd;
+        background: var(--muted);
         border-radius: 2px;
         outline: none;
         -webkit-appearance: none;
     }
 
-    input[type="range"]::-webkit-slider-thumb {
+    input[type='range']::-webkit-slider-thumb {
         -webkit-appearance: none;
         width: 14px;
         height: 14px;
-        background: #007bff;
+        background: var(--primary);
         border-radius: 50%;
         cursor: pointer;
     }
 </style>
-
-
-

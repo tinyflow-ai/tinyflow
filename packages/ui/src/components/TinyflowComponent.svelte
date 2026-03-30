@@ -1,11 +1,13 @@
-<svelte:options customElement={{
-  tag: "tinyflow-component",
-  shadow: "none",
-  // props: {
-	// 		options: { reflect: true, type: 'Object', attribute: 'options' },
-	// 		onInit: { reflect: true, type: 'Object', attribute: 'onInit' }
-	// 	},
-}} />
+<svelte:options
+    customElement={{
+        tag: 'tinyflow-component',
+        shadow: 'none'
+        // props: {
+        // 		options: { reflect: true, type: 'Object', attribute: 'options' },
+        // 		onInit: { reflect: true, type: 'Object', attribute: 'onInit' }
+        // 	},
+    }}
+/>
 
 <script lang="ts">
     import { SvelteFlowProvider, type useSvelteFlow } from '@xyflow/svelte';
@@ -13,13 +15,19 @@
     import { store } from '#store/stores.svelte';
     import type { TinyflowData, TinyflowOptions } from '#types';
     import { setContext } from 'svelte';
+    import { ModeWatcher, setMode } from 'mode-watcher';
 
-    const { options, onInit }: {
-        options: TinyflowOptions,
-        onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void,
+    const {
+        options,
+        onInit
+    }: {
+        options: TinyflowOptions;
+        onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void;
     } = $props();
 
-    let { data } = options;
+    let { data, theme = 'system' } = options;
+
+    setMode(theme);
 
     if (typeof data === 'string') {
         try {
@@ -32,7 +40,7 @@
     setContext('tinyflow_options', options);
 </script>
 
-
+<ModeWatcher />
 <SvelteFlowProvider>
-    <TinyflowCore {onInit} />
+    <TinyflowCore {onInit} colorMode={theme} />
 </SvelteFlowProvider>

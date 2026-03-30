@@ -14,14 +14,19 @@
         }
     });
 
-    const { parameter, index, dataKeyName, useChildrenOnly, showContentType = false }: {
-        parameter: Parameter,
-        index: number,
-        dataKeyName: string,
-        useChildrenOnly?: boolean,
-        showContentType?: boolean,
+    const {
+        parameter,
+        index,
+        dataKeyName,
+        useChildrenOnly,
+        showContentType = false
+    }: {
+        parameter: Parameter;
+        index: number;
+        dataKeyName: string;
+        useChildrenOnly?: boolean;
+        showContentType?: boolean;
     } = $props();
-
 
     let currentNodeId = getCurrentNodeId();
     let node = useNodesData(currentNodeId);
@@ -47,18 +52,15 @@
         });
     };
 
-
     const updateParamByEvent = (name: string, event: Event) => {
         const newValue = (event.target as any).value;
         updateParam(name, newValue);
     };
 
-
     const updateRef = (item: any) => {
         const newValue = item.value;
         updateParam('ref', newValue);
     };
-
 
     const updateRefType = (item: any) => {
         const newValue = item.value;
@@ -69,7 +71,6 @@
         const newValue = item.value;
         updateParam('contentType', newValue);
     };
-
 
     let triggerObject: any;
     const handleDelete = () => {
@@ -85,19 +86,31 @@
     let selectItems = useRefOptions(useChildrenOnly);
 </script>
 
-
 <div class="input-item">
-    <Input style="width: 100%;" value={param.name} placeholder="请输入参数名称"
-           disabled={param.nameDisabled === true}
-           oninput={(event)=>updateParamByEvent('name', event)} />
+    <Input
+        style="width: 100%;"
+        value={param.name}
+        placeholder="请输入参数名称"
+        disabled={param.nameDisabled === true}
+        oninput={(event) => updateParamByEvent('name', event)}
+    />
 </div>
 <div class="input-item">
     {#if param.refType === 'fixed'}
-        <Input value={param.value} placeholder="请输入参数值" oninput={(event)=>updateParamByEvent('value', event)} />
-    {:else if (param.refType !== 'input')}
-        <Select items={selectItems.current} style="width: 100%" defaultValue={["ref"]} value={[param.ref]}
-                expandAll
-                onSelect={updateRef} />
+        <Input
+            value={param.value}
+            placeholder="请输入参数值"
+            oninput={(event) => updateParamByEvent('value', event)}
+        />
+    {:else if param.refType !== 'input'}
+        <Select
+            items={selectItems.current}
+            style="width: 100%"
+            defaultValue={['ref']}
+            value={[param.ref]}
+            expandAll
+            onSelect={updateRef}
+        />
     {/if}
 </div>
 <div class="input-item">
@@ -107,31 +120,49 @@
             <div class="input-more-setting">
                 <div class="input-more-item">
                     数据来源：
-                    <Select items={parameterRefTypes} style="width: 100%" defaultValue={["ref"]}
-                            value={param.refType ? [param.refType] : []}
-                            onSelect={updateRefType}
+                    <Select
+                        items={parameterRefTypes}
+                        style="width: 100%"
+                        defaultValue={['ref']}
+                        value={param.refType ? [param.refType] : []}
+                        onSelect={updateRefType}
                     />
                 </div>
-                {#if showContentType }
+                {#if showContentType}
                     <div class="input-more-item">
                         数据内容：
-                        <Select items={contentTypes} style="width: 100%" defaultValue={["text"]}
-                                value={param.contentType ? [param.contentType] : []}
-                                onSelect={updateContentType}
+                        <Select
+                            items={contentTypes}
+                            style="width: 100%"
+                            defaultValue={['text']}
+                            value={param.contentType ? [param.contentType] : []}
+                            onSelect={updateContentType}
                         />
                     </div>
                 {/if}
                 <div class="input-more-item">
                     默认值：
-                    <Textarea rows={1} style="width: 100%;" onchange={(event)=>{
-                        updateParamByEvent('defaultValue', event)
-                    }} value={param.defaultValue}  placeholder="请输入参数默认值" />
+                    <Textarea
+                        rows={1}
+                        style="width: 100%;"
+                        onchange={(event) => {
+                            updateParamByEvent('defaultValue', event);
+                        }}
+                        value={param.defaultValue}
+                        placeholder="请输入参数默认值"
+                    />
                 </div>
                 <div class="input-more-item">
                     参数描述：
-                    <Textarea rows={3} style="width: 100%;" onchange={(event)=>{
-                        updateParamByEvent('description', event)
-                    }} value={param.description}  placeholder="请输入参数描述"/>
+                    <Textarea
+                        rows={3}
+                        style="width: 100%;"
+                        onchange={(event) => {
+                            updateParamByEvent('description', event);
+                        }}
+                        value={param.description}
+                        placeholder="请输入参数描述"
+                    />
                 </div>
 
                 <div class="input-more-item">
@@ -142,34 +173,29 @@
     </FloatingTrigger>
 </div>
 
-
 <style lang="less">
-
-  .input-item {
-    display: flex;
-    align-items: center;
-  }
-
-  .input-more-setting {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 200px;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-
-    .input-more-item {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 12px;
-      color: #666;
+    .input-item {
+        display: flex;
+        align-items: center;
     }
-  }
 
+    .input-more-setting {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        background: var(--background);
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        width: 200px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+
+        .input-more-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 12px;
+            color: var(--muted-foreground);
+        }
+    }
 </style>
-
-

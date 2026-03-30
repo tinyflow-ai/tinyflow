@@ -85,6 +85,7 @@ export type TinyflowOptions = {
     onNodeExecute?: (node: Node) => void;
     hiddenNodes?: string[] | (() => string[]);
     onDataChange?: (data: TinyflowData) => void;
+    theme?: 'light' | 'dark' | 'system';
 };
 
 export type Parameter = {

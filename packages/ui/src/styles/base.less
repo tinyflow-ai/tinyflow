@@ -1,245 +1,241 @@
 .tf-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  background: #fff;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 0;
-  height: fit-content;
-  width: fit-content;
-
-  svg {
-    fill: currentColor;
-    width: 16px;
-    height: 16px;
-  }
-
-  &:hover {
-    border: 1px solid var(--tf-primary-color);
-  }
-}
-
-.tf-btn.tf-btn-primary {
-  background: var(--tf-primary-color);
-  color: #fff;
-
-  &:hover {
-    border: 1px solid #ccc;
-    background: #3a6fe3;
-  }
-}
-
-
-.tf-input, .tf-textarea {
-  display: flex;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  padding: 5px 8px;
-  box-sizing: border-box;
-  resize: vertical;
-  outline: none;
-  line-height: normal;
-  overflow-y: hidden;
-
-  &::placeholder {
-    color: #ccc;
-    font-size: 12px;
-  }
-
-  // 获得焦点时的样式
-  &:focus {
-    border-color: var(--tf-primary-color);
-    box-shadow: 0 0 5px rgba(81, 203, 238, .2);
-  }
-
-  // 禁用时的样式
-  &[disabled] {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-    color: #aaa;
-  }
-}
-
-
-.tf-select {
-  &-input {
-    display: flex;
-    border: 1px solid #ccc;
-    padding: 3px 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    background: #fff;
-    height: 27px;
-
-    &:focus {
-      border-color: var(--tf-primary-color);
-      box-shadow: 0 0 5px rgba(81, 203, 238, .2);
-    }
-
-    &-value {
-      height: 21px;
-      min-width: 10px;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-    }
-
-    &-arrow {
-      display: block;
-      width: 16px;
-      height: 16px;
-      color: #666;
-    }
-
-    &-placeholder {
-      color: #ccc;
-    }
-  }
-
-  &-content {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px;
-    width: max-content;
-    min-width: 100%;
-    z-index: 999;
-    box-sizing: border-box;
-    max-height: 220px;
-    overflow: auto;
-
-    &-item {
-      display: flex;
-      align-items: center;
-      padding: 5px 10px;
-      border: none;
-      background: #fff;
-      border-radius: 5px;
-      cursor: pointer;
-      line-height: 100%;
-      gap: 2px;
-
-      span {
-        width: 16px;
-        display: flex;
-      }
-
-      svg {
-        width: 16px;
-        height: 16px;
-        margin: auto;
-      }
-
-      &:hover {
-        background: #f0f0f0;
-      }
-    }
-
-    &-children {
-      padding-left: 14px;
-    }
-  }
-}
-
-.tf-checkbox {
-  width: 14px;
-  height: 14px;
-}
-
-.tf-tabs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  padding: 5px;
-  border-radius: 5px;
-  border: none;
-  background: #F4F4F5;
-
-  .tf-tabs-item {
-    flex-grow: 1;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    color: #808088;
-  }
+    gap: 2px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0;
+    height: fit-content;
+    width: fit-content;
 
-  .tf-tabs-item.active {
-    background: #fff;
-    color: #333;
-    font-weight: 500;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
-  }
+    svg {
+        fill: currentColor;
+        width: 16px;
+        height: 16px;
+    }
+
+    &:hover {
+        border: 1px solid var(--primary);
+    }
+}
+
+.tf-btn.tf-btn-primary {
+    background: var(--primary);
+    color: var(--primary-foreground);
+
+    &:hover {
+        border: 1px solid var(--border);
+        background: var(--chart-3);
+    }
+}
+
+.tf-input,
+.tf-textarea {
+    display: flex;
+    border-radius: 5px;
+    border: 1px solid var(--border);
+    padding: 5px 8px;
+    box-sizing: border-box;
+    resize: vertical;
+    outline: none;
+    line-height: normal;
+    overflow-y: hidden;
+
+    &::placeholder {
+        color: var(--muted-foreground);
+        font-size: 12px;
+    }
+
+    // 获得焦点时的样式
+    &:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 5px var(--chart-5);
+    }
+
+    // 禁用时的样式
+    &[disabled] {
+        background-color: var(--secondary);
+        cursor: not-allowed;
+        color: var(--secondary-foreground);
+    }
+}
+
+.tf-select {
+    &-input {
+        display: flex;
+        border: 1px solid var(--border);
+        padding: 3px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background: var(--background);
+        height: 27px;
+
+        &:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 5px var(--chart-5);
+        }
+
+        &-value {
+            height: 21px;
+            min-width: 10px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        &-arrow {
+            display: block;
+            width: 16px;
+            height: 16px;
+            color: var(--ring);
+        }
+
+        &-placeholder {
+            color: var(--muted-foreground);
+        }
+    }
+
+    &-content {
+        display: flex;
+        flex-direction: column;
+        background: var(--background);
+        margin-top: 5px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        padding: 5px;
+        width: max-content;
+        min-width: 100%;
+        z-index: 999;
+        box-sizing: border-box;
+        max-height: 220px;
+        overflow: auto;
+
+        &-item {
+            display: flex;
+            align-items: center;
+            padding: 5px 10px;
+            border: none;
+            background: var(--background);
+            border-radius: 5px;
+            cursor: pointer;
+            line-height: 100%;
+            gap: 2px;
+
+            span {
+                width: 16px;
+                display: flex;
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+                margin: auto;
+            }
+
+            &:hover {
+                background: var(--secondary);
+            }
+        }
+
+        &-children {
+            padding-left: 14px;
+        }
+    }
+}
+
+.tf-checkbox {
+    width: 14px;
+    height: 14px;
+}
+
+.tf-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    background: var(--muted);
+
+    .tf-tabs-item {
+        flex-grow: 1;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        color: var(--muted-foreground);
+    }
+
+    .tf-tabs-item.active {
+        background: var(--background);
+        color: var(--foreground);
+        font-weight: 500;
+        box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+    }
 }
 
 h3.tf-heading {
-  font-weight: 700;
-  font-size: 14px;
-  margin-top: 2px;
-  margin-bottom: 3px;
-  color: #333;
+    font-weight: 700;
+    font-size: 14px;
+    margin-top: 2px;
+    margin-bottom: 3px;
+    color: var(--foreground);
 }
 
-
 .tf-collapse {
-  border: none;
-  border-radius: 5px;
-  //padding: 5px;
+    border: none;
+    border-radius: 5px;
+    //padding: 5px;
 
-  &-item {
+    &-item {
+        &-title {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
 
-    &-title {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      font-size: 14px;
+            &-icon {
+                display: flex;
+                width: 26px;
+                height: 26px;
+                color: var(--primary);
+                background: color-mix(in oklab, var(--primary) 10%, transparent);
+                border-radius: 5px;
+                padding: 3px;
+                justify-content: center;
+                align-items: center;
+                margin-right: 10px;
 
-      &-icon {
-        display: flex;
-        width: 26px;
-        height: 26px;
-        color: #2563EB;
-        background: #cedafb;
-        border-radius: 5px;
-        padding: 3px;
-        justify-content: center;
-        align-items: center;
-        margin-right: 10px;
+                svg {
+                    width: 22px;
+                    height: 22px;
+                    color: var(--primary);
+                }
+            }
 
-        svg {
-          width: 22px;
-          height: 22px;
-          color: #3474ff;
+            &-arrow {
+                display: block;
+                width: 16px;
+                height: 16px;
+                margin-left: auto;
+            }
         }
-      }
 
-      &-arrow {
-        display: block;
-        width: 16px;
-        height: 16px;
-        margin-left: auto;
-      }
+        &-description {
+            font-size: 12px;
+            margin: 10px 0;
+            color: var(--muted-foreground);
+        }
     }
-
-
-    &-description {
-      font-size: 12px;
-      margin: 10px 0;
-      color: #999;
-    }
-  }
 }

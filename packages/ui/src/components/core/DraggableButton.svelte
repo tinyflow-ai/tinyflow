@@ -2,12 +2,18 @@
     import { Button } from '../base/';
     import { type Node } from '@xyflow/svelte';
 
-    const { icon, title, type, description, extra }: {
-        icon: string,
-        title: string,
-        type: string,
-        description: string,
-        extra?: Partial<Node['data']>,
+    const {
+        icon,
+        title,
+        type,
+        description,
+        extra
+    }: {
+        icon: string;
+        title: string;
+        type: string;
+        description: string;
+        extra?: Partial<Node['data']>;
     } = $props();
 
     const onDragStart = (event: DragEvent) => {

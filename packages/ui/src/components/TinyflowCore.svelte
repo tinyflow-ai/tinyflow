@@ -5,7 +5,12 @@
         Controls,
         MiniMap,
         useSvelteFlow,
-        type Node, MarkerType, type Handle, Panel, type Edge, type NodeTypes
+        type Node,
+        MarkerType,
+        type Handle,
+        Panel,
+        type Edge,
+        type NodeTypes
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index.ts';
@@ -28,7 +33,7 @@
     import { onDestroy, onMount } from 'svelte';
     import { isInEditableElement } from '#components/utils/isInEditableElement';
 
-    const { onInit, ...rest } = $props();
+    const { onInit, colorMode, ...rest } = $props();
     const svelteFlow = useSvelteFlow();
 
     console.log('props', rest);
@@ -71,9 +76,7 @@
         store.selectNodeOnly(newNode.id);
     };
 
-
     const { getNode } = useGetNode();
-
 
     const isValidConnection = (conn: any) => {
         const sourceNode = getNode(conn.source)!;
@@ -85,7 +88,10 @@
             for (let edge of edges) {
                 if (edge.target === conn.target) {
                     const edgeSourceNode = getNode(edge.source) as Node;
-                    if (conn.sourceHandle === 'loop_handle' && edgeSourceNode.parentId !== sourceNode.id) {
+                    if (
+                        conn.sourceHandle === 'loop_handle' &&
+                        edgeSourceNode.parentId !== sourceNode.id
+                    ) {
                         return false;
                     }
                     if (sourceNode.parentId && edgeSourceNode.parentId !== sourceNode.parentId) {
@@ -130,7 +136,6 @@
         }
 
         if (newNode.parentId) {
-
             const { x, y } = getNodeRelativePosition(newNode.parentId);
 
             newNode.position = {
@@ -165,7 +170,6 @@
             });
         });
     };
-
 
     const { getEdgesByTarget } = useGetEdgesByTarget();
     const onDelete = (params: any) => {
@@ -238,11 +242,9 @@
 
     const { deleteEdge } = useDeleteEdge();
 
-
     const onconnectstart = (event: any, node: any) => {
         // console.log('onconnectstart: ', event, node);
     };
-
 
     const onconnect = (event: any) => {
         // console.log('onconnect: ', event);
@@ -251,7 +253,6 @@
     const { copyHandler, pasteHandler } = useCopyPasteHandler();
 
     const handleKeyDown = (e: KeyboardEvent) => {
-
         if (isInEditableElement()) {
             return;
         }
@@ -265,11 +266,11 @@
             e.preventDefault();
             // 全选所有节点
             store.updateNodes((nodes) => {
-                return nodes.map(node => ({ ...node, selected: true }));
+                return nodes.map((node) => ({ ...node, selected: true }));
             });
 
             store.updateEdges((edges) => {
-                return edges.map(edge => ({ ...edge, selected: true }));
+                return edges.map((edge) => ({ ...edge, selected: true }));
             });
         }
     };
@@ -312,55 +313,56 @@
             viewport: store.getViewport()
         });
     });
-
-
 </script>
 
-
 <div style="position: relative; height: 100%; width: 100%;overflow: hidden">
-    <SvelteFlow nodeTypes={{ ...nodeTypes, ...customNodeTypes}}
-                bind:nodes={store.getNodes, store.setNodes}
-                bind:edges={store.getEdges, store.setEdges}
-                bind:viewport={store.getViewport, store.setViewport}
-                class="tinyflow-logo"
-                ondrop={onDrop}
-                ondragover={onDragOver}
-                isValidConnection={isValidConnection}
-                onconnectend={onconnectend}
-                onconnectstart={onconnectstart}
-                onconnect={onconnect}
-                connectionRadius={50}
-                onedgeclick={(e) => {
-                    showEdgePanel = true;
-                    currentEdge = e.edge;
-                }}
-                onbeforeconnect={(edge) => {
-                    return {
-                        ...edge,
-                        id:genShortId(),
-                    }
-                }}
-                ondelete={onDelete}
-                onclick={(e) => {
-                    const el = e.target as HTMLElement;
-                    if (el.classList.contains("svelte-flow__edge-interaction")
-                        || el.classList.contains('panel-content')
-                        || el.closest('.panel-content')){
-                     return
-                    }
-                     showEdgePanel = false;
-                     currentEdge = null;
-                }}
-                defaultEdgeOptions={{
-                    // animated: true,
-                    // label: 'edge label',
-                    markerEnd: {
-                        type: MarkerType.ArrowClosed,
-                        // color: 'red',
-                        width: 20,
-                        height: 20
-                    }
-                }}
+    <SvelteFlow
+        {colorMode}
+        nodeTypes={{ ...nodeTypes, ...customNodeTypes }}
+        bind:nodes={store.getNodes, store.setNodes}
+        bind:edges={store.getEdges, store.setEdges}
+        bind:viewport={store.getViewport, store.setViewport}
+        class="tinyflow-logo"
+        ondrop={onDrop}
+        ondragover={onDragOver}
+        {isValidConnection}
+        {onconnectend}
+        {onconnectstart}
+        {onconnect}
+        connectionRadius={50}
+        onedgeclick={(e) => {
+            showEdgePanel = true;
+            currentEdge = e.edge;
+        }}
+        onbeforeconnect={(edge) => {
+            return {
+                ...edge,
+                id: genShortId()
+            };
+        }}
+        ondelete={onDelete}
+        onclick={(e) => {
+            const el = e.target as HTMLElement;
+            if (
+                el.classList.contains('svelte-flow__edge-interaction') ||
+                el.classList.contains('panel-content') ||
+                el.closest('.panel-content')
+            ) {
+                return;
+            }
+            showEdgePanel = false;
+            currentEdge = null;
+        }}
+        defaultEdgeOptions={{
+            // animated: true,
+            // label: 'edge label',
+            markerEnd: {
+                type: MarkerType.ArrowClosed,
+                // color: 'red',
+                width: 20,
+                height: 20
+            }
+        }}
     >
         <Background />
         <Controls />
@@ -377,11 +379,11 @@
                             placeholder="请输入边条件"
                             style="width: 100%"
                             value={currentEdge?.data?.condition}
-                            onchange={(e)=>{
-                                if (currentEdge){
+                            onchange={(e) => {
+                                if (currentEdge) {
                                     updateEdgeData(currentEdge.id, {
                                         condition: e.target?.value
-                                    })
+                                    });
                                 }
                             }}
                         />
@@ -389,7 +391,7 @@
                     <div class="setting-item" style="padding: 8px 0">
                         <Button
                             onclick={() => {
-                                deleteEdge(currentEdge?.id)
+                                deleteEdge(currentEdge?.id);
                                 showEdgePanel = false;
                             }}
                         >
@@ -415,17 +417,17 @@
 <style>
     .panel-content {
         padding: 10px;
-        background-color: #fff;
+        background-color: var(--background);
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         width: 200px;
-        border: 1px solid #efefef;
+        border: 1px solid var(--border);
     }
 
     .setting-title {
         margin: 10px 0;
         font-size: 12px;
-        color: #999;
+        color: var(--muted-foreground);
     }
 
     .setting-item {

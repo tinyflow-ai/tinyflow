@@ -3,6 +3,7 @@ import { resolve } from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dts from 'vite-plugin-dts';
 import replace from '@rollup/plugin-replace';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -20,11 +21,11 @@ export default defineConfig({
             formats: ['es', 'umd'],
             name: 'Tinyflow'
         },
-        rollupOptions:{
+        rollupOptions: {
             output: {
                 // 确保所有依赖都被打包
                 inlineDynamicImports: true,
-                exports: 'named',
+                exports: 'named'
             },
             plugins: [
                 replace({
@@ -35,6 +36,7 @@ export default defineConfig({
         }
     },
     plugins: [
+        tailwindcss(),
         svelte({ emitCss: false }),
         dts({
             rollupTypes: true,
