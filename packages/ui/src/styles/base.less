@@ -33,37 +33,6 @@
     }
 }
 
-.tf-input,
-.tf-textarea {
-    display: flex;
-    border-radius: 5px;
-    border: 1px solid var(--border);
-    padding: 5px 8px;
-    box-sizing: border-box;
-    resize: vertical;
-    outline: none;
-    line-height: normal;
-    overflow-y: hidden;
-
-    &::placeholder {
-        color: var(--muted-foreground);
-        font-size: 12px;
-    }
-
-    // 获得焦点时的样式
-    &:focus {
-        border-color: var(--primary);
-        box-shadow: 0 0 5px var(--chart-5);
-    }
-
-    // 禁用时的样式
-    &[disabled] {
-        background-color: var(--secondary);
-        cursor: not-allowed;
-        color: var(--secondary-foreground);
-    }
-}
-
 .tf-select {
     &-input {
         display: flex;
@@ -78,8 +47,8 @@
         height: 27px;
 
         &:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 5px var(--chart-5);
+            border-color: var(--ring);
+            box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 50%, transparent);
         }
 
         &-value {
@@ -146,6 +115,26 @@
 
         &-children {
             padding-left: 14px;
+        }
+    }
+}
+
+.dark .tf-select {
+    &-input {
+        border: 1px solid var(--input);
+        background: color-mix(in oklab, var(--input) 30%, transparent);
+    }
+
+    &-content {
+        background: var(--muted);
+        border: 1px solid var(--input);
+
+        &-item {
+            background: var(--muted);
+
+            &:hover {
+                background: var(--input);
+            }
         }
     }
 }
