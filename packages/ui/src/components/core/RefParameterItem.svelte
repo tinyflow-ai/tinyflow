@@ -166,7 +166,7 @@
                 </div>
 
                 <div class="input-more-item">
-                    <Button onclick={handleDelete}>删除</Button>
+                    <Button variant="destructive" onclick={handleDelete}>删除</Button>
                 </div>
             </div>
         {/snippet}

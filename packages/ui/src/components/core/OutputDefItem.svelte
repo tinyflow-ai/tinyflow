@@ -161,7 +161,12 @@
         onSelect={updateDataType}
     />
     {#if (currentParameter.dataType === 'Object' || currentParameter.dataType === 'Array') && currentParameter.addChildDisabled !== true}
-        <Button class="input-btn-more" style="margin-left: auto" onclick={handleAddChildParameter}>
+        <Button
+            size="icon-xs"
+            class="input-btn-more"
+            style="margin-left: auto"
+            onclick={handleAddChildParameter}
+        >
             <svg
                 style="transform: scaleY(-1)"
                 xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +210,7 @@
 
                 {#if currentParameter.deleteDisabled !== true}
                     <div class="input-more-item">
-                        <Button onclick={handleDelete}>删除</Button>
+                        <Button variant="destructive" onclick={handleDelete}>删除</Button>
                     </div>
                 {/if}
             </div>

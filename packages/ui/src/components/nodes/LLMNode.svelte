@@ -91,6 +91,7 @@
     <div class="heading">
         <Heading level={3}>输入参数</Heading>
         <Button
+            size="icon-xs"
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
@@ -107,6 +108,7 @@
     <div class="heading" style="padding-top: 10px">
         <Heading level={3}>图片识别</Heading>
         <Button
+            size="icon-xs"
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {

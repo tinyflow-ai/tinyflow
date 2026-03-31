@@ -390,6 +390,7 @@
                     </div>
                     <div class="setting-item" style="padding: 8px 0">
                         <Button
+                            variant="destructive"
                             onclick={() => {
                                 deleteEdge(currentEdge?.id);
                                 showEdgePanel = false;
@@ -399,7 +400,7 @@
                         </Button>
 
                         <Button
-                            primary={true}
+                            variant="default"
                             onclick={() => {
                                 showEdgePanel = false;
                             }}

@@ -86,6 +86,7 @@
 
             {#if customNode.parametersAddEnable !== false}
                 <Button
+                    size="icon-xs"
                     class="input-btn-more"
                     style="margin-left: auto"
                     onclick={() => {
@@ -194,6 +195,7 @@
 
             {#if customNode.outputDefsAddEnable !== false}
                 <Button
+                    size="icon-xs"
                     class="input-btn-more"
                     style="margin-left: auto"
                     onclick={() => {

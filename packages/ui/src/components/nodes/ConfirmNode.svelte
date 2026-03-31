@@ -76,6 +76,7 @@
     <div class="heading">
         <Heading level={3}>确认数据</Heading>
         <Button
+            size="icon-xs"
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {

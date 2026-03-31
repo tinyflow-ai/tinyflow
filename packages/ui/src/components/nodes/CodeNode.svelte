@@ -51,6 +51,7 @@
     <div class="heading">
         <Heading level={3}>输入参数</Heading>
         <Button
+            size="icon-xs"
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
@@ -103,6 +104,7 @@
     <div class="heading">
         <Heading level={3} mt="10px">输出参数</Heading>
         <Button
+            size="icon-xs"
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {

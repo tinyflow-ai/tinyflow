@@ -15,7 +15,6 @@
             description: '开始定义输入参数'
         },
         {
-
             icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M5.46257 4.43262C7.21556 2.91688 9.5007 2 12 2C17.5228 2 22 6.47715 22 12C22 14.1361 21.3302 16.1158 20.1892 17.7406L17 12H20C20 7.58172 16.4183 4 12 4C9.84982 4 7.89777 4.84827 6.46023 6.22842L5.46257 4.43262ZM18.5374 19.5674C16.7844 21.0831 14.4993 22 12 22C6.47715 22 2 17.5228 2 12C2 9.86386 2.66979 7.88416 3.8108 6.25944L7 12H4C4 16.4183 7.58172 20 12 20C14.1502 20 16.1022 19.1517 17.5398 17.7716L18.5374 19.5674Z"></path></svg>',
             title: '循环',
             type: 'loopNode',
@@ -120,7 +119,8 @@
     }
 
     if (options.hiddenNodes) {
-        const hiddenNodes = typeof options.hiddenNodes === 'function' ? options.hiddenNodes() : options.hiddenNodes;
+        const hiddenNodes =
+            typeof options.hiddenNodes === 'function' ? options.hiddenNodes() : options.hiddenNodes;
         if (Array.isArray(hiddenNodes)) {
             for (let hiddenNode of hiddenNodes) {
                 for (let i = 0; i < baseNodes.length; i++) {
@@ -132,25 +132,33 @@
             }
         }
     }
-
 </script>
 
 <div class="tf-toolbar {containerShowClass}">
-    <div class="tf-toolbar-container ">
+    <div class="tf-toolbar-container">
         <div class="tf-toolbar-container-header">
-            <Tabs style="width: 100%" items={tableItems} onChange={(item)=>{
-                showType = item.value.toString();
-            }}
+            <Tabs
+                style="width: 100%"
+                items={tableItems}
+                onChange={(item) => {
+                    showType = item.value.toString();
+                }}
             />
         </div>
 
         <div class="tf-toolbar-container-body">
-            <div class="tf-toolbar-container-base" style="display: {showType === 'base' ? 'flex' : 'none'}">
+            <div
+                class="tf-toolbar-container-base"
+                style="display: {showType === 'base' ? 'flex' : 'none'}"
+            >
                 {#each baseNodes as node}
                     <DraggableButton {...node} />
                 {/each}
             </div>
-            <div class="tf-toolbar-container-tools" style="display: {showType !== 'base' ? 'flex' : 'none'}">
+            <div
+                class="tf-toolbar-container-tools"
+                style="display: {showType !== 'base' ? 'flex' : 'none'}"
+            >
                 {#each customNodes as node}
                     <DraggableButton {...node} />
                 {/each}
@@ -158,18 +166,24 @@
         </div>
     </div>
 
-    <Button onclick={()=>{
-        containerShowClass = containerShowClass ? '' :'show';
-    }}>
+    <Button
+        size="icon"
+        variant="outline"
+        onclick={() => {
+            containerShowClass = containerShowClass ? '' : 'show';
+        }}
+    >
         {#if containerShowClass === 'show'}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path
-                    d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"></path>
+                    d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"
+                ></path>
             </svg>
         {:else}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                 <path
-                    d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"></path>
+                    d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"
+                ></path>
             </svg>
         {/if}
     </Button>
