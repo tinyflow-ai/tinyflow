@@ -78,6 +78,7 @@
 <textarea
     bind:this={textareaEl}
     spellcheck="false"
+    {...restProps}
     data-slot={dataSlot}
     oninput={(e) => {
         adjustHeight();
@@ -92,5 +93,4 @@
         className
     )}
     bind:value
-    {...restProps}
 ></textarea>
