@@ -254,6 +254,7 @@
     <div class="heading">
         <Heading level={3}>输出参数</Heading>
         <Select
+            class="w-25 ml-auto"
             items={[
                 {
                     label: '文本',
@@ -264,7 +265,6 @@
                     value: 'json'
                 }
             ]}
-            style="width: 100px;margin-left: auto"
             onSelect={(item) => {
                 setOutType(item.value);
             }}
