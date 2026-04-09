@@ -14,6 +14,7 @@
         multiple = false,
         expandValue = [],
         placeholder,
+        disabled = false,
         class: className,
         ...restProps
     }: WithoutChildren<{
@@ -25,6 +26,7 @@
         expandValue?: any[];
         multiple?: boolean;
         placeholder?: string;
+        disabled?: boolean;
         class?: string;
         [key: string]: any;
     }> = $props();
@@ -108,8 +110,10 @@
         <SelectPrimitive.Trigger
             class={cn(
                 'nopan nodrag border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 flex h-9 w-full items-center justify-between rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 md:text-sm',
+                disabled && 'cursor-not-allowed bg-muted/50 text-muted-foreground opacity-60',
                 className
             )}
+            {disabled}
         >
             <span class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left">
                 {#if selectedItems.length > 0}
@@ -130,51 +134,55 @@
                 class="nopan nodrag nowheel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-96 min-w-(--bits-select-anchor-width) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md"
             >
                 <SelectPrimitive.Viewport class="p-1">
-                    {#each displayItems as item (item.value)}
-                        {@const hasChildren = item.children && item.children.length > 0}
-                        {@const option = toSelectOption(item)}
-                        <SelectPrimitive.Item
-                            value={option.value}
-                            label={option.label}
-                            class={cn(
-                                'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
-                                isChildItem(item) && 'pl-6'
-                            )}
-                            onclick={(e: MouseEvent) => handleSelect(e, item)}
-                        >
-                            {#snippet children({ selected })}
-                                <span class="flex items-center gap-2 whitespace-nowrap">
-                                    {#if hasChildren}
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            class="size-4"
-                                        >
-                                            <path d="M12 14L8 10H16L12 14Z"></path>
-                                        </svg>
-                                    {/if}
-                                    <Render target={item.label} />
-                                </span>
-                                {#if selected}
-                                    <span
-                                        class="absolute right-2 flex size-3.5 items-center justify-center"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            class="size-4"
-                                        >
-                                            <path
-                                                d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
-                                            ></path>
-                                        </svg>
+                    {#if displayItems.length === 0}
+                        <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
+                    {:else}
+                        {#each displayItems as item (item.value)}
+                            {@const hasChildren = item.children && item.children.length > 0}
+                            {@const option = toSelectOption(item)}
+                            <SelectPrimitive.Item
+                                value={option.value}
+                                label={option.label}
+                                class={cn(
+                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+                                    isChildItem(item) && 'pl-6'
+                                )}
+                                onclick={(e: MouseEvent) => handleSelect(e, item)}
+                            >
+                                {#snippet children({ selected })}
+                                    <span class="flex items-center gap-2 whitespace-nowrap">
+                                        {#if hasChildren}
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="size-4"
+                                            >
+                                                <path d="M12 14L8 10H16L12 14Z"></path>
+                                            </svg>
+                                        {/if}
+                                        <Render target={item.label} />
                                     </span>
-                                {/if}
-                            {/snippet}
-                        </SelectPrimitive.Item>
-                    {/each}
+                                    {#if selected}
+                                        <span
+                                            class="absolute right-2 flex size-3.5 items-center justify-center"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="size-4"
+                                            >
+                                                <path
+                                                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                                                ></path>
+                                            </svg>
+                                        </span>
+                                    {/if}
+                                {/snippet}
+                            </SelectPrimitive.Item>
+                        {/each}
+                    {/if}
                 </SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
         </SelectPrimitive.Portal>
@@ -185,8 +193,10 @@
         <SelectPrimitive.Trigger
             class={cn(
                 'nopan nodrag border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 flex h-9 w-full items-center justify-between rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 md:text-sm',
+                disabled && 'cursor-not-allowed bg-muted/50 text-muted-foreground opacity-60',
                 className
             )}
+            {disabled}
         >
             <span class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left">
                 {#if selectedItems.length > 0}
@@ -202,51 +212,55 @@
                 class="nopan nodrag nowheel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-96 min-w-(--bits-select-anchor-width) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md"
             >
                 <SelectPrimitive.Viewport class="p-1">
-                    {#each displayItems as item (item.value)}
-                        {@const hasChildren = item.children && item.children.length > 0}
-                        {@const option = toSelectOption(item)}
-                        <SelectPrimitive.Item
-                            value={option.value}
-                            label={option.label}
-                            class={cn(
-                                'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
-                                isChildItem(item) && 'pl-6'
-                            )}
-                            onclick={(e: MouseEvent) => handleSelect(e, item)}
-                        >
-                            {#snippet children({ selected })}
-                                <span class="flex items-center gap-2 whitespace-nowrap">
-                                    {#if hasChildren}
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            class="size-4"
-                                        >
-                                            <path d="M12 14L8 10H16L12 14Z"></path>
-                                        </svg>
-                                    {/if}
-                                    <Render target={item.label} />
-                                </span>
-                                {#if selected}
-                                    <span
-                                        class="absolute right-2 flex size-3.5 items-center justify-center"
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 24 24"
-                                            fill="currentColor"
-                                            class="size-4"
-                                        >
-                                            <path
-                                                d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
-                                            ></path>
-                                        </svg>
+                    {#if displayItems.length === 0}
+                        <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
+                    {:else}
+                        {#each displayItems as item (item.value)}
+                            {@const hasChildren = item.children && item.children.length > 0}
+                            {@const option = toSelectOption(item)}
+                            <SelectPrimitive.Item
+                                value={option.value}
+                                label={option.label}
+                                class={cn(
+                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
+                                    isChildItem(item) && 'pl-6'
+                                )}
+                                onclick={(e: MouseEvent) => handleSelect(e, item)}
+                            >
+                                {#snippet children({ selected })}
+                                    <span class="flex items-center gap-2 whitespace-nowrap">
+                                        {#if hasChildren}
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="size-4"
+                                            >
+                                                <path d="M12 14L8 10H16L12 14Z"></path>
+                                            </svg>
+                                        {/if}
+                                        <Render target={item.label} />
                                     </span>
-                                {/if}
-                            {/snippet}
-                        </SelectPrimitive.Item>
-                    {/each}
+                                    {#if selected}
+                                        <span
+                                            class="absolute right-2 flex size-3.5 items-center justify-center"
+                                        >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                                class="size-4"
+                                            >
+                                                <path
+                                                    d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                                                ></path>
+                                            </svg>
+                                        </span>
+                                    {/if}
+                                {/snippet}
+                            </SelectPrimitive.Item>
+                        {/each}
+                    {/if}
                 </SelectPrimitive.Viewport>
             </SelectPrimitive.Content>
         </SelectPrimitive.Portal>
