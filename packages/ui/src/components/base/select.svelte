@@ -72,11 +72,14 @@
         onSelect?.(item);
     }
 
-    // 递归渲染树形选项
-    function renderTreeItems(items: SelectItem[], level = 0): SelectItem[] {
-        const result: SelectItem[] = [];
+    // 递归渲染树形选项，返回带层级的项
+    function renderTreeItems(
+        items: SelectItem[],
+        level = 0
+    ): { item: SelectItem; level: number }[] {
+        const result: { item: SelectItem; level: number }[] = [];
         for (const item of items) {
-            result.push(item);
+            result.push({ item, level });
             const shouldExpand = expandAll || expandValue.includes(item.value);
             if (item.children?.length && shouldExpand) {
                 result.push(...renderTreeItems(item.children, level + 1));
@@ -87,12 +90,6 @@
 
     // 获取显示的选项列表
     let displayItems = $derived(renderTreeItems(items));
-
-    // 判断是否为子项（用于缩进显示）
-    function isChildItem(item: SelectItem): boolean {
-        const isDirectChild = items.findIndex((i) => i.value === item.value) === -1;
-        return isDirectChild;
-    }
 
     // 将 SelectItem 转换为 bits-ui 需要的格式
     function toSelectOption(item: SelectItem) {
@@ -137,16 +134,16 @@
                     {#if displayItems.length === 0}
                         <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
                     {:else}
-                        {#each displayItems as item (item.value)}
+                        {#each displayItems as { item, level } (item.value)}
                             {@const hasChildren = item.children && item.children.length > 0}
                             {@const option = toSelectOption(item)}
                             <SelectPrimitive.Item
                                 value={option.value}
                                 label={option.label}
                                 class={cn(
-                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
-                                    isChildItem(item) && 'pl-6'
+                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50'
                                 )}
+                                style="padding-left: {level * 4}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
@@ -160,6 +157,8 @@
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
+                                        {:else}
+                                            <span class="size-4"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
@@ -215,16 +214,16 @@
                     {#if displayItems.length === 0}
                         <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
                     {:else}
-                        {#each displayItems as item (item.value)}
+                        {#each displayItems as { item, level } (item.value)}
                             {@const hasChildren = item.children && item.children.length > 0}
                             {@const option = toSelectOption(item)}
                             <SelectPrimitive.Item
                                 value={option.value}
                                 label={option.label}
                                 class={cn(
-                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50',
-                                    isChildItem(item) && 'pl-6'
+                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50'
                                 )}
+                                style="padding-left: {level * 4}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
@@ -238,6 +237,8 @@
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
+                                        {:else}
+                                            <span class="size-4"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
