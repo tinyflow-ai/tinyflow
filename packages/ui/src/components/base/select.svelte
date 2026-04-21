@@ -2,8 +2,9 @@
     import { Select as SelectPrimitive } from 'bits-ui';
     import { cn, type WithoutChildren } from '../utils/cn';
     import { Render } from './index';
-    import type { SelectItem } from '#types';
+    import type { SelectItem, TinyflowOptions } from '#types';
     import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
+    import { getContext } from 'svelte';
 
     let {
         items,
@@ -30,6 +31,8 @@
         class?: string;
         [key: string]: any;
     }> = $props();
+
+    let options = getContext('tinyflow_options') as TinyflowOptions;
 
     // 扁平化所有选项用于查找
     let flatItems = $derived.by(() => {
@@ -105,34 +108,33 @@
     <!-- 多选模式 -->
     <SelectPrimitive.Root type="multiple" value={multipleValue} {...restProps}>
         <SelectPrimitive.Trigger
-            class={cn(
-                'nopan nodrag border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 flex h-9 w-full items-center justify-between rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 md:text-sm',
-                disabled && 'cursor-not-allowed bg-muted/50 text-muted-foreground opacity-60',
-                className
-            )}
+            class={cn('nopan nodrag tf-select', disabled && 'tf-select-disabled', className)}
             {disabled}
         >
-            <span class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left">
+            <span class="tf-select-heading">
                 {#if selectedItems.length > 0}
                     {#each selectedItems as item, index (item.value)}
                         <Render target={item.label} />
                         {#if index < selectedItems.length - 1}
-                            <span class="mx-1">,</span>
+                            <span class="tf-select-heading-item">,</span>
                         {/if}
                     {/each}
                 {:else}
-                    <span class="text-muted-foreground">{placeholder ?? ''}</span>
+                    <span class="tf-select-heading-span">{placeholder ?? ''}</span>
                 {/if}
             </span>
-            <ChevronDownIcon class="size-4 opacity-50" />
+            <ChevronDownIcon class="tf-select-heading-icon" />
         </SelectPrimitive.Trigger>
         <SelectPrimitive.Portal>
             <SelectPrimitive.Content
-                class="nopan nodrag nowheel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-96 min-w-(--bits-select-anchor-width) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md"
+                class={cn(
+                    'nopan nodrag nowheel tf-root tf-select-content',
+                    options.theme === 'dark' && 'dark'
+                )}
             >
-                <SelectPrimitive.Viewport class="p-1">
+                <SelectPrimitive.Viewport style="padding: 4px;">
                     {#if displayItems.length === 0}
-                        <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
+                        <div class="tf-select-empty">暂无数据</div>
                     {:else}
                         {#each displayItems as { item, level } (item.value)}
                             {@const hasChildren = item.children && item.children.length > 0}
@@ -140,37 +142,33 @@
                             <SelectPrimitive.Item
                                 value={option.value}
                                 label={option.label}
-                                class={cn(
-                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50'
-                                )}
+                                class="tf-select-option"
                                 style="padding-left: {level * 4}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
-                                    <span class="flex items-center gap-2 whitespace-nowrap">
+                                    <span class="tf-select-option-content">
                                         {#if hasChildren}
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                class="size-4"
+                                                style="width: 1rem;height: 1rem;"
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
                                         {:else}
-                                            <span class="size-4"></span>
+                                            <span style="width: 1rem;height: 1rem;"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
                                     {#if selected}
-                                        <span
-                                            class="absolute right-2 flex size-3.5 items-center justify-center"
-                                        >
+                                        <span class="tf-select-option-selected">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                class="size-4"
+                                                style="width: 1rem;height: 1rem;"
                                             >
                                                 <path
                                                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
@@ -190,29 +188,28 @@
     <!-- 单选模式 -->
     <SelectPrimitive.Root type="single" value={singleValue} {...restProps}>
         <SelectPrimitive.Trigger
-            class={cn(
-                'nopan nodrag border-input dark:bg-input/30 focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 flex h-9 w-full items-center justify-between rounded-md border bg-transparent px-2.5 py-1 text-base shadow-xs transition-[color,box-shadow] focus-visible:ring-3 aria-invalid:ring-3 md:text-sm',
-                disabled && 'cursor-not-allowed bg-muted/50 text-muted-foreground opacity-60',
-                className
-            )}
+            class={cn('nopan nodrag tf-select', disabled && ' tf-select-disabled', className)}
             {disabled}
         >
-            <span class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-left">
+            <span class="tf-select-heading">
                 {#if selectedItems.length > 0}
                     <Render target={selectedItems[0].label} />
                 {:else}
-                    <span class="text-muted-foreground">{placeholder ?? ''}</span>
+                    <span class="tf-select-heading-span">{placeholder ?? ''}</span>
                 {/if}
             </span>
-            <ChevronDownIcon class="size-4 opacity-50" />
+            <ChevronDownIcon class="tf-select-icon" />
         </SelectPrimitive.Trigger>
         <SelectPrimitive.Portal>
             <SelectPrimitive.Content
-                class="nopan nodrag nowheel data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 max-h-96 min-w-(--bits-select-anchor-width) overflow-hidden rounded-md border bg-popover text-popover-foreground shadow-md"
+                class={cn(
+                    'nopan nodrag nowheel tf-root tf-select-content',
+                    options.theme === 'dark' && 'dark'
+                )}
             >
-                <SelectPrimitive.Viewport class="p-1">
+                <SelectPrimitive.Viewport style="padding: 4px;">
                     {#if displayItems.length === 0}
-                        <div class="py-6 text-center text-sm text-muted-foreground">暂无数据</div>
+                        <div class="tf-select-empty">暂无数据</div>
                     {:else}
                         {#each displayItems as { item, level } (item.value)}
                             {@const hasChildren = item.children && item.children.length > 0}
@@ -220,37 +217,33 @@
                             <SelectPrimitive.Item
                                 value={option.value}
                                 label={option.label}
-                                class={cn(
-                                    'relative flex w-full cursor-pointer select-none items-center rounded-sm py-1.5 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50'
-                                )}
+                                class="tf-select-option"
                                 style="padding-left: {level * 4}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
-                                    <span class="flex items-center gap-2 whitespace-nowrap">
+                                    <span class="tf-select-option-content">
                                         {#if hasChildren}
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                class="size-4"
+                                                style="width: 1rem;height: 1rem;"
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
                                         {:else}
-                                            <span class="size-4"></span>
+                                            <span style="width: 1rem;height: 1rem;"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
                                     {#if selected}
-                                        <span
-                                            class="absolute right-2 flex size-3.5 items-center justify-center"
-                                        >
+                                        <span class="tf-select-option-selected">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                class="size-4"
+                                                style="width: 1rem;height: 1rem;"
                                             >
                                                 <path
                                                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"

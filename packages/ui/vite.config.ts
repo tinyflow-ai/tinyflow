@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 import dts from 'vite-plugin-dts';
 import replace from '@rollup/plugin-replace';
-import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +35,6 @@ export default defineConfig({
         }
     },
     plugins: [
-        tailwindcss(),
         svelte({ emitCss: false }),
         dts({
             rollupTypes: true,

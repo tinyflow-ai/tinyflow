@@ -15,7 +15,7 @@
 
             &::after {
                 content: ' ';
-                background: var(--primary);
+                background: var(--tf-primary);
                 width: 8px;
                 height: 8px;
                 border-radius: 100%;
@@ -35,12 +35,12 @@
         div.loop_handle_wrapper {
             &::after {
                 content: '循环体';
-                background: var(--primary);
+                background: var(--tf-primary);
                 width: 100px;
                 height: 20px;
                 border-radius: 0;
                 display: flex;
-                color: var(--primary-foreground);
+                color: var(--tf-primary-foreground);
                 justify-content: center;
                 align-items: center;
             }
@@ -59,18 +59,18 @@
             border-radius: 5px;
             top: -2px;
             left: -2px;
-            border: 1px solid var(--border);
+            border: 1px solid var(--tf-border);
             height: calc(100% + 2px);
             width: calc(100% + 2px);
         }
 
         &:hover {
-            border: 3px solid color-mix(in oklab, var(--border) 50%, transparent);
+            border: 3px solid rgba(226, 232, 240, 0.5);
         }
 
         &.selectable.selected {
-            border: 3px solid color-mix(in oklab, var(--border) 50%, transparent);
-            box-shadow: 0 0 0 1px var(--primary);
+            border: 3px solid rgba(226, 232, 240, 0.5);
+            box-shadow: 0 0 0 1px var(--tf-primary);
         }
 
         &:hover:after {
@@ -86,17 +86,17 @@
 .tf-node-wrapper {
     border-radius: 5px;
     min-width: 300px;
-    background: var(--background);
+    background: var(--tf-background);
 
     &-title {
         height: 30px;
-        background: color-mix(in oklab, var(--primary) 5%, transparent);
-        color: var(--muted-foreground);
+        background: rgba(59, 130, 246, 0.05);
+        color: var(--tf-muted-foreground);
         font-size: 12px;
         display: flex;
         align-items: center;
         padding-left: 5px;
-        border-bottom: 1px solid var(--border);
+        border-bottom: 1px solid var(--tf-border);
         font-weight: 300;
         letter-spacing: 1px;
     }
@@ -127,8 +127,8 @@
     }
 
     &-container {
-        background: var(--background);
-        border: 1px solid var(--border);
+        background: var(--tf-background);
+        border: 1px solid var(--tf-border);
         border-radius: 5px;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         padding: 10px;
@@ -161,11 +161,11 @@
                     svg {
                         width: 20px;
                         height: 20px;
-                        fill: var(--primary);
+                        fill: var(--tf-primary);
                     }
 
                     &:hover {
-                        background: var(--muted);
+                        background: var(--tf-muted);
                     }
                 }
             }
@@ -182,7 +182,7 @@
     width: 100%;
     height: 100%;
     font-weight: 800;
-    color: color-mix(in oklab, var(--foreground) 33%, transparent);
+    color: rgba(36, 36, 36, 0.33);
     text-shadow:
         1px 3px 6px #cedafb,
         0 0 0 #000,

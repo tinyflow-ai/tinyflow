@@ -38,7 +38,9 @@ export class Tinyflow {
         tinyflowEl.style.display = 'block';
         tinyflowEl.style.width = '100%';
         tinyflowEl.style.height = '100%';
-        tinyflowEl.classList.add('tf-theme-light');
+        tinyflowEl.classList.add(
+            ...(this.options.theme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
+        );
 
         tinyflowEl.options = this.options;
         tinyflowEl.onInit = (svelteFlowInstance: FlowInstance) => {
@@ -72,7 +74,9 @@ export class Tinyflow {
         tinyflowEl.style.display = 'block';
         tinyflowEl.style.width = '100%';
         tinyflowEl.style.height = '100%';
-        tinyflowEl.classList.add('tf-theme-light');
+        tinyflowEl.classList.add(
+            ...(this.options.theme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
+        );
 
         tinyflowEl.options = this.options;
         tinyflowEl.onInit = (svelteFlowInstance: FlowInstance) => {
