@@ -81,11 +81,13 @@
         level = 0
     ): { item: SelectItem; level: number }[] {
         const result: { item: SelectItem; level: number }[] = [];
-        for (const item of items) {
-            result.push({ item, level });
-            const shouldExpand = expandAll || expandValue.includes(item.value);
-            if (item.children?.length && shouldExpand) {
-                result.push(...renderTreeItems(item.children, level + 1));
+        if (items) {
+            for (const item of items) {
+                result.push({ item, level });
+                const shouldExpand = expandAll || expandValue.includes(item.value);
+                if (item.children?.length && shouldExpand) {
+                    result.push(...renderTreeItems(item.children, level + 1));
+                }
             }
         }
         return result;

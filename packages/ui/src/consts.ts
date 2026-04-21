@@ -35,11 +35,11 @@ export const parameterRefTypes = [
     {
         value: 'fixed',
         label: '固定值'
+    },
+    {
+        value: 'input',
+        label: '输入'
     }
-    // {
-    //     value: 'input',
-    //     label: '输入'
-    // }
 ];
 
 export const contentTypes = [
@@ -51,10 +51,18 @@ export const contentTypes = [
     { label: '其他', value: 'other' }
 ];
 
-export const startFormTypes = [
+export const inputFormTypes = [
     { label: '单行输入框', value: 'input' },
     { label: '多行输入框', value: 'textarea' },
     { label: '下拉菜单', value: 'select' },
+    { label: '单选', value: 'radio' },
+    { label: '多选', value: 'checkbox' }
+];
+
+export const inputFormTypesForFiles = [
+    // { label: '单行输入框', value: 'input' },
+    // { label: '多行输入框', value: 'textarea' },
+    // { label: '下拉菜单', value: 'select' },
     { label: '单选', value: 'radio' },
     { label: '多选', value: 'checkbox' }
 ];

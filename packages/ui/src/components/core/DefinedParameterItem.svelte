@@ -2,7 +2,7 @@
     import { Input, Textarea } from '../base';
     import { Button, Checkbox, FloatingTrigger, Select } from '../base/index.js';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { contentTypes, startFormTypes } from '#consts';
+    import { contentTypes, inputFormTypes, inputFormTypesForFiles } from '#consts';
     import type { Parameter } from '#types';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
@@ -22,6 +22,14 @@
             ...(node?.current?.data?.parameters as Array<Parameter>)[index]
         };
     });
+
+    let formTypes = $derived.by(() => {
+        return ["text","other"].includes(param.contentType || "text") ? inputFormTypes : inputFormTypesForFiles;
+    });
+
+    let isTextFormType = $derived.by(() => {
+        return param.contentType === 'text' || !param.contentType;
+    })
 
     const { updateNodeData } = useSvelteFlow();
 
@@ -107,7 +115,7 @@
                 <div class="input-more-item">
                     输入方式：
                     <Select
-                        items={startFormTypes}
+                        items={formTypes}
                         style="width: 100%"
                         defaultValue={['input']}
                         value={param.formType ? [param.formType] : []}
@@ -115,7 +123,7 @@
                     />
                 </div>
 
-                {#if param.formType === 'radio' || param.formType === 'checkbox' || param.formType === 'select'}
+                {#if isTextFormType && (param.formType === 'radio' || param.formType === 'checkbox' || param.formType === 'select')}
                     <div class="input-more-item">
                         数据选项：
                         <Textarea
@@ -139,6 +147,7 @@
                             updateParamByEvent('formLabel', event);
                         }}
                         value={param.formLabel}
+                        placeholder="请输入数据标题"
                     />
                 </div>
 
@@ -151,6 +160,7 @@
                             updateParamByEvent('formDescription', event);
                         }}
                         value={param.formDescription}
+                        placeholder="请输入数据描述"
                     />
                 </div>
 
@@ -163,6 +173,21 @@
                             updateParamByEvent('formPlaceholder', event);
                         }}
                         value={param.formPlaceholder}
+                        placeholder="请输入占位符"
+                    />
+                </div>
+
+
+                <div class="input-more-item">
+                    参数描述：
+                    <Textarea
+                        rows={3}
+                        style="width: 100%;"
+                        onchange={(event) => {
+                            updateParamByEvent('description', event);
+                        }}
+                        value={param.description}
+                        placeholder="请输入参数描述"
                     />
                 </div>
 

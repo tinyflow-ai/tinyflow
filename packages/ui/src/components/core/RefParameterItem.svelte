@@ -3,7 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { contentTypes, parameterRefTypes } from '#consts';
+    import { contentTypes, parameterRefTypes, inputFormTypes, inputFormTypesForFiles } from '#consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
     import { onMount } from 'svelte';
     import type { Parameter } from '#types';
@@ -36,6 +36,14 @@
             ...(node?.current?.data?.[dataKeyName] as Array<Parameter>)[index]
         };
     });
+
+    let formTypes = $derived.by(() => {
+        return ["text","other"].includes(param.contentType || "text") ? inputFormTypes : inputFormTypesForFiles;
+    });
+
+    let isTextFormType = $derived.by(() => {
+        return param.contentType === 'text' || !param.contentType;
+    })
 
     const { updateNodeData } = useSvelteFlow();
 
@@ -72,6 +80,11 @@
         updateParam('contentType', newValue);
     };
 
+    const updateFormType = (item: any) => {
+        const newValue = item.value;
+        updateParam('formType', newValue);
+    };
+
     let triggerObject: any;
     const handleDelete = () => {
         updateNodeData(currentNodeId, (node) => {
@@ -102,7 +115,7 @@
             placeholder="请输入参数值"
             oninput={(event) => updateParamByEvent('value', event)}
         />
-    {:else if param.refType !== 'input'}
+    {:else if param.refType === 'ref'}
         <Select
             items={selectItems.current}
             style="width: 100%"
@@ -110,6 +123,11 @@
             value={[param.ref]}
             expandAll
             onSelect={updateRef}
+        />
+    {:else if param.refType === 'input'}
+        <Input
+            placeholder="在执行期间，由用户输入"
+            disabled
         />
     {/if}
 </div>
@@ -128,7 +146,7 @@
                         onSelect={updateRefType}
                     />
                 </div>
-                {#if showContentType}
+                {#if showContentType || param.refType === "input"}
                     <div class="input-more-item">
                         数据内容：
                         <Select
@@ -140,6 +158,73 @@
                         />
                     </div>
                 {/if}
+                {#if param.refType === "input"}
+                    <div class="input-more-item">
+                        输入方式：
+                        <Select
+                            items={formTypes}
+                            style="width: 100%"
+                            defaultValue={['input']}
+                            value={param.formType ? [param.formType] : []}
+                            onSelect={updateFormType}
+                        />
+                    </div>
+
+                    {#if isTextFormType && (param.formType === 'radio' || param.formType === 'checkbox' || param.formType === 'select')}
+                        <div class="input-more-item">
+                            数据选项：
+                            <Textarea
+                                rows={3}
+                                style="width: 100%;"
+                                onchange={(event) => {
+                                updateParam('enums', event.target?.value.trim().split('\n'));
+                            }}
+                                value={param.enums?.join('\n')}
+                                placeholder="一行一个选项"
+                            />
+                        </div>
+                    {/if}
+
+                    <div class="input-more-item">
+                        数据标题：
+                        <Textarea
+                            rows={1}
+                            placeholder="请输入数据标题"
+                            style="width: 100%;"
+                            onchange={(event) => {
+                            updateParamByEvent('formLabel', event);
+                        }}
+                            value={param.formLabel}
+                        />
+                    </div>
+
+                    <div class="input-more-item">
+                        数据描述：
+                        <Textarea
+                            rows={2}
+                            placeholder="请输入数据描述"
+                            style="width: 100%;"
+                            onchange={(event) => {
+                            updateParamByEvent('formDescription', event);
+                        }}
+                            value={param.formDescription}
+                        />
+                    </div>
+
+                    <div class="input-more-item">
+                        占位符：
+                        <Textarea
+                            rows={2}
+                            placeholder="请输入占位符内容"
+                            style="width: 100%;"
+                            onchange={(event) => {
+                            updateParamByEvent('formPlaceholder', event);
+                        }}
+                            value={param.formPlaceholder}
+                        />
+                    </div>
+                {/if}
+
                 <div class="input-more-item">
                     默认值：
                     <Textarea
@@ -152,18 +237,7 @@
                         placeholder="请输入参数默认值"
                     />
                 </div>
-                <div class="input-more-item">
-                    参数描述：
-                    <Textarea
-                        rows={3}
-                        style="width: 100%;"
-                        onchange={(event) => {
-                            updateParamByEvent('description', event);
-                        }}
-                        value={param.description}
-                        placeholder="请输入参数描述"
-                    />
-                </div>
+
 
                 <div class="input-more-item">
                     <Button variant="destructive" onclick={handleDelete}>删除</Button>
@@ -174,28 +248,28 @@
 </div>
 
 <style lang="less">
-    .input-item {
-        display: flex;
-        align-items: center;
-    }
+  .input-item {
+    display: flex;
+    align-items: center;
+  }
 
-    .input-more-setting {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-        background: var(--background);
-        border: 1px solid var(--border);
-        border-radius: 5px;
-        width: 200px;
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  .input-more-setting {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
 
-        .input-more-item {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            font-size: 12px;
-            color: var(--muted-foreground);
-        }
+    .input-more-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 12px;
+      color: var(--muted-foreground);
     }
+  }
 </style>
