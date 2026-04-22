@@ -85,6 +85,7 @@ export declare class Tinyflow {
         viewport: Viewport;
     };
     setData(data: TinyflowData): void;
+    setTheme(theme: 'light' | 'dark' | 'system'): void;
     destroy(): void;
 }
 
@@ -102,7 +103,8 @@ export declare type TinyflowOptions = {
     onNodeExecute?: (node: Node_2) => void;
     hiddenNodes?: string[] | (() => string[]);
     onDataChange?: (data: TinyflowData) => void;
-    theme?: 'light' | 'dark' | 'system';
+    /** 默认主题，default: system */
+    defaultTheme?: 'light' | 'dark' | 'system';
 };
 
 export { }
