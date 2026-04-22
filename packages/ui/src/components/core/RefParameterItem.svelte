@@ -3,7 +3,12 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { contentTypes, parameterRefTypes, inputFormTypes, inputFormTypesForFiles } from '#consts';
+    import {
+        contentTypes,
+        parameterRefTypes,
+        inputFormTypes,
+        inputFormTypesForFiles
+    } from '#consts';
     import { useRefOptions } from '../utils/useRefOptions.svelte';
     import { onMount } from 'svelte';
     import type { Parameter } from '#types';
@@ -38,12 +43,14 @@
     });
 
     let formTypes = $derived.by(() => {
-        return ["text","other"].includes(param.contentType || "text") ? inputFormTypes : inputFormTypesForFiles;
+        return ['text', 'other'].includes(param.contentType || 'text')
+            ? inputFormTypes
+            : inputFormTypesForFiles;
     });
 
     let isTextFormType = $derived.by(() => {
         return param.contentType === 'text' || !param.contentType;
-    })
+    });
 
     const { updateNodeData } = useSvelteFlow();
 
@@ -125,10 +132,7 @@
             onSelect={updateRef}
         />
     {:else if param.refType === 'input'}
-        <Input
-            placeholder="在执行期间，由用户输入"
-            disabled
-        />
+        <Input placeholder="在执行期间，由用户输入" disabled />
     {/if}
 </div>
 <div class="input-item">
@@ -146,7 +150,7 @@
                         onSelect={updateRefType}
                     />
                 </div>
-                {#if showContentType || param.refType === "input"}
+                {#if showContentType || param.refType === 'input'}
                     <div class="input-more-item">
                         数据内容：
                         <Select
@@ -158,7 +162,7 @@
                         />
                     </div>
                 {/if}
-                {#if param.refType === "input"}
+                {#if param.refType === 'input'}
                     <div class="input-more-item">
                         输入方式：
                         <Select
@@ -177,8 +181,8 @@
                                 rows={3}
                                 style="width: 100%;"
                                 onchange={(event) => {
-                                updateParam('enums', event.target?.value.trim().split('\n'));
-                            }}
+                                    updateParam('enums', event.target?.value.trim().split('\n'));
+                                }}
                                 value={param.enums?.join('\n')}
                                 placeholder="一行一个选项"
                             />
@@ -192,8 +196,8 @@
                             placeholder="请输入数据标题"
                             style="width: 100%;"
                             onchange={(event) => {
-                            updateParamByEvent('formLabel', event);
-                        }}
+                                updateParamByEvent('formLabel', event);
+                            }}
                             value={param.formLabel}
                         />
                     </div>
@@ -205,8 +209,8 @@
                             placeholder="请输入数据描述"
                             style="width: 100%;"
                             onchange={(event) => {
-                            updateParamByEvent('formDescription', event);
-                        }}
+                                updateParamByEvent('formDescription', event);
+                            }}
                             value={param.formDescription}
                         />
                     </div>
@@ -218,8 +222,8 @@
                             placeholder="请输入占位符内容"
                             style="width: 100%;"
                             onchange={(event) => {
-                            updateParamByEvent('formPlaceholder', event);
-                        }}
+                                updateParamByEvent('formPlaceholder', event);
+                            }}
                             value={param.formPlaceholder}
                         />
                     </div>
@@ -238,7 +242,6 @@
                     />
                 </div>
 
-
                 <div class="input-more-item">
                     <Button variant="destructive" onclick={handleDelete}>删除</Button>
                 </div>
@@ -248,28 +251,28 @@
 </div>
 
 <style lang="less">
-  .input-item {
-    display: flex;
-    align-items: center;
-  }
-
-  .input-more-setting {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
-    background: var(--background);
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    width: 200px;
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-
-    .input-more-item {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      font-size: 12px;
-      color: var(--muted-foreground);
+    .input-item {
+        display: flex;
+        align-items: center;
     }
-  }
+
+    .input-more-setting {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        background: var(--tf-background);
+        border: 1px solid var(--tf-border);
+        border-radius: 5px;
+        width: 200px;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+
+        .input-more-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            font-size: 12px;
+            color: var(--tf-muted-foreground);
+        }
+    }
 </style>

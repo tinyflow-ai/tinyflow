@@ -1,6 +1,7 @@
 import { type useSvelteFlow } from '@xyflow/svelte';
 import { componentName } from './consts';
 import type { TinyflowData, TinyflowOptions } from './types';
+import { systemPrefersMode } from 'mode-watcher';
 
 type FlowInstance = ReturnType<typeof useSvelteFlow>;
 
@@ -12,6 +13,9 @@ export class Tinyflow {
     constructor(options: TinyflowOptions) {
         if (typeof options.element !== 'string' && !(options.element instanceof Element)) {
             throw new Error('element must be a string or Element');
+        }
+        if (!options.defaultTheme || options.defaultTheme === 'system') {
+            options.defaultTheme = systemPrefersMode.current;
         }
         this._setOptions(options);
         this._init();
@@ -39,7 +43,7 @@ export class Tinyflow {
         tinyflowEl.style.width = '100%';
         tinyflowEl.style.height = '100%';
         tinyflowEl.classList.add(
-            ...(this.options.theme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
+            ...(this.options.defaultTheme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
         );
 
         tinyflowEl.options = this.options;
@@ -75,7 +79,7 @@ export class Tinyflow {
         tinyflowEl.style.width = '100%';
         tinyflowEl.style.height = '100%';
         tinyflowEl.classList.add(
-            ...(this.options.theme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
+            ...(this.options.defaultTheme === 'dark' ? ['tf-root', 'dark'] : ['tf-root'])
         );
 
         tinyflowEl.options = this.options;
@@ -85,6 +89,16 @@ export class Tinyflow {
 
         this.destroy();
         this.rootEl.appendChild(tinyflowEl);
+    }
+
+    setTheme(theme: 'light' | 'dark' | 'system') {
+        if (theme === 'system') {
+            this.options.defaultTheme = systemPrefersMode.current;
+        } else {
+            this.options.defaultTheme = theme;
+        }
+        this.destroy();
+        this._init();
     }
 
     destroy() {

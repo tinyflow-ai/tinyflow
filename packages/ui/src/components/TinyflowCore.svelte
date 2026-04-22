@@ -33,7 +33,7 @@
     import { onDestroy, onMount } from 'svelte';
     import { isInEditableElement } from '#components/utils/isInEditableElement';
 
-    const { onInit, colorMode, ...rest } = $props();
+    const { onInit, ...rest } = $props();
     const svelteFlow = useSvelteFlow();
 
     console.log('props', rest);
@@ -317,7 +317,7 @@
 
 <div style="position: relative; height: 100%; width: 100%;overflow: hidden">
     <SvelteFlow
-        {colorMode}
+        colorMode={getOptions().defaultTheme ?? 'system'}
         nodeTypes={{ ...nodeTypes, ...customNodeTypes }}
         bind:nodes={store.getNodes, store.setNodes}
         bind:edges={store.getEdges, store.setEdges}
@@ -418,17 +418,17 @@
 <style>
     .panel-content {
         padding: 10px;
-        background-color: var(--background);
+        background-color: var(--tf-background);
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         width: 200px;
-        border: 1px solid var(--border);
+        border: 1px solid var(--tf-border);
     }
 
     .setting-title {
         margin: 10px 0;
         font-size: 12px;
-        color: var(--muted-foreground);
+        color: var(--tf-muted-foreground);
     }
 
     .setting-item {

@@ -319,11 +319,13 @@
         display: flex;
         margin: 10px 0;
         flex-wrap: wrap;
+        gap: 8px;
 
         label {
             display: flex;
             font-size: 14px;
             box-sizing: border-box;
+            gap: 4px;
         }
     }
 </style>

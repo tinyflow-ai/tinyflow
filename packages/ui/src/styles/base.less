@@ -24,7 +24,7 @@
     --tf-chart-3: #a78bfa;
     --tf-chart-4: #3b82f6;
     --tf-chart-5: #8b5cf6;
-    --tf-radius: 0.875rem;
+    --tf-radius: 14px;
     --tf-sidebar: #fcfcfd;
     --tf-sidebar-foreground: #242424;
     --tf-sidebar-primary: #a78bfa;
@@ -44,13 +44,13 @@
     --tf-card-foreground: #fcfcfd;
     --tf-popover: #334155;
     --tf-popover-foreground: #fcfcfd;
-    --tf-primary: #7c3aed;
+    --tf-primary: #3b82f6;
     --tf-primary-foreground: #fafcff;
     --tf-secondary: #475569;
     --tf-secondary-foreground: #fcfcfd;
     --tf-muted: #475569;
     --tf-muted-foreground: #94a3b8;
-    --tf-accent: #7c3aed;
+    --tf-accent: #3b82f6;
     --tf-accent-foreground: #fafcff;
     --tf-destructive: #b91c1c;
     --tf-border: rgba(255, 255, 255, 0.1);
@@ -71,6 +71,7 @@
     --tf-sidebar-ring: #64748b;
 }
 
+.tf-root,
 .tf-root * {
     border-color: var(--tf-border);
     outline-color: rgba(148, 163, 184, 0.5);
@@ -236,8 +237,8 @@ h3.tf-heading {
         }
 
         &-icon {
-            width: 1rem;
-            height: 1rem;
+            width: 16px;
+            height: 16px;
             opacity: 50%;
         }
     }
@@ -340,7 +341,8 @@ h3.tf-heading {
 
 .tf-btn {
     border-radius: calc(var(--tf-radius) * 0.6);
-    border: 1px solid transparent;
+    border-style: solid;
+    border-width: 1px;
     background-clip: padding-box;
     font-size: 14px;
     line-height: 1.428571;
@@ -381,31 +383,20 @@ h3.tf-heading {
         pointer-events: none;
         flex-shrink: 0;
 
-        &::not([class*='size-']) {
-            width: 1rem;
-            height: 1rem;
+        &:not([class*='size-']) {
+            width: 16px;
+            height: 16px;
         }
     }
 
     &-default {
         background-color: var(--tf-primary);
         color: var(--tf-primary-foreground);
-        height: 32px;
-        gap: 6px;
-        padding-inline: 10px;
 
         &:is(a) {
             &:hover {
                 background-color: rgba(59, 130, 246, 0.8);
             }
-        }
-
-        &:has(*[data-icon='inline-end']) {
-            padding-right: 8px;
-        }
-
-        &:has(*[data-icon='inline-start']) {
-            padding-left: 8px;
         }
     }
 
@@ -473,6 +464,20 @@ h3.tf-heading {
         }
     }
 
+    &-size-default {
+        height: 32px;
+        gap: 6px;
+        padding-inline: 10px;
+
+        &:has(*[data-icon='inline-end']) {
+            padding-right: 8px;
+        }
+
+        &:has(*[data-icon='inline-start']) {
+            padding-left: 8px;
+        }
+    }
+
     &-xs {
         height: 24px;
         gap: 4px;
@@ -494,8 +499,8 @@ h3.tf-heading {
         }
 
         & svg:not([class*='size-']) {
-            width: 0.75rem;
-            height: 0.75rem;
+            width: 12px;
+            height: 12px;
         }
     }
 
@@ -504,7 +509,7 @@ h3.tf-heading {
         gap: 4px;
         border-radius: min(calc(var(--tf-radius) * 0.8), 12px);
         padding-inline: 10px;
-        font-size: 0.8rem;
+        font-size: 12.8px;
 
         :where(*[data-slot='button-group']) & {
             border-radius: var(--tf-radius);
@@ -519,8 +524,8 @@ h3.tf-heading {
         }
 
         & svg:not([class*='size-']) {
-            width: 0.875rem;
-            height: 0.875rem;
+            width: 14px;
+            height: 14px;
         }
     }
 
@@ -539,13 +544,13 @@ h3.tf-heading {
     }
 
     &-icon {
-        width: 2rem;
-        height: 2rem;
+        width: 32px;
+        height: 32px;
     }
 
     &-icon-xs {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 24px;
+        height: 24px;
         border-radius: min(calc(var(--tf-radius) * 0.8), 6px);
 
         :where(*[data-slot='button-group']) & {
@@ -553,8 +558,8 @@ h3.tf-heading {
         }
 
         & svg:not([class*='size-']) {
-            width: 0.75rem;
-            height: 0.75rem;
+            width: 12px;
+            height: 12px;
         }
     }
 
@@ -638,8 +643,8 @@ h3.tf-heading {
         transition-property: none;
 
         & > svg {
-            width: 0.875rem;
-            height: 0.875rem;
+            width: 14px;
+            height: 14px;
         }
     }
 }
@@ -694,6 +699,11 @@ h3.tf-heading {
         pointer-events: none;
         cursor: not-allowed;
         opacity: 50%;
+    }
+
+    &[type='radio'] {
+        width: 16px;
+        height: 16px;
     }
 }
 

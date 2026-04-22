@@ -15,7 +15,6 @@
     import { store } from '#store/stores.svelte';
     import type { TinyflowData, TinyflowOptions } from '#types';
     import { setContext } from 'svelte';
-    import { ModeWatcher, setMode } from 'mode-watcher';
 
     const {
         options,
@@ -25,9 +24,7 @@
         onInit: (svelteFlow: ReturnType<typeof useSvelteFlow>) => void;
     } = $props();
 
-    let { data, theme = 'system' } = options;
-
-    setMode(theme);
+    let { data } = options;
 
     if (typeof data === 'string') {
         try {
@@ -40,7 +37,6 @@
     setContext('tinyflow_options', options);
 </script>
 
-<ModeWatcher />
 <SvelteFlowProvider>
-    <TinyflowCore {onInit} colorMode={theme} />
+    <TinyflowCore {onInit} />
 </SvelteFlowProvider>

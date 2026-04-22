@@ -221,7 +221,7 @@
 
     .setting-title {
         font-size: 12px;
-        color: var(--secondary-foreground);
+        color: var(--tf-secondary-foreground);
         margin-bottom: 4px;
         margin-top: 10px;
     }
@@ -244,7 +244,7 @@
 
     .slider-container span {
         font-size: 12px;
-        color: var(--muted-foreground);
+        color: var(--tf-muted-foreground);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -253,7 +253,7 @@
     input[type='range'] {
         width: 100%;
         height: 4px;
-        background: var(--muted);
+        background: var(--tf-muted);
         border-radius: 2px;
         outline: none;
         -webkit-appearance: none;
@@ -263,7 +263,7 @@
         -webkit-appearance: none;
         width: 14px;
         height: 14px;
-        background: var(--primary);
+        background: var(--tf-primary);
         border-radius: 50%;
         cursor: pointer;
     }

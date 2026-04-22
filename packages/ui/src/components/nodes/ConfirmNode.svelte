@@ -122,7 +122,7 @@
 
     .setting-title {
         font-size: 12px;
-        color: var(--secondary-foreground);
+        color: var(--tf-secondary-foreground);
         margin-bottom: 4px;
         margin-top: 10px;
     }

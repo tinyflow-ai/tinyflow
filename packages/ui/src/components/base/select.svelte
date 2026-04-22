@@ -155,12 +155,12 @@
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                style="width: 1rem;height: 1rem;"
+                                                style="width: 16px;height: 16px;"
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
                                         {:else}
-                                            <span style="width: 1rem;height: 1rem;"></span>
+                                            <span style="width: 16px;height: 16px;"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
@@ -170,7 +170,7 @@
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                style="width: 1rem;height: 1rem;"
+                                                style="width: 16px;height: 16px;"
                                             >
                                                 <path
                                                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
@@ -230,12 +230,12 @@
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                style="width: 1rem;height: 1rem;"
+                                                style="width: 16px;height: 16px;"
                                             >
                                                 <path d="M12 14L8 10H16L12 14Z"></path>
                                             </svg>
                                         {:else}
-                                            <span style="width: 1rem;height: 1rem;"></span>
+                                            <span style="width: 16px;height: 16px;"></span>
                                         {/if}
                                         <Render target={item.label} />
                                     </span>
@@ -245,7 +245,7 @@
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                style="width: 1rem;height: 1rem;"
+                                                style="width: 16px;height: 16px;"
                                             >
                                                 <path
                                                     d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"

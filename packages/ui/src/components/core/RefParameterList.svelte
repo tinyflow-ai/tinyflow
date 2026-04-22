@@ -51,7 +51,7 @@
 
         .none-params {
             font-size: 12px;
-            background: var(--secondary);
+            background: var(--tf-secondary);
             height: 40px;
             display: flex;
             justify-content: center;
@@ -63,7 +63,7 @@
 
         .input-header {
             font-size: 12px;
-            color: var(--muted-foreground);
+            color: var(--tf-muted-foreground);
         }
     }
 </style>

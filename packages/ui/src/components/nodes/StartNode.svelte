@@ -62,7 +62,7 @@
         padding: 3px;
 
         &:hover {
-            background: var(--muted);
+            background: var(--tf-muted);
             border: 1px solid transparent;
         }
     }

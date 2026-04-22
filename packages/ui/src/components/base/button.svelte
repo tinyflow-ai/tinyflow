@@ -12,7 +12,7 @@
     };
 
     const sizes = {
-        default: 'tf-btn-default',
+        default: 'tf-btn-size-default',
         xs: 'tf-btn-xs',
         sm: 'tf-btn-sm',
         lg: 'tf-btn-lg',

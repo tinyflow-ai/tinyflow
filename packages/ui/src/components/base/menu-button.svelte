@@ -19,7 +19,7 @@
         padding: 3px;
 
         &:hover {
-            background: var(--input);
+            background: var(--tf-input);
             border: 1px solid transparent;
         }
     }

@@ -322,8 +322,8 @@
         gap: 5px;
         padding: 5px;
         border-radius: 5px;
-        background: var(--background);
-        border: 1px solid var(--border);
+        background: var(--tf-background);
+        border: 1px solid var(--tf-border);
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
 
@@ -336,8 +336,8 @@
         flex-direction: column;
         gap: 10px;
         padding: 10px;
-        background: var(--background);
-        border: 1px solid var(--border);
+        background: var(--tf-background);
+        border: 1px solid var(--tf-border);
         border-radius: 5px;
         width: 200px;
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
@@ -347,14 +347,14 @@
             flex-direction: column;
             gap: 3px;
             font-size: 12px;
-            color: var(--muted-foreground);
+            color: var(--tf-muted-foreground);
         }
 
         .input-item-inline {
             display: flex;
             align-items: center;
             font-size: 12px;
-            color: var(--muted-foreground);
+            color: var(--tf-muted-foreground);
         }
     }
 </style>

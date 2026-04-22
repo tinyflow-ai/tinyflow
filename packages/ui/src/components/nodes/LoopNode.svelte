@@ -94,8 +94,8 @@
             content: '循环体';
             width: 100px;
             height: 20px;
-            background: var(--primary);
-            color: var(--primary-foreground);
+            background: var(--tf-primary);
+            color: var(--tf-primary-foreground);
             display: flex;
             justify-content: center;
             align-items: center;
