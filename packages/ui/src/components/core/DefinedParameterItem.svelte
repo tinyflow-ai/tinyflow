@@ -105,7 +105,7 @@
         {#snippet floating()}
             <div class="input-more-setting">
                 <div class="input-more-item">
-                    数据内容：
+                    数据类型：
                     <Select
                         items={contentTypes}
                         style="width: 100%"
