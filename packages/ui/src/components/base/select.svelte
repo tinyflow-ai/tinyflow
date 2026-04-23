@@ -108,7 +108,7 @@
 
 {#if multiple}
     <!-- 多选模式 -->
-    <SelectPrimitive.Root type="multiple" value={multipleValue} {...restProps}>
+    <SelectPrimitive.Root type="multiple" value={multipleValue} {disabled} {...restProps}>
         <SelectPrimitive.Trigger
             class={cn('nopan nodrag tf-select', disabled && 'tf-select-disabled', className)}
             {disabled}
@@ -188,7 +188,7 @@
     </SelectPrimitive.Root>
 {:else}
     <!-- 单选模式 -->
-    <SelectPrimitive.Root type="single" value={singleValue} {...restProps}>
+    <SelectPrimitive.Root type="single" value={singleValue} {disabled} {...restProps}>
         <SelectPrimitive.Trigger
             class={cn('nopan nodrag tf-select', disabled && ' tf-select-disabled', className)}
             {disabled}
