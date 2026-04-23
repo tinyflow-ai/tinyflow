@@ -137,12 +137,8 @@
 </script>
 
 <div class="input-item">
-    {#if position.length > 1}
-        {#each position as p}
-            &nbsp;{/each}
-    {/if}
     <Input
-        style="width: 100%;"
+        style="width: 100%; margin-left: {position.length * 12}px;"
         value={currentParameter.name}
         {placeholder}
         oninput={(e) => {

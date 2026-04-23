@@ -145,7 +145,7 @@
                                 value={option.value}
                                 label={option.label}
                                 class="tf-select-option"
-                                style="padding-left: {level * 4}px"
+                                style="padding-left: {level * 10}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
@@ -220,7 +220,7 @@
                                 value={option.value}
                                 label={option.label}
                                 class="tf-select-option"
-                                style="padding-left: {level * 4}px"
+                                style="padding-left: {level * 10}px"
                                 onclick={(e: MouseEvent) => handleSelect(e, item)}
                             >
                                 {#snippet children({ selected })}
