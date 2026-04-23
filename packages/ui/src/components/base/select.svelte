@@ -138,7 +138,7 @@
                     {#if displayItems.length === 0}
                         <div class="tf-select-empty">暂无数据</div>
                     {:else}
-                        {#each displayItems as { item, level } (item.value)}
+                        {#each displayItems as { item, level }, index (`${index}_${item.value}`)}
                             {@const hasChildren = item.children && item.children.length > 0}
                             {@const option = toSelectOption(item)}
                             <SelectPrimitive.Item
@@ -213,7 +213,7 @@
                     {#if displayItems.length === 0}
                         <div class="tf-select-empty">暂无数据</div>
                     {:else}
-                        {#each displayItems as { item, level } (item.value)}
+                        {#each displayItems as { item, level }, index (`${index}_${item.value}`)}
                             {@const hasChildren = item.children && item.children.length > 0}
                             {@const option = toSelectOption(item)}
                             <SelectPrimitive.Item
