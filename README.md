@@ -45,8 +45,8 @@ tinyflow 提供了以下方法：
 ```xml
 <dependency>
     <groupId>dev.tinyflow</groupId>
-    <artifactId>tinyflow-java-core</artifactId>
-    <version>1.0.4</version>
+    <artifactId>tinyflow-core</artifactId>
+    <version>2.0.3</version>
 </dependency>
 ```
 
