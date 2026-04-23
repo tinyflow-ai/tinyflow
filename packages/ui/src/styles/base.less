@@ -73,6 +73,7 @@
 
 .tf-root,
 .tf-root * {
+    box-sizing: border-box;
     border-color: var(--tf-border);
     outline-color: rgba(148, 163, 184, 0.5);
     color: var(--tf-foreground);
@@ -212,6 +213,11 @@ h3.tf-heading {
         --tf-ring: rgba(239, 68, 68, 0.2);
         border-color: var(--tf-destructive);
         box-shadow: inset 0 0 0 3px var(--tf-ring, currentcolor);
+    }
+
+    &-xs {
+        width: 100px;
+        margin-left: auto;
     }
 
     &-disabled {

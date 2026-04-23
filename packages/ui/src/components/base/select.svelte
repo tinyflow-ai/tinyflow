@@ -2,9 +2,9 @@
     import { Select as SelectPrimitive } from 'bits-ui';
     import { cn, type WithoutChildren } from '../utils/cn';
     import { Render } from './index';
-    import type { SelectItem, TinyflowOptions } from '#types';
+    import type { SelectItem } from '#types';
     import ChevronDownIcon from '@lucide/svelte/icons/chevron-down';
-    import { getContext } from 'svelte';
+    import { getOptions } from '../utils/NodeUtils';
 
     let {
         items,
@@ -32,7 +32,7 @@
         [key: string]: any;
     }> = $props();
 
-    let options = getContext('tinyflow_options') as TinyflowOptions;
+    let theme = getOptions().defaultTheme;
 
     // 扁平化所有选项用于查找
     let flatItems = $derived.by(() => {
@@ -131,7 +131,7 @@
             <SelectPrimitive.Content
                 class={cn(
                     'nopan nodrag nowheel tf-root tf-select-content',
-                    options.theme === 'dark' && 'dark'
+                    theme === 'dark' && 'dark'
                 )}
             >
                 <SelectPrimitive.Viewport style="padding: 4px;">
@@ -206,7 +206,7 @@
             <SelectPrimitive.Content
                 class={cn(
                     'nopan nodrag nowheel tf-root tf-select-content',
-                    options.theme === 'dark' && 'dark'
+                    theme === 'dark' && 'dark'
                 )}
             >
                 <SelectPrimitive.Viewport style="padding: 4px;">

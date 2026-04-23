@@ -254,7 +254,7 @@
     <div class="heading">
         <Heading level={3}>输出参数</Heading>
         <Select
-            class="w-25 ml-auto"
+            class="tf-select-xs"
             items={[
                 {
                     label: '文本',
