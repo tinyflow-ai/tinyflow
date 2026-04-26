@@ -1,5 +1,14 @@
 # @tinyflow-ai/ui
 
+## 1.3.3
+
+### Patch Changes
+
+- [`55a5519`](https://github.com/tinyflow-ai/tinyflow/commit/55a55192eded57178034e1974f184461825218ac) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.3.3
+
+- Updated dependencies [[`55a5519`](https://github.com/tinyflow-ai/tinyflow/commit/55a55192eded57178034e1974f184461825218ac)]:
+    - @tinyflow-ai/ui@1.3.3
+
 ## 1.3.2
 
 ### Patch Changes
