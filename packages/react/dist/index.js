@@ -25012,7 +25012,7 @@ function tv(t, e) {
 ae(tv, { data: {} }, [], [], !0);
 const nv = (t, e, n) => {
   for (const r of n)
-    r.target === e && r.source && (t.push(r.source), nv(t, r.source, n));
+    r.target === e && r.source && !t.includes(r.source) && (t.push(r.source), nv(t, r.source, n));
 }, rv = (t, e, n) => !t || t.length === 0 ? [] : t.map((r) => ({
   label: r.name + (n ? ` (Array<${r.dataType || "String"}>)` : ` (${r.dataType || "String"})`),
   value: e + "." + r.name,
