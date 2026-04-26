@@ -4,7 +4,7 @@ import { getCurrentNodeId } from '#components/utils/NodeUtils';
 
 const fillRefNodeIds = (refNodeIds: string[], currentNodeId: string, edges: Edge[]) => {
     for (const edge of edges) {
-        if (edge.target === currentNodeId && edge.source) {
+        if (edge.target === currentNodeId && edge.source && !refNodeIds.includes(edge.source)) {
             refNodeIds.push(edge.source);
             fillRefNodeIds(refNodeIds, edge.source, edges);
         }
