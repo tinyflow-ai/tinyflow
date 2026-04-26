@@ -80,6 +80,11 @@
     const updateRefType = (item: any) => {
         const newValue = item.value;
         updateParam('refType', newValue);
+
+        if (newValue === 'form') {
+            updateParam('contentType', param.contentType || 'text');
+            updateParam('formType', param.formType || 'input');
+        }
     };
 
     const updateContentType = (item: any) => {
@@ -131,7 +136,7 @@
             expandAll
             onSelect={updateRef}
         />
-    {:else if param.refType === 'input'}
+    {:else if param.refType === 'form'}
         <Input placeholder="在执行期间，由用户输入" disabled />
     {/if}
 </div>
@@ -150,9 +155,9 @@
                         onSelect={updateRefType}
                     />
                 </div>
-                {#if showContentType || param.refType === 'input'}
+                {#if showContentType || param.refType === 'form'}
                     <div class="input-more-item">
-                        数据内容：
+                        数据类型：
                         <Select
                             items={contentTypes}
                             style="width: 100%"
@@ -162,7 +167,7 @@
                         />
                     </div>
                 {/if}
-                {#if param.refType === 'input'}
+                {#if param.refType === 'form'}
                     <div class="input-more-item">
                         输入方式：
                         <Select
@@ -173,6 +178,18 @@
                             onSelect={updateFormType}
                         />
                     </div>
+
+                    <label class="input-more-item" style="display: flex;flex-direction: row;align-items: center">
+                        是否必填:
+                        <input
+                            type="checkbox"
+                            checked={!!param.required}
+                            onchange={(event) => {
+                                        const value = (event.target as any).checked;
+                                        updateParam('required', value)
+                                    }}
+                        />
+                    </label>
 
                     {#if isTextFormType && (param.formType === 'radio' || param.formType === 'checkbox' || param.formType === 'select')}
                         <div class="input-more-item">
