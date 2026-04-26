@@ -37,8 +37,8 @@ export const parameterRefTypes = [
         label: '固定值'
     },
     {
-        value: 'input',
-        label: '输入'
+        value: 'form',
+        label: '表单输入'
     }
 ];
 
