@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Input, MenuButton, Textarea } from '../base';
     import { Button, FloatingTrigger, Select } from '../base/index.js';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { getCurrentNodeId, getOptions } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
     import {
         contentTypes,
@@ -109,6 +109,9 @@
         triggerObject?.hide();
     };
     let selectItems = useRefOptions(useChildrenOnly);
+
+    const paramRefTypes = getOptions().formRefTypeEnable ? parameterRefTypes : parameterRefTypes.filter(item => item.value !== 'form');
+
 </script>
 
 <div class="input-item">
@@ -148,7 +151,7 @@
                 <div class="input-more-item">
                     数据来源：
                     <Select
-                        items={parameterRefTypes}
+                        items={paramRefTypes}
                         style="width: 100%"
                         defaultValue={['ref']}
                         value={param.refType ? [param.refType] : []}
@@ -268,28 +271,28 @@
 </div>
 
 <style lang="less">
-    .input-item {
-        display: flex;
-        align-items: center;
-    }
+  .input-item {
+    display: flex;
+    align-items: center;
+  }
 
-    .input-more-setting {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px;
-        background: var(--tf-background);
-        border: 1px solid var(--tf-border);
-        border-radius: 5px;
-        width: 200px;
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
+  .input-more-setting {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    background: var(--tf-background);
+    border: 1px solid var(--tf-border);
+    border-radius: 5px;
+    width: 200px;
+    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
 
-        .input-more-item {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            font-size: 12px;
-            color: var(--tf-muted-foreground);
-        }
+    .input-more-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 12px;
+      color: var(--tf-muted-foreground);
     }
+  }
 </style>

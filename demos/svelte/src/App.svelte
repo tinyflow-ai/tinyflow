@@ -213,6 +213,7 @@
                   onDataChange={(data)=>{
                       // console.log('data change: ', data)
                   }}
+                  formRefTypeEnable={true}
                   {customNodes}
         />
     </div>
