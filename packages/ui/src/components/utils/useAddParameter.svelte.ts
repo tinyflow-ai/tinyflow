@@ -33,7 +33,7 @@ export const useAddParameter = () => {
             function createNewParameter(parameter: Parameter) {
                 return {
                     name: '',
-                    dataType: 'String',
+                    // dataType: 'String',
                     refType: 'ref',
                     ...parameter,
                     id: genShortId()
