@@ -7,7 +7,7 @@
     const {
         noneParameterText = '无输出参数',
         dataKeyName = 'outputDefs',
-        placeholder = '请输入参数名称'
+        placeholder = '请输入参数'
     }: {
         noneParameterText?: string;
         dataKeyName?: string;

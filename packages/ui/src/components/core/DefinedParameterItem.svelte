@@ -86,7 +86,7 @@
     <Input
         style="width: 100%;"
         value={param.name}
-        placeholder="请输入参数名称"
+        placeholder="请输入参数"
         oninput={updateName}
     />
 </div>

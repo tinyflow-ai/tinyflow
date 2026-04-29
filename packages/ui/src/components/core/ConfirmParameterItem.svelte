@@ -3,7 +3,7 @@
     import { Button, FloatingTrigger, Select } from '../base/index.js';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
     import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
-    import { useRefOptions } from '../utils/useRefOptions.svelte';
+    import useRefOptions from '../utils/useRefOptions.svelte';
     import type { Parameter } from '#types';
     import { contentTypes, confirmFormTypes } from '#consts';
 
@@ -86,7 +86,7 @@
     <Input
         style="width: 100%;"
         value={param.name}
-        placeholder="请输入参数名称"
+        placeholder="请输入参数"
         disabled={param.nameDisabled === true}
         oninput={(event) => updateParamByEvent('name', event)}
     />

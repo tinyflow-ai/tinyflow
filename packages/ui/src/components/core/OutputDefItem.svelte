@@ -138,7 +138,7 @@
 
 <div class="input-item">
     <Input
-        style="width: 100%; margin-left: {position.length * 12}px;"
+        style="width: 100%;  margin-left: {(position.length - 1) * 12}px;"
         value={currentParameter.name}
         {placeholder}
         oninput={(e) => {

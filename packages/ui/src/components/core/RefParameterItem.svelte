@@ -9,7 +9,7 @@
         inputFormTypes,
         inputFormTypesForFiles
     } from '#consts';
-    import { useRefOptions } from '../utils/useRefOptions.svelte';
+    import useRefOptions from '../utils/useRefOptions.svelte';
     import { onMount } from 'svelte';
     import type { Parameter } from '#types';
 
@@ -118,7 +118,7 @@
     <Input
         style="width: 100%;"
         value={param.name}
-        placeholder="请输入参数名称"
+        placeholder="请输入参数"
         disabled={param.nameDisabled === true}
         oninput={(event) => updateParamByEvent('name', event)}
     />
