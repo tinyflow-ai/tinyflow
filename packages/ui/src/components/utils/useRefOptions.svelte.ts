@@ -15,23 +15,18 @@ const getChildren = (
     params: any,
     parentId: string,
     isArrayType: boolean,
-    getRefDataType: (ref?: string) => string | undefined
+    getParameterDataTypeString: (param: Parameter, isArray: boolean) => string | undefined
 ) => {
     if (!params || params.length === 0) return [];
     return params.map((parameter: any) => {
-        console.log('getChildren', parameter);
         return {
-            label:
-                parameter.name +
-                (isArrayType
-                    ? ` (Array&lt;${parameter.dataType || getRefDataType(parameter.ref) || 'String'}&gt;)`
-                    : ` (${parameter.dataType || getRefDataType(parameter.ref) || 'String'})`),
+            label: parameter.name + getParameterDataTypeString(parameter, isArrayType),
             value: parentId + '.' + parameter.name,
             children: getChildren(
                 parameter.children,
                 parentId + '.' + parameter.name,
                 isArrayType,
-                getRefDataType
+                getParameterDataTypeString
             )
         };
     });
@@ -45,7 +40,7 @@ const nodeToOptions = (
     node: Node,
     isArrayType: boolean,
     currentNode: Node,
-    getRefDataType: (ref?: string) => string | undefined
+    getParameterDataTypeString: (param: Parameter, isArray: boolean) => string | undefined
 ) => {
     if (node.type === 'startNode') {
         const parameters = node.data.parameters as Array<Parameter>;
@@ -54,11 +49,12 @@ const nodeToOptions = (
             for (const parameter of parameters) {
                 children.push({
                     label:
-                        parameter.name +
-                        (isArrayType ||
-                        (!isTextFormType(parameter) && parameter.formType === 'checkbox')
-                            ? ` (Array&lt;${parameter.dataType || getRefDataType(parameter.ref) || 'String'}&gt;)`
-                            : ` (${parameter.dataType || getRefDataType(parameter.ref) || 'String'})`),
+                        parameter.name! +
+                        getParameterDataTypeString(
+                            parameter,
+                            isArrayType ||
+                                (!isTextFormType(parameter) && parameter.formType === 'checkbox')
+                        ),
                     value: node.id + '.' + parameter.name
                 });
             }
@@ -92,7 +88,7 @@ const nodeToOptions = (
                     outputDefs,
                     node.id,
                     isArrayType || node.type === 'loopNode',
-                    getRefDataType
+                    getParameterDataTypeString
                 )
             };
         }
@@ -103,7 +99,7 @@ const nodeToOptions = (
  * 获取当前节点的引用项
  * @param useChildrenOnly 只获取子节点的内容，比如 Loop 循环
  */
-export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
+const useRefOptions: any = (useChildrenOnly: boolean = false) => {
     const currentNodeId = getCurrentNodeId();
     const currentNode = useNodesData(currentNodeId);
     const { nodes, edges, nodeLookup } = $derived(useStore());
@@ -117,27 +113,56 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
         //通过 nodeLookup.get 才会得到有 parentId 的 node
         const cNode = nodeLookup.get(currentNodeId)!;
 
-        const getRefDataType = (ref?: string) => {
-            if (!ref) return '';
-            const nodeIdAndParamId = ref.split('.');
-            for (const node of nodes) {
-                if (node.id === nodeIdAndParamId[0]) {
-                    if (node.data.parameters) {
-                        for (let parameter of node.data.parameters as Parameter[]) {
-                            if (parameter.name === nodeIdAndParamId[1]) {
-                                return parameter.dataType;
+        const getParameterDataType = (param: Parameter, isArray: boolean) => {
+            if (param?.dataType) {
+                return convertParameterDataTypeString(param.dataType, isArray);
+            }
+            if (param?.ref) {
+                const nodeIdAndParamId = param?.ref?.split('.');
+                for (const node of nodes) {
+                    if (node.id === nodeIdAndParamId[0]) {
+                        if (node.data.parameters) {
+                            for (let parameter of node.data.parameters as Parameter[]) {
+                                if (parameter.name === nodeIdAndParamId[1]) {
+                                    if (parameter.dataType) {
+                                        return convertParameterDataTypeString(
+                                            parameter.dataType,
+                                            isArray
+                                        );
+                                    } else if (!parameter.ref) {
+                                        return getParameterDataType(parameter, isArray);
+                                    }
+                                }
                             }
                         }
-                    }
 
-                    if (node.data.outputDefs) {
-                        for (let parameter of node.data.outputDefs as Parameter[]) {
-                            if (parameter.name === nodeIdAndParamId[1]) {
-                                return parameter.dataType;
+                        if (node.data.outputDefs) {
+                            for (let parameter of node.data.outputDefs as Parameter[]) {
+                                if (parameter.name === nodeIdAndParamId[1]) {
+                                    if (parameter.dataType) {
+                                        return convertParameterDataTypeString(
+                                            parameter.dataType,
+                                            isArray
+                                        );
+                                    } else if (!parameter.ref) {
+                                        return getParameterDataType(parameter, isArray);
+                                    }
+                                }
                             }
                         }
                     }
                 }
+            }
+            return convertParameterDataTypeString('', isArray); // default is String
+        };
+
+        const convertParameterDataTypeString = (dataType: string, isArray: boolean) => {
+            // const dataType = getParameterDataType(param);
+            console.log('dataType', dataType);
+            if (isArray) {
+                return dataType ? ` (Array&lt;${dataType}&gt;)` : ` (Array&lt;&gt;)`;
+            } else {
+                return ` (${dataType})`;
             }
         };
 
@@ -150,7 +175,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                         node,
                         isCurrentNodeChild,
                         cNode,
-                        getRefDataType
+                        getParameterDataType
                     );
                     nodeOptions && resultOptions.push(nodeOptions);
                 }
@@ -168,7 +193,7 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                         node,
                         isCurrentNodeChild,
                         cNode,
-                        getRefDataType
+                        getParameterDataType
                     );
                     nodeOptions && resultOptions.push(nodeOptions);
                 }
@@ -184,3 +209,4 @@ export const useRefOptions: any = (useChildrenOnly: boolean = false) => {
         }
     };
 };
+export default useRefOptions;
