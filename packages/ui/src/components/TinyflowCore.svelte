@@ -36,7 +36,6 @@
     const { onInit, ...rest } = $props();
     const svelteFlow = useSvelteFlow();
 
-    console.log('props', rest);
     onInit(svelteFlow);
 
     let showEdgePanel = $state(false);
@@ -257,12 +256,14 @@
             return;
         }
 
+        if (document.getSelection()?.type === 'Range') {
+            return;
+        }
+
         if ((e.ctrlKey || e.metaKey) && e.key === 'c') {
             e.preventDefault();
             copyHandler(e);
-        }
-
-        if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+        } else if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
             e.preventDefault();
             // 全选所有节点
             store.updateNodes((nodes) => {
@@ -293,6 +294,13 @@
         window.removeEventListener('keydown', handleKeyDown);
         window.removeEventListener('paste', handleGlobalPaste);
     });
+
+    const onPaneClick = () => {
+        const selection = document.getSelection();
+        if (selection) {
+            selection.removeAllRanges();
+        }
+    };
 
     const customNodeTypes = {
         // ...nodeTypes
@@ -330,6 +338,7 @@
         {onconnectstart}
         {onconnect}
         connectionRadius={50}
+        onpaneclick={onPaneClick}
         onedgeclick={(e) => {
             showEdgePanel = true;
             currentEdge = e.edge;
