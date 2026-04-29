@@ -105,6 +105,7 @@ export declare type TinyflowOptions = {
     onDataChange?: (data: TinyflowData) => void;
     /** 默认主题，default: system */
     defaultTheme?: 'light' | 'dark' | 'system';
+    formRefTypeEnable?: boolean;
 };
 
 export { }
