@@ -158,7 +158,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
 
         const convertParameterDataTypeString = (dataType: string, isArray: boolean) => {
             // const dataType = getParameterDataType(param);
-            console.log('dataType', dataType);
+            // console.log('dataType', dataType);
             if (isArray) {
                 return dataType ? ` (Array&lt;${dataType}&gt;)` : ` (Array&lt;&gt;)`;
             } else {
