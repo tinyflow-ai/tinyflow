@@ -221,7 +221,7 @@
         </div>
     {/if}
 
-    {#if data.bodyType === 'form-data'}
+    {#if data.bodyType === 'form-data' && (data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch')}
         <div class="heading" style="padding-top: 10px">
             <Heading level={3}>参数</Heading>
             <Button
@@ -240,7 +240,7 @@
         <RefParameterList dataKeyName="formData" />
     {/if}
 
-    {#if data.bodyType === 'x-www-form-urlencoded'}
+    {#if data.bodyType === 'x-www-form-urlencoded' && (data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch')}
         <div class="heading" style="padding-top: 10px">
             <Heading level={3}>Body 参数</Heading>
             <Button
@@ -259,7 +259,7 @@
         <RefParameterList dataKeyName="formUrlencoded" />
     {/if}
 
-    {#if data.bodyType === 'json'}
+    {#if data.bodyType === 'json' && (data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch')}
         <div style="width: 100%">
             <Textarea
                 rows={5}
@@ -275,7 +275,7 @@
         </div>
     {/if}
 
-    {#if data.bodyType === 'raw'}
+    {#if data.bodyType === 'raw' && (data.method === 'post' || data.method === 'put' || data.method === 'delete' || data.method === 'patch')}
         <div style="width: 100%">
             <Textarea
                 rows={5}
