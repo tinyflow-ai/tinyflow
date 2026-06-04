@@ -40,7 +40,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'parameters', { refType: 'input', name: 'newParam' });
+                addParameter(currentNodeId, 'parameters', { refType: 'input', name: 'newParam', dataType: 'String'});
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -52,18 +52,18 @@
 </NodeWrapper>
 
 <style lang="less">
-    .heading {
-        display: flex;
-        margin-bottom: 10px;
-    }
+  .heading {
+    display: flex;
+    margin-bottom: 10px;
+  }
 
-    :global(.input-btn-more) {
-        border: 1px solid transparent;
-        padding: 3px;
+  :global(.input-btn-more) {
+    border: 1px solid transparent;
+    padding: 3px;
 
-        &:hover {
-            background: var(--tf-muted);
-            border: 1px solid transparent;
-        }
+    &:hover {
+      background: var(--tf-muted);
+      border: 1px solid transparent;
     }
+  }
 </style>
