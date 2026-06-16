@@ -80,7 +80,6 @@
     const updateRefType = (item: any) => {
         const newValue = item.value;
         updateParam('refType', newValue);
-
         if (newValue === 'form') {
             updateParam('contentType', param.contentType || 'text');
             updateParam('formType', param.formType || 'input');
@@ -89,6 +88,11 @@
 
     const updateContentType = (item: any) => {
         const newValue = item.value;
+        if(!['text', 'other'].includes(newValue)){
+            if (param.formType != "radio" && param.formType != "checkbox"){
+                updateParam('formType', 'radio');
+            }
+        }
         updateParam('contentType', newValue);
     };
 

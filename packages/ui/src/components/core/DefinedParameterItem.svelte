@@ -66,6 +66,11 @@
 
     const updateContentType = (item: any) => {
         const newValue = item.value;
+        if(!['text', 'other'].includes(newValue)){
+            if (param.formType != "radio" && param.formType != "checkbox"){
+                updateParameter('formType', 'radio');
+            }
+        }
         updateParameter('contentType', newValue);
     };
 
