@@ -23,7 +23,7 @@ export default defineConfig({
     plugins: [
         svelte({ emitCss: false }),
         dts({
-            rollupTypes: true,
+            bundleTypes: true,
             tsconfigPath: './tsconfig.app.json'
         })
     ]

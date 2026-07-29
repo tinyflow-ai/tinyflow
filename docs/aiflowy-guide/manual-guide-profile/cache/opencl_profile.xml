@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile>
+ <version>LibreOffice v1</version>
+ <device>
+  <type>opencl</type>
+  <name>Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz</name>
+  <driver>1.1</driver>
+  <time>276422</time>
+  <errors>false</errors>
+ </device>
+ <device>
+  <type>opencl</type>
+  <name>Intel(R) UHD Graphics 630</name>
+  <driver>1.2(Jun  9 2026 22:35:29)</driver>
+  <time>max</time>
+  <errors>false</errors>
+ </device>
+ <device>
+  <type>opencl</type>
+  <name>AMD Radeon Pro 5500M Compute Engine</name>
+  <driver>1.2 (Jun  9 2026 22:19:43)</driver>
+  <time>31394</time>
+  <errors>false</errors>
+ </device>
+ <device>
+  <type>native</type>
+  <time>7051776</time>
+  <errors>false</errors>
+ </device>
+</profile>

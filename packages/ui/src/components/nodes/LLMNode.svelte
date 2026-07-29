@@ -1,25 +1,28 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { useSvelteFlow } from '@xyflow/svelte';
     import { Button, FloatingTrigger, Heading, Select } from '../base';
     import { MenuButton, Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
-    import type { SelectItem } from '#types';
+    import type { SelectItem, TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 
     const options = getOptions();
@@ -32,14 +35,14 @@
 
     const { updateNodeData } = useSvelteFlow();
     const setOutType = (value: string) => {
-        updateNodeData(currentNodeId, () => {
+        updateNodeData(id, () => {
             return {
                 outType: value
             };
         });
 
         if (value === 'text') {
-            updateNodeData(currentNodeId, {
+            updateNodeData(id, {
                 outputDefs: [
                     {
                         name: 'output',
@@ -50,7 +53,7 @@
                 ]
             });
         } else {
-            updateNodeData(currentNodeId, {
+            updateNodeData(id, {
                 outputDefs: [
                     {
                         name: 'root',
@@ -79,7 +82,7 @@
     });
 </script>
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {id} {data} {...rest}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -95,7 +98,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId);
+                addParameter(id);
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -112,7 +115,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'images');
+                addParameter(id, 'images');
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -132,7 +135,7 @@
             placeholder="请选择模型"
             onSelect={(item) => {
                 const newValue = item.value;
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         llmId: newValue
                     };
@@ -157,8 +160,8 @@
                                 step="0.1"
                                 value={data.temperature ?? 0.5}
                                 oninput={(e) =>
-                                    updateNodeData(currentNodeId, {
-                                        temperature: parseFloat(e.target.value)
+                                    updateNodeData(id, {
+                                        temperature: parseFloat(e.currentTarget.value)
                                     })}
                             />
                         </div>
@@ -175,8 +178,8 @@
                                 step="0.1"
                                 value={data.topP ?? 0.9}
                                 oninput={(e) =>
-                                    updateNodeData(currentNodeId, {
-                                        topP: parseFloat(e.target.value)
+                                    updateNodeData(id, {
+                                        topP: parseFloat(e.currentTarget.value)
                                     })}
                             />
                         </div>
@@ -193,8 +196,8 @@
                                 step="1"
                                 value={data.topK ?? 50}
                                 oninput={(e) =>
-                                    updateNodeData(currentNodeId, {
-                                        topK: parseInt(e.target.value)
+                                    updateNodeData(id, {
+                                        topK: parseInt(e.currentTarget.value)
                                     })}
                             />
                         </div>
@@ -212,8 +215,8 @@
             style="width: 100%"
             value={data.systemPrompt || ''}
             oninput={(e) => {
-                updateNodeData(currentNodeId, {
-                    systemPrompt: e.target.value
+                updateNodeData(id, {
+                    systemPrompt: e.currentTarget.value
                 });
             }}
         />
@@ -227,8 +230,8 @@
             style="width: 100%"
             value={data.userPrompt || ''}
             oninput={(e) => {
-                updateNodeData(currentNodeId, {
-                    userPrompt: e.target.value
+                updateNodeData(id, {
+                    userPrompt: e.currentTarget.value
                 });
             }}
         />
@@ -243,8 +246,8 @@
                 style="width: 100%"
                 value={data.jsonSchema || ''}
                 oninput={(e) => {
-                    updateNodeData(currentNodeId, {
-                        jsonSchema: e.target.value
+                    updateNodeData(id, {
+                        jsonSchema: e.currentTarget.value
                     });
                 }}
             />
@@ -266,7 +269,7 @@
                 }
             ]}
             onSelect={(item) => {
-                setOutType(item.value);
+                setOutType(String(item.value));
             }}
             value={data.outType ? [data.outType] : []}
         />

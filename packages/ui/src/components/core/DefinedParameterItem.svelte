@@ -137,7 +137,7 @@
                             rows={3}
                             style="width: 100%;"
                             onchange={(event) => {
-                                updateParameter('enums', event.target?.value.trim().split('\n'));
+                                updateParameter('enums', event.currentTarget.value.trim().split('\n'));
                             }}
                             value={param.enums?.join('\n')}
                             placeholder="一行一个选项"

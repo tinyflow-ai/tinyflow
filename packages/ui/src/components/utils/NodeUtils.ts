@@ -1,9 +1,15 @@
-import { getContext } from 'svelte';
+import { getContext, setContext } from 'svelte';
 import { useNodesData, useSvelteFlow } from '@xyflow/svelte';
 import type { TinyflowOptions } from '#types';
 
+const tinyflowNodeIdContext = Symbol('tinyflow_node_id');
+
+export const provideCurrentNodeId = (nodeId: string): void => {
+    setContext(tinyflowNodeIdContext, nodeId);
+};
+
 export const getCurrentNodeId = () => {
-    return getContext<string>('svelteflow__node_id');
+    return getContext<string>(tinyflowNodeIdContext);
 };
 
 export const getOptions = () => {

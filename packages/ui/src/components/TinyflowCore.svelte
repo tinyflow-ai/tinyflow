@@ -7,13 +7,12 @@
         useSvelteFlow,
         type Node,
         MarkerType,
-        type Handle,
         Panel,
         type Edge,
         type NodeTypes
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
-    import '../styles/index.ts';
+    import '../styles/index';
     import { store } from '#store/stores.svelte';
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
@@ -33,13 +32,13 @@
     import { onDestroy, onMount } from 'svelte';
     import { isInEditableElement } from '#components/utils/isInEditableElement';
 
-    const { onInit, ...rest } = $props();
+    const { onInit } = $props();
     const svelteFlow = useSvelteFlow();
 
     onInit(svelteFlow);
 
     let showEdgePanel = $state(false);
-    let currentEdge = $state<Edge | null>(null);
+    let currentEdge = $state<Edge<Record<string, any>> | null>(null);
 
     const { updateEdgeData } = useUpdateEdgeData();
 
@@ -122,13 +121,13 @@
         }
 
         const fromNode = state.fromNode as Node;
-        const fromHande = state.fromHandle as Handle;
+        const fromHandle = state.fromHandle as { id?: string | null };
 
         const newNode = {
             position: { ...toNode.position }
         } as Node;
 
-        if (fromHande.id === 'loop_handle') {
+        if (fromHandle.id === 'loop_handle') {
             newNode.parentId = fromNode.id;
         } else if (fromNode.parentId) {
             newNode.parentId = fromNode.parentId;
@@ -241,13 +240,9 @@
 
     const { deleteEdge } = useDeleteEdge();
 
-    const onconnectstart = (event: any, node: any) => {
-        // console.log('onconnectstart: ', event, node);
-    };
+    const onconnectstart = () => {};
 
-    const onconnect = (event: any) => {
-        // console.log('onconnect: ', event);
-    };
+    const onconnect = () => {};
 
     const { copyHandler, pasteHandler } = useCopyPasteHandler();
 
@@ -391,7 +386,7 @@
                             onchange={(e) => {
                                 if (currentEdge) {
                                     updateEdgeData(currentEdge.id, {
-                                        condition: e.target?.value
+                                        condition: e.currentTarget.value
                                     });
                                 }
                             }}
@@ -401,7 +396,9 @@
                         <Button
                             variant="destructive"
                             onclick={() => {
-                                deleteEdge(currentEdge?.id);
+                                if (currentEdge) {
+                                    deleteEdge(currentEdge.id);
+                                }
                                 showEdgePanel = false;
                             }}
                         >

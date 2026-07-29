@@ -1,24 +1,27 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
     import { Textarea } from '../base/index.js';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
     import ConfirmParameterList from '../core/ConfirmParameterList.svelte';
-    import type { Parameter } from '#types';
+    import type { Parameter, TinyflowNodeData } from '#types';
     import { deepEqual } from '#components/utils/deepEqual';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
     const { updateNodeData } = useSvelteFlow();
 
@@ -54,7 +57,7 @@
             // 判断 outputDefs 与 data.outputDefs 是否完全一致
             // 如果不判断，则会造成死循环更新
             if (!deepEqual(outputDefs, data.outputDefs)) {
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         outputDefs
                     };
@@ -64,7 +67,7 @@
     });
 </script>
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {id} {data} {...rest}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -80,7 +83,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'confirms');
+                addParameter(id, 'confirms');
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -98,7 +101,7 @@
             placeholder="请输入用户需要确认的消息内容"
             style="width: 100%"
             onchange={(e: any) => {
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         message: e.target.value
                     };

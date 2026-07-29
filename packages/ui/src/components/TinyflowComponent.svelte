@@ -29,7 +29,7 @@
     if (typeof data === 'string') {
         try {
             data = JSON.parse(data.trim());
-        } catch (e) {
+        } catch {
             console.error('Invalid JSON data:', data);
         }
     }

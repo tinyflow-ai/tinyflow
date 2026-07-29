@@ -2,24 +2,28 @@
     import NodeWrapper from '../core/NodeWrapper.svelte';
     import { Heading } from '../base';
     import { Button } from '../base/index.js';
-    import { type NodeProps } from '@xyflow/svelte';
     import DefinedParameterList from '../core/DefinedParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
+    import type { TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 </script>
 
 <NodeWrapper
+    {id}
     {...rest}
     {data}
     allowExecute={false}
@@ -40,7 +44,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'parameters', { refType: 'input', name: 'newParam', dataType: 'String'});
+                addParameter(id, 'parameters', { refType: 'input', name: 'newParam', dataType: 'String'});
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

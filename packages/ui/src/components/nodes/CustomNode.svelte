@@ -1,29 +1,33 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type Node, type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { type Node, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Chosen, Heading, Input, Select, Textarea } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import OutputDefList from '../core/OutputDefList.svelte';
     import { fillParameterId } from '../utils/useAddParameter.svelte.js';
+    import type { TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
     const flowInstance = useSvelteFlow();
     const { updateNodeData: updateNodeDataInner } = flowInstance;
 
     const updateNodeData = (data: Record<string, any>) => {
-        updateNodeDataInner(currentNodeId, data);
+        updateNodeDataInner(id, data);
     };
 
     const updateNodeDataByEvent = (name: string, event: Event) => {
@@ -34,7 +38,7 @@
 
     const node = {
         ...rest,
-        id: currentNodeId,
+        id,
         data
     } as Node;
 
@@ -75,7 +79,7 @@
     });
 </script>
 
-<NodeWrapper data={{ ...data, description: customNode.description }} {...rest}>
+<NodeWrapper {id} data={{ ...data, description: customNode.description }} {...rest}>
     {#snippet icon()}
         {@html customNode.icon}
     {/snippet}
@@ -90,7 +94,7 @@
                     class="input-btn-more"
                     style="margin-left: auto"
                     onclick={() => {
-                        addParameter(currentNodeId);
+                        addParameter(id);
                     }}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -143,7 +147,7 @@
                             {...form.attrs}
                             value={data[form.name] ?? form.defaultValue}
                             oninput={(e) =>
-                                updateNodeData({ [form.name]: parseFloat(e.target.value) })}
+                                updateNodeData({ [form.name]: parseFloat(e.currentTarget.value) })}
                         />
                     </div>
                 </div>
@@ -199,7 +203,7 @@
                     class="input-btn-more"
                     style="margin-left: auto"
                     onclick={() => {
-                        addParameter(currentNodeId, 'outputDefs');
+                        addParameter(id, 'outputDefs');
                     }}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

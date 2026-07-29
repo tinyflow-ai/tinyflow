@@ -1,24 +1,27 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import RefParameterList from '../core/RefParameterList.svelte';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
+    import type { TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 </script>
 
-<NodeWrapper {data} {...rest} allowExecute={false} showSourceHandle={false}>
+<NodeWrapper {id} {data} {...rest} allowExecute={false} showSourceHandle={false}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -33,7 +36,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'outputDefs', { name: 'output' });
+                addParameter(id, 'outputDefs', { name: 'output' });
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

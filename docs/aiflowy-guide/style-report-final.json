@@ -1,0 +1,170 @@
+{
+  "input": "/Users/michael/git/tinyflow-ai-next/docs/aiflowy-guide/AIFlowy\u667a\u80fd\u4f53\u914d\u7f6e\u4f7f\u7528\u624b\u518c.docx",
+  "fonts_by_char_count": {
+    "Calibri": 2137
+  },
+  "direct_run_formatting_runs": 146,
+  "direct_paragraph_formatting_paragraphs": 48,
+  "heading_like_paragraphs_not_heading_style": [
+    {
+      "para_index": 1,
+      "text": "\u4ea7\u54c1\u4f7f\u7528\u624b\u518c",
+      "style": "Normal"
+    },
+    {
+      "para_index": 2,
+      "text": "AIFlowy \u667a\u80fd\u4f53\u914d\u7f6e",
+      "style": "Normal"
+    },
+    {
+      "para_index": 11,
+      "text": "\u6b65\u9aa4 1  \u5b9a\u4e49\u8f93\u5165",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 13,
+      "text": "\u6b65\u9aa4 2  \u8bbe\u5b9a\u89d2\u8272",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 15,
+      "text": "\u6b65\u9aa4 3  \u9009\u62e9\u6a21\u578b",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 17,
+      "text": "\u6b65\u9aa4 4  \u7ed1\u5b9a\u80fd\u529b",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 19,
+      "text": "\u6b65\u9aa4 5  \u914d\u7f6e\u5bf9\u8bdd",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 21,
+      "text": "\u6b65\u9aa4 6  \u9884\u89c8\u4e0e\u53d1\u5e03",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 29,
+      "text": "\u6b65\u9aa4 1  \u586b\u5199\u6807\u9898",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 31,
+      "text": "\u6b65\u9aa4 2  \u9009\u62e9\u7c7b\u578b\u4e0e\u8f93\u5165\u65b9\u5f0f",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 33,
+      "text": "\u6b65\u9aa4 3  \u8865\u5145\u4ea4\u4e92\u4fe1\u606f",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 35,
+      "text": "\u6b65\u9aa4 4  \u4fdd\u5b58",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 49,
+      "text": "\u6b65\u9aa4 1  \u5efa\u7acb\u57fa\u51c6",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 51,
+      "text": "\u6b65\u9aa4 2  \u5355\u9879\u8c03\u6574",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 53,
+      "text": "\u6b65\u9aa4 3  \u56de\u5f52\u9a8c\u8bc1",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 59,
+      "text": "\u6b65\u9aa4 1  \u786e\u5b9a\u80fd\u529b\u6765\u6e90",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 61,
+      "text": "\u6b65\u9aa4 2  \u6dfb\u52a0\u5e76\u6838\u5bf9\u6570\u91cf",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 63,
+      "text": "\u6b65\u9aa4 3  \u5c55\u5f00\u68c0\u67e5",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 65,
+      "text": "\u6b65\u9aa4 4  \u573a\u666f\u6d4b\u8bd5",
+      "style": "Step Heading"
+    },
+    {
+      "para_index": 83,
+      "text": "\u6b65\u9aa4 1  \u57fa\u7840\u56de\u7b54",
+      "style": "Step Heading"
+    }
+  ],
+  "examples": {
+    "direct_paragraph_formatting": [
+      {
+        "para_index": 1,
+        "text": "\u4ea7\u54c1\u4f7f\u7528\u624b\u518c",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "text": "AIFlowy \u667a\u80fd\u4f53\u914d\u7f6e",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "text": "\u4ece\u57fa\u7840\u8bbe\u5b9a\u3001\u80fd\u529b\u7ed1\u5b9a\u5230\u9884\u89c8\u4e0e\u53d1\u5e03",
+        "style": "Normal"
+      },
+      {
+        "para_index": 5,
+        "text": "",
+        "style": "Normal"
+      },
+      {
+        "para_index": 6,
+        "text": "",
+        "style": "Normal"
+      }
+    ],
+    "direct_run_formatting": [
+      {
+        "para_index": 1,
+        "run_text": "\u4ea7\u54c1\u4f7f\u7528\u624b\u518c",
+        "style": "Normal"
+      },
+      {
+        "para_index": 2,
+        "run_text": "AIFlowy \u667a\u80fd\u4f53\u914d\u7f6e",
+        "style": "Normal"
+      },
+      {
+        "para_index": 3,
+        "run_text": "\u4ece\u57fa\u7840\u8bbe\u5b9a\u3001\u80fd\u529b\u7ed1\u5b9a\u5230\u9884\u89c8\u4e0e\u53d1\u5e03",
+        "style": "Normal"
+      },
+      {
+        "para_index": 4,
+        "run_text": "\u56fe 1  \u667a\u80fd\u4f53\u914d\u7f6e\u9875\u603b\u89c8",
+        "style": "Caption"
+      },
+      {
+        "para_index": 11,
+        "run_text": "\u6b65\u9aa4 1  \u5b9a\u4e49\u8f93\u5165",
+        "style": "Step Heading"
+      }
+    ]
+  },
+  "notes": [
+    "Direct formatting is not always wrong, but it often causes inconsistent output when templates change.",
+    "Heading-like paragraphs not using Heading styles can break TOC and accessibility."
+  ]
+}

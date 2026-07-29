@@ -1,11 +1,12 @@
 <script lang="ts">
-    import { Handle, type NodeProps, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
+    import { Handle, NodeToolbar, Position, useSvelteFlow } from '@xyflow/svelte';
     import { Button, Collapse, FloatingTrigger, Input, Textarea } from '../base';
     import { type Snippet } from 'svelte';
     import { useDeleteNode } from '../utils/useDeleteNode.svelte';
     import { useCopyNode } from '../utils/useCopyNode.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import type { TinyflowNodeData } from '#types';
 
     const {
         data,
@@ -22,8 +23,8 @@
         showTargetHandle = true,
         onCollapse
     }: {
-        data: NodeProps['data'];
-        id?: NodeProps['id'];
+        data: TinyflowNodeData;
+        id?: string;
         icon?: Snippet;
         handle?: Snippet;
         children: Snippet;

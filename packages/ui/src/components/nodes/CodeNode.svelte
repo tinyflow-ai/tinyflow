@@ -1,18 +1,21 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Select } from '../base';
     import { Textarea } from '../base/index.js';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
+    import type { TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
     // 添加生命周期函数
@@ -20,14 +23,15 @@
     // 在组件挂载时检查并设置默认值
     onMount(() => {
         if (!data.engine) {
-            updateNodeData(currentNodeId, () => {
+            updateNodeData(id, () => {
                 return {
                     engine: 'qlexpress'
                 };
             });
         }
     });
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 
     const { updateNodeData } = useSvelteFlow();
@@ -39,7 +43,7 @@
     ];
 </script>
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {id} {data} {...rest}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -55,7 +59,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId);
+                addParameter(id);
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -74,7 +78,7 @@
             placeholder="请选择执行引擎"
             onSelect={(item) => {
                 const newValue = item.value;
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         engine: newValue
                     };
@@ -91,7 +95,7 @@
             placeholder="请输入执行代码，注：输出内容需添加到_result中，如：_result['key'] = value 或者 _result.key = value"
             style="width: 100%"
             onchange={(e: any) => {
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         code: e.target.value
                     };
@@ -108,7 +112,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'outputDefs');
+                addParameter(id, 'outputDefs');
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

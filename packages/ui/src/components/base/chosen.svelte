@@ -8,6 +8,8 @@
         value,
         buttonText = '选择...',
         onChosen,
+        class: className,
+        style,
         ...rest
     }: {
         placeholder?: string;
@@ -15,10 +17,12 @@
         value?: any;
         buttonText?: string;
         onChosen?: (value?: any, label?: any, event?: Event) => void;
+        class?: string;
+        style?: string;
     } & MyHTMLAttributes = $props();
 </script>
 
-<div {...rest} class="tf-chosen nopan nodrag {rest.class}">
+<div {...rest} {style} class="tf-chosen nopan nodrag {className || ''}">
     <input type="hidden" {value} />
     <Input value={label} {placeholder} style="flex-grow: 1;" disabled />
     <Button

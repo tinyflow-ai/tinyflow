@@ -22,8 +22,6 @@ export default defineConfig({
         },
         rollupOptions: {
             output: {
-                // 确保所有依赖都被打包
-                inlineDynamicImports: true,
                 exports: 'named'
             },
             plugins: [
@@ -37,7 +35,7 @@ export default defineConfig({
     plugins: [
         svelte({ emitCss: false }),
         dts({
-            rollupTypes: true,
+            bundleTypes: true,
             tsconfigPath: './tsconfig.app.json'
         })
     ]

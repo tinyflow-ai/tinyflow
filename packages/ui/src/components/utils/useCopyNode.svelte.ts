@@ -18,7 +18,7 @@ export const useCopyNode = () => {
             } as Node;
 
             if (newNode.data?.parameters) {
-                for (let parameter of newNode.data.parameters as Parameter[]) {
+                for (const parameter of newNode.data.parameters as Parameter[]) {
                     parameter.id = genShortId();
                     parameter.ref = undefined;
                 }

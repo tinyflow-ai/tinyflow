@@ -1,6 +1,6 @@
 import { store } from '#store/stores.svelte';
 import { genShortId } from '#components/utils/IdGen';
-import { type Node, type Edge, useSvelteFlow } from '@xyflow/svelte';
+import { type Node, type Edge } from '@xyflow/svelte';
 
 interface ClipboardData {
     tinyflowNodes: Node[];
@@ -118,7 +118,7 @@ function rewriteRefsInData(obj: any, idMap: Map<string, string>): any {
         if (obj.refType === 'ref' && typeof obj.ref === 'string') {
             const match = obj.ref.match(/^([^.\s]+)\.(.+)$/);
             if (match) {
-                const [_, oldNodeId, paramId] = match;
+                const [, oldNodeId, paramId] = match;
                 const newNodeId = idMap.get(oldNodeId);
                 if (newNodeId !== undefined) {
                     // 返回新对象，避免修改原数据
@@ -148,8 +148,6 @@ function rewriteRefsInData(obj: any, idMap: Map<string, string>): any {
  * 复制粘贴处理器 Hook
  */
 export const useCopyPasteHandler = () => {
-    const svelteFlow = useSvelteFlow();
-
     const copyHandler = async (event: ClipboardEvent | KeyboardEvent) => {
         const selectedNodes = store.getNodes().filter((node) => node.selected);
         if (selectedNodes.length === 0) return;
@@ -190,7 +188,9 @@ export const useCopyPasteHandler = () => {
             // 可选：同源降级存储
             try {
                 sessionStorage.setItem('tinyflow_clipboard', jsonStr);
-            } catch {}
+            } catch {
+                // Storage can be unavailable in restricted browser contexts.
+            }
         }
     };
 

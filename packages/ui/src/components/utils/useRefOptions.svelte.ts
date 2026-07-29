@@ -104,7 +104,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
     const currentNode = useNodesData(currentNodeId);
     const { nodes, edges, nodeLookup } = $derived(useStore());
 
-    let selectItems = $derived.by(() => {
+    const selectItems = $derived.by(() => {
         const resultOptions = [];
         if (!currentNode.current) {
             return [];
@@ -122,7 +122,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                 for (const node of nodes) {
                     if (node.id === nodeIdAndParamId[0]) {
                         if (node.data.parameters) {
-                            for (let parameter of node.data.parameters as Parameter[]) {
+                            for (const parameter of node.data.parameters as Parameter[]) {
                                 if (parameter.name === nodeIdAndParamId[1]) {
                                     if (parameter.dataType) {
                                         return convertParameterDataTypeString(
@@ -137,7 +137,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                         }
 
                         if (node.data.outputDefs) {
-                            for (let parameter of node.data.outputDefs as Parameter[]) {
+                            for (const parameter of node.data.outputDefs as Parameter[]) {
                                 if (parameter.name === nodeIdAndParamId[1]) {
                                     if (parameter.dataType) {
                                         return convertParameterDataTypeString(
@@ -177,7 +177,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                         cNode,
                         getParameterDataType
                     );
-                    nodeOptions && resultOptions.push(nodeOptions);
+                    if (nodeOptions) resultOptions.push(nodeOptions);
                 }
             }
         }
@@ -195,7 +195,7 @@ const useRefOptions: any = (useChildrenOnly: boolean = false) => {
                         cNode,
                         getParameterDataType
                     );
-                    nodeOptions && resultOptions.push(nodeOptions);
+                    if (nodeOptions) resultOptions.push(nodeOptions);
                 }
             }
         }

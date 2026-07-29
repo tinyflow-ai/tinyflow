@@ -1,0 +1,54 @@
+Device Index: 0
+  Selected: false
+  Device Name: Intel(R) Core(TM) i9-9980HK CPU @ 2.40GHz
+  Device Vendor: Intel
+  Device Version: OpenCL 1.2 
+  Driver Version: 1.1
+  Device Type: cpu 
+  Device Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event cl_khr_fp64 cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_int64_base_atomics cl_khr_int64_extended_atomics cl_khr_3d_image_writes cl_khr_image2d_from_buffer cl_APPLE_fp64_basic_ops cl_APPLE_fixed_alpha_channel_orders cl_APPLE_biased_fixed_point_image_formats cl_APPLE_command_queue_priority
+  Device OpenCL C Version: OpenCL C 1.2 
+  Device Available: true
+  Device Compiler Available: true
+  Device Linker Available: true
+  Platform Name: Apple
+  Platform Vendor: Apple
+  Platform Version: OpenCL 1.2 (Apr 18 2026 19:19:32)
+  Platform Profile: FULL_PROFILE
+  Platform Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event
+
+Device Index: 1
+  Selected: false
+  Device Name: Intel(R) UHD Graphics 630
+  Device Vendor: Intel Inc.
+  Device Version: OpenCL 1.2 
+  Driver Version: 1.2(Jun  9 2026 22:35:29)
+  Device Type: gpu 
+  Device Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_image2d_from_buffer cl_khr_gl_depth_images cl_khr_depth_images cl_khr_3d_image_writes 
+  Device OpenCL C Version: OpenCL C 1.2 
+  Device Available: true
+  Device Compiler Available: true
+  Device Linker Available: true
+  Platform Name: Apple
+  Platform Vendor: Apple
+  Platform Version: OpenCL 1.2 (Apr 18 2026 19:19:32)
+  Platform Profile: FULL_PROFILE
+  Platform Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event
+
+Device Index: 2
+  Selected: false
+  Device Name: AMD Radeon Pro 5500M Compute Engine
+  Device Vendor: AMD
+  Device Version: OpenCL 1.2 
+  Driver Version: 1.2 (Jun  9 2026 22:19:43)
+  Device Type: gpu 
+  Device Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event cl_khr_global_int32_base_atomics cl_khr_global_int32_extended_atomics cl_khr_local_int32_base_atomics cl_khr_local_int32_extended_atomics cl_khr_byte_addressable_store cl_khr_depth_images cl_APPLE_command_queue_priority cl_APPLE_command_queue_select_compute_units cl_khr_fp64
+  Device OpenCL C Version: OpenCL C 1.2 
+  Device Available: true
+  Device Compiler Available: true
+  Device Linker Available: true
+  Platform Name: Apple
+  Platform Vendor: Apple
+  Platform Version: OpenCL 1.2 (Apr 18 2026 19:19:32)
+  Platform Profile: FULL_PROFILE
+  Platform Extensions: cl_APPLE_SetMemObjectDestructor cl_APPLE_ContextLoggingFunctions cl_APPLE_clut cl_APPLE_query_kernel_names cl_APPLE_gl_sharing cl_khr_gl_event
+

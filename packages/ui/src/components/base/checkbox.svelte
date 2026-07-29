@@ -23,9 +23,9 @@
     {#snippet children({ checked, indeterminate })}
         <div data-slot="checkbox-indicator" class="tf-checkbox-indicator">
             {#if checked}
-                <CheckIcon />
+                <CheckIcon color="var(--tf-checkbox-checkmark)" strokeWidth={3} />
             {:else if indeterminate}
-                <MinusIcon />
+                <MinusIcon color="var(--tf-checkbox-checkmark)" strokeWidth={3} />
             {/if}
         </div>
     {/snippet}

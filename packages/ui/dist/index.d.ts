@@ -91,6 +91,8 @@ export declare class Tinyflow {
 
 export declare type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelteFlow>['toObject']>>;
 
+export declare type TinyflowNodeData = Record<string, any>;
+
 export declare type TinyflowOptions = {
     element: string | Element;
     data?: TinyflowData | string;

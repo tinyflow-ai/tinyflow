@@ -1,6 +1,8 @@
 import type { Snippet } from 'svelte';
 import type { Node, useSvelteFlow } from '@xyflow/svelte';
 
+export type TinyflowNodeData = Record<string, any>;
+
 export type TinyflowData = Partial<ReturnType<ReturnType<typeof useSvelteFlow>['toObject']>>;
 
 export type SelectItem = {

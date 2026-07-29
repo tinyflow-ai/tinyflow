@@ -1,24 +1,27 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { type NodeProps, useSvelteFlow } from '@xyflow/svelte';
+    import { useSvelteFlow } from '@xyflow/svelte';
     import { Button, Heading, Input, Select } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
     import { getOptions } from '../utils/NodeUtils';
     import { onMount } from 'svelte';
     import OutputDefList from '../core/OutputDefList.svelte';
-    import type { SelectItem } from '#types';
+    import type { SelectItem, TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 
     const options = getOptions();
@@ -33,7 +36,7 @@
 
     $effect(() => {
         if (!data.outputDefs || data.outputDefs.length === 0) {
-            addParameter(currentNodeId, 'outputDefs', {
+            addParameter(id, 'outputDefs', {
                 name: 'documents',
                 dataType: 'Array',
                 nameDisabled: true,
@@ -61,7 +64,7 @@
     });
 </script>
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {id} {data} {...rest}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -77,7 +80,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId);
+                addParameter(id);
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -96,7 +99,7 @@
             placeholder="请选择搜索引擎"
             onSelect={(item) => {
                 const newValue = item.value;
-                updateNodeData(currentNodeId, () => {
+                updateNodeData(id, () => {
                     return {
                         engine: newValue
                     };
@@ -113,8 +116,8 @@
             style="width: 100%"
             value={data.keyword}
             onchange={(e) => {
-                const newValue = e.target.value;
-                updateNodeData(currentNodeId, () => {
+                const newValue = e.currentTarget.value;
+                updateNodeData(id, () => {
                     return {
                         keyword: newValue
                     };
@@ -130,8 +133,8 @@
             style="width: 100%"
             value={data.limit}
             onchange={(e) => {
-                const newValue = e.target.value;
-                updateNodeData(currentNodeId, () => {
+                const newValue = e.currentTarget.value;
+                updateNodeData(id, () => {
                     return {
                         limit: newValue
                     };

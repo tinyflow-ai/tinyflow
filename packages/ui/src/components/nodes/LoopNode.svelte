@@ -1,25 +1,29 @@
 <script lang="ts">
     import NodeWrapper from '../core/NodeWrapper.svelte';
-    import { Handle, type NodeProps, Position } from '@xyflow/svelte';
+    import { Handle, Position } from '@xyflow/svelte';
     import { Button, Heading } from '../base';
     import RefParameterList from '../core/RefParameterList.svelte';
-    import { getCurrentNodeId } from '#components/utils/NodeUtils';
+    import { provideCurrentNodeId } from '#components/utils/NodeUtils';
     import { useAddParameter } from '../utils/useAddParameter.svelte';
+    import type { TinyflowNodeData } from '#types';
 
     const {
+        id,
         data,
         ...rest
     }: {
-        data: NodeProps['data'];
+        id: string;
+        data: TinyflowNodeData;
         [key: string]: any;
     } = $props();
 
-    const currentNodeId = getCurrentNodeId();
+    // svelte-ignore state_referenced_locally
+    provideCurrentNodeId(id);
     const { addParameter } = useAddParameter();
 
     $effect(() => {
         if (!data.loopVars || data.loopVars.length === 0) {
-            addParameter(currentNodeId, 'loopVars', {
+            addParameter(id, 'loopVars', {
                 name: 'loopVar',
                 nameDisabled: true,
                 deleteDisabled: true
@@ -28,7 +32,7 @@
     });
 </script>
 
-<NodeWrapper {data} {...rest}>
+<NodeWrapper {id} {data} {...rest}>
     {#snippet icon()}
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
             <path
@@ -50,7 +54,7 @@
     <div class="heading">
         <Heading level={3}>循环变量</Heading>
         <!--        <Button class="input-btn-more" style="margin-left: auto" onclick={()=>{-->
-        <!--            addParameter(currentNodeId)-->
+        <!--            addParameter(id)-->
         <!--        }}>-->
         <!--            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">-->
         <!--                <path d="M11 11V5H13V11H19V13H13V19H11V13H5V11H11Z"></path>-->
@@ -66,7 +70,7 @@
             class="input-btn-more"
             style="margin-left: auto"
             onclick={() => {
-                addParameter(currentNodeId, 'outputDefs');
+                addParameter(id, 'outputDefs');
             }}
         >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

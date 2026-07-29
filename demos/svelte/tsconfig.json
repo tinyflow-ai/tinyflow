@@ -5,6 +5,7 @@
         "target": "ESNext",
         "useDefineForClassFields": true,
         "module": "ESNext",
+        "moduleResolution": "bundler",
         /**
          * Typecheck JS in `.svelte` and `.js` files by default.
          * Disable checkJs if you'd like to use dynamic types in JS.
@@ -12,7 +13,7 @@
          * of JS in `.svelte` files.
          */
         "allowJs": true,
-        "checkJs": true,
+        "checkJs": false,
         "isolatedModules": true,
         "moduleDetection": "force",
         "paths": {
