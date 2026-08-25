@@ -1,5 +1,16 @@
 # @tinyflow-ai/svelte
 
+## 1.3.7
+
+### Patch Changes
+
+- [`cf20977`](https://github.com/tinyflow-ai/tinyflow/commit/cf2097757f59ac73fc054c795c9598a7e6f5becc) Thanks [@yangfuhai](https://github.com/yangfuhai)! - Upgrade the SDK build toolchain and framework dependencies, including xyflow, Svelte, Vite, React, and Vue, and update compatibility for their latest stable releases.
+
+- [`b08b55c`](https://github.com/tinyflow-ai/tinyflow/commit/b08b55ce6f5a7eab96e2e5eb53744c29e3b27813) Thanks [@yangfuhai](https://github.com/yangfuhai)! - v1.3.7
+
+- Updated dependencies [[`cf20977`](https://github.com/tinyflow-ai/tinyflow/commit/cf2097757f59ac73fc054c795c9598a7e6f5becc), [`b08b55c`](https://github.com/tinyflow-ai/tinyflow/commit/b08b55ce6f5a7eab96e2e5eb53744c29e3b27813)]:
+    - @tinyflow-ai/ui@1.3.7
+
 ## 1.3.6
 
 ### Patch Changes
