@@ -9,7 +9,8 @@
         MarkerType,
         Panel,
         type Edge,
-        type NodeTypes
+        type NodeTypes,
+        type OnDelete
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index';
@@ -30,6 +31,7 @@
     import { useGetNodeRelativePosition } from '#components/utils/useGetNodeRelativePosition.svelte';
     import { useCopyPasteHandler } from '#components/utils/useCopyPasteHandler.svelte';
     import { isInEditableElement } from '#components/utils/isInEditableElement';
+    import { clearNodeReferences } from '#components/utils/workflowMutations';
 
     const { onInit } = $props();
     const store = getStore();
@@ -170,7 +172,13 @@
     };
 
     const { getEdgesByTarget } = useGetEdgesByTarget();
-    const onDelete = (params: any) => {
+    const onDelete: OnDelete = (params) => {
+        // XYFlow 已经移除了父子节点和关联边；这里补齐其不了解的 Tinyflow 参数引用清理。
+        const deletedNodeIds = new Set<string>((params.nodes as Node[]).map((node) => node.id));
+        if (deletedNodeIds.size > 0) {
+            store.setNodes(clearNodeReferences(store.getNodes(), deletedNodeIds));
+        }
+
         const deleteEdges = params.edges as Edge[];
         deleteEdges.forEach((edge) => {
             if (edge.id === currentEdge?.id) {
@@ -306,9 +314,9 @@
         }
     }
 
-    const onDataChange = getOptions().onDataChange;
     $effect(() => {
-        onDataChange?.({
+        // 每次从 context 读取最新代理函数，使宿主更新回调时无需重建画布。
+        getOptions().onDataChange?.({
             nodes: store.getNodes(),
             edges: store.getEdges(),
             viewport: store.getViewport()

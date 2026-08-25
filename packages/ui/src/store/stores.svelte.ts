@@ -4,6 +4,8 @@ import { type Edge, type Node, type Viewport } from '@xyflow/svelte';
 const STORE_CONTEXT_KEY = Symbol('tinyflow_store');
 
 export const createStore = () => {
+    // raw 状态避免 Svelte 对 XYFlow 的大型节点对象做深层代理；所有写操作通过下方
+    // 方法替换数组/对象引用，从而同时保证响应式更新和多实例隔离。
     let nodesInternal = $state.raw([] as Node[]);
     let edgesInternal = $state.raw([] as Edge[]);
     let viewport = $state.raw({ x: 250, y: 100, zoom: 1 } as Viewport);
@@ -12,6 +14,7 @@ export const createStore = () => {
         // nodes: nodesInternal,
         // edges: edgesInternal,
         // viewport,
+        /** 使用导入数据初始化完整画布；缺少 viewport 时采用编辑器默认视角。 */
         init: (nodes: Node[], edges: Edge[], initialViewport?: Viewport) => {
             nodesInternal = nodes;
             edgesInternal = edges;
@@ -78,6 +81,7 @@ export const createStore = () => {
 export type TinyflowStore = ReturnType<typeof createStore>;
 
 export const provideStore = (store: TinyflowStore) => {
+    // Symbol key 防止与宿主应用或其他组件库的字符串 context key 冲突。
     setContext(STORE_CONTEXT_KEY, store);
     return store;
 };

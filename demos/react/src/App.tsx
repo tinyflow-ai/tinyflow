@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Tinyflow, type TinyflowHandle } from '@tinyflow-ai/react';
+import { Tinyflow, type TinyflowHandle, type TinyflowOptions } from '@tinyflow-ai/react';
 import '@tinyflow-ai/react/dist/index.css';
 
 const flowData = (id: string, title: string, viewport: { x: number; y: number; zoom: number }) => ({
@@ -16,13 +16,15 @@ const flowData = (id: string, title: string, viewport: { x: number; y: number; z
 });
 
 const secondFlowData = flowData('flow-b', '工作流 B', { x: -80, y: 20, zoom: 1.25 });
+type WorkflowData = Exclude<TinyflowOptions['data'], string | undefined>;
 
 function App() {
     const firstRef = useRef<TinyflowHandle>(null);
     const secondRef = useRef<TinyflowHandle>(null);
-    const [firstData, setFirstData] = useState(
+    const [firstData, setFirstData] = useState<WorkflowData>(
         flowData('flow-a', '工作流 A', { x: 40, y: 30, zoom: 0.8 })
     );
+    const [firstTheme, setFirstTheme] = useState<'light' | 'dark'>('light');
     const [firstOutput, setFirstOutput] = useState('尚未读取');
     const [secondOutput, setSecondOutput] = useState('尚未读取');
 
@@ -61,6 +63,11 @@ function App() {
                 >
                     更新工作流 A
                 </button>
+                <button
+                    onClick={() => setFirstTheme((theme) => (theme === 'light' ? 'dark' : 'light'))}
+                >
+                    切换工作流 A 主题（当前：{firstTheme}）
+                </button>
             </header>
 
             <section
@@ -75,6 +82,8 @@ function App() {
                     <Tinyflow
                         ref={firstRef}
                         data={firstData}
+                        defaultTheme={firstTheme}
+                        onDataChange={setFirstData}
                         style={{ height: 440, border: '1px solid #bbb' }}
                     />
                     <pre

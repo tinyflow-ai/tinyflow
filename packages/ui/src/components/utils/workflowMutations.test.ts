@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Edge, Node } from '@xyflow/svelte';
-import { deleteNodeAndDependencies } from './workflowMutations';
+import { clearNodeReferences, deleteNodeAndDependencies } from './workflowMutations';
 
 const node = (id: string, data: Node['data'] = {}, parentId?: string): Node => ({
     id,
@@ -60,5 +60,27 @@ describe('deleteNodeAndDependencies', () => {
 
         expect(result.nodes).toEqual(nodes);
         expect(result.edges).toEqual(edges);
+    });
+});
+
+describe('clearNodeReferences', () => {
+    it('clears dangling references after XYFlow has already removed selected nodes', () => {
+        const remaining = [
+            node('consumer', {
+                parameters: [
+                    { refType: 'ref', ref: 'deleted.output' },
+                    { refType: 'ref', ref: 'kept.output' }
+                ]
+            })
+        ];
+
+        const result = clearNodeReferences(remaining, new Set(['deleted']));
+        const parameters = result[0].data.parameters as Array<{ ref?: string }>;
+
+        expect(parameters[0].ref).toBeUndefined();
+        expect(parameters[1].ref).toBe('kept.output');
+        expect((remaining[0].data.parameters as Array<{ ref?: string }>)[0].ref).toBe(
+            'deleted.output'
+        );
     });
 });

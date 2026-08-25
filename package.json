@@ -6,7 +6,7 @@
         "build": "turbo run build",
         "dev": "turbo run dev",
         "lint": "turbo run lint",
-        "test": "vitest run",
+        "test": "vitest run && vitest run --config vitest.adapters.config.ts",
         "format": "prettier --write ."
     },
     "devDependencies": {
