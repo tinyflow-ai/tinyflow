@@ -21,10 +21,11 @@ export default defineConfig({
             name: 'Tinyflow'
         },
         rollupOptions: {
-            external: ['vue'], // 排除 Vue 作为外部依赖
+            external: ['vue', '@tinyflow-ai/ui'],
             output: {
                 globals: {
-                    vue: 'Vue'
+                    vue: 'Vue',
+                    '@tinyflow-ai/ui': 'Tinyflow'
                 }
             }
         }
