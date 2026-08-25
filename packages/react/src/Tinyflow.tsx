@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 import {
     Tinyflow as TinyflowNative,
     type TinyflowOptions as TinyflowNativeOptions
@@ -12,6 +12,7 @@ export type TinyflowOptions = {
 
 export interface TinyflowHandle {
     getData: () => any;
+    getInstance: () => TinyflowNative | null;
 }
 
 const Tinyflow = forwardRef<TinyflowHandle, TinyflowOptions>((options, ref) => {
@@ -35,14 +36,31 @@ const Tinyflow = forwardRef<TinyflowHandle, TinyflowOptions>((options, ref) => {
         }
     }));
 
-    const { data, style, className } = options;
+    const {
+        data,
+        style,
+        className,
+        provider,
+        customNodes,
+        onNodeExecute,
+        hiddenNodes,
+        onDataChange,
+        defaultTheme,
+        formRefTypeEnable
+    } = options;
 
     useEffect(() => {
         if (divRef.current) {
             const tinyflow = new TinyflowNative({
-                ...options,
-                element: divRef.current
-                // data: data
+                element: divRef.current,
+                data,
+                provider,
+                customNodes,
+                onNodeExecute,
+                hiddenNodes,
+                onDataChange,
+                defaultTheme,
+                formRefTypeEnable
             });
 
             tinyflowInstance.current = tinyflow;
@@ -52,7 +70,16 @@ const Tinyflow = forwardRef<TinyflowHandle, TinyflowOptions>((options, ref) => {
                 tinyflowInstance.current = null;
             };
         }
-    }, [data]);
+    }, [
+        data,
+        provider,
+        customNodes,
+        onNodeExecute,
+        hiddenNodes,
+        onDataChange,
+        defaultTheme,
+        formRefTypeEnable
+    ]);
 
     return <div ref={divRef} style={{ height: '600px', ...style }} className={className} />;
 }) as React.ForwardRefExoticComponent<TinyflowOptions & React.RefAttributes<TinyflowHandle>>;

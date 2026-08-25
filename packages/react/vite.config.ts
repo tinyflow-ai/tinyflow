@@ -20,11 +20,18 @@ export default defineConfig({
             name: 'tinyflow'
         },
         rollupOptions: {
-            external: ['react', 'react-dom']
+            external: ['react', 'react-dom', '@tinyflow-ai/ui'],
+            output: {
+                globals: {
+                    react: 'React',
+                    'react-dom': 'ReactDOM',
+                    '@tinyflow-ai/ui': 'Tinyflow'
+                }
+            }
         }
     },
     plugins: [
-        react(),
+        react({ jsxRuntime: 'classic' }),
         dts({
             bundleTypes: true,
             tsconfigPath: './tsconfig.app.json'
