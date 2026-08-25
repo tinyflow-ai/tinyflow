@@ -6,16 +6,37 @@
     } from '@tinyflow-ai/ui';
     import '@tinyflow-ai/ui/dist/index.css';
 
-    const { style, className, ...rest }: {
+    const {
+        style,
+        className,
+        data,
+        provider,
+        customNodes,
+        onNodeExecute,
+        hiddenNodes,
+        onDataChange,
+        defaultTheme,
+        formRefTypeEnable
+    }: {
         style?: Record<string, string> | string;
         className?: string;
-        // data: TinyflowOptions['data']
     } & Omit<TinyflowOptions, 'element'> = $props();
 
+    const getNativeOptions = (): Omit<TinyflowOptions, 'element'> => ({
+        data,
+        provider,
+        customNodes,
+        onNodeExecute,
+        hiddenNodes,
+        onDataChange,
+        defaultTheme,
+        formRefTypeEnable
+    });
 
     // Internal state
     let divRef: HTMLElement | null = null;
     let tinyflowInstance: TinyflowNative | null = null;
+    let skipInitialOptionsEffect = true;
 
     // Expose imperative handle
     export function getData() {
@@ -34,7 +55,7 @@
     onMount(() => {
         if (divRef) {
             tinyflowInstance = new TinyflowNative({
-                ...rest,
+                ...getNativeOptions(),
                 element: divRef
             });
 
@@ -46,8 +67,16 @@
             };
         }
     });
+
+    $effect(() => {
+        const nextOptions = getNativeOptions();
+        if (skipInitialOptionsEffect) {
+            skipInitialOptionsEffect = false;
+            return;
+        }
+        tinyflowInstance?.setOptions(nextOptions);
+    });
     const defaultStyle = { height: '600px' };
-    const combinedStyle = { ...defaultStyle, ...style as Record<string, string> };
 
     function styleObjectToString(styleObj: Record<string, string>): string {
         return Object.entries(styleObj)
@@ -55,12 +84,15 @@
             .join(' ');
     }
 
-    const combinedStyleString = typeof style === 'string' ? style : styleObjectToString(combinedStyle);
+    const combinedStyleString = $derived.by(() =>
+        typeof style === 'string'
+            ? style
+            : styleObjectToString({ ...defaultStyle, ...(style ?? {}) })
+    );
 </script>
 
 <div
     bind:this={divRef}
     style={combinedStyleString }
     class={className}
-    {...rest}
 ></div>

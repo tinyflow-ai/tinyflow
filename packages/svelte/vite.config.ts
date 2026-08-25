@@ -18,6 +18,14 @@ export default defineConfig({
             },
             formats: ['es', 'umd'],
             name: 'tinyflow'
+        },
+        rollupOptions: {
+            external: ['@tinyflow-ai/ui'],
+            output: {
+                globals: {
+                    '@tinyflow-ai/ui': 'Tinyflow'
+                }
+            }
         }
     },
     plugins: [
