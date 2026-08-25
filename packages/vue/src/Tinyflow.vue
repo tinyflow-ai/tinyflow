@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { Tinyflow as TinyflowNative, TinyflowOptions } from '@tinyflow-ai/ui';
 import '@tinyflow-ai/ui/dist/index.css';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 
 const props = defineProps<
     {
@@ -16,6 +16,15 @@ const props = defineProps<
 
 const divRef = ref<HTMLDivElement | null>(null);
 let tinyflow: TinyflowNative | null = null;
+
+const getNativeOptions = () => {
+    const { className: _className, style: _style, ...nativeOptions } = props;
+    const cleanedOptions = { ...nativeOptions } as Omit<TinyflowOptions, 'element'>;
+    if (cleanedOptions.data != null) {
+        cleanedOptions.data = safeDeepClone(cleanedOptions.data);
+    }
+    return cleanedOptions;
+};
 
 // 安全深拷贝工具函数
 function safeDeepClone<T>(obj: T): T {
@@ -36,17 +45,18 @@ function safeDeepClone<T>(obj: T): T {
 onMounted(() => {
     if (divRef.value) {
         // 净化 props.data，避免响应式对象或函数污染
-        const cleanedProps = { ...props } as any;
-        if ('data' in cleanedProps && cleanedProps.data != null) {
-            cleanedProps.data = safeDeepClone(cleanedProps.data);
-        }
-
         tinyflow = new TinyflowNative({
-            ...cleanedProps,
+            ...getNativeOptions(),
             element: divRef.value
         });
     }
 });
+
+watch(
+    () => getNativeOptions(),
+    (options) => tinyflow?.setOptions(options),
+    { deep: true }
+);
 
 onUnmounted(() => {
     if (tinyflow) {
