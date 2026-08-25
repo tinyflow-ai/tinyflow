@@ -34,5 +34,6 @@ yarn-error.log*
 
 .ossutil_checkpoint
 ossutil_output
-/docs/.vitepress/cache/
-/docs/.vitepress/dist/
+
+# Local agent instructions
+/AGENTS.md
