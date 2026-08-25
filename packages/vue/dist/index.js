@@ -17,11 +17,8 @@ var u = /* @__PURE__ */ t({
 		formRefTypeEnable: { type: Boolean }
 	},
 	setup(t, { expose: u }) {
-		let d = t, f = s(null), p = null, m = () => {
-			let { className: e, style: t, ...n } = d, r = { ...n };
-			return r.data != null && (r.data = h(r.data)), r;
-		};
-		function h(e) {
+		let d = t, f = s(null), p = null;
+		function m(e) {
 			if (typeof e != "object" || !e) return e;
 			try {
 				return structuredClone(e);
@@ -29,16 +26,33 @@ var u = /* @__PURE__ */ t({
 				try {
 					return JSON.parse(JSON.stringify(e));
 				} catch {
-					return console.warn("Failed to clone object, returning original (may cause issues)", e), e;
+					return console.warn("无法复制 Tinyflow data，将使用原始值", e), e;
 				}
 			}
 		}
+		let h = () => ({
+			data: d.data == null ? d.data : m(d.data),
+			provider: d.provider,
+			customNodes: d.customNodes,
+			hiddenNodes: d.hiddenNodes,
+			defaultTheme: d.defaultTheme,
+			formRefTypeEnable: d.formRefTypeEnable
+		}), g = (e) => d.onDataChange?.(e), _ = (e) => d.onNodeExecute?.(e);
 		return i(() => {
 			f.value && (p = new l({
-				...m(),
+				...h(),
+				onDataChange: g,
+				onNodeExecute: _,
 				element: f.value
 			}));
-		}), c(() => m(), (e) => p?.setOptions(e), { deep: !0 }), a(() => {
+		}), c(() => [
+			d.data,
+			d.provider,
+			d.customNodes,
+			d.hiddenNodes,
+			d.defaultTheme,
+			d.formRefTypeEnable
+		], () => p?.setOptions(h()), { deep: !0 }), a(() => {
 			p &&= (p.destroy(), null);
 		}), u({
 			getData: () => p ? p.getData() : (console.warn("Tinyflow instance is not initialized"), null),
