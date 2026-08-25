@@ -13,7 +13,7 @@
     } from '@xyflow/svelte';
     import '@xyflow/svelte/dist/style.css';
     import '../styles/index';
-    import { store } from '#store/stores.svelte';
+    import { getStore } from '#store/stores.svelte';
     import { nodeTypes } from './nodes';
     import Toolbar from './Toolbar.svelte';
     import { genShortId } from './utils/IdGen';
@@ -29,10 +29,10 @@
     import { useGetNodesFromSource } from '#components/utils/useGetNodesFromSource.svelte';
     import { useGetNodeRelativePosition } from '#components/utils/useGetNodeRelativePosition.svelte';
     import { useCopyPasteHandler } from '#components/utils/useCopyPasteHandler.svelte';
-    import { onDestroy, onMount } from 'svelte';
     import { isInEditableElement } from '#components/utils/isInEditableElement';
 
     const { onInit } = $props();
+    const store = getStore();
     const svelteFlow = useSvelteFlow();
 
     onInit(svelteFlow);
@@ -53,8 +53,8 @@
         event.preventDefault();
 
         const position = svelteFlow.screenToFlowPosition({
-            x: event.clientX - 250,
-            y: event.clientY - 100
+            x: event.clientX,
+            y: event.clientY
         });
 
         const baseNodeJsonString = event.dataTransfer?.getData('application/tinyflow');
@@ -280,21 +280,19 @@
         pasteHandler(event);
     };
 
-    onMount(() => {
-        window.addEventListener('keydown', handleKeyDown);
-        window.addEventListener('paste', handleGlobalPaste);
-    });
-
-    onDestroy(() => {
-        window.removeEventListener('keydown', handleKeyDown);
-        window.removeEventListener('paste', handleGlobalPaste);
-    });
-
     const onPaneClick = () => {
         const selection = document.getSelection();
         if (selection) {
             selection.removeAllRanges();
         }
+    };
+
+    const focusEditor = (event: PointerEvent & { currentTarget: HTMLDivElement }) => {
+        const target = event.target as HTMLElement;
+        if (target.closest('input, textarea, select, button, a, [contenteditable="true"]')) {
+            return;
+        }
+        event.currentTarget.focus({ preventScroll: true });
     };
 
     const customNodeTypes = {
@@ -318,7 +316,18 @@
     });
 </script>
 
-<div style="position: relative; height: 100%; width: 100%;overflow: hidden">
+<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<div
+    class="tinyflow-editor-root"
+    style="position: relative; height: 100%; width: 100%;overflow: hidden"
+    role="application"
+    aria-label="Tinyflow 工作流编辑器"
+    tabindex="0"
+    onpointerdown={focusEditor}
+    onkeydown={handleKeyDown}
+    onpaste={handleGlobalPaste}
+>
     <SvelteFlow
         colorMode={getOptions().defaultTheme ?? 'system'}
         nodeTypes={{ ...nodeTypes, ...customNodeTypes }}

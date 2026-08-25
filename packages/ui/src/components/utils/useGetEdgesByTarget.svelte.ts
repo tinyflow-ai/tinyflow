@@ -1,6 +1,7 @@
-import { store } from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 
 export const useGetEdgesByTarget = () => {
+    const store = getStore();
     const getEdgesByTarget = (target: string) => {
         const edges = store.getEdges();
         return edges.filter((edge) => edge.target === target);

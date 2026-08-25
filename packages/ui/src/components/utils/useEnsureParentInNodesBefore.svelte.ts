@@ -1,6 +1,7 @@
-import { store } from '../../store/stores.svelte';
+import { getStore } from '../../store/stores.svelte';
 
 export const useEnsureParentInNodesBefore = () => {
+    const store = getStore();
     const ensureParentInNodesBefore = (parentNodeId: string, childNodeId: string) => {
         store.updateNodes((nodeArray) => {
             let parentIndex = -1;

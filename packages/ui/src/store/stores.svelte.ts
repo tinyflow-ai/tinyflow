@@ -1,6 +1,9 @@
+import { getContext, setContext } from 'svelte';
 import { type Edge, type Node, type Viewport } from '@xyflow/svelte';
 
-const createStore = () => {
+const STORE_CONTEXT_KEY = Symbol('tinyflow_store');
+
+export const createStore = () => {
     let nodesInternal = $state.raw([] as Node[]);
     let edgesInternal = $state.raw([] as Edge[]);
     let viewport = $state.raw({ x: 250, y: 100, zoom: 1 } as Viewport);
@@ -9,9 +12,10 @@ const createStore = () => {
         // nodes: nodesInternal,
         // edges: edgesInternal,
         // viewport,
-        init: (nodes: Node[], edges: Edge[]) => {
+        init: (nodes: Node[], edges: Edge[], initialViewport?: Viewport) => {
             nodesInternal = nodes;
             edgesInternal = edges;
+            viewport = initialViewport ?? { x: 250, y: 100, zoom: 1 };
         },
 
         getNodes: () => nodesInternal,
@@ -71,4 +75,17 @@ const createStore = () => {
     };
 };
 
-export const store = createStore();
+export type TinyflowStore = ReturnType<typeof createStore>;
+
+export const provideStore = (store: TinyflowStore) => {
+    setContext(STORE_CONTEXT_KEY, store);
+    return store;
+};
+
+export const getStore = () => {
+    const store = getContext<TinyflowStore>(STORE_CONTEXT_KEY);
+    if (!store) {
+        throw new Error('Tinyflow store is not available outside a Tinyflow component');
+    }
+    return store;
+};

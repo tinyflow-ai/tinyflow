@@ -1,6 +1,7 @@
-import { store } from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 import { genShortId } from '#components/utils/IdGen';
 import { type Node, type Edge } from '@xyflow/svelte';
+import { transformParameterData } from './parameterTransforms';
 
 interface ClipboardData {
     tinyflowNodes: Node[];
@@ -148,6 +149,7 @@ function rewriteRefsInData(obj: any, idMap: Map<string, string>): any {
  * 复制粘贴处理器 Hook
  */
 export const useCopyPasteHandler = () => {
+    const store = getStore();
     const copyHandler = async (event: ClipboardEvent | KeyboardEvent) => {
         const selectedNodes = store.getNodes().filter((node) => node.selected);
         if (selectedNodes.length === 0) return;
@@ -233,7 +235,9 @@ export const useCopyPasteHandler = () => {
                     ? newNodeIdMap.get(node.parentId) // 安全：即使父不在粘贴范围内，也会是 undefined
                     : undefined;
 
-            const newData = rewriteRefsInData(node.data, newNodeIdMap);
+            const newData = transformParameterData(rewriteRefsInData(node.data, newNodeIdMap), {
+                regenerateIds: true
+            }) as Node['data'];
 
             newNodes.push({
                 ...node,

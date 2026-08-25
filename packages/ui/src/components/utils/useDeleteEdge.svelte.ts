@@ -1,8 +1,9 @@
-import {store}   from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 
 export const useDeleteEdge = () => {
+    const store = getStore();
     const deleteEdge = (id: string) => {
-        store.removeEdge( id);
+        store.removeEdge(id);
     };
     return {
         deleteEdge

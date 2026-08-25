@@ -1,7 +1,8 @@
-import { store } from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 import type { Edge, Node } from '@xyflow/svelte';
 
 export const useGetNodesFromSource = () => {
+    const store = getStore();
     const getEdgesBySource = (target: string, edges: Edge[]) => {
         return edges.filter(
             // 排除循环节点的子节点，否则在多层循环嵌套时不正确

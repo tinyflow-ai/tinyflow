@@ -1,6 +1,7 @@
-import { store } from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 
 export const useGetNodeRelativePosition = () => {
+    const store = getStore();
     const getNodeRelativePosition = (parentNodeId: string) => {
         let node = store.getNode(parentNodeId);
         const position = { x: 0, y: 0 };

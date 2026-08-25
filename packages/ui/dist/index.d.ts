@@ -74,16 +74,18 @@ export declare type SelectItem = {
 export declare class Tinyflow {
     private options;
     private rootEl;
-    private svelteFlowInstance;
+    private tinyflowEl?;
+    private svelteFlowInstance?;
     constructor(options: TinyflowOptions);
-    private _init;
-    private _setOptions;
+    private resolveRoot;
+    private mount;
     getOptions(): TinyflowOptions;
     getData(): {
         nodes: Node_2[];
         edges: Edge[];
         viewport: Viewport;
-    };
+    } | null;
+    setOptions(options: Partial<Omit<TinyflowOptions, 'element'>>): void;
     setData(data: TinyflowData): void;
     setTheme(theme: 'light' | 'dark' | 'system'): void;
     destroy(): void;

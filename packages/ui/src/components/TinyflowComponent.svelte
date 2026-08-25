@@ -12,7 +12,7 @@
 <script lang="ts">
     import { SvelteFlowProvider, type useSvelteFlow } from '@xyflow/svelte';
     import TinyflowCore from './TinyflowCore.svelte';
-    import { store } from '#store/stores.svelte';
+    import { createStore, provideStore } from '#store/stores.svelte';
     import type { TinyflowData, TinyflowOptions } from '#types';
     import { setContext } from 'svelte';
 
@@ -33,7 +33,9 @@
             console.error('Invalid JSON data:', data);
         }
     }
-    store.init((data as TinyflowData)?.nodes || [], (data as TinyflowData)?.edges || []);
+    const workflowData = data as TinyflowData;
+    const store = provideStore(createStore());
+    store.init(workflowData?.nodes || [], workflowData?.edges || [], workflowData?.viewport);
     setContext('tinyflow_options', options);
 </script>
 

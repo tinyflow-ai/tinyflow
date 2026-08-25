@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Button } from '../base/';
     import { type Node, useSvelteFlow } from '@xyflow/svelte';
-    import { store } from '#store/stores.svelte';
+    import { getStore } from '#store/stores.svelte';
     import { genShortId } from '../utils/IdGen';
 
     const {
@@ -19,6 +19,7 @@
     } = $props();
 
     const svelteFlow = useSvelteFlow();
+    const store = getStore();
 
     const onDragStart = (event: DragEvent) => {
         if (!event.dataTransfer) {

@@ -1,28 +1,26 @@
 import { genShortId } from './IdGen';
-import { store } from '#store/stores.svelte';
+import { getStore } from '#store/stores.svelte';
 import { deepClone } from '#components/utils/deepClone';
-import type { Parameter } from '#types';
 import type { Node } from '@xyflow/svelte';
+import { transformParameterData } from './parameterTransforms';
 
 export const useCopyNode = () => {
+    const store = getStore();
     const copyNode = (id: string) => {
         const node = store.getNode(id);
         if (node) {
             const newNode = {
                 ...deepClone(node),
                 id: genShortId(),
+                data: transformParameterData(deepClone(node.data), {
+                    regenerateIds: true,
+                    clearRefs: true
+                }),
                 position: {
                     x: node.position.x + 50,
                     y: node.position.y + 50
                 }
             } as Node;
-
-            if (newNode.data?.parameters) {
-                for (const parameter of newNode.data.parameters as Parameter[]) {
-                    parameter.id = genShortId();
-                    parameter.ref = undefined;
-                }
-            }
 
             store.updateNodes((nodes) => {
                 const newNodes = nodes.map((n) => ({ ...n, selected: false }));
